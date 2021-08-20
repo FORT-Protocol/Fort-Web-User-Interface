@@ -1,0 +1,90 @@
+@import '../../../styles/shared.scss';
+
+.mining {
+    position: relative;
+    width: 100%;
+    background-color: $C0-color;
+    padding-bottom: 20px;
+    padding-top: 44px;
+
+    .mining-info {
+        width: 500px;
+        height: 132px;
+        margin-left: calc((100% - #{500px}) / 2);
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .mining-top {
+        @extend .cardMain2;
+        // height: 592px;
+        margin-top: 44px;
+        padding: 36px 144px 36px 144px;
+
+        hr {
+            @extend .hrStyle;
+            margin: 20px 114px 0 114px;
+        }
+
+        .mining-top-title {
+            text-align: center;
+            font: $T3 bold;
+            color: $C6-color;
+        }
+
+        p.mining-top-text {
+            margin-top: 28px;
+            text-align: center;
+            font: $T1 normal;
+            color: $C2-color;
+        }
+
+        .mining-top-squareInfo {
+            margin-top: 36px;
+            display: flex;
+            justify-content: space-between;
+
+        }
+
+        .mining-top-morTime {
+            height: 32px;
+            display: flex;
+            justify-content: space-between;
+            margin: 30px 114px 0 114px;
+            padding: 0 44px 0 44px;
+
+            & > p{
+                justify-self: start;
+                font-size: $T1;
+                color: $C2-color;
+                line-height: 32px;
+            }
+
+            .radioGroupFort {
+                width: 70%;
+                justify-self: flex-end;
+            }
+        }
+
+        .infoView {
+            margin: 20px 114px 0 114px;  
+        }
+
+        .mining-top-title-two {
+            @extend .mining-top-title;
+            margin-top: 36px;
+        }
+
+        .mining-top-squareInfo-two {
+            @extend .mining-top-squareInfo;
+            margin-left: 88px;
+            margin-right: 88px;
+        }
+
+        .mining-top-doubleButton {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 114px 0 114px;  
+        }
+    }
+}

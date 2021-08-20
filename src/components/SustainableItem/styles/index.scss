@@ -1,0 +1,81 @@
+@import '../../../styles/shared.scss';
+
+.sustainableItem {
+    height: $baseHeight;
+    background-color: $C5-color;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    color: $C6-color;
+    line-height: $baseHeight;
+    text-align: center;
+    font-size: $T1;
+    font-weight: bold;
+    padding: 0 44px 0 44px;
+
+    &.isTitle {
+        font-weight: normal;
+        color: $C4-color;
+
+        .sustainableItem-type {
+            color: $C4-color;
+        }
+    }
+
+    &.isMore {
+        .sustainableItem-type {
+            background: $button-color1;
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+    }
+
+    .sustainableItem-type {
+        width: 80px;
+        background: $button-color2;
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+    }
+
+    .sustainableItem-pair {
+        width: 100px;
+    }
+
+    .sustainableItem-money {
+        width: 80px;
+    }
+
+    .sustainableItem-price {
+        width: 130px;
+    }
+
+    .sustainableItem-num {
+        width: 80px;
+    }
+
+    .sustainableItem-rate {
+        width: 90px;
+    }
+
+    .sustainableItem-willGet {
+        width: 90px;
+    }
+
+    .sustainableItem-willPrice {
+        width: 140px;
+    }
+
+    .sustainableItem-doit {
+        width: 240px;
+
+        .fortButton-over{
+            margin-right: 5px;
+        }
+
+        .fortButton-second {
+            margin-left: 5px;
+        }
+    }
+}

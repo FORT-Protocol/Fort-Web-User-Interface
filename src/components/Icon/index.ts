@@ -1,0 +1,10 @@
+export { ReactComponent as FortLogo } from './svg/fort-logo.svg'
+export { ReactComponent as EnglishIcon } from './svg/english-icon.svg'
+export { ReactComponent as ChineseIcon } from './svg/chinese-icon.svg'
+export { ReactComponent as TwitterIcon } from './svg/twitter-icon.svg'
+export { ReactComponent as GithubIcon } from './svg/github-icon.svg'
+export { ReactComponent as MiIcon } from './svg/mi-icon.svg'
+export { ReactComponent as PutDownIcon } from './svg/putDown-icon.svg'
+export { ReactComponent as TokenUSDT } from './svg/TokenUSDT.svg'
+export { ReactComponent as TokenETH } from './svg/TokenETH.svg'
+export {}

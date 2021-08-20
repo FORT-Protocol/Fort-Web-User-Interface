@@ -1,0 +1,83 @@
+@import '../../../styles/shared.scss';
+
+.sustainable {
+    position: relative;
+    width: 100%;
+    background-color: $C0-color;
+
+    .sustainable-top {
+        @extend .cardMain;
+        height: 392px;
+        
+        .sustainable-title {
+            text-align: center;
+            height: 96px;
+            margin: 0 0 0 0;
+            line-height: 96px;
+            color: $C6-color;
+            font-size: $T3;
+            font-weight: bold;
+        }
+    }
+
+    .sustainable-bottom {
+        @extend .cardMain;
+        height: 180px;
+        
+        hr {
+            @extend .hrStyle;
+            margin: 0 44px 0 44px;
+        }
+    }
+
+    .sustainable-had {
+        width: 100%;
+        height: $baseHeight;
+        position: relative;
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+
+        hr {
+            @extend .hrStyle;
+            margin-top: 22px;
+            width: 100%;
+            position: absolute;
+        }
+
+        .sustainable-had-title {
+            height: $baseHeight;
+            border-radius: 22px;
+            background-color: $C5-color;
+            display: flex;
+            justify-content: space-between;
+            z-index: 11;
+
+            p {
+                color: $C6-color;
+                font-size: $T2;
+                line-height: 44px;
+                margin: 0 10px 0 55px;
+            }
+            
+            svg {
+                margin: 11px 55px 0 0;
+            }
+        }
+    }
+
+    .sustainable-list {
+        width: 100%;
+        padding-top: 20px;
+
+        ul {
+            width: 1286px;
+            margin: 0 auto;
+            align-content: center;
+        }
+
+        ul li {
+            margin-top: 8px;
+        }
+    }
+}

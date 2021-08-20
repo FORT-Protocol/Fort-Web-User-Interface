@@ -1,0 +1,38 @@
+@use "sass:math";
+@import '../../../styles/shared.scss';
+
+$miningInfoSize: 132px;
+.miningCircle {
+    position: relative;
+    width: $miningInfoSize;
+    height: $miningInfoSize;
+    border-radius: 50%;
+    text-align: center;
+    padding-top: math.div($miningInfoSize, 3);
+
+    p {
+        height: math.div($miningInfoSize, 5);
+        line-height: math.div($miningInfoSize, 5);
+        width: $miningInfoSize;
+        font: $T3 bold;
+    }
+
+    & > p + p {
+        font: $T1 normal;
+    }
+}
+
+.miningCircle-left {
+    @extend .miningCircle;
+    background: linear-gradient(135deg, #C98191 0%, #DB7075 100%);
+}
+
+.miningCircle-middle {
+    @extend .miningCircle;
+    background: linear-gradient(135deg, #96CE70 0%, #64C8A6 100%);
+}
+
+.miningCircle-right {
+    @extend .miningCircle;
+    background: linear-gradient(135deg, #E3C850 0%, #E8BB58 100%);
+}

@@ -1,0 +1,18 @@
+@use "sass:math";
+@import '../../../styles/shared.scss';
+
+$squareInfoHeight: 120px;
+.miningNormalInfo {
+    width: 160px;
+    height: $squareInfoHeight;
+    border-radius: 12px;
+    background-color: $C1-color;
+
+    p {
+        width: 100%;
+        height: math.div($squareInfoHeight, 3);
+        line-height: math.div($squareInfoHeight, 3);
+        text-align: center;
+        color: $C2-color;
+    }
+}

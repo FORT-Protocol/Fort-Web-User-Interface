@@ -1,0 +1,29 @@
+@import '../../../styles/shared.scss';
+
+$showTokenHeight: 28px;
+
+.showToken {
+    position: relative;
+    height: $showTokenHeight;
+    display: flex;
+    justify-content:start;
+    
+    .showToken-one {
+        z-index: 11;
+    }
+
+    .showToken-two {
+        margin: 0 0 0 -5px;
+        
+    }
+
+    p {
+        height: $baseHeight;
+        font-size: $T2;
+        font-weight: bold;
+        color: $C6-color;
+        line-height: $showTokenHeight;
+        margin: 0 0 0 12px;
+    }
+    
+}

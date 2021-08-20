@@ -1,0 +1,45 @@
+@use 'sass:math';
+// color
+$C0-color: #1B1B1B;
+$C1-color: #161616;
+$C2-color: #BFBFBF;
+$C3-color: #C5C5C5;
+$C4-color: #878787;
+$C5-color: #2B2B2B;
+$C6-color: #FFFFFF;
+$C7-color: #80D5F8;
+$C8-color: #54BEF3;
+$C9-color: #434343;
+$c10-color: #212121;
+
+$main-background: linear-gradient(to right, $C7-color, $C8-color);
+$button-color1: linear-gradient(135deg, #D6724A 0%, #DD8751 100%);
+$button-color2: linear-gradient(135deg, #72CA91 0%, #5AC4BE 100%);
+
+// font
+$T1: 12px;
+$T2: 16px;
+$T3: 18px;
+
+// size
+$baseWidth: 572px;
+$baseHeight: 44px;
+
+// mainStyle
+.cardMain {
+    position: relative;
+    background-color: $C5-color;
+    border-radius: 20px;
+    width: $baseWidth;
+    margin-left: calc((100% - #{$baseWidth}) / 2);
+}
+.cardMain2 {
+    @extend .cardMain;
+    width: 1000px;
+    margin-left: calc((100% - #{1000px}) / 2);
+}
+.hrStyle {
+    color: $C9-color;
+    border-style: dashed;
+    height:1px;
+}

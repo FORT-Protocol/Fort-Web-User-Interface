@@ -1,0 +1,73 @@
+@use "sass:math";
+@import '../../../styles/shared.scss';
+
+.optionItem {
+    height: $baseHeight;
+    background-color: $C5-color;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    color: $C6-color;
+    line-height: $baseHeight;
+    text-align: center;
+    font-size: $T1;
+    font-weight: bold;
+    padding: 0 44px 0 44px;
+
+    &.isTitle {
+        font-weight: normal;
+        color: $C4-color;
+    }
+
+    .optionItem-icon {
+        padding-top: 8px;
+        width: 28px;
+    }
+
+    .optionItem-pairName {
+        width: 170px;
+    }
+
+    .optionItem-pair {
+        width: 90px;
+    }
+
+    .optionItem-num {
+        width: 90px;
+    }
+
+    .optionItem-price {
+        width: 110px;
+    }
+
+    .optionItem-time {
+        width: 140px;
+        display: block;
+
+        .optionItem-time-span {
+            height: math.div($baseHeight, 2);
+            line-height: math.div($baseHeight, 2);
+            width: 140px;
+        }
+
+        .optionItem-time-block {
+            height: math.div($baseHeight, 2);
+            line-height: math.div($baseHeight, 2);
+            width: 140px;
+            font-weight: normal;
+            color: $C4-color;
+        }
+    }
+
+    .optionItem-money {
+        width: 100px;
+    }
+
+    .optionItem-address {
+        width: 140px;
+    }
+
+    .optionItem-doit {
+        width: 64px;
+    }
+}

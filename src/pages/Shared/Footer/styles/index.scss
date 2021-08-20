@@ -1,0 +1,56 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+footer {
+    $footerHeight: 66px;
+    $iconSize: 28px;
+    $iconMargin: math.div($footerHeight - $iconSize, 2);
+    $footerWidth: 100%;
+    position: relative;
+    width: $footerWidth;
+    height: $footerHeight;
+    background-color: $C0-color;
+    display: flex;
+    justify-content: space-between;
+
+    .footer-left {
+        height: $footerHeight;
+        width: 50%;
+
+        .footer-english {
+            width: $iconSize;
+            height: $iconSize;
+            margin: $iconMargin 0 (-$iconMargin) 40px;
+        }
+    
+        .footer-chinese {
+            width: $iconSize;
+            height: $iconSize;
+            margin: $iconMargin 0 (-$iconMargin) 12px;
+        }
+    }
+
+    .footer-right {
+        height: $footerHeight;
+        width: 50%;
+        display: flex;
+        justify-content: flex-end;
+        .footer-mi {
+            width: $iconSize;
+            height: $iconSize;
+            margin: $iconMargin 40px (-$iconMargin) 0;
+        }
+    
+        .footer-github {
+            width: $iconSize;
+            height: $iconSize;
+            margin: $iconMargin 12px (-$iconMargin) 0;
+        }
+    
+        .footer-twitter {
+            width: $iconSize;
+            height: $iconSize;
+            margin: $iconMargin 12px (-$iconMargin) 0;
+        }
+    }
+}
