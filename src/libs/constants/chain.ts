@@ -9,7 +9,7 @@ type Chain = {
     infoURL: string
 }
 
-const INFURA_API_KEY = ''
+const INFURA_API_KEY = '24386bfa69af4babb7d4849a7d904476'
 
 export const Mainnet = {
     name: 'Mainnet',

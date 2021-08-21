@@ -23,13 +23,23 @@ export const tokenList: {[key: string]: TokenType} = {
         }
     },
     "USDT": {
-        symbol: 'NEST',
+        symbol: 'USDT',
         Icon: TokenUSDT,
         decimals: 18,
         addresses: {
-            1: '0x04abeda201850ac0124161f037efd70c74ddc74c',
+            1: '',
             2: '',
-            4: '0x8d6b97c482ecc00d83979dac4a703dbff04fd84f'
+            4: '0x2d750210c0b5343a0b79beff8F054C9add7d2411'
+        }
+    },
+    "FORT": {
+        symbol: 'FORT',
+        Icon: TokenUSDT,
+        decimals: 18,
+        addresses: {
+            1: '',
+            2: '',
+            4: '0x6747972f3Fc6f4A4fC9c8a1fF4C2899dc83c4DF7'
         }
     },
 }

@@ -1,6 +1,6 @@
 import { BigNumber } from "ethers";
 
-export const PRICE_FEE = normalToBigNumber('0.01')
+export const PRICE_FEE = BigNumber.from(normalToBigNumber('0.01'))
 
 export function bigNumberToNormal(num: string, decimals: number): string {
     const strLength = num.length

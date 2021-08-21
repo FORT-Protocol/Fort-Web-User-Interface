@@ -4,8 +4,15 @@ import MainButton from '../../../components/Button/MainButton'
 import classNames from 'classnames'
 import { FortLogo } from '../../../components/Icon'
 import './styles'
+import useWeb3 from '../../../libs/hooks/useWeb3'
+import result from '../../../libs/connectors/injected'
+import { useFortEuropeanOptionOpen } from '../../../contracts/hooks/useFortEuropeanOptionTransation'
+import { BigNumber } from 'ethers'
 
 const Header: FC = () => {
+    const tran1 = useFortEuropeanOptionOpen(
+        'USDT', BigNumber.from('100000000'), false, BigNumber.from('9247859'), BigNumber.from('2000000'))
+    const { activate } = useWeb3()
     const location = useLocation()
     const header = 'header'
     const routes = [
@@ -32,7 +39,8 @@ const Header: FC = () => {
                     </ul>
                 </nav>
                 
-                <MainButton title={'链接钱包'} className={'connect'} />
+                <MainButton title={'链接钱包'} className={'connect'} onClick={() => activate(result.connector)}/>
+                <button onClick={tran1}>交易1</button>
             </div>
         </header>
     )

@@ -1980,6 +1980,17 @@
   resolved "https://registry.yarnpkg.com/@lingui/detect-locale/-/detect-locale-3.10.4.tgz#501204ace622bb5cea0e13978277374b0320e24c"
   integrity sha512-b8TF/3fhLq+TqPuqqLzNKTOGd5W/Gc/BlS5rXbQIDtm2/RYRSdpbEO3P5VWCVVFSVWUbp66wDCAMuuk0LYlVmg==
 
+"@lingui/loader@^3.10.2":
+  version "3.10.2"
+  resolved "https://registry.yarnpkg.com/@lingui/loader/-/loader-3.10.2.tgz#1994de9bcce2f2f67b1efe46c377d70866466cf7"
+  integrity sha512-6iktLXTnZktm5V1ZaJqh7LQxQuPf2f/SkxzLrIS8eIRkMYX5Pf+XbUQH1b9aZisZp2gToHLKDpHx+w5PbfH0Ug==
+  dependencies:
+    "@babel/runtime" "^7.11.2"
+    "@lingui/cli" "^3.10.2"
+    "@lingui/conf" "^3.10.2"
+    loader-utils "^2.0.0"
+    ramda "^0.27.1"
+
 "@lingui/macro@^3.10.2":
   version "3.10.2"
   resolved "https://registry.yarnpkg.com/@lingui/macro/-/macro-3.10.2.tgz#30286cf7d77d87de2869ada1f5814953e747e415"

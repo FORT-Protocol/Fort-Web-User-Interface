@@ -5,6 +5,7 @@
   "homepage": "./",
   "dependencies": {
     "@lingui/detect-locale": "^3.10.4",
+    "@lingui/loader": "^3.10.2",
     "@lingui/react": "^3.10.2",
     "@loadable/component": "^5.15.0",
     "@testing-library/jest-dom": "^5.11.4",
@@ -33,7 +34,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "i18n:extract": "lingui extract --clean",
+    "i18n:compile": "lingui compile --typescript"
   },
   "eslintConfig": {
     "extends": [

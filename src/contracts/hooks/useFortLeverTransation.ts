@@ -1,38 +1,33 @@
 import { BigNumber } from "ethers";
-import { useCallback } from "react";
-import { FortLeverContract } from "../../libs/constants/addresses";
+import { FortLeverContract, tokenList } from "../../libs/constants/addresses";
 import { FortLever } from "../../libs/hooks/useContract";
-import { addGasLimit, PRICE_FEE } from "../../libs/utils";
+import { useSendTransaction } from "../../libs/hooks/useSendTransaction";
+import useWeb3 from "../../libs/hooks/useWeb3";
+import { PRICE_FEE } from "../../libs/utils";
 
 const contract = FortLever(FortLeverContract)
-
 export function useFortLeverBuy(
-    tokenAddress: string, 
+    tokenName: string, 
     lever: BigNumber, 
     orientation: boolean, 
     fortAmount: BigNumber
 ) {
-    const txPromise = useCallback(
-        async ():Promise<void> => {
-            if (!contract) {
-                throw new Error('useFortLeverBuy:!contract')
-            }
-            const estimatedGas = await contract.estimateGas.buy(
-                tokenAddress, 
-                lever.toString(), 
-                orientation, 
-                fortAmount.toString(), { value: PRICE_FEE })
-            return contract.buy(
-                tokenAddress, 
-                lever.toString(), 
-                orientation, 
-                fortAmount.toString(), { 
-                    value: PRICE_FEE, 
-                    gasLimit: addGasLimit(estimatedGas)
-                }
-            )
-        }, [fortAmount, lever, orientation, tokenAddress]
+    const { account, chainId } = useWeb3()
+    if (!chainId || !contract) {return}
+    const callData = contract?.interface.encodeFunctionData('buy', [
+        tokenList[tokenName].addresses[chainId], 
+        lever, 
+        orientation, 
+        fortAmount]
     )
+    const tx = {
+        from: account,
+        to: contract.address,
+        data: callData,
+        value: PRICE_FEE
+    }
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const txPromise = useSendTransaction(contract, tx)
     return txPromise
 }
 
@@ -40,23 +35,20 @@ export function useFortLeverSell(
     leverAddress: string, 
     amount: string
 ) {
-    const txPromise = useCallback(
-        async ():Promise<void> => {
-            if (!contract) {
-                throw new Error('useFortLeverSell:!contract')
-            }
-            const estimatedGas = await contract.estimateGas.sell(
-                leverAddress, 
-                amount, { value: PRICE_FEE })
-            return contract.sell(
-                leverAddress, 
-                amount, { 
-                    value: PRICE_FEE,
-                    gasLimit: addGasLimit(estimatedGas)
-                }
-            )
-        }, [amount, leverAddress]
+    const { account, chainId } = useWeb3()
+    if (!chainId || !contract) {return}
+    const callData = contract?.interface.encodeFunctionData('buy', [
+        leverAddress, 
+        amount]
     )
+    const tx = {
+        from: account,
+        to: contract.address,
+        data: callData,
+        value: PRICE_FEE
+    }
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const txPromise = useSendTransaction(contract, tx)
     return txPromise
 }
 

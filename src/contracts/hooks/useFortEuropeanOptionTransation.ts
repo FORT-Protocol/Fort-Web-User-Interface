@@ -1,41 +1,36 @@
+import { tokenList } from './../../libs/constants/addresses';
 import { BigNumber } from "ethers";
-import { useCallback } from "react";
 import { FortEuropeanOptionContract } from "../../libs/constants/addresses";
 import { FortEuropeanOption } from "../../libs/hooks/useContract";
-import { addGasLimit, PRICE_FEE } from "../../libs/utils";
+import { useSendTransaction } from "../../libs/hooks/useSendTransaction";
+import useWeb3 from "../../libs/hooks/useWeb3";
+import { PRICE_FEE } from "../../libs/utils";
 
 const contract = FortEuropeanOption(FortEuropeanOptionContract)
-
 export function useFortEuropeanOptionOpen(
-    tokenAddress: string, 
+    tokenName: string, 
     price: BigNumber, 
     orientation: boolean, 
     endblock: BigNumber, 
     fortAmount: BigNumber
-) {
-    const txPromise = useCallback(
-        async ():Promise<void> => {
-            if (!contract) {
-                throw new Error('useFortEuropeanOptionOpen:!contract')
-            }
-            const estimatedGas = await contract.estimateGas.open(
-                tokenAddress, 
-                price.toString(), 
-                orientation, 
-                endblock.toString(),
-                fortAmount.toString(), { value: PRICE_FEE })
-            return contract.open(
-                tokenAddress, 
-                price.toString(), 
-                orientation, 
-                endblock.toString(),
-                fortAmount.toString(), { 
-                    value: PRICE_FEE, 
-                    gasLimit: addGasLimit(estimatedGas) 
-                }
-            )
-        }, [endblock, fortAmount, orientation, price, tokenAddress]
+) { 
+    const { account, chainId } = useWeb3()
+    if (!chainId || !contract) {return}
+    const callData = contract?.interface.encodeFunctionData('open', [
+        tokenList[tokenName].addresses[chainId], 
+        price, 
+        String(orientation), 
+        endblock, 
+        fortAmount]
     )
+    const tx = {
+        from: account,
+        to: contract.address,
+        data: callData,
+        value: PRICE_FEE
+    }
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const txPromise = useSendTransaction(contract, tx)
     return txPromise
 }
 
@@ -43,23 +38,19 @@ export function useFortEuropeanOptionExercise(
     optionAddress: string,
     amount: BigNumber
 ) {
-    const txPromise = useCallback(
-        async ():Promise<void> => {
-            if (!contract) {
-                throw new Error('useFortEuropeanOptionOpen:!contract')
-            }
-            const estimatedGas = await contract.estimateGas.exercise(
-                optionAddress,
-                amount.toString(), { value: PRICE_FEE }
-            )
-            return contract.exercise(
-                optionAddress,
-                amount.toString(), { 
-                    value: PRICE_FEE, 
-                    gasLimit: addGasLimit(estimatedGas) 
-                }
-            )
-        }, [amount, optionAddress]
+    const { account, chainId } = useWeb3()
+    if (!chainId || !contract) {return}
+    const callData = contract?.interface.encodeFunctionData('exercise', [
+        optionAddress, 
+        amount]
     )
+    const tx = {
+        from: account,
+        to: contract.address,
+        data: callData,
+        value: PRICE_FEE
+    }
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const txPromise = useSendTransaction(contract, tx)
     return txPromise
 }

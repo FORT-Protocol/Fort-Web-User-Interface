@@ -1,29 +1,30 @@
 import { BigNumber } from "ethers";
-import { useCallback } from "react";
 import { tokenList } from "../../libs/constants/addresses";
 import { ERC20Contract } from "../../libs/hooks/useContract";
-import { addGasLimit } from "../../libs/utils";
+import { useSendTransaction } from "../../libs/hooks/useSendTransaction";
+import useWeb3 from "../../libs/hooks/useWeb3";
+import { PRICE_FEE } from "../../libs/utils";
 
 export function useERC20Approve(
     tokenName: string, 
     to: string, 
     amount: BigNumber
-): () => Promise<void> {
+) {
     const contract = ERC20Contract(tokenList[tokenName].addresses)
-    const txPromise = useCallback(
-        async ():Promise<void> => {
-            if (!contract) {
-                throw new Error('useERC20Approve:!contract')
-            }
-            const estimateGas = await contract.estimateGas.approve(to, amount.toString())
-            return contract.approve(to, amount.toString(), {
-                gasLimit: addGasLimit(estimateGas)
-            }).then(() => {
-
-            }).catch((error: Error) => {
-                throw error
-            })
-        }, [amount, contract, to]
+    const { account, chainId } = useWeb3()
+    if (!chainId || !contract) {return}
+    const callData = contract?.interface.encodeFunctionData('approve', [
+        tokenList[tokenName].addresses[chainId], 
+        to, 
+        amount]
     )
+    const tx = {
+        from: account,
+        to: contract.address,
+        data: callData,
+        value: PRICE_FEE
+    }
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const txPromise = useSendTransaction(contract, tx)
     return txPromise
 }
