@@ -11,20 +11,16 @@ export function useERC20Approve(
     amount: BigNumber
 ) {
     const contract = ERC20Contract(tokenList[tokenName].addresses)
-    const { account, chainId } = useWeb3()
-    if (!chainId || !contract) {return}
+    const { account } = useWeb3()
     const callData = contract?.interface.encodeFunctionData('approve', [
-        tokenList[tokenName].addresses[chainId], 
         to, 
         amount]
     )
     const tx = {
         from: account,
-        to: contract.address,
-        data: callData,
-        value: PRICE_FEE
+        to: contract?.address,
+        data: callData
     }
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const txPromise = useSendTransaction(contract, tx)
+    const txPromise = useSendTransaction(contract, tx, {title:'授权', info:'我授权你'})
     return txPromise
 }

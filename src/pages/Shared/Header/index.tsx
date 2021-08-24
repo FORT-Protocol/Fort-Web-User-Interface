@@ -8,10 +8,12 @@ import useWeb3 from '../../../libs/hooks/useWeb3'
 import result from '../../../libs/connectors/injected'
 import { useFortEuropeanOptionOpen } from '../../../contracts/hooks/useFortEuropeanOptionTransation'
 import { BigNumber } from 'ethers'
+import { useERC20Approve } from '../../../contracts/hooks/useERC20Approve'
 
 const Header: FC = () => {
-    const tran1 = useFortEuropeanOptionOpen(
-        'USDT', BigNumber.from('100000000'), false, BigNumber.from('9247859'), BigNumber.from('2000000'))
+    // const tran1 = useFortEuropeanOptionOpen(
+    //     'USDT', BigNumber.from('100000000'), false, BigNumber.from('9247859'), BigNumber.from('2000000'))
+    const tran2 = useERC20Approve('FORT','0x688f016CeDD62AD1d8dFA4aBcf3762ab29294489', BigNumber.from("2222233323423423423423422"))
     const { activate } = useWeb3()
     const location = useLocation()
     const header = 'header'
@@ -40,7 +42,7 @@ const Header: FC = () => {
                 </nav>
                 
                 <MainButton title={'链接钱包'} className={'connect'} onClick={() => activate(result.connector)}/>
-                <button onClick={tran1}>交易1</button>
+                <button onClick={tran2}>交易1</button>
             </div>
         </header>
     )

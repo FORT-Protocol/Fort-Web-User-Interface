@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/bin/yarn add @ethersproject/experimental
+  /usr/local/bin/node /usr/local/bin/yarn add @types/localStorage
 
 PATH: 
   /Library/Frameworks/Python.framework/Versions/3.8/bin:/Library/Frameworks/Python.framework/Versions/3.8/bin:/Library/Frameworks/Python.framework/Versions/3.9/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/VMware Fusion.app/Contents/Public:/Library/Apple/usr/bin:/Library/Frameworks/Python.framework/Versions/3.8/bin:/Library/Frameworks/Python.framework/Versions/3.9/bin
@@ -14,8 +14,15 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: read ECONNRESET
-      at TLSWrap.onStreamRead (internal/stream_base_commons.js:209:20)
+  Error: https://registry.yarnpkg.com/@types%2flocalStorage: tunneling socket could not be established, cause=connect ECONNREFUSED 127.0.0.1:1081
+      at ClientRequest.onError (/usr/local/lib/node_modules/yarn/lib/cli.js:152235:17)
+      at Object.onceWrapper (events.js:422:26)
+      at ClientRequest.emit (events.js:315:20)
+      at Socket.socketErrorListener (_http_client.js:469:9)
+      at Socket.emit (events.js:315:20)
+      at emitErrorNT (internal/streams/destroy.js:106:8)
+      at emitErrorCloseNT (internal/streams/destroy.js:74:3)
+      at processTicksAndRejections (internal/process/task_queues.js:80:21)
 
 npm manifest: 
   {
@@ -39,6 +46,7 @@ npm manifest:
       "@web3-react/walletconnect-connector": "^6.2.4",
       "classnames": "^2.3.1",
       "ethers": "^5.4.3",
+      "localStorage": "^1.0.4",
       "react": "^17.0.2",
       "react-dom": "^17.0.2",
       "react-router": "^5.2.0",
@@ -8746,6 +8754,11 @@ Lockfile:
       big.js "^5.2.2"
       emojis-list "^3.0.0"
       json5 "^1.0.1"
+  
+  localStorage@^1.0.4:
+    version "1.0.4"
+    resolved "https://registry.yarnpkg.com/localStorage/-/localStorage-1.0.4.tgz#57dfa28084385f81431accb8ae24b196398223f7"
+    integrity sha512-r35zrihcDiX+dqWlJSeIwS9nrF95OQTgqMFm3FB2D/+XgdmZtcutZOb7t0xXkhOEM8a9kpuu7cc28g1g36I5DQ==
   
   locate-path@^2.0.0:
     version "2.0.0"
