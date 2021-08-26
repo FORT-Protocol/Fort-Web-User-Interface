@@ -1,0 +1,38 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.lever {
+    padding: 22px 0;
+    // margin-top: 0;
+    // justify-self: flex-start;
+    &-card {
+        width: $baseWidth;
+        margin: 0 auto;
+        padding: 40px 44px;
+        
+        & > .infoView {
+            width: 100%;
+        }
+
+        &-exchangeButton {
+            width: 88px;
+            height: 88px;
+            margin: 20px auto;
+            background-color: $main-background-color;
+            box-sizing: border-box;
+            box-shadow: $shadow;
+            border: 1px solid $gray-background-color;
+            border-radius: 44px;
+            display: block;
+        }
+
+        &-buyButton {
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        .lineShowInfo {
+            margin: 20px 20px 0 20px;
+        }
+    }
+}

@@ -1,0 +1,14 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.fort-button {
+    height: 44px;
+    border-radius: 22px;
+    background-color: $main-button-color;
+    color: $main-button-text-color;
+    font-family: MontserratBold;
+    text-align: center;
+    font-weight: $T3;
+    padding-left: 35px;
+    padding-right: 35px;
+}

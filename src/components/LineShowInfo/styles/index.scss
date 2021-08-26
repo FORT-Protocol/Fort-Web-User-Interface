@@ -1,0 +1,25 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.lineShowInfo {
+    display: flex;
+    justify-content: space-between;
+    height: 20px;
+
+    &-leftText {
+        justify-self: flex-start;
+        margin-left: 0;
+        font-size: $T2;
+        line-height: 20px;
+        color: $gray-info-text-color;
+    }
+
+    &-rightText {
+        justify-self: flex-end;
+        margin-right: 0;
+        font-size: $T2;
+        font-family: MontserratBold;
+        text-align: right;
+        line-height: 20px;
+    }
+}

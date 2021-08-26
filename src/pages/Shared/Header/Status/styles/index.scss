@@ -1,0 +1,19 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.connectStatus {
+    display: flex;
+    justify-content: space-between;
+
+    &-chainName{
+        text-align: center;
+        padding: 0 30px;
+        font-size: $T3;
+        color: black;
+        height: 44px;
+        border-radius: 22px;
+        border: 1px solid black;
+        line-height: 44px;
+        margin-right: 20px;
+    }
+}

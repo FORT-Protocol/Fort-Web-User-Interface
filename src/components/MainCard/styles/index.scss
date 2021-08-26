@@ -1,0 +1,9 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.mainCard {
+    background: #ffffff;
+    box-shadow: $shadow;
+    border: 1px solid $gray-background-color;
+    border-radius: 20px;
+}

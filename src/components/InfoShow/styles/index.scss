@@ -1,0 +1,30 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.infoView{
+    &-topLeft {
+        margin: 0 20px;
+        color: $gray-info-text-color;
+        font-size: $T2;
+        text-align: left;
+        height: 20px;
+    }
+
+    &-mainView {
+        margin: 20px 0;
+        background-color: $gray-info-background-color;
+        border: 1px solid $gray-background-color;
+        box-sizing: border-box;
+        box-shadow: $shadow-inside;
+        border-radius: 22px;
+        height: 44px;
+    }
+
+    &-bottomRight {
+        margin: 0 20px;
+        color: $gray-info-text-color;
+        font-size: $T4;
+        text-align: right;
+        height: 20px;
+    }
+}

@@ -1,4 +1,4 @@
-import { TokenETH, TokenUSDT } from "../../components/Icon"
+import { TokenETH, TokenFORT, TokenUSDT } from "../../components/Icon"
 
 export type AddressesType = {
     [key: number]: string
@@ -25,7 +25,7 @@ export const tokenList: {[key: string]: TokenType} = {
     "USDT": {
         symbol: 'USDT',
         Icon: TokenUSDT,
-        decimals: 18,
+        decimals: 6,
         addresses: {
             1: '',
             2: '',
@@ -34,7 +34,7 @@ export const tokenList: {[key: string]: TokenType} = {
     },
     "FORT": {
         symbol: 'FORT',
-        Icon: TokenUSDT,
+        Icon: TokenFORT,
         decimals: 18,
         addresses: {
             1: '',

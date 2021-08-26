@@ -6,24 +6,24 @@ footer {
     $iconSize: 28px;
     $iconMargin: math.div($footerHeight - $iconSize, 2);
     $footerWidth: 100%;
-    position: relative;
     width: $footerWidth;
     height: $footerHeight;
-    background-color: $C0-color;
+    background-color: $main-background-color;
     display: flex;
     justify-content: space-between;
+    border-top: 1px solid $gray-background-color;
 
     .footer-left {
         height: $footerHeight;
         width: 50%;
 
-        .footer-english {
+        &-english {
             width: $iconSize;
             height: $iconSize;
             margin: $iconMargin 0 (-$iconMargin) 40px;
         }
     
-        .footer-chinese {
+        &-chinese {
             width: $iconSize;
             height: $iconSize;
             margin: $iconMargin 0 (-$iconMargin) 12px;
@@ -35,19 +35,19 @@ footer {
         width: 50%;
         display: flex;
         justify-content: flex-end;
-        .footer-mi {
+        &-mi {
             width: $iconSize;
             height: $iconSize;
             margin: $iconMargin 40px (-$iconMargin) 0;
         }
     
-        .footer-github {
+        &-github {
             width: $iconSize;
             height: $iconSize;
             margin: $iconMargin 12px (-$iconMargin) 0;
         }
     
-        .footer-twitter {
+        &-twitter {
             width: $iconSize;
             height: $iconSize;
             margin: $iconMargin 12px (-$iconMargin) 0;

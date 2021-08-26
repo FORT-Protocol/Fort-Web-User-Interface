@@ -7,4 +7,5 @@ export { ReactComponent as MiIcon } from './svg/mi-icon.svg'
 export { ReactComponent as PutDownIcon } from './svg/putDown-icon.svg'
 export { ReactComponent as TokenUSDT } from './svg/TokenUSDT.svg'
 export { ReactComponent as TokenETH } from './svg/TokenETH.svg'
-export {}
+export { ReactComponent as TokenFORT } from './svg/TokenFORT.svg'
+export { ReactComponent as ExchangeIcon} from './svg/exchange-icon.svg'

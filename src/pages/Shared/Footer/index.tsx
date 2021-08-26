@@ -7,13 +7,13 @@ const Footer: FC = () => {
     return (
         <footer>
             <div className={`${footer}-left`}>
-                <EnglishIcon className={`${footer}-english`}/>
-                <ChineseIcon className={`${footer}-chinese`}/>
+                <EnglishIcon className={`${footer}-left-english`}/>
+                <ChineseIcon className={`${footer}-left-chinese`}/>
             </div>
             <div className={`${footer}-right`}>
-                <TwitterIcon className={`${footer}-twitter`}/>
-                <GithubIcon className={`${footer}-github`}/>
-                <MiIcon className={`${footer}-mi`}/>
+                <TwitterIcon className={`${footer}-right-twitter`}/>
+                <GithubIcon className={`${footer}-right-github`}/>
+                <MiIcon className={`${footer}-right-mi`}/>
             </div>
 
             

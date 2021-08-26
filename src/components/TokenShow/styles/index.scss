@@ -1,0 +1,25 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.TokenShow {
+    margin-left: 20px;
+    display: flex;
+    justify-content: flex-start;
+    height: 100%;
+
+    svg {
+        margin: auto 0;
+    }
+
+    svg + svg {
+        margin-left: -5px;
+        
+    }
+
+    &-text {
+        font-size: $T2;
+        margin-left: 10px;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+}
