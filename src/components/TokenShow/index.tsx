@@ -34,7 +34,7 @@ export const DoubleTokenShow: FC<DoubleProps> = ({...props}) => {
             <p className={classNames({
                 [`${classPrefix}-text`]: true,
                 [`isBold`]: true
-            })}>{tokenList[props.tokenNameOne].symbol}</p>
+            })}>{tokenList[props.tokenNameOne].symbol + '/' + tokenList[props.tokenNameTwo].symbol}</p>
         </div>
     )
 }

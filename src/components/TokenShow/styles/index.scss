@@ -2,18 +2,18 @@
 @import 'src/styles/shared.scss';
 
 .TokenShow {
-    margin-left: 20px;
     display: flex;
     justify-content: flex-start;
     height: 100%;
 
     svg {
         margin: auto 0;
+        z-index: 10;
     }
 
     svg + svg {
-        margin-left: -5px;
-        
+        margin-left: -8px;
+        z-index: 0;
     }
 
     &-text {

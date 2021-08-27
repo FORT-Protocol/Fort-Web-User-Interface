@@ -1,0 +1,50 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.options {
+    width: 100%;
+    ul {
+        margin: 22px auto;
+        width: $baseWidth;
+        height: 44px;
+        display: flex;
+        justify-content: space-between;
+        background: #ffffff;
+        box-shadow: $shadow;
+        border: 1px solid $gray-background-color;
+        border-radius: 22px;
+
+        li {
+            text-align: center;
+            line-height: 44px;
+            background: #ffffff;
+            width: math.div($baseWidth, 2);
+
+            a {
+                width: 100%;
+                display: block;
+            }
+
+            &.selected {
+                background: $gray-background-color;
+
+                a {
+                    color: $main-button-color;
+                    font-family: MontserratBold;
+                }
+            }
+        }
+
+        & > li {
+            border-radius: 22px 0 0 22px;
+        }
+
+        & > li + li {
+            border-radius: 0px 22px 22px 0;
+        }
+    }
+
+    .fort-button {
+        width: 100%;
+    }
+}

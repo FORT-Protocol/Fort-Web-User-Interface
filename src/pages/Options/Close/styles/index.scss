@@ -1,0 +1,18 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.options-closeOptions {
+    margin: 0 auto;
+    margin-bottom: 44px;
+    display: flex;
+    justify-content: center;
+
+    .mainCard {
+        width: $baseWidth;
+        padding: 40px 44px;
+    }
+
+    &-leftCard{
+        margin-right: 22px;
+    }
+}

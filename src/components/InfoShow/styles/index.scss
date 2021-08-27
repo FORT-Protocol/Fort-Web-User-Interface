@@ -18,6 +18,41 @@
         box-shadow: $shadow-inside;
         border-radius: 22px;
         height: 44px;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 20px;
+
+        &-leftSelect {
+            display: flex;
+            justify-content: space-between;
+
+            & > svg {
+                margin-top: auto;
+                margin-bottom: auto;
+                margin-left: 14px;
+            }
+        }
+
+        .input-right, .input-left {
+            font-family: MontserratBold;
+            border: 0;
+            font-size: $T2;
+        }
+
+        .input-right {
+            font-family: MontserratBold;
+            border: 0;
+            text-align: right;
+            font-size: $T2;
+        }
+
+        .max-button {
+            display: block;
+        }
+
+        span {
+            line-height: 44px;
+        }
     }
 
     &-bottomRight {
