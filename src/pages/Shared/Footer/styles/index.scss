@@ -22,7 +22,7 @@ footer {
             height: $iconSize;
             margin: $iconMargin 0 (-$iconMargin) 40px;
         }
-    
+
         &-chinese {
             width: $iconSize;
             height: $iconSize;
@@ -35,18 +35,19 @@ footer {
         width: 50%;
         display: flex;
         justify-content: flex-end;
+
         &-mi {
             width: $iconSize;
             height: $iconSize;
             margin: $iconMargin 40px (-$iconMargin) 0;
         }
-    
+
         &-github {
             width: $iconSize;
             height: $iconSize;
             margin: $iconMargin 12px (-$iconMargin) 0;
         }
-    
+
         &-twitter {
             width: $iconSize;
             height: $iconSize;

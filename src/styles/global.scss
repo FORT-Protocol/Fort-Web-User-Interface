@@ -1,3 +1,4 @@
+@import 'shared.scss';
 * {
     box-sizing: border-box;
     margin: 0;
@@ -51,6 +52,24 @@ button {
 input {
     background-color: transparent;
 }
+input::-webkit-input-placeholder {
+    font-family: Montserrat;
+    color:$button-disable-color;
+    font-size: $T2;
+    font-weight: normal;
+}
+input::-moz-placeholder {   /* Mozilla Firefox 19+ */
+    font-family: Montserrat;
+    color:$button-disable-color;
+    font-size: $T2;
+    font-weight: normal;
+}
+input:-moz-placeholder {    /* Mozilla Firefox 4 to 18 */
+    font-family: Montserrat;
+    color:$button-disable-color;
+    font-size: $T2;
+    font-weight: normal;
+}
 
 a {
     color: inherit;
@@ -61,3 +80,20 @@ ul,
 li {
     list-style: none;
 }
+
+.popup-overlay {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.animation-spin {
+    animation: spin 1s linear infinite;
+  
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  }

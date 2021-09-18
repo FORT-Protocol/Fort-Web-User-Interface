@@ -4,6 +4,7 @@ import './styles'
 
 type Props = {
     classNames?:string
+    onClick?: () => void
 }
 
 const MainCard: FC<Props> = ({children, ...props}) => {
@@ -12,7 +13,7 @@ const MainCard: FC<Props> = ({children, ...props}) => {
         <div className={classNames({
             [`${classPrefix}`]: true,
             [props.classNames || '']: true
-        })}>
+        })} onClick={props.onClick}>
             {children}
         </div>
     )

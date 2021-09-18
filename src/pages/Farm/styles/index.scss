@@ -1,0 +1,71 @@
+@use "sass:math";
+@import "src/styles/shared.scss";
+
+@mixin circleInfo {
+  width: 132px;
+  height: 132px;
+  text-align: center;
+  border-radius: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 45px 0;
+
+  .farm-circleInfo-value {
+    font-size: $T1;
+    font-family: $boldFont;
+  }
+
+  p + p {
+    font-size: $T4;
+  }
+}
+
+.farm {
+  &-circleInfo {
+    margin: 0 auto;
+    margin-top: 44px;
+    display: flex;
+    justify-content: center;
+
+    div + div {
+      margin-left: 40px;
+    }
+
+    &-one {
+      @include circleInfo;
+      background: linear-gradient(135deg, #dc706a 0%, #dd8751 100%);
+      box-shadow: 0px 0px 10px #e5e5e5;
+    }
+
+    &-two {
+      @include circleInfo;
+      background: linear-gradient(135deg, #85d6f7 0%, #56bff4 100%);
+      box-shadow: 0px 0px 10px #e5e5e5;
+    }
+
+    &-three {
+      @include circleInfo;
+      background: linear-gradient(135deg, #98cf71 0%, #63c8a7 100%);
+      box-shadow: 0px 0px 10px #e5e5e5;
+    }
+
+    &-four {
+      @include circleInfo;
+      background: linear-gradient(135deg, #e4cb58 0%, #e8bb58 100%);
+      box-shadow: 0px 0px 10px #e5e5e5;
+    }
+  }
+
+  ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding-bottom: 40px;
+
+    li {
+      margin: 0 22px;
+      margin-top: 44px;
+    }
+  }
+}

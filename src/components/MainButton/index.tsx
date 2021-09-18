@@ -1,9 +1,12 @@
 import classNames from 'classnames'
 import { FC, MouseEventHandler } from 'react'
+import { WhiteLoading } from '../Icon'
 import './styles'
 
 type Props = {
     className?: string
+    disable?: boolean
+    loading?: boolean
     onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
@@ -14,9 +17,10 @@ const MainButton: FC<Props> = ({children, ...props}) => {
         onClick={props.onClick} 
         className={classNames({
             [`${classPrefix}`]: true,
-            [props.className || '']: true
+            [props.className || '']: true,
+            [`disable`]: props.disable
         })}>
-            {children}
+            {props.loading ? (<WhiteLoading className={'animation-spin'}/>) : children}
         </button>
     )
 }

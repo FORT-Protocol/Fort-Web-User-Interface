@@ -4,7 +4,8 @@ import './styles'
 import classNames from 'classnames'
 
 type Props = {
-    isLong?: boolean
+    callBack: (isLong: boolean) => void
+    isLong: boolean
 }
 
 const ChooseType: FC<Props> = ({...props}) => {
@@ -16,13 +17,13 @@ const ChooseType: FC<Props> = ({...props}) => {
                 <div className={classNames({
                     [`${classPrefix}-choose-left`]:true,
                     [`isSelected`]: props.isLong
-                })}>
+                })} onClick={() => props.callBack(true)}>
                     <div><Trans>Long</Trans></div>
                 </div>
                 <div className={classNames({
                     [`${classPrefix}-choose-right`]: true,
                     [`isSelected`]: !props.isLong
-                })}>
+                })} onClick={() => props.callBack(false)}>
                     <div><Trans>Short</Trans></div>
                 </div>
             </div>

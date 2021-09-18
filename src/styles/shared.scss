@@ -4,13 +4,15 @@ $main-background-color: #FFFFFF;
 $main-button-color: #0047BB;
 $main-button-text-color: #FFFFFF;
 $black-text-color: #000000;
-
 $gray-background-color: #EEEEEE;
 $gray-info-text-color: #7D7D7D;
 $gray-info-background-color: #FAFBFF;
 $gray-background-text-color: #878787;
+$gray-line-color: #E5E5E5;
+$wrongAndNotice-color: #FE3645;
+$button-disable-color: #BFBFBF;
 
-$shadow: 0px 0px 10px #E5E5E5;
+$shadow: 0px 0px 10px $gray-line-color;
 $shadow-inside: inset 0px 0px 10px $gray-background-color;
 
 // size
@@ -20,4 +22,7 @@ $baseWidth: 572px;
 $T1: 18px;
 $T2: 16px;
 $T3: 14px;
-$T4: 12PX;
+$T4: 12px;
+
+$boldFont: MontserratBold;
+

@@ -8,7 +8,7 @@
 
     svg {
         margin: auto 0;
-        z-index: 10;
+        z-index: 1;
     }
 
     svg + svg {
@@ -21,5 +21,9 @@
         margin-left: 10px;
         margin-top: auto;
         margin-bottom: auto;
+
+        &.isBold {
+            font-family: $boldFont;
+        }
     }
 }

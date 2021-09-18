@@ -1,0 +1,42 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.modal-status {
+    width: $baseWidth;
+
+    &-notice {
+        margin-top: 10px;
+        font-size: $T4;
+        color: $gray-info-text-color;
+        text-align: center;
+    }
+
+    &-walletSelect {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 40px;
+
+        &>.mainCard:first-child {
+            margin-right: 20px;
+        }
+
+        .mainCard {
+            height: 220px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+
+            svg {
+                margin: 0 auto;
+            }
+
+            p {
+                text-align: center;
+                font-size: $T1;
+                font-family: $boldFont;
+            }
+
+        }
+    }
+}

@@ -1,0 +1,96 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.modal-wallet {
+    width: $baseWidth;
+
+    &-metamask {
+        display: flex;
+        justify-content: space-between;
+        height: 44px;
+        border-radius: 22px;
+        border: 1px solid $gray-background-color;
+        background: $gray-info-background-color;
+        padding: 0 20px;
+        margin-top: 20px;
+
+        svg {
+            width: 22px;
+            height: 22px;
+            margin: auto 0;
+        }
+
+        &-address {
+            width: 75%;
+            margin-left: 20px;
+            display: flex;
+            justify-content: flex-start;
+
+            p {
+                line-height: 44px;
+                color: $main-button-color;
+                font-family: $boldFont;
+                font-size: $T2;
+            }
+
+            button {
+                margin-left: 20px;
+            }
+        }
+
+        &>button {
+            color: $wrongAndNotice-color;
+            font-size: $T4;
+        }
+    }
+
+    &-ulTitle {
+        margin: 20px;
+        font-size: $T4;
+        color: $gray-info-text-color;
+    }
+
+    ul {
+        width: 100%;
+        height: 150px;
+        overflow: scroll;
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            height: 44px;
+            border-radius: 22px;
+            border: 1px solid $gray-background-color;
+            background: $gray-info-background-color;
+
+            svg {
+                width: 22px;
+                height: 22px;
+                margin: auto 0;
+            }
+
+            .transactionInfo {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                margin: 0;
+                padding: 0 20px;
+
+                p {
+                    margin: auto 0;
+                    font-size: $T2;
+                    color: $gray-info-text-color;
+                }
+            }
+
+            a {
+                margin: auto 0;
+            }
+        }
+
+        li+li {
+            margin-top: 15px;
+        }
+    }
+}

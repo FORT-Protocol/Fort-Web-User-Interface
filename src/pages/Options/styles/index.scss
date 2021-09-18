@@ -3,7 +3,8 @@
 
 .options {
     width: 100%;
-    ul {
+
+    &-route {
         margin: 22px auto;
         width: $baseWidth;
         height: 44px;
@@ -30,16 +31,16 @@
 
                 a {
                     color: $main-button-color;
-                    font-family: MontserratBold;
+                    font-family: $boldFont;
                 }
             }
         }
 
-        & > li {
+        &>li {
             border-radius: 22px 0 0 22px;
         }
 
-        & > li + li {
+        &>li+li {
             border-radius: 0px 22px 22px 0;
         }
     }

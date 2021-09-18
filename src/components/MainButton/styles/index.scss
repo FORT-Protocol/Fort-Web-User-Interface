@@ -6,9 +6,13 @@
     border-radius: 22px;
     background-color: $main-button-color;
     color: $main-button-text-color;
-    font-family: MontserratBold;
+    font-family: $boldFont;
     text-align: center;
     font-weight: $T3;
     padding-left: 35px;
     padding-right: 35px;
+
+    &.disable {
+        background-color: $button-disable-color;
+    }
 }

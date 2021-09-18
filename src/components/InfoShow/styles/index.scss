@@ -2,6 +2,12 @@
 @import 'src/styles/shared.scss';
 
 .infoView{
+
+    .select-button {
+        & > svg {
+            margin: auto 0
+        }
+    }
     &-topLeft {
         margin: 0 20px;
         color: $gray-info-text-color;
@@ -12,6 +18,7 @@
 
     &-mainView {
         margin: 20px 0;
+        margin-bottom: 5px;
         background-color: $gray-info-background-color;
         border: 1px solid $gray-background-color;
         box-sizing: border-box;
@@ -27,26 +34,38 @@
             justify-content: space-between;
 
             & > svg {
+                display: block;
                 margin-top: auto;
                 margin-bottom: auto;
                 margin-left: 14px;
             }
         }
 
-        .input-right, .input-left {
-            font-family: MontserratBold;
+        &.noSelect {
+            .infoView-mainView-leftSelect {
+                & > svg {
+                    display: none;
+                }
+            }
+        }
+
+        .input-right, .input-left, .input-middle {
+            font-family: $boldFont;
             border: 0;
             font-size: $T2;
+        }
+
+        .input-middle {
+            width: 100%;
+            text-align: right;
         }
 
         .input-right {
-            font-family: MontserratBold;
-            border: 0;
             text-align: right;
-            font-size: $T2;
         }
 
         .max-button {
+            margin-left: 5px;
             display: block;
         }
 
@@ -57,9 +76,58 @@
 
     &-bottomRight {
         margin: 0 20px;
+        margin-top: 15px;
         color: $gray-info-text-color;
         font-size: $T4;
         text-align: right;
         height: 20px;
+
+        &.balanceRed {
+            color: $wrongAndNotice-color;
+        }
+    }
+
+    &-tokenSelect {
+        display: none;
+        background-color: $gray-info-background-color;
+        height: 150px;
+        margin-bottom: -155px;
+        overflow: scroll;
+        border: 1px solid $gray-line-color;
+        box-shadow: $shadow-inside;
+        border-radius: 22px;
+        
+
+        li {
+            display: flex;
+            justify-content: flex-start;
+            padding: 0 20px;
+            line-height: 40px;
+            height: 40px;
+
+            p {
+                margin-left: 10px;
+            }
+
+            .dataSelect {
+                margin-left: 0px;
+            }
+
+            &:hover {
+                background-color: $gray-line-color;
+            }
+
+            svg {
+                margin: auto 0;
+            }
+        }
+
+        &.isShow{
+            display: block;
+        }
+
+        &.hover {
+            display: block;
+        }
     }
 }

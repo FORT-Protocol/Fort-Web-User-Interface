@@ -13,6 +13,20 @@
             width: 100%;
         }
 
+        & > .infoView:first-child {
+            .infoView-mainView-maxView {
+                display: flex;
+                justify-content: flex-end;
+                margin-left: 0;
+
+                .input-right {
+                    margin-left: 0px;
+                    margin-right: 10px;
+                    width: 100%;
+                }
+            }
+        }
+
         &-exchangeButton {
             width: 88px;
             height: 88px;

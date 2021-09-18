@@ -20,7 +20,7 @@
     &.isSelected {
         div {
             background: transparent;
-            font-family: MontserratBold;
+            font-family: $boldFont;
             color: black;
         }
     }

@@ -1,199 +1,284 @@
 [
-    {
-      "inputs": [],
-      "stateMutability": "nonpayable",
-      "type": "constructor"
-    },
-    {
-      "inputs": [],
-      "name": "_governance",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "tokenAddress",
-          "type": "address"
-        },
-        {
-          "internalType": "uint256",
-          "name": "lever",
-          "type": "uint256"
-        },
-        {
-          "internalType": "bool",
-          "name": "orientation",
-          "type": "bool"
-        },
-        {
-          "internalType": "uint256",
-          "name": "fortAmount",
-          "type": "uint256"
-        }
-      ],
-      "name": "buy",
-      "outputs": [],
-      "stateMutability": "payable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "tokenAddress",
-          "type": "address"
-        },
-        {
-          "internalType": "uint256",
-          "name": "lever",
-          "type": "uint256"
-        },
-        {
-          "internalType": "bool",
-          "name": "orientation",
-          "type": "bool"
-        }
-      ],
-      "name": "getLeverToken",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "governance",
-          "type": "address"
-        }
-      ],
-      "name": "initialize",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "offset",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "count",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "order",
-          "type": "uint256"
-        }
-      ],
-      "name": "list",
-      "outputs": [
-        {
-          "internalType": "address[]",
-          "name": "leverArray",
-          "type": "address[]"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "tokenAddress",
-          "type": "address"
-        },
-        {
-          "internalType": "uint256",
-          "name": "value",
-          "type": "uint256"
-        }
-      ],
-      "name": "migrate",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "leverAddress",
-          "type": "address"
-        },
-        {
-          "internalType": "uint256",
-          "name": "amount",
-          "type": "uint256"
-        }
-      ],
-      "name": "sell",
-      "outputs": [],
-      "stateMutability": "payable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "leverAddress",
-          "type": "address"
-        },
-        {
-          "internalType": "address",
-          "name": "account",
-          "type": "address"
-        }
-      ],
-      "name": "settle",
-      "outputs": [],
-      "stateMutability": "payable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address[]",
-          "name": "leverAddressArray",
-          "type": "address[]"
-        }
-      ],
-      "name": "sync",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "newGovernance",
-          "type": "address"
-        }
-      ],
-      "name": "update",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    }
-  ]
+  {
+    "inputs": [],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [],
+    "name": "_governance",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "tokenAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "lever",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "orientation",
+        "type": "bool"
+      },
+      {
+        "internalType": "uint256",
+        "name": "fortAmount",
+        "type": "uint256"
+      }
+    ],
+    "name": "buy",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "leverAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "fortAmount",
+        "type": "uint256"
+      }
+    ],
+    "name": "buyDirect",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "tokenAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "lever",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "orientation",
+        "type": "bool"
+      }
+    ],
+    "name": "create",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "tokenAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "lever",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "orientation",
+        "type": "bool"
+      }
+    ],
+    "name": "getLeverToken",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getTokenCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "governance",
+        "type": "address"
+      }
+    ],
+    "name": "initialize",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "offset",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "count",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "order",
+        "type": "uint256"
+      }
+    ],
+    "name": "list",
+    "outputs": [
+      {
+        "internalType": "address[]",
+        "name": "leverArray",
+        "type": "address[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "tokenAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "value",
+        "type": "uint256"
+      }
+    ],
+    "name": "migrate",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "leverAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "sell",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "usdtTokenAddress",
+        "type": "address"
+      }
+    ],
+    "name": "setUsdtTokenAddress",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "leverAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "settle",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address[]",
+        "name": "leverAddressArray",
+        "type": "address[]"
+      }
+    ],
+    "name": "sync",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "newGovernance",
+        "type": "address"
+      }
+    ],
+    "name": "update",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "leverAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "payback",
+        "type": "address"
+      }
+    ],
+    "name": "updateLeverInfo",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  }
+]

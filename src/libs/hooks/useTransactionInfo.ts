@@ -1,7 +1,21 @@
+import { BigNumber, Contract } from 'ethers';
 import { useEffect, useState } from "react";
 import { createContainer } from "unstated-next";
 import useWeb3 from "./useWeb3";
-import { toast } from "react-toastify";
+import { TransactionModalTokenInfo, TransactionModalType } from "../../pages/Shared/TransactionModal";
+import { notifyTransaction } from "../../pages/Shared/TransactionToast";
+import ERC20ABI from '../../contracts/abis/ERC20.json'
+
+export enum TransactionType {
+    buyLever = 0,
+    closeLever = 1,
+    buyOption = 2,
+    closeOption = 3,
+    approve = 4,
+    stake = 5,
+    claim = 6,
+    unStake = 7
+}
 
 export enum TransactionState {
     Pending = 0,
@@ -12,22 +26,31 @@ export enum TransactionState {
 
 export type TransactionBaseInfoType = {
     title: string,
-    info: string
+    info: string,
+    type: TransactionType
 }
 
-type TransactionInfoType = {
+export type TransactionInfoType = {
     title: string,
     info: string,
     hash: string,
     txState: TransactionState,
     addTime: number,
-    endTime: number
+    endTime: number,
+    type: TransactionType
 }
 
-const _useTransactionList = () => {
+type ShoeModalType = {
+    isShow: boolean,
+    hash: string,
+    txType: TransactionModalType,
+    tokenInfo?: TransactionModalTokenInfo
+}
+
+const useTransactionList = () => {
     const {chainId, library} = useWeb3()
     const [txList, setTxList] = useState<TransactionInfoType[]>([])
-    const [showModal, setShowModal] = useState({isShow:false, hash:'0x0', txState:TransactionState.Pending})
+    const [showModal, setShowModal] = useState<ShoeModalType>({isShow:false, hash:'0x0', txType:TransactionModalType.wait})
     const [pendingList, setPendingList] = useState<TransactionInfoType[]>([])
     const [checking, setChecking] = useState(false)
 
@@ -40,8 +63,9 @@ const _useTransactionList = () => {
             console.log('1' + {cache})
         })()
     }, [chainId])
-
+    
     useEffect(() => {
+        if (!chainId) {return}
         if (txList.length === 0) {return}
         ;(async () => {
             localStorage.setItem('transactionList' + chainId?.toString(), JSON.stringify(txList))
@@ -66,21 +90,37 @@ const _useTransactionList = () => {
                     element.txState = status
                     updateList(element)
                     setChecking(false)
-                    console.log('成功' + {index})
                     notifyTransaction(element)
-                    if (element.hash === showModal.hash) {
-                        setShowModal({isShow:true, hash: element.hash, txState:TransactionState.Success})
+                    
+                    if (element.type === TransactionType.buyOption) {
+                        var cache = localStorage.getItem("optionTokensList" + chainId?.toString())
+                        var optionTokenList = []
+                        if (cache) {
+                            optionTokenList = JSON.parse(cache)
+                        }
+                        const newTokenAddress = rec['logs'][1]['address']
+                        const newTokenContract = new Contract(newTokenAddress, ERC20ABI, library)
+                        const newTokenName = await newTokenContract.name()
+                        if (optionTokenList.filter((item: { address: string; }) => item.address === newTokenAddress).length === 0) {
+                            const optionToken = {address: newTokenAddress, name: newTokenName}
+                            localStorage.setItem('optionTokensList' + chainId?.toString(), JSON.stringify([...optionTokenList, optionToken]))
+                        }
+                        const tokenInfo:TransactionModalTokenInfo = {
+                            tokenName: newTokenName,
+                            tokenAddress: newTokenAddress,
+                            tokenValue: BigNumber.from(rec['logs'][1]['data']).toString()
+                        }
+                        setShowModal({isShow:true, hash: element.hash, txType:TransactionModalType.eurSuccess, tokenInfo:tokenInfo})
                     }
                     return
                 }
-                console.log('下一个' + {index})
             }
             setTimeout(() => {
                 setChecking(false)
             }, 15000)
         })()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [pendingList, checking])
+    }, [pendingList, checking, library])
 
     const pushTx = (hash: string, txInfo:TransactionBaseInfoType) => {
         const nowDate = parseInt((new Date().getTime() / 1000).toString())
@@ -91,10 +131,10 @@ const _useTransactionList = () => {
             hash: hash,
             txState: TransactionState.Pending,
             addTime: nowDate,
-            endTime: monthDate
+            endTime: monthDate,
+            type: txInfo.type
         }
         updateList(newTxInfo)
-        setShowModal({isShow:false, hash: hash, txState:TransactionState.Pending})
     }
 
     const updateList = (item:TransactionInfoType) => {
@@ -108,24 +148,20 @@ const _useTransactionList = () => {
     }
 
     const closeModal = () => {
-        setShowModal({isShow:false, hash:'0x0', txState:TransactionState.Pending})
+        setShowModal({isShow:false, hash:'0x0', txType:TransactionModalType.wait})
     }
 
     return {txList, showModal, setShowModal, pushTx, closeModal, pendingList}
 }
 
-const notifyTransaction = (txInfo:TransactionInfoType) => {
-    toast.success(txInfo.title + txInfo.info, {
-        position: toast.POSITION.TOP_RIGHT
-    })
-}
 
-const transactionList = createContainer(_useTransactionList)
 
-const useTransactionList = () => {
+const transactionList = createContainer(useTransactionList)
+
+const useTransactionListCon = () => {
     return transactionList.useContainer()
 }
 
 export const Provider = transactionList.Provider
   
-export default useTransactionList
+export default useTransactionListCon

@@ -9,7 +9,7 @@ type Chain = {
     infoURL: string
 }
 
-const INFURA_API_KEY = '24386bfa69af4babb7d4849a7d904476'
+const INFURA_API_KEY = process.env.REACT_APP_INFURA_KEY
 
 export const Mainnet = {
     name: 'Mainnet',
@@ -26,7 +26,7 @@ export const Mainnet = {
 
 export const Ropsten = {
     name: 'Ropsten',
-    chainId: 2,
+    chainId: 3,
     tokenName: 'Ether',
     tokenSymbol: 'ETH',
     tokenDecimals: 18,
@@ -50,4 +50,27 @@ export const Rinkeby = {
     infoURL: "https://rinkeby.etherscan.io/"
 }
 
-export const SupportedChains: Array<Chain> = [Mainnet, Ropsten, Rinkeby]
+export const Goerli = {
+    name: 'Goerli',
+    chainId: 5,
+    tokenName: 'Ether',
+    tokenSymbol: 'ETH',
+    tokenDecimals: 18,
+    rpc: ['https://rpc.goerli.mudit.blog/', 'https://rpc.slock.it/goerli ', 'https://goerli.prylabs.net/'],
+    infoURL: "https://goerli.net/#about/"
+}
+
+export const Kovan = {
+    name: 'Kovan',
+    chainId: 42,
+    tokenName: 'Ether',
+    tokenSymbol: 'ETH',
+    tokenDecimals: 18,
+    rpc: [
+        `https://kovan.infura.io/v3/${INFURA_API_KEY}`,
+        `wss://kovan.infura.io/ws/v3/${INFURA_API_KEY}`
+    ],
+    infoURL: "https://kovan-testnet.github.io/website"
+}
+// export const SupportedChains: Array<Chain> = [Mainnet, Ropsten, Rinkeby, Goerli, Kovan]
+export const SupportedChains: Array<Chain> = [Mainnet, Rinkeby]

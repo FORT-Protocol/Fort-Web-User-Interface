@@ -1,0 +1,25 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.baseModal {
+    
+    & > .mainCard {
+        padding: 40px 44px;
+    }
+
+    &-top {
+        display: flex;
+        justify-content: space-between;
+
+        &-title {
+            font-size: $T1;
+            font-family: $boldFont;
+            text-align: center;
+        }
+
+        button {
+            width: 20px;
+            height: 20px;
+        }
+    }
+}

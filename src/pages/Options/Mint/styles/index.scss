@@ -7,21 +7,32 @@
 }
 
 .options-mintOptions {
+
     margin: 0 auto;
     margin-bottom: 44px;
     display: flex;
     justify-content: center;
-    
+
     .mainCard {
         width: $baseWidth;
         padding: 40px 44px;
     }
 
-    &-leftCard{
+    &-leftCard {
+
         margin-right: 22px;
 
-        .infoView + .infoView, .chooseType + .infoView {
+        .infoView+.infoView,
+        .chooseType+.infoView {
             margin-top: 20px;
+        }
+        
+        & .infoView:nth-child(5) {
+            .TokenShow {
+                svg {
+                    z-index: auto;
+                }
+            } 
         }
     }
 
@@ -66,11 +77,11 @@
                 padding: 44px 0;
             }
 
-            .mainCard + .mainCard {
+            .mainCard+.mainCard {
                 margin-right: 0;
             }
 
-            &-title{
+            &-title {
                 p {
                     color: $gray-info-text-color;
                     font-size: $T3;
@@ -78,7 +89,7 @@
             }
 
             &-value {
-                font-family: MontserratBold;
+                font-family: $boldFont;
                 font-size: $T2;
                 margin: 15px 0;
             }
@@ -87,6 +98,25 @@
                 color: $gray-info-text-color;
                 font-size: $T3;
             }
+        }
+
+        .fort-button {
+            font-size: $T2;
+        }
+    }
+
+    .ant-picker {
+        padding-left: 0;
+        padding-right: 0;
+        width: 100%;
+    }
+
+    .ant-picker-suffix {
+        justify-self: end;
+        line-height: 0;
+
+        &>svg {
+            margin: auto 0;
         }
     }
 }
