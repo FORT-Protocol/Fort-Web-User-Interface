@@ -81,6 +81,10 @@
                 display: flex;
                 justify-content: space-between;
 
+                &:hover {
+                    border: 1px solid $button-disable-color;
+                }
+
                 input {
                     // font-family: $boldFont;
                     border: 0;

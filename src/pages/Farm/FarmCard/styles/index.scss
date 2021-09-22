@@ -73,6 +73,7 @@
     .stake-button {
         margin: 20px 22px 0 22px;
         height: 84px;
+        
         &-inputView {
             display: flex;
             justify-content: space-between;
@@ -102,9 +103,13 @@
                 }
             }
 
+            &:hover {
+                border: 1px solid $button-disable-color;
+            }
+
             div + button {
                 width: 100px;
-                height: 44px;
+                height: 100%;
                 background-color: $main-button-color;
                 color: $main-button-text-color;
                 font-family: $boldFont;
