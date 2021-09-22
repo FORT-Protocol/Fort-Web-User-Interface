@@ -35,8 +35,7 @@ export function useFortForStakingStake(
 
 export function useFortForStakingWithdraw(
     tokenName: string, 
-    cycle: BigNumber, 
-    amount: BigNumber
+    cycle: BigNumber
 ) { 
     const { account, chainId } = useWeb3()
     
@@ -47,8 +46,7 @@ export function useFortForStakingWithdraw(
     } else {
         callData = contract?.interface.encodeFunctionData('withdraw', [
             tokenList[tokenName].addresses[chainId], 
-            cycle, 
-            amount]
+            cycle]
         )
     }
     

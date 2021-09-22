@@ -15,7 +15,7 @@ import MainButton from "../../../components/MainButton";
 import MainCard from "../../../components/MainCard";
 import { SingleTokenShow } from "../../../components/TokenShow";
 import { tokenList } from "../../../libs/constants/addresses";
-import { FortOptionToken } from "../../../libs/hooks/useContract";
+import { FortOptionToken, NestPriceContract } from "../../../libs/hooks/useContract";
 import copy from "copy-to-clipboard";
 import useWeb3 from "../../../libs/hooks/useWeb3";
 import {
@@ -45,7 +45,7 @@ const CloseOptions: FC<Props> = ({ ...props }) => {
   const [optionTokenList, setOptionTokenList] = useState<
     Array<{ [key: string]: string }>
   >([]);
-  // const nestPriceContract = NestPriceContract()
+  const nestPriceContract = NestPriceContract()
 
   const routes = optionTokenList ? (
     optionTokenList.reverse().map((item: any, index) => (
@@ -114,7 +114,7 @@ const CloseOptions: FC<Props> = ({ ...props }) => {
         var nowTime = 0;
         var fortAmount = BigNumber.from("0");
         // TODO:删除测试代码
-        const blockPrice = "2723234567";
+        const blockPrice = "4100000000";
         if (Boolean(tokenInfo[2])) {
           fortAmount = BigNumber.from(blockPrice)
             .sub(BigNumber.from(tokenInfo[1]))
@@ -142,6 +142,10 @@ const CloseOptions: FC<Props> = ({ ...props }) => {
           nowTime = moment().valueOf() + subBlock.mul(13000).toNumber();
         }
 
+        if (fortAmount.lte(BigNumber.from('0'))) {
+          fortAmount = BigNumber.from('0')
+        }
+
         const newOptionInfo: OptionsInfo = {
           fortAmount: fortAmount,
           optionTokenAmount: BigNumber.from(balance),
@@ -154,16 +158,21 @@ const CloseOptions: FC<Props> = ({ ...props }) => {
         };
         setLatestBlock(latestBlock || 0);
         setOptionInfo(newOptionInfo);
-        setCloseButtonDis(
-          (latestBlock || 0) > endBlock.toNumber() ? false : true
-        );
+        const buttonStatus = () => {
+          // 检查区块，fort数量，余额
+          if (((latestBlock || 0) > endBlock.toNumber()) && newOptionInfo.fortAmount.gt(BigNumber.from('0')) && BigNumber.from(balance).gt(BigNumber.from('0'))) {
+            return false
+          }
+          return true
+        }
+        setCloseButtonDis(buttonStatus());
       })();
     } else {
       if (optionTokenContracts.length > 0 && optionTokenContracts[0]) {
         setSelectToken(optionTokenContracts[0].address);
       }
     }
-  }, [account, library, selectToken, optionTokenContracts, optionTokenList, chainId]);
+  }, [account, library, selectToken, optionTokenContracts, optionTokenList, chainId, nestPriceContract]);
 
   const addToken = useCallback(() => {
     var cache = localStorage.getItem("optionTokensList" + chainId?.toString());

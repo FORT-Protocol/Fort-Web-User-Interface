@@ -318,11 +318,6 @@
               "internalType":"uint64",
               "name":"cycle",
               "type":"uint64"
-          },
-          {
-              "internalType":"uint160",
-              "name":"amount",
-              "type":"uint160"
           }
       ],
       "name":"withdraw",

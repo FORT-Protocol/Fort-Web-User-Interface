@@ -19,6 +19,7 @@ import './styles'
 type Props = {
     name: string
     time: number
+    total: BigNumber
 }
 
 enum StakingButtonType {
@@ -38,6 +39,10 @@ type StakingType = {
     buttonType: StakingButtonType
 }
 
+// TODO:主网上线替换 1month = 165000
+const oneMonthBlock = 300
+
+
 export const FarmCard: FC<Props> = ({...props}) => {
     const {account, chainId, library} = useWeb3()
     const {pendingList} = useTransactionListCon()
@@ -50,10 +55,9 @@ export const FarmCard: FC<Props> = ({...props}) => {
     const tokenContract = ERC20Contract(tokenList[props.name].addresses)
     const classPrefix = 'farm'
     const TokenIcon = tokenList[props.name].Icon
-    const getReward = useFortForStakingGetReward(props.name, BigNumber.from((props.time * 1000).toString()))
-    const stake = useFortForStakingStake(props.name, BigNumber.from((props.time * 1000).toString()), normalToBigNumber(inputValue))
-    // TODO:不需要第三个参数，等合约修改，同时修改ABI
-    const withdraw = useFortForStakingWithdraw(props.name, BigNumber.from((props.time * 1000).toString()), BigNumber.from('10000000000000000000'))
+    const getReward = useFortForStakingGetReward(props.name, BigNumber.from((props.time * oneMonthBlock).toString()))
+    const stake = useFortForStakingStake(props.name, BigNumber.from((props.time * oneMonthBlock).toString()), normalToBigNumber(inputValue))
+    const withdraw = useFortForStakingWithdraw(props.name, BigNumber.from((props.time * oneMonthBlock).toString()))
     const approve = useERC20Approve(props.name, MaxUint256, stakingContract?.address)
 
     const buttonJSX = useCallback(
@@ -105,10 +109,11 @@ export const FarmCard: FC<Props> = ({...props}) => {
 
     useEffect(() => {
         if (!account || !chainId || !stakingContract || !library || !tokenContract) { return }
-        ;(async () => {
+        const timeOut = stakingInfo ? 4000 : 0
+        setTimeout(async () => {
             const config = await stakingContract.getConfig()
-            const channelInfo = await stakingContract.getChannelInfo(tokenList[props.name].addresses[chainId], (props.time * 1000))
-            const balanceOf = await stakingContract.balanceOf(tokenList[props.name].addresses[chainId], (props.time * 1000), account)
+            const channelInfo = await stakingContract.getChannelInfo(tokenList[props.name].addresses[chainId], (props.time * oneMonthBlock))
+            const balanceOf = await stakingContract.balanceOf(tokenList[props.name].addresses[chainId], (props.time * oneMonthBlock), account)
             const latestBlock = await library.getBlockNumber()
             // 开始锁仓
             const startBlock:BigNumber = config[1]
@@ -117,7 +122,7 @@ export const FarmCard: FC<Props> = ({...props}) => {
             // 总锁仓量
             const totalStaked:BigNumber = channelInfo[0]
             // 总出矿量
-            const totalRewards:BigNumber = channelInfo[1]
+            const totalRewards:BigNumber = props.total
             // 解锁区块号
             const unlockBlock:BigNumber = channelInfo[2]
             // 我的锁仓数量
@@ -150,11 +155,57 @@ export const FarmCard: FC<Props> = ({...props}) => {
                 setApproveAmount(allowance)
             }
             setStakingInfo(newStakingInfo)
-            // TODO:删除
-            if (tokenList[props.name].addresses[chainId] === '0xDB7b4FdF99eEE8E4Cb8373630c923c51c1275382' && props.time === 1) {
-                console.log(startBlock.toString(), stopBlock.toString(), totalStaked.toString(), totalRewards.toString(), unlockBlock.toString(), myStakeAmount.toString())
-            }
-        })()
+        }, timeOut);
+        // ;(async () => {
+        //     const config = await stakingContract.getConfig()
+        //     const channelInfo = await stakingContract.getChannelInfo(tokenList[props.name].addresses[chainId], (props.time * 1000))
+        //     const balanceOf = await stakingContract.balanceOf(tokenList[props.name].addresses[chainId], (props.time * 1000), account)
+        //     const latestBlock = await library.getBlockNumber()
+        //     // 开始锁仓
+        //     const startBlock:BigNumber = config[1]
+        //     // 结束锁仓
+        //     const stopBlock:BigNumber = config[2]
+        //     // 总锁仓量
+        //     const totalStaked:BigNumber = channelInfo[0]
+        //     // 总出矿量
+        //     const totalRewards:BigNumber = BigNumber.from(props.total)
+        //     // 解锁区块号
+        //     const unlockBlock:BigNumber = channelInfo[2]
+        //     // 我的锁仓数量
+        //     const myStakeAmount:BigNumber = balanceOf
+
+        //     const rate = totalStaked.toString() === '0' ? BigNumber.from('0') : totalRewards.mul(BigNumber.from('1000000000000000000')).div(totalStaked)
+        //     const stakingNumber = totalStaked
+        //     const miningPoolNumber = totalRewards
+        //     const myStaking = myStakeAmount
+        //     const expectedMining = rate.mul(myStaking).div(BigNumber.from('1000000000000000000'))
+        //     const claimTime = stopBlock.sub(latestBlock).toNumber() * 13000 + moment().valueOf()
+        //     const buttonType = 
+        //     latestBlock < startBlock.toNumber() ? StakingButtonType.disable : 
+        //     latestBlock < stopBlock.toNumber() ? StakingButtonType.farm :
+        //     latestBlock < unlockBlock.toNumber() ? StakingButtonType.claim : StakingButtonType.withdraw
+
+        //     const newStakingInfo = {
+        //         rate: rate,
+        //         stakingNumber: stakingNumber,
+        //         miningPoolNumber: miningPoolNumber,
+        //         myStaking: myStaking,
+        //         expectedMining: expectedMining,
+        //         claimTime: claimTime,
+        //         buttonType : buttonType
+        //     }
+        //     if (buttonType === StakingButtonType.farm) {
+        //         const tokenBalance = await tokenContract.balanceOf(account)
+        //         const allowance = await tokenContract.allowance(account, stakingContract.address)
+        //         setBalanceAmount(tokenBalance)
+        //         setApproveAmount(allowance)
+        //     }
+        //     setStakingInfo(newStakingInfo)
+        //     // TODO:删除
+        //     if (tokenList[props.name].addresses[chainId] === '0xDB7b4FdF99eEE8E4Cb8373630c923c51c1275382' && props.time === 1) {
+        //         console.log(startBlock.toString(), stopBlock.toString(), totalStaked.toString(), totalRewards.toString(), unlockBlock.toString(), myStakeAmount.toString())
+        //     }
+        // })()
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [account, chainId, library, pendingList])
 

@@ -12,6 +12,7 @@ import FortForStakingABI from '../../contracts/abis/FortForStaking.json'
 import FortEuropeanOptionABI from '../../contracts/abis/FortEuropeanOption.json';
 import FortLeverABI from '../../contracts/abis/FortLever.json';
 import NestPriceABI from '../../contracts/abis/NestPrice.json';
+import FortLeverTokenABI from '../../contracts/abis/FortLeverToken.json';
 
 function isAddress(value: any): string | false {
     try {
@@ -58,6 +59,10 @@ export function useContract(
 
 export function ERC20Contract(addresses: AddressesType): Contract | null {
     return useContract(addresses, ERC20ABI);
+}
+
+export function FortLeverToken(addresses: AddressesType): Contract | null {
+    return useContract(addresses, FortLeverTokenABI);
 }
 
 export function FortEuropeanOption(addresses: AddressesType): Contract | null {

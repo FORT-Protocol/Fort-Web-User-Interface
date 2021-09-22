@@ -84,8 +84,9 @@ const MintOptions: FC<Props> = ({ ...props }) => {
 
   useEffect(() => {
     if (nestPriceContract && priceNow === "--.--" && chainId) {
+      //  TODO:改ABI
       nestPriceContract
-        .latestPrice(tokenList["USDT"].addresses[chainId])
+        .latestPriceView(tokenList["USDT"].addresses[chainId])
         .then((value: any) => {
           setPriceNow(bigNumberToNormal(value[1], tokenList["USDT"].decimals));
         });

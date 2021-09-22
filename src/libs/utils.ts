@@ -7,9 +7,11 @@ export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
  * BigNumber转为浮点字符串
  * @param num BigNumber
  * @param decimals token精度（USDT为6位，大部分为18位）
+ * @param fix 保留小数点后位数
+ * @param exZero 是否清除0
  * @returns 浮点字符串
  */
-export function bigNumberToNormal(num: BigNumber, decimals: number = 18, fix: number = 18): string {
+export function bigNumberToNormal(num: BigNumber, decimals: number = 18, fix: number = 18, exZero: boolean = true): string {
     const str = num.toString()
     const strLength = str.length
     var newStr: string
@@ -22,7 +24,7 @@ export function bigNumberToNormal(num: BigNumber, decimals: number = 18, fix: nu
         }
         newStr = "0." + baseStr + str
     }
-    const resultBaseStr = parseFloat(newStr).toString()
+    const resultBaseStr = exZero ? parseFloat(newStr).toString() : newStr
     if (resultBaseStr.indexOf('.') !== -1) {
         const resultBaseStrArray = resultBaseStr.split('.')
         return resultBaseStrArray[0] + '.' + resultBaseStrArray[1].substr(0,fix)

@@ -1,20 +1,24 @@
+import { BigNumber } from "@ethersproject/bignumber";
 import { FC } from "react";
 import { FarmCard } from "./FarmCard";
 import "./styles";
 
+const baseTotal = BigNumber.from('1000000000000000000')
+
 const Farm: FC = () => {
   const classPrefix = "farm";
   const farms = [
-    { name: "DCU", time: 1 },
-    { name: "DCU", time: 2 },
-    { name: "DCU", time: 24 },
-    { name: "USDT", time: 1 },
-    { name: "USDT", time: 2 },
-    { name: "USDT", time: 3 },
+    { name: "NEST", time: 12, total: BigNumber.from('30000000').mul(baseTotal) },
+    { name: "NEST", time: 1, total: BigNumber.from('2000000').mul(baseTotal) },
+    { name: "CoFi", time: 1, total: BigNumber.from('2000000').mul(baseTotal) },
+    { name: "FOR", time: 1, total: BigNumber.from('2000000').mul(baseTotal) },
+    { name: "NHBTC", time: 1, total: BigNumber.from('2000000').mul(baseTotal) },
+    { name: "PUSD", time: 1, total: BigNumber.from('2000000').mul(baseTotal) },
+    { name: "PETH", time: 1, total: BigNumber.from('2000000').mul(baseTotal) },
   ].map((item) => {
     return (
       <li key={item.name + item.time.toString()}>
-        <FarmCard name={item.name} time={item.time} />
+        <FarmCard name={item.name} time={item.time} total={item.total}/>
       </li>
     );
   });

@@ -61,6 +61,6 @@ export function useFortEuropeanOptionExercise(
         data: callData,
         value: PRICE_FEE
     }
-    const txPromise = useSendTransaction(contract, tx, {title:`Option Token close`, info:'', type: TransactionType.buyOption})
+    const txPromise = useSendTransaction(contract, tx, {title:`Option Token close`, info:'', type: TransactionType.closeOption})
     return txPromise
 }

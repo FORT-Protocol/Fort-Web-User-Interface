@@ -8,7 +8,7 @@ import MainButton from '../../components/MainButton'
 import LineShowInfo from '../../components/LineShowInfo'
 import { SingleTokenShow } from '../../components/TokenShow'
 import LeverReview, { LeverReviewModel } from '../Review/LeverReview'
-import { ERC20Contract, NestPriceContract } from '../../libs/hooks/useContract'
+import { ERC20Contract, FortLeverToken, NestPriceContract } from '../../libs/hooks/useContract'
 import { bigNumberToNormal, formatInputNum, normalToBigNumber } from '../../libs/utils'
 import { LeverTokenList, tokenList } from '../../libs/constants/addresses'
 import useWeb3 from '../../libs/hooks/useWeb3'
@@ -35,20 +35,21 @@ const Lever: FC = () => {
         getNum: ''
     })
     const nestPriceContract = NestPriceContract()
-    const tokenContracts = [...LeverTokenList, tokenList['DCU']].map((item) => {
-        return ERC20Contract(item.addresses)
-    })
+    const tokenContracts = [...LeverTokenList.map((item) => {
+        return FortLeverToken(item.addresses)
+    }), ERC20Contract(tokenList['DCU'].addresses)]
     
-    useEffect(() => {
-        if (nestPriceContract && priceNow === '--.--' && chainId) {
-            nestPriceContract
-            .latestPrice(tokenList['USDT'].addresses[chainId])
-            .then((value:any) => {
-                setPriceNow(bigNumberToNormal(value[1], tokenList['USDT'].decimals))
-            })
-        }
+    // useEffect(() => {
+    //     if (nestPriceContract && chainId) {
+    //         //  TODO:改ABI
+    //         nestPriceContract
+    //         .latestPriceView(tokenList['USDT'].addresses[chainId])
+    //         .then((value:any) => {
+    //             setPriceNow(bigNumberToNormal(value[1], tokenList['USDT'].decimals))
+    //         })
+    //     }
 
-    }, [priceNow, nestPriceContract, chainId])
+    // }, [priceNow, nestPriceContract, chainId])
 
     useEffect(() => {
         if (account && chainId) {
@@ -56,10 +57,23 @@ const Lever: FC = () => {
                 (item) => item?.address === tokenList[transactionInfo.fromToken].addresses[chainId]
             )
             if (tokenContract[0]) {
-                tokenContract[0].balanceOf(account)
-                .then((value: any) => {
-                    setFromBalance(BigNumber.from(value))
-                })
+                if (tokenList[transactionInfo.fromToken].symbol === 'DCU') {
+                    tokenContract[0].balanceOf(account)
+                    .then((value: any) => {
+                        setFromBalance(BigNumber.from(value))
+                    })
+                } else {
+                    if (nestPriceContract && chainId) {
+                        ;(async () => {
+                            //  TODO:改ABI
+                            const priceResult = await nestPriceContract
+                            .latestPriceView(tokenList['USDT'].addresses[chainId])
+                            const leverTokenBalance = await tokenContract[0]?.estimateBalance(account, priceResult[1])
+                            setFromBalance(BigNumber.from(leverTokenBalance))
+                            setPriceNow(bigNumberToNormal(priceResult[1], tokenList['USDT'].decimals))
+                        })()
+                    }
+                }
                 return
             }
         }
@@ -72,10 +86,24 @@ const Lever: FC = () => {
                 (item) => item?.address === tokenList[transactionInfo.getToken].addresses[chainId]
             )
             if (tokenContract[0]) {
-                tokenContract[0].balanceOf(account)
-                .then((value: any) => {
-                    setGetBalance(BigNumber.from(value))
-                })
+                if (tokenList[transactionInfo.getToken].symbol === 'DCU') {
+                    tokenContract[0].balanceOf(account)
+                    .then((value: any) => {
+                        setGetBalance(BigNumber.from(value))
+                    })
+                } else {
+                    if (nestPriceContract && chainId) {
+                        ;(async () => {
+                            //  TODO:改ABI
+                            const priceResult = await nestPriceContract
+                            .latestPriceView(tokenList['USDT'].addresses[chainId])
+                            const leverTokenBalance = await tokenContract[0]?.estimateBalance(account, priceResult[1])
+                            setGetBalance(BigNumber.from(leverTokenBalance))
+                            setPriceNow(bigNumberToNormal(priceResult[1], tokenList['USDT'].decimals))
+                        })()
+                    }
+                }
+                return
             }
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -127,7 +155,7 @@ const Lever: FC = () => {
         return false
     }
     const handleMax = () => {
-        setTransactionInfo({...transactionInfo, fromNum: bigNumberToNormal(fromBalance), getNum: bigNumberToNormal(fromBalance)})
+        setTransactionInfo({...transactionInfo, fromNum: bigNumberToNormal(fromBalance, 18, 18, false), getNum: bigNumberToNormal(fromBalance, 18, 18, false)})
     }
     
     return isReview ? <LeverReview back={() => setIsReview(false)} model={reviewModel}/> : (

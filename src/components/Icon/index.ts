@@ -29,6 +29,14 @@ export { ReactComponent as NoOptionToken } from './svg/noOptionToken.svg'
 export { ReactComponent as XIconGray } from './svg/xIconGray.svg'
 export { ReactComponent as ProblemIcon } from './svg/problemIcon.svg'
 export { ReactComponent as WhiteLoading } from './svg/whiteLoading.svg'
+export { ReactComponent as TokenCoFiX } from './svg/TokenCoFiX.svg'
+export { ReactComponent as TokenNest } from './svg/TokenNest.svg'
+export { ReactComponent as TokenFortube } from './svg/TokenFortube.svg'
+export { ReactComponent as TokenNHBTC } from './svg/TokenNHBTC.svg'
+export { ReactComponent as TokenPUSD } from './svg/TokenPUSD.svg'
+export { ReactComponent as TokenPETH } from './svg/TokenPETH.svg'
+
+
 
 
 

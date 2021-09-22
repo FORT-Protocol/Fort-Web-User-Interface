@@ -6,6 +6,11 @@
     justify-content: flex-start;
     height: 100%;
 
+    p {
+        line-height: 100%;
+        white-space:nowrap;
+    }
+
     svg {
         margin: auto 0;
         z-index: 1;
