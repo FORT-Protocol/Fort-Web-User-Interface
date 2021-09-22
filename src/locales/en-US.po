@@ -244,8 +244,8 @@ msgid "Number of Option Token"
 msgstr "Number of Option Token"
 
 #: src/pages/Shared/Header/index.tsx
-msgid "Opions Token"
-msgstr "Opions Token"
+msgid "Options Token"
+msgstr "Options Token"
 
 #: src/pages/Options/Close/index.tsx
 #: src/pages/Options/Close/index.tsx
@@ -376,8 +376,8 @@ msgid "Withdraw"
 msgstr "Withdraw"
 
 #: src/pages/Options/Mint/index.tsx
-msgid "compare with spot price and srike price"
-msgstr "compare with spot price and srike price"
+msgid "compare with spot price and strike price"
+msgstr "compare with spot price and strike price"
 
 #: src/pages/Farm/FarmCard/index.tsx
 msgid "wallet:"

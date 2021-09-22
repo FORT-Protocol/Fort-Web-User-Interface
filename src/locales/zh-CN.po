@@ -244,7 +244,7 @@ msgid "Number of Option Token"
 msgstr "期权币数量"
 
 #: src/pages/Shared/Header/index.tsx
-msgid "Opions Token"
+msgid "Options Token"
 msgstr "期权币"
 
 #: src/pages/Options/Close/index.tsx
@@ -376,7 +376,7 @@ msgid "Withdraw"
 msgstr "取回"
 
 #: src/pages/Options/Mint/index.tsx
-msgid "compare with spot price and srike price"
+msgid "compare with spot price and strike price"
 msgstr "比较ETH的现货价格与行权价"
 
 #: src/pages/Farm/FarmCard/index.tsx

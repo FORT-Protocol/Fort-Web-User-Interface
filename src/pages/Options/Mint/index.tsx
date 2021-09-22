@@ -343,7 +343,7 @@ const MintOptions: FC<Props> = ({ ...props }) => {
             {` ${exercise.time}`}
           </p>
           <p className={`${classPrefix}-rightCard-timeValue`}>
-            <Trans>compare with spot price and srike price</Trans>
+            <Trans>compare with spot price and strike price</Trans>
           </p>
         </div>
 

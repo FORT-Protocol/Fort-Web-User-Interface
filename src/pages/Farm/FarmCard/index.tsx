@@ -217,7 +217,7 @@ export const FarmCard: FC<Props> = ({...props}) => {
             </div>
             <div className={`${classPrefix}-middleInfo`}>
                 <LineShowInfo leftText={t`Lock period`} rightText={`${props.time} Month`}/>
-                <LineShowInfo leftText={t`Current mining rate`} rightText={`${bigNumberToNormal(stakingInfo?.rate || BigNumber.from('0'), 18, 8)} FORT/${props.name}`}/>
+                <LineShowInfo leftText={t`Current mining rate`} rightText={`${bigNumberToNormal(stakingInfo?.rate || BigNumber.from('0'), 18, 8)} DCU/${props.name}`}/>
                 <LineShowInfo leftText={t`Staking number`} rightText={`${bigNumberToNormal(stakingInfo?.stakingNumber || BigNumber.from('0'), 18, 2)} ${props.name}`}/>
                 <LineShowInfo leftText={t`Mining pool number`} rightText={`${bigNumberToNormal(stakingInfo?.miningPoolNumber || BigNumber.from('0'), 18, 2)} DCU`}/>
             </div>
