@@ -1,8 +1,9 @@
 import { BigNumber } from "@ethersproject/bignumber";
 import { t } from "@lingui/macro";
 import classNames from "classnames";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Link, Redirect, Route, Switch, useLocation } from "react-router-dom";
+import useWeb3 from "../../libs/hooks/useWeb3";
 import OptionsReview from "../Review/OptionsReview";
 import CloseOptions from "./Close";
 import MintOptions from "./Mint";
@@ -20,6 +21,7 @@ export type OptionsInfo = {
 };
 
 const Options: FC = () => {
+  const {chainId} = useWeb3()
   const [review, setReview] = useState({
     isReview: false,
     isMint: true,
@@ -44,6 +46,12 @@ const Options: FC = () => {
     setReview({ ...review, isReview: true, isMint: isMint });
     setOptionInfo(info);
   };
+  useEffect(() => {
+    if(review.isReview) {
+      setReview({ ...review, isReview: false});
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [chainId])
   return review.isReview ? (
     <OptionsReview
       back={() => setReview({ ...review, isReview: false })}

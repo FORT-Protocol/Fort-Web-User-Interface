@@ -52,6 +52,13 @@ const Lever: FC = () => {
     // }, [priceNow, nestPriceContract, chainId])
 
     useEffect(() => {
+        if (isReview) {
+            setIsReview(false)
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [chainId])
+
+    useEffect(() => {
         if (account && chainId) {
             const tokenContract = tokenContracts.filter(
                 (item) => item?.address === tokenList[transactionInfo.fromToken].addresses[chainId]
