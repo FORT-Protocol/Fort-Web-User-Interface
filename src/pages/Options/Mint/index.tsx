@@ -365,7 +365,7 @@ const MintOptions: FC<Props> = ({ ...props }) => {
                 : t`(Strike price - Spot price)*`}
               {bigNumberToNormal(optionTokenValue, 18, 2)}
             </p>
-            <p className={`${classPrefix}-rightCard-smallCard-name`}>FORT</p>
+            <p className={`${classPrefix}-rightCard-smallCard-name`}>DCU</p>
           </MainCard>
           <MainCard>
             <div className={`${classPrefix}-rightCard-smallCard-title`}>
@@ -379,7 +379,7 @@ const MintOptions: FC<Props> = ({ ...props }) => {
               </p>
             </div>
             <p className={`${classPrefix}-rightCard-smallCard-value`}>{"0"}</p>
-            <p className={`${classPrefix}-rightCard-smallCard-name`}>FORT</p>
+            <p className={`${classPrefix}-rightCard-smallCard-name`}>DCU</p>
           </MainCard>
         </div>
       </MainCard>

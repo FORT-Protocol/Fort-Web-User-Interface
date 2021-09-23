@@ -311,7 +311,7 @@ const CloseOptions: FC<Props> = ({ ...props }) => {
               <span
                 className={`${classPrefix}-rightCard-bottomInfo-fortNum-name`}
               >
-                FORT
+                DCU
               </span>
             </div>
           </div>
