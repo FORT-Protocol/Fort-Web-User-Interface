@@ -53,5 +53,11 @@ footer {
             height: $iconSize;
             margin: $iconMargin 12px (-$iconMargin) 0;
         }
+
+        &-tel {
+            width: $iconSize;
+            height: $iconSize;
+            margin: $iconMargin 12px (-$iconMargin) 0;
+        }
     }
 }

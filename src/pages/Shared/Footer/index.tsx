@@ -4,6 +4,7 @@ import {
   EnglishIcon,
   GithubIcon,
   MiIcon,
+  TelIcon,
   TwitterIcon,
 } from "../../../components/Icon";
 import { dynamicActivate } from "../../../libs/i18nConfig";
@@ -28,9 +29,10 @@ const Footer: FC = () => {
         </button>
       </div>
       <div className={`${footer}-right`}>
-        <TwitterIcon className={`${footer}-right-twitter`} />
-        <GithubIcon className={`${footer}-right-github`} />
-        <MiIcon className={`${footer}-right-mi`} />
+        <a href="https://t.me/fort_DeFi" target="view_window"><TelIcon className={`${footer}-right-tel`} /></a>
+        <a href="https://www.google.com" target="view_window"><TwitterIcon className={`${footer}-right-twitter`} /></a>
+        <a href="https://github.com/FORT-Protocol" target="view_window"><GithubIcon className={`${footer}-right-github`} /></a>
+        <a href="https://www.google.com" target="view_window"><MiIcon className={`${footer}-right-mi`} /></a>
       </div>
     </footer>
   );

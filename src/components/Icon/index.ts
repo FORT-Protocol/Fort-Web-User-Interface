@@ -35,6 +35,7 @@ export { ReactComponent as TokenFortube } from './svg/TokenFortube.svg'
 export { ReactComponent as TokenNHBTC } from './svg/TokenNHBTC.svg'
 export { ReactComponent as TokenPUSD } from './svg/TokenPUSD.svg'
 export { ReactComponent as TokenPETH } from './svg/TokenPETH.svg'
+export { ReactComponent as TelIcon } from './svg/tel-icon.svg'
 
 
 

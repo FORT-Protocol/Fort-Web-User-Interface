@@ -73,4 +73,4 @@ export const Kovan = {
     infoURL: "https://kovan-testnet.github.io/website"
 }
 // export const SupportedChains: Array<Chain> = [Mainnet, Ropsten, Rinkeby, Goerli, Kovan]
-export const SupportedChains: Array<Chain> = [Mainnet, Ropsten]
+export const SupportedChains: Array<Chain> = [Ropsten]

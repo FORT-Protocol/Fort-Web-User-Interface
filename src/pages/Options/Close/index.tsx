@@ -113,19 +113,20 @@ const CloseOptions: FC<Props> = ({ ...props }) => {
         var subBlock: BigNumber = BigNumber.from(0);
         var nowTime = 0;
         var fortAmount = BigNumber.from("0");
-        // TODO:删除测试代码
-        const blockPrice = "4100000000";
+        // TODO:删除测试代码----
+        const blockPrice = await nestPriceContract?.latestPriceView(tokenList["USDT"].addresses[chainId])
         if (Boolean(tokenInfo[2])) {
-          fortAmount = BigNumber.from(blockPrice)
+          fortAmount = blockPrice[1]
             .sub(BigNumber.from(tokenInfo[1]))
             .mul(balance)
             .div(getBaseBigNumber(6));
         } else {
           fortAmount = BigNumber.from(tokenInfo[1])
-            .sub(BigNumber.from(blockPrice))
+            .sub(blockPrice[1])
             .mul(balance)
             .div(getBaseBigNumber(6));
         }
+        // TODO:删除测试代码----//
 
         if (BigNumber.from(latestBlock?.toString()).gt(endBlock)) {
           // TODO:恢复正式代码
