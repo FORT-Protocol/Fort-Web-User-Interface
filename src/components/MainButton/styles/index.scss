@@ -14,5 +14,12 @@
 
     &.disable {
         background-color: $button-disable-color;
+        &:hover {
+            cursor: not-allowed;
+        }
+    }
+
+    &:hover {
+        cursor: pointer;
     }
 }

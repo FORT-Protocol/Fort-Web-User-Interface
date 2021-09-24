@@ -251,7 +251,7 @@ const CloseOptions: FC<Props> = ({ ...props }) => {
             rightText={
               optionInfo
                 ? bigNumberToNormal(optionInfo.optionTokenAmount)
-                : "--.--"
+                : "----"
             }
           />
           <LineShowInfo
@@ -262,7 +262,7 @@ const CloseOptions: FC<Props> = ({ ...props }) => {
                     optionInfo.strikePrice,
                     tokenList["USDT"].decimals
                   )
-                : "--.--"
+                : "----"
             }
           />
           <LineShowInfo
