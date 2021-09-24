@@ -308,7 +308,7 @@ const CloseOptions: FC<Props> = ({ ...props }) => {
                 18,
                 6
               )}
-              {/* {latestBlock > (optionInfo?.blockNumber || 0) ? bigNumberToNormal(optionInfo?.fortAmount || BigNumber.from('0')) : '---'} */}
+              {/* {latestBlock > (optionInfo?.blockNumber || 0) ? bigNumberToNormal(optionInfo?.fortAmount || BigNumber.from('0')) : '----'} */}
               <span
                 className={`${classPrefix}-rightCard-bottomInfo-fortNum-name`}
               >

@@ -339,7 +339,7 @@ export const FarmCard: FC<Props> = ({ ...props }) => {
       stakingInfo?.buttonType === StakingButtonType.claim ||
       stakingInfo?.buttonType === StakingButtonType.withdraw
     ) {
-      return "---";
+      return "----";
     }
     return `${bigNumberToNormal(
       stakingInfo?.rate || BigNumber.from("0"),

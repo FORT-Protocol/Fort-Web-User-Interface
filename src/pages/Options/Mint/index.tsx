@@ -95,7 +95,7 @@ const MintOptions: FC<Props> = ({ ...props }) => {
 
   useEffect(() => {
     if (exercise.blockNum === 0 || strikePrice === "") {
-      setTokenName("---");
+      setTokenName("----");
     } else {
       const oneStr = isLong ? "C" : "P";
       const strikePriceStr = normalToBigNumber(
