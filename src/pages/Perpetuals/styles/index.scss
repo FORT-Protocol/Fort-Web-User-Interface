@@ -1,0 +1,71 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.perpetuals-card {
+
+    width: $baseWidth;
+    margin: 0 auto;
+    padding: 40px 44px;
+    margin-top: 22px;
+
+    .leverChoose + .infoView {
+        margin-top: 30px;
+    }
+
+    &-button {
+        width: 100%;
+        margin-top:30px;
+    }
+}
+
+.holdLine {
+    margin-top: 40px;
+}
+
+table {
+    width: 1340px;
+    margin: 0 auto;
+    border-collapse: separate;
+    border-spacing: 0px 20px;
+
+
+    .perpetuals-table-title {
+        color: $gray-info-text-color;
+        font-size: $T2;
+        height: 44px;
+        border-radius: 12px;
+        box-shadow: $shadow;
+    }
+    .perpetuals-table-normal {
+        color: $gray-info-text-color;
+        font-size: $T2;
+        height: 44px;
+        border-radius: 12px;
+        box-shadow: $shadow;
+        text-align: center;
+        font-size: $T2;
+        font-family: $boldFont;
+        color: $black-text-color;
+
+        .fort-button {
+            height: 28px;
+            width: 90px;
+            padding: 0;
+        }
+
+        .tokenPair {
+            
+            justify-content:center;
+            // padding: 8px 0;
+            
+            svg {
+                margin: auto 0;
+                z-index: 1;
+            }
+            svg + svg {
+                margin-left: -8px;
+                z-index: 0;
+            }
+        }
+    }
+}

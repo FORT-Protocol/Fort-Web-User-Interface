@@ -36,12 +36,12 @@ export { ReactComponent as TokenNHBTC } from './svg/TokenNHBTC.svg'
 export { ReactComponent as TokenPUSD } from './svg/TokenPUSD.svg'
 export { ReactComponent as TokenPETH } from './svg/TokenPETH.svg'
 export { ReactComponent as TelIcon } from './svg/tel-icon.svg'
-
-
-
-
-
-
+export { ReactComponent as LongIcon } from './svg/longIcon.svg'
+export { ReactComponent as ShortIcon } from './svg/shortIcon.svg'
+export { ReactComponent as LongTypeNormal } from './svg/long-type-normal.svg'
+export { ReactComponent as LongTypeSelected } from './svg/long-type-selected.svg'
+export { ReactComponent as ShortTypeNormal } from './svg/short-type-normal.svg'
+export { ReactComponent as ShortTypeSelected } from './svg/short-type-selected.svg'
 
 
 

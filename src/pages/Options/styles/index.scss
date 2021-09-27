@@ -1,52 +1,173 @@
 @use "sass:math";
 @import 'src/styles/shared.scss';
 
-.options {
-    width: 100%;
+@mixin normal-text {
+    color: $gray-info-text-color;
+    font-size: $T2;
+}
 
-    &-route {
-        margin: 22px auto;
+.options-mintOptions {
+
+    margin: 0 auto;
+    margin-bottom: 44px;
+    margin-top: 22px;
+    display: flex;
+    justify-content: center;
+
+    .mainCard {
         width: $baseWidth;
-        height: 44px;
-        display: flex;
-        justify-content: space-between;
-        background: #ffffff;
-        box-shadow: $shadow;
-        border: 1px solid $gray-background-color;
-        border-radius: 22px;
+        padding: 40px 44px;
+    }
 
-        li {
-            text-align: center;
-            line-height: 44px;
-            background: #ffffff;
-            width: math.div($baseWidth, 2);
+    &-leftCard {
 
-            a {
-                width: 100%;
-                display: block;
-            }
+        margin-right: 22px;
 
-            &.selected {
-                background: $gray-background-color;
-
-                a {
-                    color: $main-button-color;
-                    font-family: $boldFont;
-                    font-weight: bold;
+        .infoView+.infoView,
+        .chooseType+.infoView {
+            margin-top: 20px;
+        }
+        
+        & .infoView:nth-child(5) {
+            .TokenShow {
+                svg {
+                    z-index: auto;
                 }
-            }
-        }
-
-        &>li {
-            border-radius: 22px 0 0 22px;
-        }
-
-        &>li+li {
-            border-radius: 0px 22px 22px 0;
+            } 
         }
     }
 
-    .fort-button {
+    &-rightCard {
+        text-align: center;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+
+        &-tokenTitle {
+            @include normal-text;
+        }
+
+        &-tokenValue {
+            font-family: HeptaSlabMedium;
+            font-size: 48px;
+            color: $main-button-color;
+        }
+
+        &-tokenName {
+            @include normal-text;
+        }
+
+        &-timeTitle {
+            @include normal-text;
+        }
+
+        &-timeValue {
+            margin-top: 1px;
+            @include normal-text;
+        }
+
+        &-smallCard {
+            display: flex;
+            justify-content: space-between;
+
+            .mainCard {
+                margin-right: 44px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                padding: 44px 0;
+            }
+
+            .mainCard+.mainCard {
+                margin-right: 0;
+            }
+
+            &-title {
+                p {
+                    color: $gray-info-text-color;
+                    font-size: $T3;
+                }
+            }
+
+            &-value {
+                font-family: $boldFont;
+                font-size: $T2;
+                margin: 15px 0;
+            }
+
+            &-name {
+                color: $gray-info-text-color;
+                font-size: $T3;
+            }
+        }
+
+        .fort-button {
+            font-size: $T2;
+        }
+    }
+
+    .ant-picker {
+        padding-left: 0;
+        padding-right: 0;
         width: 100%;
+    }
+
+    .ant-picker-suffix {
+        justify-self: end;
+        line-height: 0;
+
+        &>svg {
+            margin: auto 0;
+        }
+    }
+}
+
+table {
+    width: 1340px;
+    margin: 0 auto;
+    border-collapse: separate;
+    border-spacing: 0px 20px;
+
+    .exerciseTime {
+        text-align: left;
+        width: 370px;
+    }
+
+    .options-mintOptions-table-title {
+        color: $gray-info-text-color;
+        font-size: $T2;
+        height: 44px;
+        border-radius: 12px;
+        box-shadow: $shadow;
+    }
+    .options-mintOptions-table-normal {
+        color: $gray-info-text-color;
+        font-size: $T2;
+        height: 44px;
+        border-radius: 12px;
+        box-shadow: $shadow;
+        text-align: center;
+        font-size: $T2;
+        font-family: $boldFont;
+        color: $black-text-color;
+
+        .fort-button {
+            height: 28px;
+            width: 90px;
+            padding: 0;
+        }
+
+        .tokenPair {
+            justify-content:center;
+            
+            svg {
+                margin: auto 0;
+                z-index: 1;
+            }
+            svg + svg {
+                margin-left: -8px;
+                z-index: 0;
+            }
+        }
     }
 }

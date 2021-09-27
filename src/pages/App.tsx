@@ -6,9 +6,8 @@ import loadable from "@loadable/component";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import TransactionModal from "./Shared/TransactionModal";
-// import useWeb3 from '../libs/hooks/useWeb3'
 
-const Sustainable = loadable(() => import("./Lever"));
+const Perpetuals = loadable(() => import("./Perpetuals"));
 const Option = loadable(() => import("./Options"));
 const Mining = loadable(() => import("./Farm"));
 
@@ -22,8 +21,8 @@ const App: FC = () => {
         <HashRouter>
           <Header />
           <Switch>
-            <Route path="/lever">
-              <Sustainable />
+            <Route path="/perpetuals">
+              <Perpetuals />
             </Route>
             <Route path="/options">
               <Option />
@@ -31,7 +30,7 @@ const App: FC = () => {
             <Route path="/farm">
               <Mining />
             </Route>
-            <Redirect to="/lever" />
+            <Redirect to="/perpetuals" />
           </Switch>
         </HashRouter>
       </div>

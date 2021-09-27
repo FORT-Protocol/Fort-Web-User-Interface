@@ -1,0 +1,26 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.holdLine {
+    height: 44px;
+    width: 100%;
+    margin-bottom: -22px;
+
+    &-mainBG {
+        margin: 0 auto;
+        width: 270px;
+        border-radius: 22px;
+        box-shadow: $shadow;
+        line-height: 44px;
+        height: 44px;
+        text-align: center;
+        margin-top: -22px;
+        background-color: $main-background-color;
+    }
+
+    &-line {
+        width: 100%;
+        border: 1px solid $gray-line-color;
+        margin-top: 22px;
+    }
+}

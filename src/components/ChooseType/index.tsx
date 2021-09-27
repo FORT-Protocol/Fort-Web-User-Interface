@@ -1,7 +1,6 @@
 import { FC } from 'react'
-import { Trans } from '@lingui/macro'
 import './styles'
-import classNames from 'classnames'
+import { LongTypeNormal, LongTypeSelected, ShortTypeNormal, ShortTypeSelected } from '../Icon'
 
 type Props = {
     callBack: (isLong: boolean) => void
@@ -10,23 +9,12 @@ type Props = {
 
 const ChooseType: FC<Props> = ({...props}) => {
     const classPrefix = 'chooseType'
+    const leftIcon = props.isLong ? (<LongTypeSelected/>) : (<LongTypeNormal/>)
+    const rightIcon = props.isLong ? (<ShortTypeNormal/>) : (<ShortTypeSelected/>)
     return (
         <div className={classPrefix}>
-            <p className={`${classPrefix}-title`}><Trans>Type</Trans></p>
-            <div className={`${classPrefix}-choose`}>
-                <div className={classNames({
-                    [`${classPrefix}-choose-left`]:true,
-                    [`isSelected`]: props.isLong
-                })} onClick={() => props.callBack(true)}>
-                    <div><Trans>Long</Trans></div>
-                </div>
-                <div className={classNames({
-                    [`${classPrefix}-choose-right`]: true,
-                    [`isSelected`]: !props.isLong
-                })} onClick={() => props.callBack(false)}>
-                    <div><Trans>Short</Trans></div>
-                </div>
-            </div>
+            <div onClick={() => props.callBack(true)}>{leftIcon}</div>
+            <div onClick={() => props.callBack(false)}>{rightIcon}</div>
         </div>
     )
 }
