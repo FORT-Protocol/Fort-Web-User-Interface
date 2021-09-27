@@ -47,6 +47,10 @@ table {
         font-family: $boldFont;
         color: $black-text-color;
 
+        svg {
+            margin-top: 3px;
+        }
+
         .fort-button {
             height: 28px;
             width: 90px;
@@ -54,13 +58,9 @@ table {
         }
 
         .tokenPair {
-            
-            justify-content:center;
-            // padding: 8px 0;
-            
             svg {
-                margin: auto 0;
                 z-index: 1;
+                
             }
             svg + svg {
                 margin-left: -8px;

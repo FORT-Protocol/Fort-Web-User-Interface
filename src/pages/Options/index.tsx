@@ -1,6 +1,6 @@
 import { t, Trans } from "@lingui/macro";
 import { BigNumber } from "ethers";
-import { FC, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import ChooseType from "../../components/ChooseType";
 import { LongIcon, PutDownIcon, ShortIcon } from "../../components/Icon";
 import InfoShow from "../../components/InfoShow";
@@ -26,11 +26,11 @@ import {
   normalToBigNumber,
   ZERO_ADDRESS,
 } from "../../libs/utils";
-import { message } from "antd";
+import { DatePicker, message } from "antd";
 import "../../styles/ant.css";
 import "./styles";
 import { HoldLine } from "../../components/HoldLine";
-// import moment from "moment";
+import moment from "moment";
 
 export type OptionsInfo = {
   fortAmount: BigNumber;
@@ -45,7 +45,7 @@ export type OptionsInfo = {
 
 const MintOptions: FC = () => {
   const classPrefix = "options-mintOptions";
-  const { account, chainId } = useWeb3();
+  const { account, chainId, library } = useWeb3();
   const nestPriceContract = NestPriceContract();
   const fortEuropeanOption = FortEuropeanOption(FortEuropeanOptionContract);
   const fortContract = ERC20Contract(tokenList["DCU"].addresses);
@@ -147,28 +147,28 @@ const MintOptions: FC = () => {
     setIsLong(isLong);
   };
 
-  // const onOk = useCallback(
-  //   async (value: any) => {
-  //     const nowTime = moment().valueOf();
-  //     const selectTime = moment(value).valueOf();
-  //     const latestBlock = await library?.getBlockNumber();
+  const onOk = useCallback(
+    async (value: any) => {
+      const nowTime = moment().valueOf();
+      const selectTime = moment(value).valueOf();
+      const latestBlock = await library?.getBlockNumber();
 
-  //     if (selectTime > nowTime) {
-  //       const timeString = moment(value).format("YYYY[-]MM[-]DD");
-  //       const blockNum = parseFloat(
-  //         ((selectTime - nowTime) / 13000).toString()
-  //       ).toFixed(0);
-  //       setExercise({
-  //         time: timeString,
-  //         blockNum: Number(blockNum) + (latestBlock || 0),
-  //       });
-  //     } else {
-  //       const timeString = moment().format("YYYY[-]MM[-]DD");
-  //       setExercise({ time: timeString, blockNum: latestBlock || 0 });
-  //     }
-  //   },
-  //   [library]
-  // );
+      if (selectTime > nowTime) {
+        const timeString = moment(value).format("YYYY[-]MM[-]DD");
+        const blockNum = parseFloat(
+          ((selectTime - nowTime) / 13000).toString()
+        ).toFixed(0);
+        setExercise({
+          time: timeString,
+          blockNum: Number(blockNum) + (latestBlock || 0),
+        });
+      } else {
+        const timeString = moment().format("YYYY[-]MM[-]DD");
+        setExercise({ time: timeString, blockNum: latestBlock || 0 });
+      }
+    },
+    [library]
+  );
 
   // const optionInfo: OptionsInfo = {
   //   fortAmount: normalToBigNumber(fortNum),
@@ -230,9 +230,9 @@ const MintOptions: FC = () => {
     }
     return false;
   };
-  // function disabledDate(current: any) {
-  //   return current && current < moment().add(7, "days").startOf("day");
-  // }
+  function disabledDate(current: any) {
+    return current && current < moment().add(7, "days").startOf("day");
+  }
 
   // function disabledDateTime(date: any) {
   //     var nowHour:number
@@ -284,13 +284,13 @@ const MintOptions: FC = () => {
             dataList={timeDatalist} 
             getSelectedToken={handleGetTime}
           >
-            <input 
+            {/* <input 
             type={'text'}
             className={'input-left'} 
             value={exercise.time} 
             readOnly
-            placeholder={t`Input`}/>
-            {/* <DatePicker
+            placeholder={t`Input`}/> */}
+            <DatePicker
               format="YYYY-MM-DD"
               disabledDate={disabledDate}
               onChange={onOk}
@@ -298,7 +298,7 @@ const MintOptions: FC = () => {
               suffixIcon={<PutDownIcon />}
               placeholder={t`Exercise time`}
               allowClear={false}
-            /> */}
+            />
           </InfoShow>
 
           <InfoShow
