@@ -1,6 +1,5 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { t, Trans } from '@lingui/macro'
-import classNames from 'classnames'
 import { FC, useState } from 'react'
 import ChooseType from '../../components/ChooseType'
 import { HoldLine } from '../../components/HoldLine'
@@ -16,6 +15,7 @@ import './styles'
 
 const Perpetuals: FC = () => {
     const [isLong, setIsLong] = useState(true)
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [dcuBalance, setDcuBalance] = useState<BigNumber>()
     const [dcuInput, setDcuInput] = useState<string>('')
     const classPrefix = 'perpetuals'

@@ -170,16 +170,16 @@ const MintOptions: FC = () => {
   //   [library]
   // );
 
-  const optionInfo: OptionsInfo = {
-    fortAmount: normalToBigNumber(fortNum),
-    optionToken: ZERO_ADDRESS,
-    optionTokenName: tokenName,
-    optionTokenAmount: optionTokenValue,
-    type: isLong,
-    strikePrice: normalToBigNumber(strikePrice, tokenList["USDT"].decimals),
-    exerciseTime: exercise.time,
-    blockNumber: BigNumber.from(exercise.blockNum),
-  };
+  // const optionInfo: OptionsInfo = {
+  //   fortAmount: normalToBigNumber(fortNum),
+  //   optionToken: ZERO_ADDRESS,
+  //   optionTokenName: tokenName,
+  //   optionTokenAmount: optionTokenValue,
+  //   type: isLong,
+  //   strikePrice: normalToBigNumber(strikePrice, tokenList["USDT"].decimals),
+  //   exerciseTime: exercise.time,
+  //   blockNumber: BigNumber.from(exercise.blockNum),
+  // };
 
   useEffect(() => {
     if (
