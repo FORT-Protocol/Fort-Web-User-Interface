@@ -49,10 +49,13 @@ const Perpetuals: FC = () => {
         <div>
             <MainCard classNames={`${classPrefix}-card`}>
                 <InfoShow topLeftText={t`Token pair`} bottomRightText={""}>
-                    <DoubleTokenShow tokenNameOne={"ETH"} tokenNameTwo={"USDT"} />
-                    <button className={"select-button"}>
-                        <PutDownIcon />
-                    </button>
+                    <div className={`${classPrefix}-card-tokenPair`}>
+                        <DoubleTokenShow tokenNameOne={"ETH"} tokenNameTwo={"USDT"} />
+                        <button className={"select-button"}>
+                            <PutDownIcon />
+                        </button>
+                    </div>
+                    <p>1 ETH = 42000,455733 USDT</p>
                 </InfoShow>
                 <ChooseType callBack={handleType} isLong={isLong} />
                 <LeverChoose/>

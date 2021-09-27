@@ -53,10 +53,6 @@
             color: $main-button-color;
         }
 
-        &-tokenName {
-            @include normal-text;
-        }
-
         &-timeTitle {
             @include normal-text;
         }

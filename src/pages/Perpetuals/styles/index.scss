@@ -8,6 +8,21 @@
     padding: 40px 44px;
     margin-top: 22px;
 
+    &-tokenPair {
+        display: flex;
+        justify-content: space-between;
+
+        button {
+            margin-left: 10px;
+        }
+    }
+
+    &-tokenPair + p {
+        line-height: 44px;
+        font-size: $T2;
+        color: $main-button-color;
+    }
+
     .leverChoose + .infoView {
         margin-top: 30px;
     }

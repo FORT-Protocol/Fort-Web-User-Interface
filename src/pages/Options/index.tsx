@@ -52,7 +52,6 @@ const MintOptions: FC = () => {
 
   const [isLong, setIsLong] = useState(false);
   const [exercise, setExercise] = useState({ time: '', blockNum: 0 });
-  const [strikePrice, setStrikePrice] = useState("");
   const [fortNum, setFortNum] = useState("");
 
   const [optionTokenNumBaseInfo, setOptionTokenNumBaseInfo] = useState({
@@ -61,23 +60,22 @@ const MintOptions: FC = () => {
   });
   const [priceNow, setPriceNow] = useState("--.--");
   const [fortBalance, setFortBalance] = useState(BigNumber.from(0));
-  const [tokenName, setTokenName] = useState("");
   const [optionTokenValue, setOptionTokenValue] = useState(BigNumber.from(0));
 
-  const timeDatalist = [
-    {title:'2021-9-18', value:'11000000'},
-    {title:'2021-10-18', value:'12000000'},
-    {title:'2021-11-18', value:'13000000'},
-    {title:'2021-12-18', value:'14000000'},
-    {title:'2021-13-18', value:'15000000'}
-  ]
-  const strikePriceDataList = [
-    {title:'1000', value:'1000'},
-    {title:'2000', value:'2000'},
-    {title:'3000', value:'3000'},
-    {title:'4000', value:'4000'},
-    {title:'5000', value:'5000'}
-  ]
+  // const timeDatalist = [
+  //   {title:'2021-9-18', value:'11000000'},
+  //   {title:'2021-10-18', value:'12000000'},
+  //   {title:'2021-11-18', value:'13000000'},
+  //   {title:'2021-12-18', value:'14000000'},
+  //   {title:'2021-13-18', value:'15000000'}
+  // ]
+  // const strikePriceDataList = [
+  //   {title:'1000', value:'1000'},
+  //   {title:'2000', value:'2000'},
+  //   {title:'3000', value:'3000'},
+  //   {title:'4000', value:'4000'},
+  //   {title:'5000', value:'5000'}
+  // ]
   const trList = [
     {token:'USDT', type: true, price: BigNumber.from('1000100000'), endBlock: BigNumber.from('12000000'), shares: BigNumber.from('1000000000000000000')},
     {token:'USDT', type: false, price: BigNumber.from('1000300000'), endBlock: BigNumber.from('13000000'), shares: BigNumber.from('11234500000000000000')},
@@ -121,27 +119,27 @@ const MintOptions: FC = () => {
     }
   }, [chainId, nestPriceContract, priceNow]);
 
-  useEffect(() => {
-    if (exercise.blockNum === 0 || strikePrice === "") {
-      setTokenName("----");
-    } else {
-      const oneStr = isLong ? "C" : "P";
-      const strikePriceStr = normalToBigNumber(
-        strikePrice,
-        tokenList["USDT"].decimals
-      ).toString();
-      const twoStr =
-        strikePriceStr.substr(0, 1) +
-        "." +
-        strikePriceStr.substr(1, 6) +
-        "+" +
-        (strikePriceStr.length - 7).toString();
-      const threeStr = "ETH";
-      const fourStr = exercise.blockNum;
-      const newTokenName = oneStr + twoStr + threeStr + fourStr;
-      setTokenName(newTokenName);
-    }
-  }, [exercise.blockNum, isLong, strikePrice]);
+  // useEffect(() => {
+  //   if (exercise.blockNum === 0 || strikePrice === "") {
+  //     setTokenName("----");
+  //   } else {
+  //     const oneStr = isLong ? "C" : "P";
+  //     const strikePriceStr = normalToBigNumber(
+  //       strikePrice,
+  //       tokenList["USDT"].decimals
+  //     ).toString();
+  //     const twoStr =
+  //       strikePriceStr.substr(0, 1) +
+  //       "." +
+  //       strikePriceStr.substr(1, 6) +
+  //       "+" +
+  //       (strikePriceStr.length - 7).toString();
+  //     const threeStr = "ETH";
+  //     const fourStr = exercise.blockNum;
+  //     const newTokenName = oneStr + twoStr + threeStr + fourStr;
+  //     setTokenName(newTokenName);
+  //   }
+  // }, [exercise.blockNum, isLong, strikePrice]);
 
   const handleType = (isLong: boolean) => {
     setIsLong(isLong);
@@ -219,10 +217,10 @@ const MintOptions: FC = () => {
   const checkButton = () => {
     if (
       fortNum === "" ||
-      strikePrice === "" ||
+      optionTokenNumBaseInfo.strikePrice === "" ||
       exercise.blockNum === 0 ||
       normalToBigNumber(fortNum).gt(fortBalance) ||
-      normalToBigNumber(strikePrice, tokenList["USDT"].decimals).eq(
+      normalToBigNumber(optionTokenNumBaseInfo.strikePrice, tokenList["USDT"].decimals).eq(
         BigNumber.from("0")
       )
     ) {
@@ -254,18 +252,18 @@ const MintOptions: FC = () => {
   //     return result;
   // }
 
-  const handleGetTime = (title: string) => {
-    const value = timeDatalist.filter((item) => item.title === title)[0].value
-    setExercise({ time: title, blockNum: Number(value)});
-  }
-  const handleGetStrikePrice = (title: string) => {
-    const value = strikePriceDataList.filter((item) => item.title === title)[0].value
-    setStrikePrice(value)
-    setOptionTokenNumBaseInfo({
-      ...optionTokenNumBaseInfo,
-      strikePrice: value
-    })
-  }
+  // const handleGetTime = (title: string) => {
+  //   const value = timeDatalist.filter((item) => item.title === title)[0].value
+  //   setExercise({ time: title, blockNum: Number(value)});
+  // }
+  // const handleGetStrikePrice = (title: string) => {
+  //   const value = strikePriceDataList.filter((item) => item.title === title)[0].value
+  //   setStrikePrice(value)
+  //   setOptionTokenNumBaseInfo({
+  //     ...optionTokenNumBaseInfo,
+  //     strikePrice: value
+  //   })
+  // }
   return (
     <div>
       <div className={classPrefix}>
@@ -280,9 +278,6 @@ const MintOptions: FC = () => {
           <InfoShow
             topLeftText={t`Exercise time`}
             bottomRightText={`Block number: ${exercise.blockNum}`}
-            dataSelect
-            dataList={timeDatalist} 
-            getSelectedToken={handleGetTime}
           >
             {/* <input 
             type={'text'}
@@ -304,15 +299,17 @@ const MintOptions: FC = () => {
           <InfoShow
             topLeftText={t`Strike price`}
             bottomRightText={`1 ETH = ${priceNow} USDT`}
-            dataSelect
-            dataList={strikePriceDataList} 
-            getSelectedToken={handleGetStrikePrice}
           >
             <input
               placeholder={t`Input`}
               className={"input-left"}
-              value={strikePrice}
-              readOnly
+              value={optionTokenNumBaseInfo.strikePrice}
+              onBlur={(e: any) =>
+                setOptionTokenNumBaseInfo({
+                  ...optionTokenNumBaseInfo,
+                  strikePrice: e.target.value,
+                })
+              }
             />
             <span>USDT</span>
           </InfoShow>
@@ -350,7 +347,6 @@ const MintOptions: FC = () => {
           <p className={`${classPrefix}-rightCard-tokenValue`}>
             {bigNumberToNormal(optionTokenValue, 18, 6)}
           </p>
-          <p className={`${classPrefix}-rightCard-tokenName`}>{tokenName}</p>
           <MainButton
             disable={checkButton()}
             onClick={() => {
@@ -381,7 +377,7 @@ const MintOptions: FC = () => {
                 <p>
                   <Trans>Spot price</Trans>
                   {isLong ? ">" : "<"}
-                  {bigNumberToNormal(normalToBigNumber(strikePrice), 18, 6)}
+                  {bigNumberToNormal(normalToBigNumber(optionTokenNumBaseInfo.strikePrice), 18, 6)}
                 </p>
                 <p>
                   <Trans>Expected get</Trans>
@@ -400,7 +396,7 @@ const MintOptions: FC = () => {
                 <p>
                   <Trans>Spot price</Trans>
                   {isLong ? "<=" : ">="}
-                  {bigNumberToNormal(normalToBigNumber(strikePrice), 18, 6)}
+                  {bigNumberToNormal(normalToBigNumber(optionTokenNumBaseInfo.strikePrice), 18, 6)}
                 </p>
                 <p>
                   <Trans>Expected get</Trans>
