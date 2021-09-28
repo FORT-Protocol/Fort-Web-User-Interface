@@ -2,7 +2,7 @@ import { t, Trans } from "@lingui/macro";
 import { BigNumber } from "ethers";
 import { FC, useCallback, useEffect, useState } from "react";
 import ChooseType from "../../components/ChooseType";
-import { LongIcon, PutDownIcon, ShortIcon } from "../../components/Icon";
+import { PutDownIcon } from "../../components/Icon";
 import InfoShow from "../../components/InfoShow";
 import MainButton from "../../components/MainButton";
 import MainCard from "../../components/MainCard";
@@ -31,17 +31,17 @@ import "../../styles/ant.css";
 import "./styles";
 import { HoldLine } from "../../components/HoldLine";
 import moment from "moment";
+import { useFortEuropeanOptionOpen } from "../../contracts/hooks/useFortEuropeanOptionTransation";
+import OptionsList from "../../components/OptionsList";
 
-export type OptionsInfo = {
-  fortAmount: BigNumber;
-  optionTokenAmount: BigNumber;
-  optionToken: string;
-  optionTokenName: string;
-  type: boolean;
-  strikePrice: BigNumber;
-  exerciseTime: string;
-  blockNumber: BigNumber;
-};
+export type OptionsListType = {
+  balance: BigNumber,
+  exerciseBlock: BigNumber,
+  index: BigNumber,
+  orientation: boolean,
+  strikePrice: BigNumber,
+  tokenAddress: string
+}
 
 const MintOptions: FC = () => {
   const classPrefix = "options-mintOptions";
@@ -50,10 +50,11 @@ const MintOptions: FC = () => {
   const fortEuropeanOption = FortEuropeanOption(FortEuropeanOptionContract);
   const fortContract = ERC20Contract(tokenList["DCU"].addresses);
 
-  const [isLong, setIsLong] = useState(false);
+  const [isLong, setIsLong] = useState(true);
   const [exercise, setExercise] = useState({ time: '', blockNum: 0 });
   const [fortNum, setFortNum] = useState("");
-
+  const [strikePrice, setStrikePrice] = useState<string>();
+  const [optionsListState, setOptionsListState] = useState<Array<OptionsListType>>([])
   const [optionTokenNumBaseInfo, setOptionTokenNumBaseInfo] = useState({
     strikePrice: "0",
     fortNum: "0",
@@ -62,41 +63,18 @@ const MintOptions: FC = () => {
   const [fortBalance, setFortBalance] = useState(BigNumber.from(0));
   const [optionTokenValue, setOptionTokenValue] = useState(BigNumber.from(0));
 
-  // const timeDatalist = [
-  //   {title:'2021-9-18', value:'11000000'},
-  //   {title:'2021-10-18', value:'12000000'},
-  //   {title:'2021-11-18', value:'13000000'},
-  //   {title:'2021-12-18', value:'14000000'},
-  //   {title:'2021-13-18', value:'15000000'}
-  // ]
-  // const strikePriceDataList = [
-  //   {title:'1000', value:'1000'},
-  //   {title:'2000', value:'2000'},
-  //   {title:'3000', value:'3000'},
-  //   {title:'4000', value:'4000'},
-  //   {title:'5000', value:'5000'}
-  // ]
-  const trList = [
-    {token:'USDT', type: true, price: BigNumber.from('1000100000'), endBlock: BigNumber.from('12000000'), shares: BigNumber.from('1000000000000000000')},
-    {token:'USDT', type: false, price: BigNumber.from('1000300000'), endBlock: BigNumber.from('13000000'), shares: BigNumber.from('11234500000000000000')},
-    {token:'USDT', type: true, price: BigNumber.from('1235500000'), endBlock: BigNumber.from('14000000'), shares: BigNumber.from('1000000000000000000')},
-  ].map((item, index) => {
-      const TokenOneSvg = tokenList['ETH'].Icon
-      const TokenTwoSvg = tokenList[item.token].Icon
-
-      return (
-          <tr key={index} className={`${classPrefix}-table-normal`}>
-              <td className={'tokenPair'}><TokenOneSvg/><TokenTwoSvg/></td>
-              <td>
-                  {item.type ? (<LongIcon/>) : (<ShortIcon/>)}
-              </td>
-              <td>{bigNumberToNormal(item.price, tokenList[item.token].decimals, 2)} USDT</td>
-              <td className={`exerciseTime`}>{`Block number:${item.endBlock.toString()}(2021-12-12 12:12)`}</td>
-              <td>{bigNumberToNormal(item.price, 18, 2)}</td>
-              <td><MainButton><Trans>Close</Trans></MainButton></td>
-          </tr>
-      )
+  const trList = optionsListState.map((item) => {
+      return (<OptionsList className={classPrefix} key={item.index.toString() + account} item={item}/>)
   })
+
+  useEffect(() => {
+    if (!fortEuropeanOption) {return}
+    ;(async() => {
+      const optionsList = await fortEuropeanOption.find(0, 20, 20, account)
+      const resultList = optionsList.filter((item:OptionsListType) => item.balance.gt(BigNumber.from('0')))
+      setOptionsListState(resultList)
+    })()
+  }, [account, fortEuropeanOption])
 
   useEffect(() => {
     if (fortContract) {
@@ -110,9 +88,8 @@ const MintOptions: FC = () => {
 
   useEffect(() => {
     if (nestPriceContract && priceNow === "--.--" && chainId) {
-      //  TODO:改ABI
       nestPriceContract
-        .latestPriceView(tokenList["USDT"].addresses[chainId])
+        .latestPrice(tokenList["USDT"].addresses[chainId])
         .then((value: any) => {
           setPriceNow(bigNumberToNormal(value[1], tokenList["USDT"].decimals));
         });
@@ -217,10 +194,10 @@ const MintOptions: FC = () => {
   const checkButton = () => {
     if (
       fortNum === "" ||
-      optionTokenNumBaseInfo.strikePrice === "" ||
+      strikePrice === undefined ||
       exercise.blockNum === 0 ||
       normalToBigNumber(fortNum).gt(fortBalance) ||
-      normalToBigNumber(optionTokenNumBaseInfo.strikePrice, tokenList["USDT"].decimals).eq(
+      normalToBigNumber(strikePrice || '0', tokenList["USDT"].decimals).eq(
         BigNumber.from("0")
       )
     ) {
@@ -264,6 +241,7 @@ const MintOptions: FC = () => {
   //     strikePrice: value
   //   })
   // }
+  const active = useFortEuropeanOptionOpen('ETH', isLong, BigNumber.from(exercise.blockNum), normalToBigNumber(fortNum), strikePrice ? normalToBigNumber(strikePrice, 6) : undefined)
   return (
     <div>
       <div className={classPrefix}>
@@ -303,7 +281,8 @@ const MintOptions: FC = () => {
             <input
               placeholder={t`Input`}
               className={"input-left"}
-              value={optionTokenNumBaseInfo.strikePrice}
+              value={strikePrice}
+              onChange={(e) => setStrikePrice(formatInputNum(e.target.value))}
               onBlur={(e: any) =>
                 setOptionTokenNumBaseInfo({
                   ...optionTokenNumBaseInfo,
@@ -357,6 +336,7 @@ const MintOptions: FC = () => {
               if (checkButton()) {
                 return;
               }
+              active()
             }}
           >
             <Trans>Mint</Trans>
@@ -377,7 +357,7 @@ const MintOptions: FC = () => {
                 <p>
                   <Trans>Spot price</Trans>
                   {isLong ? ">" : "<"}
-                  {bigNumberToNormal(normalToBigNumber(optionTokenNumBaseInfo.strikePrice), 18, 6)}
+                  {bigNumberToNormal(normalToBigNumber(strikePrice || '0'), 18, 6)}
                 </p>
                 <p>
                   <Trans>Expected get</Trans>
@@ -396,7 +376,7 @@ const MintOptions: FC = () => {
                 <p>
                   <Trans>Spot price</Trans>
                   {isLong ? "<=" : ">="}
-                  {bigNumberToNormal(normalToBigNumber(optionTokenNumBaseInfo.strikePrice), 18, 6)}
+                  {bigNumberToNormal(normalToBigNumber(strikePrice || '0'), 18, 6)}
                 </p>
                 <p>
                   <Trans>Expected get</Trans>

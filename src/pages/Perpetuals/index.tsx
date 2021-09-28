@@ -1,50 +1,87 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { t, Trans } from '@lingui/macro'
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import ChooseType from '../../components/ChooseType'
 import { HoldLine } from '../../components/HoldLine'
-import { LongIcon, PutDownIcon, ShortIcon } from '../../components/Icon'
+import { PutDownIcon } from '../../components/Icon'
 import InfoShow from '../../components/InfoShow'
 import { LeverChoose } from '../../components/LeverChoose'
 import MainButton from '../../components/MainButton'
 import MainCard from '../../components/MainCard'
+import PerpetualsList from '../../components/PerpetualsList'
 import { DoubleTokenShow, SingleTokenShow } from '../../components/TokenShow'
-import { tokenList } from '../../libs/constants/addresses'
+import { useFortLeverBuy } from '../../contracts/hooks/useFortLeverTransation'
+import { FortLeverContract, tokenList } from '../../libs/constants/addresses'
+import { ERC20Contract, FortLever, NestPriceContract } from '../../libs/hooks/useContract'
+import useWeb3 from '../../libs/hooks/useWeb3'
 import { bigNumberToNormal, formatInputNum, normalToBigNumber } from '../../libs/utils'
 import './styles'
 
+export type LeverListType = {
+    index: BigNumber,           //  编号
+    tokenAddress: string,       //  token地址
+    lever: BigNumber,           //  X倍数
+    orientation: boolean,       //  涨跌
+    balance: BigNumber,         //  保证金
+    price: BigNumber,              //  基础价格
+    settleBlock: BigNumber        //  基础区块号
+}
+
 const Perpetuals: FC = () => {
+    const {account, chainId} = useWeb3()
     const [isLong, setIsLong] = useState(true)
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [dcuBalance, setDcuBalance] = useState<BigNumber>()
+    const [nowPrice, setNowPrice] = useState<BigNumber>()
+    const [leverNum, setLeverNum] = useState<number>(1)
     const [dcuInput, setDcuInput] = useState<string>('')
-    const classPrefix = 'perpetuals'
+    const [leverListState, setLeverListState] = useState<Array<LeverListType>>([])
+    const classPrefix = 'perpetuals';
+    const dcuToken = ERC20Contract(tokenList['DCU'].addresses)
+    const priceContract = NestPriceContract()
+    const leverContract = FortLever(FortLeverContract)
     const handleType = (isLong: boolean) => {
         setIsLong(isLong);
     };
-    const trList = [
-        {token:'USDT', type: true, lever:2, guarantee: BigNumber.from('1000200000000000000000'), positioning: BigNumber.from('1000000000'), price: BigNumber.from('1000000000')},
-        {token:'USDT', type: false, lever:3, guarantee: BigNumber.from('1000300000000000000000'), positioning: BigNumber.from('1000000000'), price: BigNumber.from('1000000000')},
-        {token:'USDT', type: true, lever:4, guarantee: BigNumber.from('1000040000000000000000'), positioning: BigNumber.from('1000000000'), price: BigNumber.from('1000000000')},
-    ].map((item, index) => {
-        const TokenOneSvg = tokenList['ETH'].Icon
-        const TokenTwoSvg = tokenList[item.token].Icon
-
-        return (
-            <tr key={index} className={`${classPrefix}-table-normal`}>
-                <td className={'tokenPair'}><TokenOneSvg/><TokenTwoSvg/></td>
-                <td>
-                    {item.type ? (<LongIcon/>) : (<ShortIcon/>)}
-                </td>
-                <td>{item.lever.toString()}X</td>
-                <td>{bigNumberToNormal(item.guarantee, 18, 2)} DCU</td>
-                <td>{bigNumberToNormal(item.positioning, tokenList[item.token].decimals, 2)} DCU</td>
-                <td>{bigNumberToNormal(item.price, tokenList[item.token].decimals, 2)} DCU</td>
-                <td>30%</td>
-                <td><MainButton><Trans>Close</Trans></MainButton></td>
-            </tr>
-        )
+    const handleLeverNum = (selected: number) => {
+        setLeverNum(selected);
+    };
+    const trList = leverListState.map((item) => {
+        return (<PerpetualsList className={classPrefix} item={item} key={item.index.toString()+account}/>)
     })
+    // price
+    useEffect(() => {
+        if (!priceContract || !chainId) {return}
+        ;(async () => {
+            const price = await priceContract.latestPrice(tokenList['USDT'].addresses[chainId])
+            setNowPrice(price[1])
+        })()
+    }, [chainId, priceContract])
+    // balance
+    useEffect(() => {
+        if (!dcuToken) {return}
+        ;(async () => {
+            const balance = await dcuToken.balanceOf(account)
+            setDcuBalance(balance)
+        })()
+    }, [dcuToken, account])
+    // list
+    useEffect(() => {
+        if (!leverContract) {return}
+        ;(async () => {
+            const leverList = await leverContract.find('0','13','13',account)
+            console.log(leverList)
+            const resultList = leverList.filter((item:LeverListType) => item.balance.gt(BigNumber.from('0')))
+            setLeverListState(resultList)
+        })()
+    }, [account, leverContract])
+    const checkDCUBalance = normalToBigNumber(dcuInput).gt(dcuBalance || BigNumber.from('0'))
+    const checkMainButton = () => {
+        if (checkDCUBalance) {
+            return false
+        }
+        return true
+    }
+    const active = useFortLeverBuy('ETH', leverNum, isLong, normalToBigNumber(dcuInput))
     return (
         <div>
             <MainCard classNames={`${classPrefix}-card`}>
@@ -55,14 +92,14 @@ const Perpetuals: FC = () => {
                             <PutDownIcon />
                         </button>
                     </div>
-                    <p>1 ETH = 42000,455733 USDT</p>
+                    <p>1 ETH = {bigNumberToNormal(nowPrice || BigNumber.from('0'), tokenList['USDT'].decimals, 6)} USDT</p>
                 </InfoShow>
                 <ChooseType callBack={handleType} isLong={isLong} />
-                <LeverChoose/>
+                <LeverChoose selected={leverNum} callBack={handleLeverNum}/>
                 <InfoShow
                 topLeftText={t`Mint amount`}
                 bottomRightText={`Balance: ${dcuBalance ? bigNumberToNormal(dcuBalance) : '----'} DCU`}
-                balanceRed={normalToBigNumber(dcuInput).gt(dcuBalance || BigNumber.from('0')) ? true : false}
+                balanceRed={checkDCUBalance}
                 >
                 <SingleTokenShow tokenNameOne={"DCU"} isBold />
                 <input
@@ -81,7 +118,10 @@ const Perpetuals: FC = () => {
                 </InfoShow>
                 <MainButton 
                 className={`${classPrefix}-card-button`} 
-                onClick={() => {}}>
+                onClick={() => {
+                    if (!checkMainButton()) {return}
+                    active()
+                }} disable={!checkMainButton()}>
                     {isLong ? (<Trans>Long</Trans>) : (<Trans>Short</Trans>)}
                 </MainButton>
             </MainCard>

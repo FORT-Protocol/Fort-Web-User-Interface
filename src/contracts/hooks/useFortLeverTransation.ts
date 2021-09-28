@@ -1,4 +1,4 @@
-import { tokenList } from './../../libs/constants/addresses';
+import { LeverIndex } from './../../libs/constants/addresses';
 import { BigNumber } from "ethers";
 import { FortLeverContract } from "../../libs/constants/addresses";
 import { FortLever } from "../../libs/hooks/useContract";
@@ -8,9 +8,9 @@ import { PRICE_FEE } from "../../libs/utils";
 import { TransactionType } from '../../libs/hooks/useTransactionInfo';
 
 export function useFortLeverBuy(
-    tokenName: string, 
-    lever: BigNumber, 
-    orientation: boolean, 
+    tokenName: string,
+    leverNum: number,
+    isLong: boolean,
     fortAmount: BigNumber
 ) {
     const { account, chainId } = useWeb3()
@@ -19,10 +19,9 @@ export function useFortLeverBuy(
     if (!chainId) {
         contract = null
     } else {
-        callData = contract?.interface.encodeFunctionData('buy', [
-            tokenList[tokenName].addresses[chainId || 9], 
-            lever, 
-            orientation, 
+        const leverIndex = LeverIndex[tokenName][chainId][isLong?1:0][leverNum]
+        callData = contract?.interface.encodeFunctionData('buyDirect', [
+            leverIndex, 
             fortAmount]
         )
     }
@@ -37,8 +36,8 @@ export function useFortLeverBuy(
 }
 
 export function useFortLeverSell(
-    leverTokenName: string, 
-    amount: string
+    index: BigNumber, 
+    amount: BigNumber
 ) {
     const { account, chainId } = useWeb3()
     var contract = FortLever(FortLeverContract)
@@ -47,7 +46,7 @@ export function useFortLeverSell(
         contract = null
     } else {
         callData = contract?.interface.encodeFunctionData('sell', [
-            tokenList[leverTokenName].addresses[chainId], 
+            index, 
             amount]
         )
     }
@@ -57,7 +56,6 @@ export function useFortLeverSell(
         data: callData,
         value: PRICE_FEE
     }
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const txPromise = useSendTransaction(contract, tx, {title:`Sell Leveraged Token`, info:'', type: TransactionType.closeLever})
     return txPromise
 }

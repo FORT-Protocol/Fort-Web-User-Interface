@@ -8,16 +8,16 @@ import { PRICE_FEE } from "../../libs/utils";
 import { TransactionType } from '../../libs/hooks/useTransactionInfo';
 
 export function useFortEuropeanOptionOpen(
-    tokenName: string, 
-    price: BigNumber, 
+    tokenName: string,  
     orientation: boolean, 
     endblock: BigNumber, 
-    fortAmount: BigNumber
+    fortAmount: BigNumber,
+    price?: BigNumber
 ) { 
     const { account, chainId } = useWeb3()
     var contract = FortEuropeanOption(FortEuropeanOptionContract)
     var callData: string | undefined
-    if (!chainId) {
+    if (!chainId || !price) {
         contract = null
     } else {
         callData = contract?.interface.encodeFunctionData('open', [
@@ -40,7 +40,7 @@ export function useFortEuropeanOptionOpen(
 }
 
 export function useFortEuropeanOptionExercise(
-    optionAddress: string,
+    index: BigNumber,
     amount: BigNumber
 ) {
     const { account, chainId } = useWeb3()
@@ -50,7 +50,7 @@ export function useFortEuropeanOptionExercise(
         contract = null
     } else {
         callData = contract?.interface.encodeFunctionData('exercise', [
-            optionAddress, 
+            index, 
             amount]
         )
     }

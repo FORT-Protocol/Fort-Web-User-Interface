@@ -1,10 +1,14 @@
 import classNames from 'classnames'
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import './styles'
 
-export const LeverChoose: FC = () => {
+type Props = {
+    callBack: (selected: number) => void
+    selected: number
+}
+
+export const LeverChoose: FC<Props> = ({...props}) => {
     const classPrefix = 'leverChoose'
-    const [selected, setSelected] = useState(1)
     const liList = [
         {text: '1X', value: 1},
         {text: '2X', value: 2},
@@ -15,9 +19,9 @@ export const LeverChoose: FC = () => {
         return <li 
                 key={index.toString() + item.text} 
                 className={classNames({
-                    [`selected`]: selected === item.value ? true : false
+                    [`selected`]: props.selected === item.value ? true : false
                 })} 
-                onClick={() => {setSelected(item.value)}}>{item.text}</li>
+                onClick={() => {props.callBack(item.value)}}>{item.text}</li>
     })
     return (
         <div className={classPrefix}>

@@ -12,17 +12,6 @@
         font-size: $T2;
         line-height: 20px;
         color: $gray-info-text-color;
-
-        button {
-            height: 20px;
-            width: 20px;
-            margin-left: 10px;
-            padding-top:3px;
-
-            svg {
-                margin: auto 0;
-            }
-        }
     }
 
     &-rightText {
@@ -32,9 +21,5 @@
         font-family: $boldFont;
         text-align: right;
         line-height: 20px;
-    }
-
-    &-content {
-        width:150px;
     }
 }
