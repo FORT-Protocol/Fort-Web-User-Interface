@@ -96,6 +96,9 @@ const MintOptions: FC = () => {
   }, [account, fortEuropeanOption]);
 
   useEffect(() => {
+    if (!isRefresh) {
+      getOptionsList();
+    }
     if (!txList || txList.length === 0) {
       return;
     }
@@ -105,8 +108,6 @@ const MintOptions: FC = () => {
       (latestTx.type === 2 || latestTx.type === 3)
     ) {
       setTimeout(getOptionsList, isRefresh ? 4000 : 0);
-    } else if (!isRefresh) {
-      getOptionsList();
     }
   }, [getOptionsList, isRefresh, txList]);
 

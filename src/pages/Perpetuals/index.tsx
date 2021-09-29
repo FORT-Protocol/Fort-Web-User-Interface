@@ -105,6 +105,9 @@ const Perpetuals: FC = () => {
     setIsRefresh(true);
   }, [account, leverContract]);
   useEffect(() => {
+    if (!isRefresh) {
+        getList();
+    }
     if (!txList || txList.length === 0) {
       return;
     }
@@ -114,8 +117,6 @@ const Perpetuals: FC = () => {
       (latestTx.type === 0 || latestTx.type === 1)
     ) {
       setTimeout(getList, isRefresh ? 4000 : 0);
-    } else if (!isRefresh) {
-      getList();
     }
   }, [getList, isRefresh, txList]);
   const checkDCUBalance = normalToBigNumber(dcuInput).gt(
