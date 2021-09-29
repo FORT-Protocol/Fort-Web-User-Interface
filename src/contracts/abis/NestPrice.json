@@ -237,7 +237,7 @@
 		"name": "tokenAddress",
 		"type": "address"
 	}],
-	"name": "latestPrice",
+	"name": "latestPriceView",
 	"outputs": [{
 		"internalType": "uint256",
 		"name": "blockNumber",

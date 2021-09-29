@@ -201,24 +201,42 @@ export const LeverIndex: { [key: string]: any } = {
         5: 6,
       },
     },
+    3: {
+      // 看涨看跌
+      1: {
+        // 倍数
+        1: 1,
+        2: 2,
+        3: 3,
+        4: 4,
+        5: 5,
+      },
+      0: {
+        1: 6,
+        2: 7,
+        3: 8,
+        4: 9,
+        5: 10,
+      },
+    },
   },
 };
 
 export const FortEuropeanOptionContract: AddressesType = {
   1: "",
-  3: "0x90b5212B1CE2cCF2aDC9Af4fF7EAcd61d0A216fF",
+  3: "0xa6948042D7B68b4c28907cE8B450DC0e5BBe30a5",
   4: "0xAB7B4a58078A76CEBd3f9DeB7cf308C34AAb71F2",
 };
 
 export const FortLeverContract: AddressesType = {
   1: "",
-  3: "0x341bA26a1c4E1c609d170574Da0abB23f7986e34",
+  3: "0x48437856C4f6C3F60eA014110066BB440A4530D7",
   4: "0x269382F35b76C6d7C30980A9E835D7e6831e0D84",
 };
 
 export const FortVaultForStakingContract: AddressesType = {
   1: "",
-  3: "0x74E243b3C1cCF1c6b19788314d8a852C5A86e618",
+  3: "0x176D7C08e5BC8f7334a1b1A5DC2C3516F80e1195",
   4: "0xF06Ca516B6e11AB7843FB0B1a7eECBf0e57B3B64",
 };
 

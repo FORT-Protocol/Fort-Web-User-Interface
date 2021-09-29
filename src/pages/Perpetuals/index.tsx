@@ -77,7 +77,7 @@ const Perpetuals: FC = () => {
       return;
     }
     (async () => {
-      const price = await priceContract.latestPrice(
+      const price = await priceContract.latestPriceView(
         tokenList["USDT"].addresses[chainId]
       );
       setNowPrice(price[1]);
