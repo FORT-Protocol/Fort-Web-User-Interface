@@ -167,7 +167,7 @@ const Perpetuals: FC = () => {
             USDT
           </p>
         </InfoShow>
-        <ChooseType callBack={handleType} isLong={isLong} />
+        <ChooseType callBack={handleType} isLong={isLong} textArray={[t`Long`, t`Short`]}/>
         <LeverChoose selected={leverNum} callBack={handleLeverNum} />
         <InfoShow
           topLeftText={t`Payment amount`}

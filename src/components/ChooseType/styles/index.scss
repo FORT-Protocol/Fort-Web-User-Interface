@@ -6,4 +6,44 @@
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
+
+    &-left {
+        display: flex;
+        text-align: center;
+        width: 88px;
+        height: 88px;
+        border-radius: 44px;
+        box-shadow: $shadow;
+
+        div {
+            margin: auto auto;
+            p {
+                color: $up-color;
+            }
+        }
+    }
+
+    &-right {
+        display: flex;
+        text-align: center;
+        width: 88px;
+        height: 88px;
+        border-radius: 44px;
+        box-shadow: $shadow;
+
+        div {
+            margin: auto auto;
+            p {
+                color: $down-color;
+            }
+        }
+    }
+
+    div.selected {
+        background-color: $main-button-color;
+        p {
+            color: white;
+        }
+        box-shadow: none;
+    }
 }

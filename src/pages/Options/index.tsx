@@ -240,7 +240,7 @@ const MintOptions: FC = () => {
               <PutDownIcon />
             </button>
           </InfoShow>
-          <ChooseType callBack={handleType} isLong={isLong} />
+          <ChooseType callBack={handleType} isLong={isLong} textArray={[t`Call`, t`Put`]}/>
           <InfoShow
             topLeftText={t`Exercise time`}
             bottomRightText={`Block number: ${exercise.blockNum}`}
