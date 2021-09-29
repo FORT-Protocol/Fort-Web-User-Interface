@@ -45,6 +45,9 @@
         & > div:first-child {
             .lineShowInfo-rightText {
                 color: #00B388;
+                &.red {
+                    color: $wrongAndNotice-color;
+                }
             }
         }
 

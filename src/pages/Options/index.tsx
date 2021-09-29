@@ -301,7 +301,7 @@ const MintOptions: FC = () => {
 
         <MainCard classNames={`${classPrefix}-rightCard`}>
           <p className={`${classPrefix}-rightCard-tokenTitle`}>
-            <Trans>Estimated number of European Options Token</Trans>
+            <Trans>Option shares</Trans>
           </p>
           <p className={`${classPrefix}-rightCard-tokenValue`}>
             {bigNumberToNormal(optionTokenValue, 18, 6)}

@@ -357,6 +357,7 @@ export const FarmCard: FC<Props> = ({ ...props }) => {
         <LineShowInfo
           leftText={t`Lock period`}
           rightText={`${props.time} Month`}
+          red={props.time === 24}
         />
         <LineShowInfo
           leftText={t`Current mining rate`}

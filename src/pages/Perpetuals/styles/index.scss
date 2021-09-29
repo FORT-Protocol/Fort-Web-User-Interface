@@ -7,7 +7,7 @@
     margin: 0 auto;
     padding: 40px 44px;
     margin-top: 22px;
-    margin-bottom: 22px;
+    margin-bottom: 44px;
 
     &-tokenPair {
         display: flex;
@@ -82,6 +82,35 @@ table {
                 margin-left: -8px;
                 z-index: 0;
             }
+        }
+    }
+
+    td.td-type {
+        display: flex;
+        justify-content: center;
+
+        svg {
+            margin: auto 0;
+        }
+
+        p.red {
+            margin-left: 5px;
+            line-height: 44px;
+            color: $up-color;
+        }
+        p.green {
+            margin-left: 5px;
+            line-height: 44px;
+            color: $down-color;
+        }
+    }
+
+    th.th-marginAssets {
+        span {
+
+            line-height: 28px;
+            padding: 3px 0;
+            border-bottom: 1px solid $gray-info-text-color;
         }
     }
 }

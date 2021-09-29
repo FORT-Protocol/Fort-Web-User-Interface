@@ -1,4 +1,4 @@
-import { Trans } from "@lingui/macro";
+import { t, Trans } from "@lingui/macro";
 import moment from "moment";
 import { FC } from "react";
 import { useFortEuropeanOptionExercise } from "../../contracts/hooks/useFortEuropeanOptionTransation";
@@ -55,7 +55,7 @@ const OptionsList: FC<Props> = ({ ...props }) => {
         <TokenOneSvg />
         <TokenTwoSvg />
       </td>
-      <td>{props.item.orientation ? <LongIcon /> : <ShortIcon />}</td>
+      <td className={'td-type'}>{props.item.orientation ? <LongIcon /> : <ShortIcon />}<p className={props.item.orientation ? 'red':'green'}>{props.item.orientation ? t`Call` : t`Put`}</p></td>
       <td>{bigNumberToNormal(props.item.strikePrice, 6, 2)} USDT</td>
       <td
         className={`exerciseTime`}

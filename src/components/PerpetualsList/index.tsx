@@ -1,5 +1,5 @@
 import { BigNumber } from "@ethersproject/bignumber";
-import { Trans } from "@lingui/macro";
+import { t, Trans } from "@lingui/macro";
 import { FC, useEffect, useState } from "react";
 import { useFortLeverSell } from "../../contracts/hooks/useFortLeverTransation";
 import { FortLeverContract, tokenList } from "../../libs/constants/addresses";
@@ -55,7 +55,7 @@ const PerpetualsList: FC<Props> = ({ ...props }) => {
         <TokenOneSvg />
         <TokenTwoSvg />
       </td>
-      <td>{props.item.orientation ? <LongIcon /> : <ShortIcon />}</td>
+      <td className={'td-type'}>{props.item.orientation ? <LongIcon /> : <ShortIcon />}<p className={props.item.orientation ? 'red':'green'}>{props.item.orientation ? t`Long` : t`Short`}</p></td>
       <td>{props.item.lever.toString()}X</td>
       <td>{bigNumberToNormal(props.item.balance, 18, 2)} DCU</td>
       <td>

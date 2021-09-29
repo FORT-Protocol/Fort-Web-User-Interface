@@ -28,6 +28,7 @@ import {
   normalToBigNumber,
 } from "../../libs/utils";
 import "./styles";
+import { Tooltip } from "antd";
 
 export type LeverListType = {
   index: BigNumber; //  编号
@@ -223,7 +224,7 @@ const Perpetuals: FC = () => {
                 <th><Trans>lever</Trans></th>
                 <th><Trans>Margin</Trans></th>
                 <th><Trans>Open Price</Trans></th>
-                <th><Trans>Margin Assets</Trans></th>
+                <th className={'th-marginAssets'}><Tooltip  placement="top" color={'#ffffff'} title={t`Dynamic changes in Margin Assets, less than 10 will be liquidated`}><span><Trans>Margin Assets</Trans></span></Tooltip></th>
                 <th><Trans>Operate</Trans></th>
               </tr>
             </thead>

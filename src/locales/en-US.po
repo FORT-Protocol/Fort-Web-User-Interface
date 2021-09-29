@@ -38,6 +38,10 @@ msgstr "Buy Leveraged Token"
 msgid "Buy Option"
 msgstr "Buy Option"
 
+#: src/components/OptionsList/index.tsx
+msgid "Call"
+msgstr "Call"
+
 #: src/pages/Shared/TransactionToast/index.tsx
 msgid "Claim reward"
 msgstr "Claim reward"
@@ -72,9 +76,9 @@ msgstr "Current mining rate"
 msgid "Disconnect"
 msgstr "Disconnect"
 
-#: src/pages/Options/index.tsx
-msgid "Estimated number of European Options Token"
-msgstr "Estimated number of European Options Token"
+#: src/pages/Perpetuals/index.tsx
+msgid "Dynamic changes in Margin Assets, less than 10 will be liquidated"
+msgstr "Dynamic changes in Margin Assets, less than 10 will be liquidated"
 
 #: src/pages/Shared/TransactionModal/index.tsx
 msgid "European option Token minted successfully"
@@ -124,6 +128,10 @@ msgstr "Leverage"
 #: src/pages/Farm/FarmCard/index.tsx
 msgid "Lock period"
 msgstr "Lock period"
+
+#: src/components/PerpetualsList/index.tsx
+msgid "Long"
+msgstr "Long"
 
 #: src/pages/Perpetuals/index.tsx
 msgid "Margin"
@@ -175,6 +183,7 @@ msgid "Option Token mint"
 msgstr "Option Token mint"
 
 #: src/pages/Options/index.tsx
+#: src/pages/Options/index.tsx
 msgid "Option shares"
 msgstr "Option shares"
 
@@ -195,6 +204,10 @@ msgstr "Please select the method of connecting to the wallet"
 msgid "Positions"
 msgstr "Positions"
 
+#: src/components/OptionsList/index.tsx
+msgid "Put"
+msgstr "Put"
+
 #: src/pages/Shared/Header/Status/WalletModal/index.tsx
 msgid "Recent transactions"
 msgstr "Recent transactions"
@@ -206,6 +219,10 @@ msgstr "Reward claim time"
 #: src/pages/Shared/TransactionToast/index.tsx
 msgid "Sell Leveraged Token"
 msgstr "Sell Leveraged Token"
+
+#: src/components/PerpetualsList/index.tsx
+msgid "Short"
+msgstr "Short"
 
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx

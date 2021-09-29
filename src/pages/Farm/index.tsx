@@ -8,13 +8,12 @@ const baseTotal = BigNumber.from('1000000000000000000')
 const Farm: FC = () => {
   const classPrefix = "farm";
   const farms = [
-    { name: "NEST", time: 12, total: BigNumber.from('30000000').mul(baseTotal) },
+    { name: "NEST", time: 24, total: BigNumber.from('30000000').mul(baseTotal) },
     { name: "NEST", time: 1, total: BigNumber.from('2000000').mul(baseTotal) },
     { name: "CoFi", time: 1, total: BigNumber.from('2000000').mul(baseTotal) },
     { name: "FOR", time: 1, total: BigNumber.from('2000000').mul(baseTotal) },
     { name: "NHBTC", time: 1, total: BigNumber.from('2000000').mul(baseTotal) },
     { name: "PUSD", time: 1, total: BigNumber.from('2000000').mul(baseTotal) },
-    { name: "PETH", time: 1, total: BigNumber.from('2000000').mul(baseTotal) },
   ].map((item) => {
     return (
       <li key={item.name + item.time.toString()}>

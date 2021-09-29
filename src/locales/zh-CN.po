@@ -38,6 +38,10 @@ msgstr "杠杆币买入"
 msgid "Buy Option"
 msgstr "买入期权"
 
+#: src/components/OptionsList/index.tsx
+msgid "Call"
+msgstr "看涨"
+
 #: src/pages/Shared/TransactionToast/index.tsx
 msgid "Claim reward"
 msgstr "领取奖励"
@@ -72,9 +76,9 @@ msgstr "当前挖矿率"
 msgid "Disconnect"
 msgstr "断开"
 
-#: src/pages/Options/index.tsx
-msgid "Estimated number of European Options Token"
-msgstr "预计获得欧式期权币"
+#: src/pages/Perpetuals/index.tsx
+msgid "Dynamic changes in Margin Assets, less than 10 will be liquidated"
+msgstr "保证金净资产动态变化，小于10 将被清算"
 
 #: src/pages/Shared/TransactionModal/index.tsx
 msgid "European option Token minted successfully"
@@ -124,6 +128,10 @@ msgstr "选择杠杆"
 #: src/pages/Farm/FarmCard/index.tsx
 msgid "Lock period"
 msgstr "锁定期"
+
+#: src/components/PerpetualsList/index.tsx
+msgid "Long"
+msgstr "看涨"
 
 #: src/pages/Perpetuals/index.tsx
 msgid "Margin"
@@ -175,6 +183,7 @@ msgid "Option Token mint"
 msgstr "期权币铸币"
 
 #: src/pages/Options/index.tsx
+#: src/pages/Options/index.tsx
 msgid "Option shares"
 msgstr "期权份数"
 
@@ -195,6 +204,10 @@ msgstr "请选择连接钱包的方式"
 msgid "Positions"
 msgstr "持仓"
 
+#: src/components/OptionsList/index.tsx
+msgid "Put"
+msgstr "看跌"
+
 #: src/pages/Shared/Header/Status/WalletModal/index.tsx
 msgid "Recent transactions"
 msgstr "最近交易"
@@ -206,6 +219,10 @@ msgstr "奖励领取时间"
 #: src/pages/Shared/TransactionToast/index.tsx
 msgid "Sell Leveraged Token"
 msgstr "杠杆币卖出"
+
+#: src/components/PerpetualsList/index.tsx
+msgid "Short"
+msgstr "看跌"
 
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx

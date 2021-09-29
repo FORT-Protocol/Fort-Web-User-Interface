@@ -9,7 +9,7 @@
 .options-mintOptions {
 
     margin: 0 auto;
-    margin-bottom: 22px;
+    margin-bottom: 44px;
     margin-top: 22px;
     display: flex;
     justify-content: center;
@@ -165,6 +165,26 @@ table {
                 margin-left: -8px;
                 z-index: 0;
             }
+        }
+    }
+
+    td.td-type {
+        display: flex;
+        justify-content: center;
+
+        svg {
+            margin: auto 0;
+        }
+
+        p.red {
+            margin-left: 5px;
+            line-height: 44px;
+            color: $up-color;
+        }
+        p.green {
+            margin-left: 5px;
+            line-height: 44px;
+            color: $down-color;
         }
     }
 }

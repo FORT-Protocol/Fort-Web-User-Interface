@@ -1,4 +1,5 @@
 @import 'shared.scss';
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -6,25 +7,25 @@
     outline: none;
 }
 
-@font-face { 
-    font-family: Montserrat; 
-    src: url('./Montserrat-Medium.ttf'); 
+@font-face {
+    font-family: Montserrat;
+    src: url('./Montserrat-Medium.ttf');
 }
 
-@font-face { 
-    font-family: MontserratBold; 
-    src: url('./Montserrat-Bold.ttf'); 
+@font-face {
+    font-family: MontserratBold;
+    src: url('./Montserrat-Bold.ttf');
 }
 
-@font-face { 
-    font-family: HeptaSlabMedium; 
-    src: url('./HeptaSlab-Medium.ttf'); 
+@font-face {
+    font-family: HeptaSlabMedium;
+    src: url('./HeptaSlab-Medium.ttf');
 }
 
 html,
 body {
     font-family: Montserrat, MontserratBold, OPPOSans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans,
-    Droid Sans, Helvetica Neue, sans-serif;
+        Droid Sans, Helvetica Neue, sans-serif;
 
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-tap-highlight-color: transparent;
@@ -38,13 +39,13 @@ body {
 main {
     display: flex;
     flex-direction: column;
-    justify-content:space-between;
+    justify-content: space-between;
     min-height: 100%;
 }
 
 button {
     font-family: Montserrat, MontserratBold, OPPOSans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans,
-    Droid Sans, Helvetica Neue, sans-serif;
+        Droid Sans, Helvetica Neue, sans-serif;
     border: 0px;
     background-color: transparent;
 }
@@ -52,21 +53,26 @@ button {
 input {
     background-color: transparent;
 }
+
 input::-webkit-input-placeholder {
     font-family: Montserrat;
-    color:$button-disable-color;
+    color: $button-disable-color;
     font-size: $T2;
     font-weight: normal;
 }
-input::-moz-placeholder {   /* Mozilla Firefox 19+ */
+
+input::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
     font-family: Montserrat;
-    color:$button-disable-color;
+    color: $button-disable-color;
     font-size: $T2;
     font-weight: normal;
 }
-input:-moz-placeholder {    /* Mozilla Firefox 4 to 18 */
+
+input:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
     font-family: Montserrat;
-    color:$button-disable-color;
+    color: $button-disable-color;
     font-size: $T2;
     font-weight: normal;
 }
@@ -87,13 +93,18 @@ li {
 
 .animation-spin {
     animation: spin 1s linear infinite;
-  
+
     @keyframes spin {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg);
-      }
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
     }
-  }
+}
+
+.ant-tooltip-inner {
+    color: $gray-info-text-color;
+}
