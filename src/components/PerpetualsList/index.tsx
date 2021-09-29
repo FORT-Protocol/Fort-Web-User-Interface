@@ -1,8 +1,11 @@
+import { BigNumber } from "@ethersproject/bignumber";
 import { Trans } from "@lingui/macro";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { useFortLeverSell } from "../../contracts/hooks/useFortLeverTransation";
-import { tokenList } from "../../libs/constants/addresses";
+import { FortLeverContract, tokenList } from "../../libs/constants/addresses";
+import { FortLever } from "../../libs/hooks/useContract";
 import useTransactionListCon from "../../libs/hooks/useTransactionInfo";
+import useWeb3 from "../../libs/hooks/useWeb3";
 import { bigNumberToNormal } from "../../libs/utils";
 import { LeverListType } from "../../pages/Perpetuals";
 import { LongIcon, ShortIcon } from "../Icon";
@@ -12,10 +15,14 @@ type Props = {
   item: LeverListType;
   key: string;
   className: string;
+  nowPrice?: BigNumber;
 };
 
 const PerpetualsList: FC<Props> = ({ ...props }) => {
   const { pendingList } = useTransactionListCon();
+  const {account} = useWeb3()
+  const leverContract = FortLever(FortLeverContract);
+  const [marginAssets, setMarginAssets] = useState<BigNumber>()
   const loadingButton = () => {
     const closeTx = pendingList.filter(
       (item) => item.info === props.item.index.toString()
@@ -33,6 +40,15 @@ const PerpetualsList: FC<Props> = ({ ...props }) => {
   const TokenOneSvg = tokenList[tokenName()].Icon;
   const TokenTwoSvg = tokenList["USDT"].Icon;
   const active = useFortLeverSell(props.item.index, props.item.balance);
+  useEffect(() => {
+    if (!leverContract || !account || !props.nowPrice) {return}
+    
+      (async () => {
+        console.log(props.item.index)
+        const num = await leverContract.balanceOf(props.item.index, props.nowPrice, account)
+        setMarginAssets(num)
+    })()
+  }, [account, leverContract, props.item.index, props.nowPrice])
   return (
     <tr key={props.key} className={`${props.className}-table-normal`}>
       <td className={"tokenPair"}>
@@ -47,10 +63,9 @@ const PerpetualsList: FC<Props> = ({ ...props }) => {
         USDT
       </td>
       <td>
-        {bigNumberToNormal(props.item.price, tokenList["USDT"].decimals, 2)}{" "}
-        USDT
+        {marginAssets ? bigNumberToNormal(marginAssets, 18, 2) : '---'}{" "}
+        DCU
       </td>
-      <td>30%</td>
       <td>
         <MainButton
           onClick={() => {

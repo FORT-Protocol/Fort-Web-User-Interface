@@ -67,6 +67,7 @@ const Perpetuals: FC = () => {
         className={classPrefix}
         item={item}
         key={item.index.toString() + account}
+        nowPrice={nowPrice}
       />
     );
   });
@@ -168,7 +169,7 @@ const Perpetuals: FC = () => {
         <ChooseType callBack={handleType} isLong={isLong} />
         <LeverChoose selected={leverNum} callBack={handleLeverNum} />
         <InfoShow
-          topLeftText={t`Mint amount`}
+          topLeftText={t`Payment amount`}
           bottomRightText={`Balance: ${
             dcuBalance ? bigNumberToNormal(dcuBalance) : "----"
           } DCU`}
@@ -206,25 +207,24 @@ const Perpetuals: FC = () => {
           disable={!checkMainButton()}
           loading={mainButtonState()}
         >
-          {isLong ? <Trans>Long</Trans> : <Trans>Short</Trans>}
+          {isLong ? <Trans>Open Long</Trans> : <Trans>Open Short</Trans>}
         </MainButton>
       </MainCard>
       {leverListState.length > 0 ? (
         <div>
           <HoldLine>
-            <Trans>Hold Options</Trans>
+            <Trans>Positions</Trans>
           </HoldLine>
           <table>
             <thead>
               <tr className={`${classPrefix}-table-title`}>
-                <th>Token pair</th>
-                <th>Options Type</th>
-                <th>Leveraged Multiplier</th>
-                <th>Guarantee</th>
-                <th>Positioning</th>
-                <th>Liquidation Price</th>
-                <th>Current Yield</th>
-                <th>Operation</th>
+                <th><Trans>Token pair</Trans></th>
+                <th><Trans>Type</Trans></th>
+                <th><Trans>lever</Trans></th>
+                <th><Trans>Margin</Trans></th>
+                <th><Trans>Open Price</Trans></th>
+                <th><Trans>Margin Assets</Trans></th>
+                <th><Trans>Operate</Trans></th>
               </tr>
             </thead>
             <tbody>{trList}</tbody>

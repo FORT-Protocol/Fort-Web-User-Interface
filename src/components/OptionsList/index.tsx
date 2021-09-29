@@ -69,7 +69,7 @@ const OptionsList: FC<Props> = ({ ...props }) => {
           loading={loadingButton()}
           disable={loadingButton()}
         >
-          <Trans>Close</Trans>
+          <Trans>Strike</Trans>
         </MainButton>
       </td>
     </tr>

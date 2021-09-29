@@ -13,62 +13,38 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/pages/Options/Mint/index.tsx
+#: src/pages/Options/index.tsx
 msgid "(Spot price - Strike price)*"
 msgstr "(现货价 - 行权价)*"
 
-#: src/pages/Options/Mint/index.tsx
+#: src/pages/Options/index.tsx
 msgid "(Strike price - Spot price)*"
 msgstr "(行权价 - 现货价)*"
-
-#: src/pages/Options/Close/index.tsx
-msgid "+ Add option Token"
-msgstr "+ 添加期权币"
 
 #: src/pages/Farm/FarmCard/index.tsx
 #: src/pages/Shared/TransactionToast/index.tsx
 msgid "Approve"
 msgstr "授权"
 
-#: src/pages/Options/Mint/index.tsx
+#: src/pages/Options/index.tsx
 msgid "At"
 msgstr "在"
-
-#: src/pages/Lever/index.tsx
-msgid "BUY"
-msgstr "兑换"
-
-#: src/pages/Lever/index.tsx
-#: src/pages/Lever/index.tsx
-msgid "Balance:"
-msgstr "余额:"
-
-#: src/pages/Options/Close/index.tsx
-#: src/pages/Review/OptionsReview/index.tsx
-msgid "Block number"
-msgstr "区块号"
 
 #: src/pages/Shared/TransactionToast/index.tsx
 msgid "Buy Leveraged Token"
 msgstr "杠杆币买入"
 
+#: src/pages/Options/index.tsx
+msgid "Buy Option"
+msgstr "买入期权"
+
 #: src/pages/Shared/TransactionToast/index.tsx
 msgid "Claim reward"
 msgstr "领取奖励"
 
-#: src/pages/Options/Close/index.tsx
-#: src/pages/Options/index.tsx
+#: src/components/PerpetualsList/index.tsx
 msgid "Close"
 msgstr "结算"
-
-#: src/pages/Review/OptionsReview/index.tsx
-#: src/pages/Review/OptionsReview/index.tsx
-msgid "Close Confirm"
-msgstr "确认结算"
-
-#: src/pages/Review/OptionsReview/index.tsx
-msgid "Close amount"
-msgstr "结算数量"
 
 #: src/pages/Farm/FarmCard/index.tsx
 msgid "Confirm"
@@ -79,12 +55,10 @@ msgstr "确定"
 msgid "Connect Wallet"
 msgstr "连接钱包"
 
-#: src/pages/Options/Close/index.tsx
 #: src/pages/Shared/TransactionModal/index.tsx
 msgid "Contract address"
 msgstr "合约地址"
 
-#: src/pages/Options/Close/index.tsx
 #: src/pages/Shared/Header/Status/WalletModal/index.tsx
 #: src/pages/Shared/TransactionModal/index.tsx
 msgid "Copied"
@@ -94,34 +68,11 @@ msgstr "已复制"
 msgid "Current mining rate"
 msgstr "当前挖矿率"
 
-#: src/pages/Lever/index.tsx
-#: src/pages/Review/LeverReview/index.tsx
-msgid "Current price"
-msgstr "当前价"
-
 #: src/pages/Shared/Header/Status/WalletModal/index.tsx
 msgid "Disconnect"
 msgstr "断开"
 
-#: src/pages/Review/LeverReview/index.tsx
-msgid "ETH Long Leveraged Token"
-msgstr "ETH看涨杠杆币"
-
-#: src/pages/Review/LeverReview/index.tsx
-msgid "ETH Short Leveraged Token"
-msgstr "ETH看跌杠杆币"
-
-#: src/pages/Options/Close/index.tsx
-#: src/pages/Review/OptionsReview/index.tsx
-msgid "ETH call option Token"
-msgstr "ETH看涨期权币"
-
-#: src/pages/Options/Close/index.tsx
-#: src/pages/Review/OptionsReview/index.tsx
-msgid "ETH put option Token"
-msgstr "ETH看跌期权币"
-
-#: src/pages/Options/Mint/index.tsx
+#: src/pages/Options/index.tsx
 msgid "Estimated number of European Options Token"
 msgstr "预计获得欧式期权币"
 
@@ -129,24 +80,16 @@ msgstr "预计获得欧式期权币"
 msgid "European option Token minted successfully"
 msgstr "欧式期权币铸币成功"
 
-#: src/pages/Options/Close/index.tsx
-#: src/pages/Options/Mint/index.tsx
-#: src/pages/Options/Mint/index.tsx
-#: src/pages/Review/OptionsReview/index.tsx
+#: src/pages/Options/index.tsx
+#: src/pages/Options/index.tsx
+#: src/pages/Options/index.tsx
 msgid "Exercise time"
 msgstr "行权时间"
 
-#: src/pages/Lever/index.tsx
-#: src/pages/Options/Mint/index.tsx
-#: src/pages/Options/Mint/index.tsx
-#: src/pages/Review/LeverReview/index.tsx
-#: src/pages/Review/OptionsReview/index.tsx
+#: src/pages/Options/index.tsx
+#: src/pages/Options/index.tsx
 msgid "Expected get"
 msgstr "预计获得"
-
-#: src/pages/Options/Close/index.tsx
-msgid "Expected get after close"
-msgstr "结算后预计获得"
 
 #: src/pages/Farm/FarmCard/index.tsx
 msgid "Expected mining"
@@ -160,53 +103,37 @@ msgstr "挖矿"
 msgid "Fort Protocol is a Beta version, you need to use it at your own risk, please be careful not to use too much money."
 msgstr "Fort Protocol 为 Beta 版本，使用时需要自担风险，请注意不用使用过多资金"
 
-#: src/pages/Lever/index.tsx
-#: src/pages/Review/LeverReview/index.tsx
-msgid "From"
-msgstr "支付"
+#: src/pages/Shared/Header/index.tsx
+msgid "Futures"
+msgstr "永续合约"
 
-#: src/pages/Options/Close/index.tsx
-msgid "Go to Mint"
-msgstr "去铸币"
-
-#: src/pages/Review/LeverReview/index.tsx
-msgid "If you already hold the Leveraged Token, it will be merged on transaction"
-msgstr "若已持有当前杠杆币，则会结算后进行合并"
-
-#: src/pages/Lever/index.tsx
-#: src/pages/Lever/index.tsx
-#: src/pages/Options/Close/index.tsx
-#: src/pages/Options/Mint/index.tsx
-#: src/pages/Options/Mint/index.tsx
+#: src/pages/Options/index.tsx
+#: src/pages/Options/index.tsx
+#: src/pages/Perpetuals/index.tsx
 msgid "Input"
 msgstr "请输入"
 
-#: src/pages/Lever/index.tsx
-#: src/pages/Options/Mint/index.tsx
+#: src/pages/Options/index.tsx
 msgid "Insufficient balance"
 msgstr "余额不足"
 
-#: src/pages/Review/LeverReview/index.tsx
-msgid "Leverage factor"
-msgstr "杠杆系数"
-
-#: src/pages/Shared/Header/index.tsx
-msgid "Leveraged Token"
-msgstr "杠杆币"
-
-#: src/pages/Review/LeverReview/index.tsx
-msgid "Leveraged Token details"
-msgstr "杠杆币详情"
+#: src/components/LeverChoose/index.tsx
+msgid "Leverage"
+msgstr "选择杠杆"
 
 #: src/pages/Farm/FarmCard/index.tsx
 msgid "Lock period"
 msgstr "锁定期"
 
-#: src/components/ChooseType/index.tsx
-msgid "Long"
-msgstr "看涨"
+#: src/pages/Perpetuals/index.tsx
+msgid "Margin"
+msgstr "保证金"
 
-#: src/pages/Lever/index.tsx
+#: src/pages/Perpetuals/index.tsx
+msgid "Margin Assets"
+msgstr "保证金净资产"
+
+#: src/pages/Perpetuals/index.tsx
 msgid "Minimum input 100"
 msgstr "最小输入100"
 
@@ -214,76 +141,59 @@ msgstr "最小输入100"
 msgid "Mining pool number"
 msgstr "矿池总量"
 
-#: src/pages/Options/Mint/index.tsx
-#: src/pages/Options/index.tsx
-msgid "Mint"
-msgstr "铸币"
-
-#: src/pages/Review/OptionsReview/index.tsx
-#: src/pages/Review/OptionsReview/index.tsx
-msgid "Mint Confirm"
-msgstr "确认铸币"
-
-#: src/pages/Options/Mint/index.tsx
-#: src/pages/Review/OptionsReview/index.tsx
-msgid "Mint amount"
-msgstr "铸币金额"
-
 #: src/pages/Farm/FarmCard/index.tsx
 msgid "My staking"
 msgstr "我的锁仓"
 
-#: src/pages/Options/Close/index.tsx
-msgid "No option Token"
-msgstr "未持有期权币"
-
-#: src/pages/Options/Close/index.tsx
-#: src/pages/Review/OptionsReview/index.tsx
 #: src/pages/Shared/TransactionModal/index.tsx
 msgid "Number of Option Token"
 msgstr "期权币数量"
 
-#: src/pages/Shared/Header/index.tsx
-msgid "Options Token"
-msgstr "期权币"
+#: src/pages/Perpetuals/index.tsx
+msgid "Open Long"
+msgstr "看涨开仓"
 
-#: src/pages/Options/Close/index.tsx
-#: src/pages/Options/Close/index.tsx
-msgid "Option Token add failed"
-msgstr "期权币添加失败"
+#: src/pages/Perpetuals/index.tsx
+msgid "Open Price"
+msgstr "开仓价"
 
-#: src/pages/Options/Close/index.tsx
-msgid "Option Token add success"
-msgstr "期权币添加成功"
+#: src/pages/Perpetuals/index.tsx
+msgid "Open Short"
+msgstr "看跌开仓"
+
+#: src/pages/Options/index.tsx
+#: src/pages/Perpetuals/index.tsx
+msgid "Operate"
+msgstr "操作"
 
 #: src/pages/Shared/TransactionToast/index.tsx
 msgid "Option Token close"
 msgstr "期权币结算"
 
-#: src/pages/Options/Close/index.tsx
-msgid "Option Token held"
-msgstr "持有的期权币"
-
 #: src/pages/Shared/TransactionToast/index.tsx
 msgid "Option Token mint"
 msgstr "期权币铸币"
 
-#: src/pages/Review/OptionsReview/index.tsx
-msgid "Options Token details"
-msgstr "期权币详情"
+#: src/pages/Options/index.tsx
+msgid "Option shares"
+msgstr "期权份数"
 
-#: src/components/LineShowInfo/index.tsx
-msgid "Oracle Fee is what you pay to the NEST protocol for providing accurate market price data to the smart contract."
-msgstr "您需要向NEST协议支付预言机价格使用费，以便为智能合约提供准确的市场价格数据。"
+#: src/pages/Shared/Header/index.tsx
+msgid "Options"
+msgstr "期权"
 
-#: src/pages/Review/LeverReview/index.tsx
-#: src/pages/Review/OptionsReview/index.tsx
-msgid "Oracle fee"
-msgstr "预言机调用费"
+#: src/pages/Options/index.tsx
+#: src/pages/Perpetuals/index.tsx
+msgid "Payment amount"
+msgstr "支付金额"
 
 #: src/pages/Shared/Header/Status/Modal/index.tsx
 msgid "Please select the method of connecting to the wallet"
 msgstr "请选择连接钱包的方式"
+
+#: src/pages/Perpetuals/index.tsx
+msgid "Positions"
+msgstr "持仓"
 
 #: src/pages/Shared/Header/Status/WalletModal/index.tsx
 msgid "Recent transactions"
@@ -297,12 +207,8 @@ msgstr "奖励领取时间"
 msgid "Sell Leveraged Token"
 msgstr "杠杆币卖出"
 
-#: src/components/ChooseType/index.tsx
-msgid "Short"
-msgstr "看跌"
-
-#: src/pages/Options/Mint/index.tsx
-#: src/pages/Options/Mint/index.tsx
+#: src/pages/Options/index.tsx
+#: src/pages/Options/index.tsx
 msgid "Spot price"
 msgstr "现货价"
 
@@ -314,20 +220,14 @@ msgstr "锁仓"
 msgid "Staking number"
 msgstr "当前锁仓量"
 
-#: src/pages/Options/Close/index.tsx
-#: src/pages/Options/Mint/index.tsx
-#: src/pages/Review/OptionsReview/index.tsx
+#: src/components/OptionsList/index.tsx
+msgid "Strike"
+msgstr "行权"
+
+#: src/pages/Options/index.tsx
+#: src/pages/Options/index.tsx
 msgid "Strike price"
 msgstr "行权价"
-
-#: src/pages/Review/LeverReview/index.tsx
-#: src/pages/Review/LeverReview/index.tsx
-msgid "Swap Confirm"
-msgstr "交易确认"
-
-#: src/pages/Options/Close/index.tsx
-msgid "The Option Token has not reached the exercise time"
-msgstr "当前期权币未到行权时间"
 
 #: src/libs/hooks/useEagerConnect.ts
 #: src/pages/Shared/Header/Status/Modal/index.tsx
@@ -335,7 +235,10 @@ msgstr "当前期权币未到行权时间"
 msgid "This network is not supported, please switch the network"
 msgstr "暂不支持该网络，请切换网络"
 
-#: src/pages/Options/Mint/index.tsx
+#: src/pages/Options/index.tsx
+#: src/pages/Options/index.tsx
+#: src/pages/Perpetuals/index.tsx
+#: src/pages/Perpetuals/index.tsx
 msgid "Token pair"
 msgstr "交易对"
 
@@ -347,10 +250,8 @@ msgstr "交易已拒绝"
 msgid "Transaction submitted"
 msgstr "交易已提交"
 
-#: src/components/ChooseType/index.tsx
-#: src/pages/Options/Close/index.tsx
-#: src/pages/Review/LeverReview/index.tsx
-#: src/pages/Review/OptionsReview/index.tsx
+#: src/pages/Options/index.tsx
+#: src/pages/Perpetuals/index.tsx
 msgid "Type"
 msgstr "类型"
 
@@ -375,9 +276,13 @@ msgstr "钱包"
 msgid "Withdraw"
 msgstr "取回"
 
-#: src/pages/Options/Mint/index.tsx
+#: src/pages/Options/index.tsx
 msgid "compare with spot price and strike price"
 msgstr "比较ETH的现货价格与行权价"
+
+#: src/pages/Perpetuals/index.tsx
+msgid "lever"
+msgstr "杠杆倍数"
 
 #: src/pages/Farm/FarmCard/index.tsx
 msgid "wallet:"

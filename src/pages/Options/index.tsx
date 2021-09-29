@@ -31,6 +31,7 @@ import moment from "moment";
 import { useFortEuropeanOptionOpen } from "../../contracts/hooks/useFortEuropeanOptionTransation";
 import OptionsList from "../../components/OptionsList";
 import useTransactionListCon from "../../libs/hooks/useTransactionInfo";
+import _ from 'lodash';
 
 export type OptionsListType = {
   balance: BigNumber;
@@ -58,10 +59,6 @@ const MintOptions: FC = () => {
   const [optionsListState, setOptionsListState] = useState<
     Array<OptionsListType>
   >([]);
-  const [optionTokenNumBaseInfo, setOptionTokenNumBaseInfo] = useState({
-    strikePrice: "0",
-    fortNum: "0",
-  });
   const [priceNow, setPriceNow] = useState("--.--");
   const [fortBalance, setFortBalance] = useState(BigNumber.from(0));
   const [optionTokenValue, setOptionTokenValue] = useState(BigNumber.from(0));
@@ -177,37 +174,36 @@ const MintOptions: FC = () => {
   useEffect(() => {
     if (
       fortEuropeanOption &&
-      optionTokenNumBaseInfo.strikePrice !== "0" &&
-      optionTokenNumBaseInfo.fortNum !== "0" &&
-      priceNow !== "--.--" &&
+      strikePrice !== "" &&
+      fortNum !== "" &&
+      priceNow !== "---" &&
       exercise.blockNum !== 0
     ) {
-      (async () => {
-        try {
-          const value = await fortEuropeanOption.estimate(
-            ZERO_ADDRESS,
-            normalToBigNumber(priceNow, tokenList["USDT"].decimals).toString(),
-            normalToBigNumber(
-              optionTokenNumBaseInfo.strikePrice,
-              tokenList["USDT"].decimals
-            ).toString(),
-            isLong,
-            exercise.blockNum.toString(),
-            normalToBigNumber(optionTokenNumBaseInfo.fortNum).toString()
-          );
-          setOptionTokenValue(BigNumber.from(value));
-        } catch {
-          setOptionTokenValue(BigNumber.from(0));
-        }
-      })();
+      _.debounce(() => {
+        ;(async() => {
+          try {
+            const value = await fortEuropeanOption.estimate(
+              ZERO_ADDRESS,
+              normalToBigNumber(priceNow, tokenList["USDT"].decimals).toString(),
+              normalToBigNumber(
+                strikePrice,
+                tokenList["USDT"].decimals
+              ).toString(),
+              isLong,
+              exercise.blockNum.toString(),
+              normalToBigNumber(fortNum).toString()
+            );
+            setOptionTokenValue(BigNumber.from(value));
+          } catch {
+            setOptionTokenValue(BigNumber.from(0));
+          }
+        })()
+      }, 2000, {
+        leading: false,
+        trailing: true,
+      })()
     }
-  }, [
-    isLong,
-    optionTokenNumBaseInfo,
-    exercise.blockNum,
-    priceNow,
-    fortEuropeanOption,
-  ]);
+  }, [exercise.blockNum, fortEuropeanOption, fortNum, isLong, priceNow, strikePrice]);
 
   const checkButton = () => {
     if (
@@ -276,17 +272,11 @@ const MintOptions: FC = () => {
               className={"input-left"}
               value={strikePrice}
               onChange={(e) => setStrikePrice(formatInputNum(e.target.value))}
-              onBlur={(e: any) =>
-                setOptionTokenNumBaseInfo({
-                  ...optionTokenNumBaseInfo,
-                  strikePrice: e.target.value,
-                })
-              }
             />
             <span>USDT</span>
           </InfoShow>
           <InfoShow
-            topLeftText={t`Mint amount`}
+            topLeftText={t`Payment amount`}
             bottomRightText={`Balance: ${bigNumberToNormal(fortBalance)} DCU`}
             balanceRed={
               normalToBigNumber(fortNum).gt(fortBalance) ? true : false
@@ -299,12 +289,6 @@ const MintOptions: FC = () => {
               className={"input-middle"}
               value={fortNum}
               onChange={(e) => setFortNum(formatInputNum(e.target.value))}
-              onBlur={(e: any) =>
-                setOptionTokenNumBaseInfo({
-                  ...optionTokenNumBaseInfo,
-                  fortNum: e.target.value,
-                })
-              }
             />
             <button
               className={"max-button"}
@@ -336,7 +320,7 @@ const MintOptions: FC = () => {
               active();
             }}
           >
-            <Trans>Mint</Trans>
+            <Trans>Buy Option</Trans>
           </MainButton>
           <div className={`${classPrefix}-rightCard-time`}>
             <p className={`${classPrefix}-rightCard-timeTitle`}>
@@ -401,12 +385,12 @@ const MintOptions: FC = () => {
           <table>
             <thead>
               <tr className={`${classPrefix}-table-title`}>
-                <th>Token pair</th>
-                <th>Options Type</th>
-                <th>Strike price</th>
-                <th className={`exerciseTime`}>Exercise time</th>
-                <th>Option shares</th>
-                <th>Operation</th>
+                <th><Trans>Token pair</Trans></th>
+                <th><Trans>Type</Trans></th>
+                <th><Trans>Strike price</Trans></th>
+                <th className={`exerciseTime`}><Trans>Exercise time</Trans></th>
+                <th><Trans>Option shares</Trans></th>
+                <th><Trans>Operate</Trans></th>
               </tr>
             </thead>
             <tbody>{trList}</tbody>
