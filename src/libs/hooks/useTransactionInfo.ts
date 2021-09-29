@@ -1,5 +1,4 @@
-import { BigNumber, Contract } from "ethers";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { createContainer } from "unstated-next";
 import useWeb3 from "./useWeb3";
 import {
@@ -7,7 +6,6 @@ import {
   TransactionModalType,
 } from "../../pages/Shared/TransactionModal";
 import { notifyTransaction } from "../../pages/Shared/TransactionToast";
-import ERC20ABI from "../../contracts/abis/ERC20.json";
 
 export enum TransactionType {
   buyLever = 0,
@@ -71,7 +69,6 @@ const useTransactionList = () => {
         return [];
       }
       setTxList(JSON.parse(cache));
-      console.log("1" + { cache });
     })();
   }, [chainId]);
 
@@ -92,10 +89,19 @@ const useTransactionList = () => {
         return item.txState === TransactionState.Pending;
       });
       setPendingList(noResultTx);
-      console.log("2" + { txList });
     })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [txList]);
+    
+  }, [chainId, txList]);
+  const updateList = useCallback((item: TransactionInfoType) => {
+    const index = txList.findIndex((t) => t.hash === item.hash);
+    console.log(11111)
+    if (index > -1) {
+      txList[index] = item;
+      setTxList([...txList]);
+    } else {
+      setTxList(txList.concat(item));
+    }
+  },[txList]);
 
   useEffect(() => {
     if (pendingList.length === 0 || checking) {
@@ -103,7 +109,6 @@ const useTransactionList = () => {
     }
     setChecking(true);
     (async () => {
-      console.log("3" + { pendingList });
       for (let index = 0; index < pendingList.length; index++) {
         const element = pendingList[index];
         const rec = await library?.getTransactionReceipt(element.hash);
@@ -115,48 +120,6 @@ const useTransactionList = () => {
           updateList(element);
           setChecking(false);
           notifyTransaction(element);
-
-          if (element.type === TransactionType.buyOption) {
-            var cache = localStorage.getItem(
-              "optionTokensList" + chainId?.toString()
-            );
-            var optionTokenList = [];
-            if (cache) {
-              optionTokenList = JSON.parse(cache);
-            }
-            const newTokenAddress = rec["logs"][1]["address"];
-            const newTokenContract = new Contract(
-              newTokenAddress,
-              ERC20ABI,
-              library
-            );
-            const newTokenName = await newTokenContract.name();
-            if (
-              optionTokenList.filter(
-                (item: { address: string }) => item.address === newTokenAddress
-              ).length === 0
-            ) {
-              const optionToken = {
-                address: newTokenAddress,
-                name: newTokenName,
-              };
-              localStorage.setItem(
-                "optionTokensList" + chainId?.toString(),
-                JSON.stringify([...optionTokenList, optionToken])
-              );
-            }
-            const tokenInfo: TransactionModalTokenInfo = {
-              tokenName: newTokenName,
-              tokenAddress: newTokenAddress,
-              tokenValue: BigNumber.from(rec["logs"][1]["data"]).toString(),
-            };
-            setShowModal({
-              isShow: true,
-              hash: element.hash,
-              txType: TransactionModalType.eurSuccess,
-              tokenInfo: tokenInfo,
-            });
-          }
           return;
         }
       }
@@ -164,8 +127,8 @@ const useTransactionList = () => {
         setChecking(false);
       }, 15000);
     })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pendingList, checking, library]);
+    
+  }, [pendingList, checking, library, updateList]);
 
   const pushTx = (hash: string, txInfo: TransactionBaseInfoType) => {
     const nowDate = parseInt((new Date().getTime() / 1000).toString());
@@ -180,16 +143,6 @@ const useTransactionList = () => {
       type: txInfo.type,
     };
     updateList(newTxInfo);
-  };
-
-  const updateList = (item: TransactionInfoType) => {
-    const index = txList.findIndex((t) => t.hash === item.hash);
-    if (index > -1) {
-      txList[index] = item;
-      setTxList([...txList]);
-    } else {
-      setTxList(txList.concat(item));
-    }
   };
 
   const closeModal = () => {

@@ -6,10 +6,7 @@ import { PutDownIcon } from "../../components/Icon";
 import InfoShow from "../../components/InfoShow";
 import MainButton from "../../components/MainButton";
 import MainCard from "../../components/MainCard";
-import {
-  DoubleTokenShow,
-  SingleTokenShow,
-} from "../../components/TokenShow";
+import { DoubleTokenShow, SingleTokenShow } from "../../components/TokenShow";
 import {
   FortEuropeanOptionContract,
   tokenList,
@@ -33,15 +30,16 @@ import { HoldLine } from "../../components/HoldLine";
 import moment from "moment";
 import { useFortEuropeanOptionOpen } from "../../contracts/hooks/useFortEuropeanOptionTransation";
 import OptionsList from "../../components/OptionsList";
+import useTransactionListCon from "../../libs/hooks/useTransactionInfo";
 
 export type OptionsListType = {
-  balance: BigNumber,
-  exerciseBlock: BigNumber,
-  index: BigNumber,
-  orientation: boolean,
-  strikePrice: BigNumber,
-  tokenAddress: string
-}
+  balance: BigNumber;
+  exerciseBlock: BigNumber;
+  index: BigNumber;
+  orientation: boolean;
+  strikePrice: BigNumber;
+  tokenAddress: string;
+};
 
 const MintOptions: FC = () => {
   const classPrefix = "options-mintOptions";
@@ -49,12 +47,17 @@ const MintOptions: FC = () => {
   const nestPriceContract = NestPriceContract();
   const fortEuropeanOption = FortEuropeanOption(FortEuropeanOptionContract);
   const fortContract = ERC20Contract(tokenList["DCU"].addresses);
+  const { pendingList, txList } = useTransactionListCon();
+  const [isRefresh, setIsRefresh] = useState<boolean>(false);
+  const [latestBlock, setLatestBlock] = useState({ time: 0, blockNum: 0 });
 
   const [isLong, setIsLong] = useState(true);
-  const [exercise, setExercise] = useState({ time: '', blockNum: 0 });
+  const [exercise, setExercise] = useState({ time: "", blockNum: 0 });
   const [fortNum, setFortNum] = useState("");
-  const [strikePrice, setStrikePrice] = useState<string>();
-  const [optionsListState, setOptionsListState] = useState<Array<OptionsListType>>([])
+  const [strikePrice, setStrikePrice] = useState<string>("");
+  const [optionsListState, setOptionsListState] = useState<
+    Array<OptionsListType>
+  >([]);
   const [optionTokenNumBaseInfo, setOptionTokenNumBaseInfo] = useState({
     strikePrice: "0",
     fortNum: "0",
@@ -64,17 +67,53 @@ const MintOptions: FC = () => {
   const [optionTokenValue, setOptionTokenValue] = useState(BigNumber.from(0));
 
   const trList = optionsListState.map((item) => {
-      return (<OptionsList className={classPrefix} key={item.index.toString() + account} item={item}/>)
-  })
+    return (
+      <OptionsList
+        className={classPrefix}
+        key={item.index.toString() + account}
+        item={item}
+        blockNum={latestBlock.blockNum.toString()}
+      />
+    );
+  });
+
+  const getOptionsList = useCallback(async () => {
+    if (!fortEuropeanOption) {
+      return;
+    }
+    const optionsCount = await fortEuropeanOption.getOptionCount();
+    const optionsList = await fortEuropeanOption.find(
+      0,
+      1000,
+      optionsCount,
+      account
+    );
+    const resultList = optionsList.filter((item: OptionsListType) =>
+      item.balance.gt(BigNumber.from("0"))
+    );
+    setOptionsListState(resultList);
+    setIsRefresh(true);
+  }, [account, fortEuropeanOption]);
 
   useEffect(() => {
-    if (!fortEuropeanOption) {return}
-    ;(async() => {
-      const optionsList = await fortEuropeanOption.find(0, 20, 20, account)
-      const resultList = optionsList.filter((item:OptionsListType) => item.balance.gt(BigNumber.from('0')))
-      setOptionsListState(resultList)
-    })()
-  }, [account, fortEuropeanOption])
+    if (!txList || txList.length === 0) {
+      return;
+    }
+    const latestTx = txList[txList.length - 1];
+    if (
+      latestTx.txState === 1 &&
+      (latestTx.type === 2 || latestTx.type === 3)
+    ) {
+      setTimeout(getOptionsList, isRefresh ? 4000 : 0);
+    } else if (!isRefresh) {
+      getOptionsList();
+    }
+  }, [getOptionsList, isRefresh, txList]);
+
+  const loadingButton = () => {
+    const latestTx = pendingList.filter((item) => item.type === 2);
+    return latestTx.length > 0 ? true : false;
+  };
 
   useEffect(() => {
     if (fortContract) {
@@ -96,27 +135,14 @@ const MintOptions: FC = () => {
     }
   }, [chainId, nestPriceContract, priceNow]);
 
-  // useEffect(() => {
-  //   if (exercise.blockNum === 0 || strikePrice === "") {
-  //     setTokenName("----");
-  //   } else {
-  //     const oneStr = isLong ? "C" : "P";
-  //     const strikePriceStr = normalToBigNumber(
-  //       strikePrice,
-  //       tokenList["USDT"].decimals
-  //     ).toString();
-  //     const twoStr =
-  //       strikePriceStr.substr(0, 1) +
-  //       "." +
-  //       strikePriceStr.substr(1, 6) +
-  //       "+" +
-  //       (strikePriceStr.length - 7).toString();
-  //     const threeStr = "ETH";
-  //     const fourStr = exercise.blockNum;
-  //     const newTokenName = oneStr + twoStr + threeStr + fourStr;
-  //     setTokenName(newTokenName);
-  //   }
-  // }, [exercise.blockNum, isLong, strikePrice]);
+  useEffect(() => {
+    if (moment().valueOf() - latestBlock.time > 15000 && library) {
+      (async () => {
+        const latest = await library?.getBlockNumber();
+        setLatestBlock({ time: moment().valueOf(), blockNum: latest || 0 });
+      })();
+    }
+  }, [latestBlock.time, library]);
 
   const handleType = (isLong: boolean) => {
     setIsLong(isLong);
@@ -124,9 +150,11 @@ const MintOptions: FC = () => {
 
   const onOk = useCallback(
     async (value: any) => {
+      if (!latestBlock) {
+        return;
+      }
       const nowTime = moment().valueOf();
       const selectTime = moment(value).valueOf();
-      const latestBlock = await library?.getBlockNumber();
 
       if (selectTime > nowTime) {
         const timeString = moment(value).format("YYYY[-]MM[-]DD");
@@ -135,26 +163,15 @@ const MintOptions: FC = () => {
         ).toFixed(0);
         setExercise({
           time: timeString,
-          blockNum: Number(blockNum) + (latestBlock || 0),
+          blockNum: Number(blockNum) + (latestBlock.blockNum || 0),
         });
       } else {
         const timeString = moment().format("YYYY[-]MM[-]DD");
-        setExercise({ time: timeString, blockNum: latestBlock || 0 });
+        setExercise({ time: timeString, blockNum: latestBlock.blockNum || 0 });
       }
     },
-    [library]
+    [latestBlock]
   );
-
-  // const optionInfo: OptionsInfo = {
-  //   fortAmount: normalToBigNumber(fortNum),
-  //   optionToken: ZERO_ADDRESS,
-  //   optionTokenName: tokenName,
-  //   optionTokenAmount: optionTokenValue,
-  //   type: isLong,
-  //   strikePrice: normalToBigNumber(strikePrice, tokenList["USDT"].decimals),
-  //   exerciseTime: exercise.time,
-  //   blockNumber: BigNumber.from(exercise.blockNum),
-  // };
 
   useEffect(() => {
     if (
@@ -194,12 +211,13 @@ const MintOptions: FC = () => {
   const checkButton = () => {
     if (
       fortNum === "" ||
-      strikePrice === undefined ||
+      strikePrice === "" ||
       exercise.blockNum === 0 ||
       normalToBigNumber(fortNum).gt(fortBalance) ||
-      normalToBigNumber(strikePrice || '0', tokenList["USDT"].decimals).eq(
+      normalToBigNumber(strikePrice || "0", tokenList["USDT"].decimals).eq(
         BigNumber.from("0")
-      )
+      ) ||
+      loadingButton()
     ) {
       return true;
     }
@@ -208,40 +226,13 @@ const MintOptions: FC = () => {
   function disabledDate(current: any) {
     return current && current < moment().add(7, "days").startOf("day");
   }
-
-  // function disabledDateTime(date: any) {
-  //     var nowHour:number
-  //     if (date && moment().format("MMM Do YY") === date.format("MMM Do YY")) {
-  //         nowHour = Number(moment().format('HH')) + 2
-  //     } else {
-  //         nowHour = 0
-  //     }
-  //     return {
-  //         disabledHours: () => range(0, 24).splice(0, nowHour)
-  //     };
-  // }
-
-  // function range(start: number, end: number) {
-  //     const result = [];
-  //     for (let i = start; i < end; i++) {
-  //         result.push(i);
-  //     }
-  //     return result;
-  // }
-
-  // const handleGetTime = (title: string) => {
-  //   const value = timeDatalist.filter((item) => item.title === title)[0].value
-  //   setExercise({ time: title, blockNum: Number(value)});
-  // }
-  // const handleGetStrikePrice = (title: string) => {
-  //   const value = strikePriceDataList.filter((item) => item.title === title)[0].value
-  //   setStrikePrice(value)
-  //   setOptionTokenNumBaseInfo({
-  //     ...optionTokenNumBaseInfo,
-  //     strikePrice: value
-  //   })
-  // }
-  const active = useFortEuropeanOptionOpen('ETH', isLong, BigNumber.from(exercise.blockNum), normalToBigNumber(fortNum), strikePrice ? normalToBigNumber(strikePrice, 6) : undefined)
+  const active = useFortEuropeanOptionOpen(
+    "ETH",
+    isLong,
+    BigNumber.from(exercise.blockNum),
+    normalToBigNumber(fortNum),
+    strikePrice ? normalToBigNumber(strikePrice, 6) : undefined
+  );
   return (
     <div>
       <div className={classPrefix}>
@@ -279,6 +270,7 @@ const MintOptions: FC = () => {
             bottomRightText={`1 ETH = ${priceNow} USDT`}
           >
             <input
+              type="text"
               placeholder={t`Input`}
               className={"input-left"}
               value={strikePrice}
@@ -295,10 +287,13 @@ const MintOptions: FC = () => {
           <InfoShow
             topLeftText={t`Mint amount`}
             bottomRightText={`Balance: ${bigNumberToNormal(fortBalance)} DCU`}
-            balanceRed={normalToBigNumber(fortNum).gt(fortBalance) ? true : false}
+            balanceRed={
+              normalToBigNumber(fortNum).gt(fortBalance) ? true : false
+            }
           >
             <SingleTokenShow tokenNameOne={"DCU"} isBold />
             <input
+              type="text"
               placeholder={t`Input`}
               className={"input-middle"}
               value={fortNum}
@@ -328,6 +323,7 @@ const MintOptions: FC = () => {
           </p>
           <MainButton
             disable={checkButton()}
+            loading={loadingButton()}
             onClick={() => {
               if (normalToBigNumber(fortNum).gt(fortBalance)) {
                 message.error(t`Insufficient balance`);
@@ -336,7 +332,7 @@ const MintOptions: FC = () => {
               if (checkButton()) {
                 return;
               }
-              active()
+              active();
             }}
           >
             <Trans>Mint</Trans>
@@ -357,7 +353,11 @@ const MintOptions: FC = () => {
                 <p>
                   <Trans>Spot price</Trans>
                   {isLong ? ">" : "<"}
-                  {bigNumberToNormal(normalToBigNumber(strikePrice || '0'), 18, 6)}
+                  {bigNumberToNormal(
+                    normalToBigNumber(strikePrice || "0"),
+                    18,
+                    6
+                  )}
                 </p>
                 <p>
                   <Trans>Expected get</Trans>
@@ -376,32 +376,43 @@ const MintOptions: FC = () => {
                 <p>
                   <Trans>Spot price</Trans>
                   {isLong ? "<=" : ">="}
-                  {bigNumberToNormal(normalToBigNumber(strikePrice || '0'), 18, 6)}
+                  {bigNumberToNormal(
+                    normalToBigNumber(strikePrice || "0"),
+                    18,
+                    6
+                  )}
                 </p>
                 <p>
                   <Trans>Expected get</Trans>
                 </p>
               </div>
-              <p className={`${classPrefix}-rightCard-smallCard-value`}>{"0"}</p>
+              <p className={`${classPrefix}-rightCard-smallCard-value`}>
+                {"0"}
+              </p>
               <p className={`${classPrefix}-rightCard-smallCard-name`}>DCU</p>
             </MainCard>
           </div>
         </MainCard>
       </div>
-      <HoldLine>Hold Options</HoldLine>
-      <table>
-          <tr className={`${classPrefix}-table-title`}>
-              <th>Token pair</th>
-              <th>Options Type</th>
-              <th>Strike price</th>
-              <th className={`exerciseTime`}>Exercise time</th>
-              <th>Option shares</th>
-              <th>Operation</th>
-          </tr>
-          {trList}
-      </table>
+      {optionsListState.length > 0 ? (
+        <div>
+          <HoldLine>Hold Options</HoldLine>
+          <table>
+            <thead>
+              <tr className={`${classPrefix}-table-title`}>
+                <th>Token pair</th>
+                <th>Options Type</th>
+                <th>Strike price</th>
+                <th className={`exerciseTime`}>Exercise time</th>
+                <th>Option shares</th>
+                <th>Operation</th>
+              </tr>
+            </thead>
+            <tbody>{trList}</tbody>
+          </table>
+        </div>
+      ) : null}
     </div>
-    
   );
 };
 
