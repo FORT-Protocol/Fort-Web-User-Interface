@@ -247,7 +247,7 @@ const MintOptions: FC = () => {
               <PutDownIcon />
             </button> */}
             </div>
-            <p>1{`1 ETH = ${priceNow} USDT`}</p>
+            <p>{`1 ETH = ${priceNow} USDT`}</p>
           </InfoShow>
           <ChooseType
             callBack={handleType}
