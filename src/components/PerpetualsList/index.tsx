@@ -49,6 +49,7 @@ const PerpetualsList: FC<Props> = ({ ...props }) => {
         setMarginAssets(num)
     })()
   }, [account, leverContract, props.item.index, props.nowPrice])
+  const marginAssetsStr = marginAssets ? bigNumberToNormal(marginAssets, 18, 2) : '---'
   return (
     <tr key={props.key} className={`${props.className}-table-normal`}>
       <td className={"tokenPair"}>
@@ -63,8 +64,7 @@ const PerpetualsList: FC<Props> = ({ ...props }) => {
         USDT
       </td>
       <td>
-        {marginAssets ? bigNumberToNormal(marginAssets, 18, 2) : '---'}{" "}
-        DCU
+        {`${marginAssetsStr} DCU`}
       </td>
       <td>
         <MainButton

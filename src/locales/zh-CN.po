@@ -30,15 +30,16 @@ msgstr "授权"
 msgid "At"
 msgstr "在"
 
-#: src/pages/Shared/TransactionToast/index.tsx
-msgid "Buy Leveraged Token"
-msgstr "杠杆币买入"
-
 #: src/pages/Options/index.tsx
 msgid "Buy Option"
 msgstr "买入期权"
 
+#: src/pages/Shared/TransactionToast/index.tsx
+msgid "Buy Options"
+msgstr "期权买入"
+
 #: src/components/OptionsList/index.tsx
+#: src/pages/Options/index.tsx
 msgid "Call"
 msgstr "看涨"
 
@@ -49,6 +50,10 @@ msgstr "领取奖励"
 #: src/components/PerpetualsList/index.tsx
 msgid "Close"
 msgstr "结算"
+
+#: src/pages/Shared/TransactionToast/index.tsx
+msgid "Close Future positions"
+msgstr "永续合约结算"
 
 #: src/pages/Farm/FarmCard/index.tsx
 msgid "Confirm"
@@ -130,6 +135,7 @@ msgid "Lock period"
 msgstr "锁定期"
 
 #: src/components/PerpetualsList/index.tsx
+#: src/pages/Perpetuals/index.tsx
 msgid "Long"
 msgstr "看涨"
 
@@ -157,6 +163,10 @@ msgstr "我的锁仓"
 msgid "Number of Option Token"
 msgstr "期权币数量"
 
+#: src/pages/Shared/TransactionToast/index.tsx
+msgid "Open Future positions"
+msgstr "永续合约开仓"
+
 #: src/pages/Perpetuals/index.tsx
 msgid "Open Long"
 msgstr "看涨开仓"
@@ -173,14 +183,6 @@ msgstr "看跌开仓"
 #: src/pages/Perpetuals/index.tsx
 msgid "Operate"
 msgstr "操作"
-
-#: src/pages/Shared/TransactionToast/index.tsx
-msgid "Option Token close"
-msgstr "期权币结算"
-
-#: src/pages/Shared/TransactionToast/index.tsx
-msgid "Option Token mint"
-msgstr "期权币铸币"
 
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx
@@ -205,6 +207,7 @@ msgid "Positions"
 msgstr "持仓"
 
 #: src/components/OptionsList/index.tsx
+#: src/pages/Options/index.tsx
 msgid "Put"
 msgstr "看跌"
 
@@ -216,11 +219,8 @@ msgstr "最近交易"
 msgid "Reward claim time"
 msgstr "奖励领取时间"
 
-#: src/pages/Shared/TransactionToast/index.tsx
-msgid "Sell Leveraged Token"
-msgstr "杠杆币卖出"
-
 #: src/components/PerpetualsList/index.tsx
+#: src/pages/Perpetuals/index.tsx
 msgid "Short"
 msgstr "看跌"
 
@@ -240,6 +240,10 @@ msgstr "当前锁仓量"
 #: src/components/OptionsList/index.tsx
 msgid "Strike"
 msgstr "行权"
+
+#: src/pages/Shared/TransactionToast/index.tsx
+msgid "Strike Options"
+msgstr "期权行权"
 
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx

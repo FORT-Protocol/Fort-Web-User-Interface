@@ -31,7 +31,7 @@ import moment from "moment";
 import { useFortEuropeanOptionOpen } from "../../contracts/hooks/useFortEuropeanOptionTransation";
 import OptionsList from "../../components/OptionsList";
 import useTransactionListCon from "../../libs/hooks/useTransactionInfo";
-import _ from 'lodash';
+// import _ from 'lodash';
 
 export type OptionsListType = {
   balance: BigNumber;
@@ -59,7 +59,7 @@ const MintOptions: FC = () => {
   const [optionsListState, setOptionsListState] = useState<
     Array<OptionsListType>
   >([]);
-  const [priceNow, setPriceNow] = useState("--.--");
+  const [priceNow, setPriceNow] = useState("---");
   const [fortBalance, setFortBalance] = useState(BigNumber.from(0));
   const [optionTokenValue, setOptionTokenValue] = useState(BigNumber.from(0));
 
@@ -104,7 +104,7 @@ const MintOptions: FC = () => {
       latestTx.txState === 1 &&
       (latestTx.type === 2 || latestTx.type === 3)
     ) {
-      setTimeout(getOptionsList, isRefresh ? 4000 : 0);
+      setTimeout(getOptionsList, 4000);
     }
   }, [getOptionsList, isRefresh, txList]);
 
@@ -124,11 +124,13 @@ const MintOptions: FC = () => {
   }, [account, fortContract]);
 
   useEffect(() => {
-    if (nestPriceContract && priceNow === "--.--" && chainId) {
+    if (nestPriceContract && priceNow === "---" && chainId) {
       nestPriceContract
         .latestPriceView(tokenList["USDT"].addresses[chainId])
         .then((value: any) => {
-          setPriceNow(bigNumberToNormal(value[1], tokenList["USDT"].decimals));
+          setPriceNow(
+            bigNumberToNormal(value[1], tokenList["USDT"].decimals, 6)
+          );
         });
     }
   }, [chainId, nestPriceContract, priceNow]);
@@ -179,31 +181,35 @@ const MintOptions: FC = () => {
       priceNow !== "---" &&
       exercise.blockNum !== 0
     ) {
-      _.debounce(() => {
-        ;(async() => {
-          try {
-            const value = await fortEuropeanOption.estimate(
-              ZERO_ADDRESS,
-              normalToBigNumber(priceNow, tokenList["USDT"].decimals).toString(),
-              normalToBigNumber(
-                strikePrice,
-                tokenList["USDT"].decimals
-              ).toString(),
-              isLong,
-              exercise.blockNum.toString(),
-              normalToBigNumber(fortNum).toString()
-            );
-            setOptionTokenValue(BigNumber.from(value));
-          } catch {
-            setOptionTokenValue(BigNumber.from(0));
-          }
-        })()
-      }, 2000, {
-        leading: false,
-        trailing: true,
-      })()
+      console.log(222);
+      (async () => {
+        console.log(33333);
+        try {
+          const value = await fortEuropeanOption.estimate(
+            ZERO_ADDRESS,
+            normalToBigNumber(priceNow, tokenList["USDT"].decimals).toString(),
+            normalToBigNumber(
+              strikePrice,
+              tokenList["USDT"].decimals
+            ).toString(),
+            isLong,
+            exercise.blockNum.toString(),
+            normalToBigNumber(fortNum).toString()
+          );
+          setOptionTokenValue(BigNumber.from(value));
+        } catch {
+          setOptionTokenValue(BigNumber.from(0));
+        }
+      })();
     }
-  }, [exercise.blockNum, fortEuropeanOption, fortNum, isLong, priceNow, strikePrice]);
+  }, [
+    exercise.blockNum,
+    fortEuropeanOption,
+    fortNum,
+    isLong,
+    priceNow,
+    strikePrice,
+  ]);
 
   const checkButton = () => {
     if (
@@ -235,22 +241,23 @@ const MintOptions: FC = () => {
       <div className={classPrefix}>
         <MainCard classNames={`${classPrefix}-leftCard`}>
           <InfoShow topLeftText={t`Token pair`} bottomRightText={""}>
-            <DoubleTokenShow tokenNameOne={"ETH"} tokenNameTwo={"USDT"} />
-            <button className={"select-button"}>
+            <div className={`${classPrefix}-leftCard-tokenPair`}>
+              <DoubleTokenShow tokenNameOne={"ETH"} tokenNameTwo={"USDT"} />
+              {/* <button className={"select-button"}>
               <PutDownIcon />
-            </button>
+            </button> */}
+            </div>
+            <p>1{`1 ETH = ${priceNow} USDT`}</p>
           </InfoShow>
-          <ChooseType callBack={handleType} isLong={isLong} textArray={[t`Call`, t`Put`]}/>
+          <ChooseType
+            callBack={handleType}
+            isLong={isLong}
+            textArray={[t`Call`, t`Put`]}
+          />
           <InfoShow
             topLeftText={t`Exercise time`}
             bottomRightText={`Block number: ${exercise.blockNum}`}
           >
-            {/* <input 
-            type={'text'}
-            className={'input-left'} 
-            value={exercise.time} 
-            readOnly
-            placeholder={t`Input`}/> */}
             <DatePicker
               format="YYYY-MM-DD"
               disabledDate={disabledDate}
@@ -385,12 +392,24 @@ const MintOptions: FC = () => {
           <table>
             <thead>
               <tr className={`${classPrefix}-table-title`}>
-                <th><Trans>Token pair</Trans></th>
-                <th><Trans>Type</Trans></th>
-                <th><Trans>Strike price</Trans></th>
-                <th className={`exerciseTime`}><Trans>Exercise time</Trans></th>
-                <th><Trans>Option shares</Trans></th>
-                <th><Trans>Operate</Trans></th>
+                <th>
+                  <Trans>Token pair</Trans>
+                </th>
+                <th>
+                  <Trans>Type</Trans>
+                </th>
+                <th>
+                  <Trans>Strike price</Trans>
+                </th>
+                <th className={`exerciseTime`}>
+                  <Trans>Exercise time</Trans>
+                </th>
+                <th>
+                  <Trans>Option shares</Trans>
+                </th>
+                <th>
+                  <Trans>Operate</Trans>
+                </th>
               </tr>
             </thead>
             <tbody>{trList}</tbody>

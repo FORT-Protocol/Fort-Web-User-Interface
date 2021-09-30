@@ -27,6 +27,12 @@
         .chooseType+.infoView {
             margin-top: 20px;
         }
+
+        &-tokenPair + p {
+            line-height: 44px;
+            font-size: $T2;
+            color: $main-button-color;
+        }
         
         & .infoView:nth-child(5) {
             .TokenShow {

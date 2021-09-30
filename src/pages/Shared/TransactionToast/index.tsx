@@ -16,17 +16,6 @@ export type TransactionToastInfo = {
   type: TransactionType;
 };
 
-// export enum TransactionType {
-//     buyLever = 0,
-//     closeLever = 1,
-//     buyOption = 2,
-//     closeOption = 3,
-//     approve = 4,
-//     stake = 5,
-//     claim = 6,
-//     unStake = 7
-// }
-
 type Props = {
   info: TransactionToastInfo;
 };
@@ -74,13 +63,13 @@ export const notifyTransaction = (txInfo: TransactionInfoType) => {
 export const transactionTitle = (type: TransactionType) => {
   switch (type) {
     case 0:
-      return t`Buy Leveraged Token`;
+      return t`Open Future positions`;
     case 1:
-      return t`Sell Leveraged Token`;
+      return t`Close Future positions`;
     case 2:
-      return t`Option Token mint`;
+      return t`Buy Options`;
     case 3:
-      return t`Option Token close`;
+      return t`Strike Options`;
     case 4:
       return t`Approve`;
     case 5:

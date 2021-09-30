@@ -30,15 +30,16 @@ msgstr "Approve"
 msgid "At"
 msgstr "At"
 
-#: src/pages/Shared/TransactionToast/index.tsx
-msgid "Buy Leveraged Token"
-msgstr "Buy Leveraged Token"
-
 #: src/pages/Options/index.tsx
 msgid "Buy Option"
 msgstr "Buy Option"
 
+#: src/pages/Shared/TransactionToast/index.tsx
+msgid "Buy Options"
+msgstr "Buy Options"
+
 #: src/components/OptionsList/index.tsx
+#: src/pages/Options/index.tsx
 msgid "Call"
 msgstr "Call"
 
@@ -49,6 +50,10 @@ msgstr "Claim reward"
 #: src/components/PerpetualsList/index.tsx
 msgid "Close"
 msgstr "Close"
+
+#: src/pages/Shared/TransactionToast/index.tsx
+msgid "Close Future positions"
+msgstr "Close Future positions"
 
 #: src/pages/Farm/FarmCard/index.tsx
 msgid "Confirm"
@@ -130,6 +135,7 @@ msgid "Lock period"
 msgstr "Lock period"
 
 #: src/components/PerpetualsList/index.tsx
+#: src/pages/Perpetuals/index.tsx
 msgid "Long"
 msgstr "Long"
 
@@ -157,6 +163,10 @@ msgstr "My staking"
 msgid "Number of Option Token"
 msgstr "Number of Option Token"
 
+#: src/pages/Shared/TransactionToast/index.tsx
+msgid "Open Future positions"
+msgstr "Open Future positions"
+
 #: src/pages/Perpetuals/index.tsx
 msgid "Open Long"
 msgstr "Open Long"
@@ -173,14 +183,6 @@ msgstr "Open Short"
 #: src/pages/Perpetuals/index.tsx
 msgid "Operate"
 msgstr "Operate"
-
-#: src/pages/Shared/TransactionToast/index.tsx
-msgid "Option Token close"
-msgstr "Option Token close"
-
-#: src/pages/Shared/TransactionToast/index.tsx
-msgid "Option Token mint"
-msgstr "Option Token mint"
 
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx
@@ -205,6 +207,7 @@ msgid "Positions"
 msgstr "Positions"
 
 #: src/components/OptionsList/index.tsx
+#: src/pages/Options/index.tsx
 msgid "Put"
 msgstr "Put"
 
@@ -216,11 +219,8 @@ msgstr "Recent transactions"
 msgid "Reward claim time"
 msgstr "Reward claim time"
 
-#: src/pages/Shared/TransactionToast/index.tsx
-msgid "Sell Leveraged Token"
-msgstr "Sell Leveraged Token"
-
 #: src/components/PerpetualsList/index.tsx
+#: src/pages/Perpetuals/index.tsx
 msgid "Short"
 msgstr "Short"
 
@@ -240,6 +240,10 @@ msgstr "Staking number"
 #: src/components/OptionsList/index.tsx
 msgid "Strike"
 msgstr "Strike"
+
+#: src/pages/Shared/TransactionToast/index.tsx
+msgid "Strike Options"
+msgstr "Strike Options"
 
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx

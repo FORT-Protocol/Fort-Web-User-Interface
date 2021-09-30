@@ -4,7 +4,7 @@ import { message } from "antd";
 import { FC, useCallback, useEffect, useState } from "react";
 import ChooseType from "../../components/ChooseType";
 import { HoldLine } from "../../components/HoldLine";
-import { PutDownIcon } from "../../components/Icon";
+// import { PutDownIcon } from "../../components/Icon";
 import InfoShow from "../../components/InfoShow";
 import { LeverChoose } from "../../components/LeverChoose";
 import MainButton from "../../components/MainButton";
@@ -118,7 +118,7 @@ const Perpetuals: FC = () => {
       latestTx.txState === 1 &&
       (latestTx.type === 0 || latestTx.type === 1)
     ) {
-      setTimeout(getList, isRefresh ? 4000 : 0);
+      setTimeout(getList, 4000);
     }
   }, [getList, isRefresh, txList]);
   const checkDCUBalance = normalToBigNumber(dcuInput).gt(
@@ -153,18 +153,22 @@ const Perpetuals: FC = () => {
         <InfoShow topLeftText={t`Token pair`} bottomRightText={""}>
           <div className={`${classPrefix}-card-tokenPair`}>
             <DoubleTokenShow tokenNameOne={"ETH"} tokenNameTwo={"USDT"} />
-            <button className={"select-button"}>
+            {/* <button className={"select-button"}>
               <PutDownIcon />
-            </button>
+            </button> */}
           </div>
-          <p>
-            1 ETH ={" "}
+          <p>{`1 ETH = ${bigNumberToNormal(
+              nowPrice || BigNumber.from("0"),
+              tokenList["USDT"].decimals,
+              6
+            )} USDT`}
+            {/* 1 ETH ={" "}
             {bigNumberToNormal(
               nowPrice || BigNumber.from("0"),
               tokenList["USDT"].decimals,
               6
             )}{" "}
-            USDT
+            USDT */}
           </p>
         </InfoShow>
         <ChooseType callBack={handleType} isLong={isLong} textArray={[t`Long`, t`Short`]}/>

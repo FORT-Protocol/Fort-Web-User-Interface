@@ -31,7 +31,7 @@ export function useFortLeverBuy(
         data: callData,
         value: PRICE_FEE
     }
-    const txPromise = useSendTransaction(contract, tx, {title:`Buy Leveraged Token`, info:'', type: TransactionType.buyLever})
+    const txPromise = useSendTransaction(contract, tx, {title:`Open Future positions`, info:'', type: TransactionType.buyLever})
     return txPromise
 }
 
@@ -56,7 +56,7 @@ export function useFortLeverSell(
         data: callData,
         value: PRICE_FEE
     }
-    const txPromise = useSendTransaction(contract, tx, {title:`Sell Leveraged Token`, info:index.toString(), type: TransactionType.closeLever})
+    const txPromise = useSendTransaction(contract, tx, {title:`Close Future positions`, info:index.toString(), type: TransactionType.closeLever})
     return txPromise
 }
 
