@@ -331,7 +331,6 @@ const MintOptions: FC = () => {
           </MainButton>
           <div className={`${classPrefix}-rightCard-time`}>
             <p className={`${classPrefix}-rightCard-timeTitle`}>
-              <Trans>At</Trans>
               {` ${exercise.time}`}
             </p>
             <p className={`${classPrefix}-rightCard-timeValue`}>

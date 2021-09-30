@@ -35,7 +35,7 @@ export function bigNumberToNormal(
   const resultBaseStr = exZero ? parseFloat(newStr).toString() : newStr;
   if (resultBaseStr.indexOf(".") !== -1) {
     const resultBaseStrArray = resultBaseStr.split(".");
-    return resultBaseStrArray[0] + "." + resultBaseStrArray[1].substr(0, fix);
+    return parseFloat(resultBaseStrArray[0] + "." + resultBaseStrArray[1].substr(0, fix)).toString();
   }
   return resultBaseStr;
 }

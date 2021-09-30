@@ -27,10 +27,7 @@ msgid "Approve"
 msgstr "Approve"
 
 #: src/pages/Options/index.tsx
-msgid "At"
-msgstr "At"
-
-#: src/pages/Options/index.tsx
+#: src/pages/Perpetuals/index.tsx
 msgid "Balance"
 msgstr "Balance"
 
@@ -118,12 +115,12 @@ msgid "Farm"
 msgstr "Farm"
 
 #: src/pages/Shared/Header/index.tsx
-msgid "Hedge Protocol is a Beta version, you need to use it at your own risk, please be careful not to use too much money."
-msgstr "Hedge Protocol is a Beta version, you need to use it at your own risk, please be careful not to use too much money."
-
-#: src/pages/Shared/Header/index.tsx
 msgid "Futures"
 msgstr "Futures"
+
+#: src/pages/Shared/Header/index.tsx
+msgid "Hedge Protocol is a Beta version, you need to use it at your own risk, please be careful not to use too much money."
+msgstr "Hedge Protocol is a Beta version, you need to use it at your own risk, please be careful not to use too much money."
 
 #: src/pages/Options/index.tsx
 msgid "Hold Options"

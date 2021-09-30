@@ -27,10 +27,7 @@ msgid "Approve"
 msgstr "授权"
 
 #: src/pages/Options/index.tsx
-msgid "At"
-msgstr "在"
-
-#: src/pages/Options/index.tsx
+#: src/pages/Perpetuals/index.tsx
 msgid "Balance"
 msgstr "余额"
 
@@ -118,12 +115,12 @@ msgid "Farm"
 msgstr "挖矿"
 
 #: src/pages/Shared/Header/index.tsx
-msgid "Hedge Protocol is a Beta version, you need to use it at your own risk, please be careful not to use too much money."
-msgstr "Hedge Protocol 为 Beta 版本，使用时需要自担风险，请注意不用使用过多资金"
-
-#: src/pages/Shared/Header/index.tsx
 msgid "Futures"
 msgstr "永续合约"
+
+#: src/pages/Shared/Header/index.tsx
+msgid "Hedge Protocol is a Beta version, you need to use it at your own risk, please be careful not to use too much money."
+msgstr "Hedge Protocol 为 Beta 版本，使用时需要自担风险，请注意不用使用过多资金"
 
 #: src/pages/Options/index.tsx
 msgid "Hold Options"
@@ -312,7 +309,7 @@ msgstr "取回"
 
 #: src/pages/Options/index.tsx
 msgid "compare with spot price and strike price"
-msgstr "比较ETH的现货价格与行权价"
+msgstr "比较ETH的现货价与行权价"
 
 #: src/pages/Perpetuals/index.tsx
 msgid "lever"

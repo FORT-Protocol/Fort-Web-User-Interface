@@ -85,6 +85,9 @@
             }
 
             &-title {
+                p + p {
+                    margin-top: 5px;
+                }
                 p {
                     color: $gray-info-text-color;
                     font-size: $T3;
