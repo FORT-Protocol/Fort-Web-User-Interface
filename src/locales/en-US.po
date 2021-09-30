@@ -126,10 +126,6 @@ msgid "Hedge Protocol is a Beta version, you need to use it at your own risk, pl
 msgstr "Hedge Protocol is a Beta version, you need to use it at your own risk, please be careful not to use too much money."
 
 #: src/pages/Options/index.tsx
-msgid "Position"
-msgstr "Position"
-
-#: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx
 #: src/pages/Perpetuals/index.tsx
 msgid "Input"
@@ -214,6 +210,10 @@ msgstr "Payment"
 #: src/pages/Shared/Header/Status/Modal/index.tsx
 msgid "Please select the method of connecting to the wallet"
 msgstr "Please select the method of connecting to the wallet"
+
+#: src/pages/Options/index.tsx
+msgid "Position"
+msgstr "Position"
 
 #: src/pages/Perpetuals/index.tsx
 msgid "Positions"

@@ -169,7 +169,7 @@ const Perpetuals: FC = () => {
         <InfoShow
           topLeftText={t`Payment`}
           bottomRightText={`${t`Balance`}: ${
-            dcuBalance ? bigNumberToNormal(dcuBalance) : "----"
+            dcuBalance ? bigNumberToNormal(dcuBalance, 18, 6) : "----"
           } DCU`}
           balanceRed={checkDCUBalance}
         >
@@ -184,7 +184,7 @@ const Perpetuals: FC = () => {
           <button
             className={"max-button"}
             onClick={() =>
-              setDcuInput(bigNumberToNormal(dcuBalance || BigNumber.from("0"), 18, 6))
+              setDcuInput(bigNumberToNormal(dcuBalance || BigNumber.from("0"), 18))
             }
           >
             MAX
