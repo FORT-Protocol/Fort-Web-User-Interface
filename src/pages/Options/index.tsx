@@ -61,7 +61,7 @@ const MintOptions: FC = () => {
   >([]);
   const [priceNow, setPriceNow] = useState("---");
   const [fortBalance, setFortBalance] = useState(BigNumber.from(0));
-  const [optionTokenValue, setOptionTokenValue] = useState(BigNumber.from(0));
+  const [optionTokenValue, setOptionTokenValue] = useState<BigNumber>();
 
   const trList = optionsListState.map((item) => {
     return (
@@ -311,7 +311,7 @@ const MintOptions: FC = () => {
             <Trans>Option shares</Trans>
           </p>
           <p className={`${classPrefix}-rightCard-tokenValue`}>
-            {bigNumberToNormal(optionTokenValue, 18, 6)}
+            {optionTokenValue ? bigNumberToNormal(optionTokenValue, 18, 6) : '---'}
           </p>
           <MainButton
             disable={checkButton()}
@@ -358,7 +358,7 @@ const MintOptions: FC = () => {
                 {isLong
                   ? t`(Spot price - Strike price)*`
                   : t`(Strike price - Spot price)*`}
-                {bigNumberToNormal(optionTokenValue, 18, 2)}
+                {optionTokenValue ? bigNumberToNormal(optionTokenValue, 18, 2) : '---'}
               </p>
               <p className={`${classPrefix}-rightCard-smallCard-name`}>DCU</p>
             </MainCard>
