@@ -126,7 +126,7 @@ msgid "Hedge Protocol is a Beta version, you need to use it at your own risk, pl
 msgstr "Hedge Protocol 为 Beta 版本，使用时需要自担风险，请注意不用使用过多资金"
 
 #: src/pages/Options/index.tsx
-msgid "Hold Options"
+msgid "Position"
 msgstr "持有的期权"
 
 #: src/pages/Options/index.tsx
@@ -208,7 +208,7 @@ msgstr "期权"
 
 #: src/pages/Options/index.tsx
 #: src/pages/Perpetuals/index.tsx
-msgid "Payment amount"
+msgid "Payment"
 msgstr "支付金额"
 
 #: src/pages/Shared/Header/Status/Modal/index.tsx

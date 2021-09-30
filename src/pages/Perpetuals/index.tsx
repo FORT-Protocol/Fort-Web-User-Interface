@@ -167,7 +167,7 @@ const Perpetuals: FC = () => {
         <ChooseType callBack={handleType} isLong={isLong} textArray={[t`Long`, t`Short`]}/>
         <LeverChoose selected={leverNum} callBack={handleLeverNum} />
         <InfoShow
-          topLeftText={t`Payment amount`}
+          topLeftText={t`Payment`}
           bottomRightText={`${t`Balance`}: ${
             dcuBalance ? bigNumberToNormal(dcuBalance) : "----"
           } DCU`}

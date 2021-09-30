@@ -227,7 +227,7 @@ const MintOptions: FC = () => {
     return false;
   };
   function disabledDate(current: any) {
-    return current && current < moment().add(7, "days").startOf("day");
+    return current && current < moment().add(3, "days").startOf("day");
   }
   const active = useFortEuropeanOptionOpen(
     "ETH",
@@ -283,7 +283,7 @@ const MintOptions: FC = () => {
             <span>USDT</span>
           </InfoShow>
           <InfoShow
-            topLeftText={t`Payment amount`}
+            topLeftText={t`Payment`}
             bottomRightText={`${t`Balance`}: ${bigNumberToNormal(fortBalance, 18 ,6)} DCU`}
             balanceRed={
               normalToBigNumber(fortNum).gt(fortBalance) ? true : false
@@ -387,7 +387,7 @@ const MintOptions: FC = () => {
       </div>
       {optionsListState.length > 0 ? (
         <div>
-          <HoldLine><Trans>Hold Options</Trans></HoldLine>
+          <HoldLine><Trans>Position</Trans></HoldLine>
           <table>
             <thead>
               <tr className={`${classPrefix}-table-title`}>
