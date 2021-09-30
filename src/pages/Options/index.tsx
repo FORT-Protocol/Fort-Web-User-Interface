@@ -256,7 +256,7 @@ const MintOptions: FC = () => {
           />
           <InfoShow
             topLeftText={t`Exercise time`}
-            bottomRightText={`Block number: ${exercise.blockNum}`}
+            bottomRightText={`${t`Block number`}: ${exercise.blockNum}`}
           >
             <DatePicker
               format="YYYY-MM-DD"
@@ -284,7 +284,7 @@ const MintOptions: FC = () => {
           </InfoShow>
           <InfoShow
             topLeftText={t`Payment amount`}
-            bottomRightText={`Balance: ${bigNumberToNormal(fortBalance)} DCU`}
+            bottomRightText={`${t`Balance`}: ${bigNumberToNormal(fortBalance)} DCU`}
             balanceRed={
               normalToBigNumber(fortNum).gt(fortBalance) ? true : false
             }
@@ -388,7 +388,7 @@ const MintOptions: FC = () => {
       </div>
       {optionsListState.length > 0 ? (
         <div>
-          <HoldLine>Hold Options</HoldLine>
+          <HoldLine><Trans>Hold Options</Trans></HoldLine>
           <table>
             <thead>
               <tr className={`${classPrefix}-table-title`}>

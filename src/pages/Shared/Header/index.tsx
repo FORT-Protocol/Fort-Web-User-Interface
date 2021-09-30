@@ -34,7 +34,7 @@ const Header: FC = () => {
       >
         <b>
           <Trans>
-            Fort Protocol is a Beta version, you need to use it at your own
+            Hedge Protocol is a Beta version, you need to use it at your own
             risk, please be careful not to use too much money.
           </Trans>
         </b>

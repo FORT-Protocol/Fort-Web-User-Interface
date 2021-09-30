@@ -113,11 +113,6 @@ export function formatInputNum(value: string): string {
     .replace(/^\./g, "");
 }
 
-export function formatInputAddress(value: string): string {
-  // eslint-disable-next-line no-useless-escape
-  return value.replace(/[^\w\.\/]/gi, "");
-}
-
 export function forMoney(value: string) {
   // eslint-disable-next-line no-useless-escape
   value = parseFloat((value + "").replace(/[^\d\.-]/g, "")) + "";

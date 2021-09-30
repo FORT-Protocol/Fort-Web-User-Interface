@@ -31,6 +31,15 @@ msgid "At"
 msgstr "At"
 
 #: src/pages/Options/index.tsx
+msgid "Balance"
+msgstr "Balance"
+
+#: src/components/OptionsList/index.tsx
+#: src/pages/Options/index.tsx
+msgid "Block number"
+msgstr "Block number"
+
+#: src/pages/Options/index.tsx
 msgid "Buy Option"
 msgstr "Buy Option"
 
@@ -109,12 +118,16 @@ msgid "Farm"
 msgstr "Farm"
 
 #: src/pages/Shared/Header/index.tsx
-msgid "Fort Protocol is a Beta version, you need to use it at your own risk, please be careful not to use too much money."
-msgstr "Fort Protocol is a Beta version, you need to use it at your own risk, please be careful not to use too much money."
+msgid "Hedge Protocol is a Beta version, you need to use it at your own risk, please be careful not to use too much money."
+msgstr "Hedge Protocol is a Beta version, you need to use it at your own risk, please be careful not to use too much money."
 
 #: src/pages/Shared/Header/index.tsx
 msgid "Futures"
 msgstr "Futures"
+
+#: src/pages/Options/index.tsx
+msgid "Hold Options"
+msgstr "Hold Options"
 
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx

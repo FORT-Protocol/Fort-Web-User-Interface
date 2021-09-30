@@ -57,15 +57,22 @@
             font-family: $boldFont;
             border: 0;
             font-size: $T2;
+            width: 100%;
         }
 
         .input-middle {
             width: 100%;
             text-align: right;
+            margin-left: 10px;
         }
 
         .input-right {
             text-align: right;
+            margin-left: 10px;
+        }
+
+        .input-left {
+            margin-right: 10px;
         }
 
         .max-button {

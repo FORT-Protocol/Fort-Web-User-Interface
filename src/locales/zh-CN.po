@@ -31,6 +31,15 @@ msgid "At"
 msgstr "在"
 
 #: src/pages/Options/index.tsx
+msgid "Balance"
+msgstr "余额"
+
+#: src/components/OptionsList/index.tsx
+#: src/pages/Options/index.tsx
+msgid "Block number"
+msgstr "区块号"
+
+#: src/pages/Options/index.tsx
 msgid "Buy Option"
 msgstr "买入期权"
 
@@ -109,12 +118,16 @@ msgid "Farm"
 msgstr "挖矿"
 
 #: src/pages/Shared/Header/index.tsx
-msgid "Fort Protocol is a Beta version, you need to use it at your own risk, please be careful not to use too much money."
-msgstr "Fort Protocol 为 Beta 版本，使用时需要自担风险，请注意不用使用过多资金"
+msgid "Hedge Protocol is a Beta version, you need to use it at your own risk, please be careful not to use too much money."
+msgstr "Hedge Protocol 为 Beta 版本，使用时需要自担风险，请注意不用使用过多资金"
 
 #: src/pages/Shared/Header/index.tsx
 msgid "Futures"
 msgstr "永续合约"
+
+#: src/pages/Options/index.tsx
+msgid "Hold Options"
+msgstr "持有的期权"
 
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx
