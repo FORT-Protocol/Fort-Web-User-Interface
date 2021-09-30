@@ -32,6 +32,9 @@ msgid "Balance"
 msgstr "Balance"
 
 #: src/components/OptionsList/index.tsx
+msgid "Block"
+msgstr "Block"
+
 #: src/pages/Options/index.tsx
 msgid "Block number"
 msgstr "Block number"

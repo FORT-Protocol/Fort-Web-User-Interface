@@ -184,7 +184,7 @@ const Perpetuals: FC = () => {
           <button
             className={"max-button"}
             onClick={() =>
-              setDcuInput(bigNumberToNormal(dcuBalance || BigNumber.from("0")))
+              setDcuInput(bigNumberToNormal(dcuBalance || BigNumber.from("0"), 18, 6))
             }
           >
             MAX

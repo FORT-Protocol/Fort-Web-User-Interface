@@ -32,6 +32,9 @@ msgid "Balance"
 msgstr "余额"
 
 #: src/components/OptionsList/index.tsx
+msgid "Block"
+msgstr "区块号"
+
 #: src/pages/Options/index.tsx
 msgid "Block number"
 msgstr "区块号"

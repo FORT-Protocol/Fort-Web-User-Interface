@@ -59,7 +59,7 @@ const OptionsList: FC<Props> = ({ ...props }) => {
       <td>{bigNumberToNormal(props.item.strikePrice, 6, 2)} USDT</td>
       <td
         className={`exerciseTime`}
-      >{`${t`Block number`}:${props.item.exerciseBlock.toString()}(${timeString()})`}</td>
+      >{`${t`Block`}:${props.item.exerciseBlock.toString()} (${timeString()})`}</td>
       <td>{bigNumberToNormal(props.item.balance, 18, 2)}</td>
       <td>
         <MainButton

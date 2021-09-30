@@ -129,7 +129,7 @@ const MintOptions: FC = () => {
         .latestPriceView(tokenList["USDT"].addresses[chainId])
         .then((value: any) => {
           setPriceNow(
-            bigNumberToNormal(value[1], tokenList["USDT"].decimals, 6)
+            bigNumberToNormal(value[1], tokenList["USDT"].decimals, 2)
           );
         });
     }
@@ -284,7 +284,7 @@ const MintOptions: FC = () => {
           </InfoShow>
           <InfoShow
             topLeftText={t`Payment amount`}
-            bottomRightText={`${t`Balance`}: ${bigNumberToNormal(fortBalance)} DCU`}
+            bottomRightText={`${t`Balance`}: ${bigNumberToNormal(fortBalance, 18 ,6)} DCU`}
             balanceRed={
               normalToBigNumber(fortNum).gt(fortBalance) ? true : false
             }

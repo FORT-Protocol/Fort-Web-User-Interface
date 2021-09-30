@@ -42,7 +42,6 @@ const PerpetualsList: FC<Props> = ({ ...props }) => {
   const active = useFortLeverSell(props.item.index, props.item.balance);
   useEffect(() => {
     if (!leverContract || !account || !props.nowPrice) {return}
-    
       (async () => {
         console.log(props.item.index)
         const num = await leverContract.balanceOf(props.item.index, props.nowPrice, account)
