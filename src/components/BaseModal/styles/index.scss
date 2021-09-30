@@ -10,16 +10,25 @@
     &-top {
         display: flex;
         justify-content: space-between;
+        height: 40px;
 
         &-title {
             font-size: $T1;
             font-family: $boldFont;
             text-align: center;
+            line-height: 40px;
+        }
+
+        &-rightButton {
+            padding: 10px 10px;
         }
 
         button {
-            width: 20px;
-            height: 20px;
+            width: 40px;
+            height: 40px;
+            &:hover {
+                cursor: pointer;
+            }
         }
     }
 }

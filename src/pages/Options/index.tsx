@@ -256,7 +256,7 @@ const MintOptions: FC = () => {
           />
           <InfoShow
             topLeftText={t`Exercise time`}
-            bottomRightText={`${t`Block number`}: ${exercise.blockNum}`}
+            bottomRightText={`${t`Block number`}: ${exercise.blockNum === 0 ? '---' : exercise.blockNum}`}
           >
             <DatePicker
               format="YYYY-MM-DD"
