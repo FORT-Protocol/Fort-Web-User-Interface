@@ -162,20 +162,13 @@ const Perpetuals: FC = () => {
               tokenList["USDT"].decimals,
               6
             )} USDT`}
-            {/* 1 ETH ={" "}
-            {bigNumberToNormal(
-              nowPrice || BigNumber.from("0"),
-              tokenList["USDT"].decimals,
-              6
-            )}{" "}
-            USDT */}
           </p>
         </InfoShow>
         <ChooseType callBack={handleType} isLong={isLong} textArray={[t`Long`, t`Short`]}/>
         <LeverChoose selected={leverNum} callBack={handleLeverNum} />
         <InfoShow
           topLeftText={t`Payment amount`}
-          bottomRightText={`Balance: ${
+          bottomRightText={`${t`Balance`}: ${
             dcuBalance ? bigNumberToNormal(dcuBalance) : "----"
           } DCU`}
           balanceRed={checkDCUBalance}
