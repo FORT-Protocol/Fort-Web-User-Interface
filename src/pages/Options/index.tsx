@@ -153,13 +153,16 @@ const MintOptions: FC = () => {
       if (!latestBlock) {
         return;
       }
+      
       const nowTime = moment().valueOf();
       const selectTime = moment(value).valueOf();
-
       if (selectTime > nowTime) {
         const timeString = moment(value).format("YYYY[-]MM[-]DD");
-        const blockNum = parseFloat(
-          ((selectTime - nowTime) / 13000).toString()
+        // TODO:删除测试代码
+        // const blockNum = parseFloat(
+        //   ((selectTime - nowTime) / 13000).toString()
+          const blockNum = parseFloat(
+            ((selectTime - nowTime) / 576000).toString()
         ).toFixed(0);
         setExercise({
           time: timeString,
@@ -358,7 +361,7 @@ const MintOptions: FC = () => {
                 {isLong
                   ? t`(Spot price - Strike price)*`
                   : t`(Strike price - Spot price)*`}
-                {optionTokenValue ? bigNumberToNormal(optionTokenValue, 18, 2) : '---'}
+                {optionTokenValue ? bigNumberToNormal(optionTokenValue, 18, 6) : '---'}
               </p>
               <p className={`${classPrefix}-rightCard-smallCard-name`}>DCU</p>
             </MainCard>
