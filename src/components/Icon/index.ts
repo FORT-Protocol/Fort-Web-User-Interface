@@ -35,10 +35,9 @@ export { ReactComponent as LongIcon } from './svg/longIcon.svg'
 export { ReactComponent as ShortIcon } from './svg/shortIcon.svg'
 export { ReactComponent as LongIconWhite } from './svg/longIcon_white.svg'
 export { ReactComponent as ShortIconWhite } from './svg/shortIcon_white.svg'
-export { ReactComponent as LongTypeNormal } from './svg/long-type-normal.svg'
-export { ReactComponent as LongTypeSelected } from './svg/long-type-selected.svg'
-export { ReactComponent as ShortTypeNormal } from './svg/short-type-normal.svg'
-export { ReactComponent as ShortTypeSelected } from './svg/short-type-selected.svg'
+export { ReactComponent as WhitePaper } from './svg/whitePaper.svg'
+
+
 
 export { ReactComponent as TokenLeverUp } from './svg/TokenLeverUp.svg'
 export { ReactComponent as TokenLeverDown } from './svg/TokenLeverDown.svg'

@@ -36,6 +36,14 @@ footer {
         display: flex;
         justify-content: flex-end;
 
+        svg {
+            &:hover {
+                & > path:first-child {
+                fill: $main-button-color;
+                }
+            }
+        }
+
         &-mi {
             width: $iconSize;
             height: $iconSize;
@@ -55,6 +63,12 @@ footer {
         }
 
         &-tel {
+            width: $iconSize;
+            height: $iconSize;
+            margin: $iconMargin 12px (-$iconMargin) 0;
+        }
+
+        &-paper {
             width: $iconSize;
             height: $iconSize;
             margin: $iconMargin 12px (-$iconMargin) 0;
