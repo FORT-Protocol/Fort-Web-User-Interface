@@ -1,9 +1,11 @@
+import { BigNumber } from "@ethersproject/bignumber";
 import { t, Trans } from "@lingui/macro";
 import moment from "moment";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { useFortEuropeanOptionExercise } from "../../contracts/hooks/useFortEuropeanOptionTransation";
 import { tokenList } from "../../libs/constants/addresses";
 import useTransactionListCon, { TransactionType } from "../../libs/hooks/useTransactionInfo";
+import useWeb3 from "../../libs/hooks/useWeb3";
 import { bigNumberToNormal } from "../../libs/utils";
 import { OptionsListType } from "../../pages/Options";
 import { LongIcon, ShortIcon } from "../Icon";
@@ -18,6 +20,8 @@ type Props = {
 
 const OptionsList: FC<Props> = ({ ...props }) => {
   const { pendingList } = useTransactionListCon();
+  const {library} = useWeb3()
+  const [timeString, setTimeString] = useState('---')
   const loadingButton = () => {
     const closeTx = pendingList.filter(
       (item) => item.info === props.item.index.toString() && item.type === TransactionType.closeOption
@@ -38,16 +42,23 @@ const OptionsList: FC<Props> = ({ ...props }) => {
     props.item.index,
     props.item.balance
   );
-  const timeString = () => {
-    if (props.item.exerciseBlock.toNumber() > Number(props.blockNum)) {
+  useEffect(() => {
+    if (!library || props.blockNum === '0' || props.blockNum === '' || props.item.exerciseBlock === BigNumber.from('0')) {return}
+    if (props.item.exerciseBlock.toNumber() >= Number(props.blockNum)) {
       const subTime =
         (props.item.exerciseBlock.toNumber() - Number(props.blockNum)) * 14000;
-      return moment(moment().valueOf() + subTime).format(
-        "YYYY[-]MM[-]DD HH:mm"
-      );
+        setTimeString(moment(moment().valueOf() + subTime).format(
+          "YYYY[-]MM[-]DD HH:mm"
+        ))
+    } else {
+      ;(async () => {
+        const blockInfo = await library?.getBlock(props.item.exerciseBlock.toNumber())
+        setTimeString(moment(Number(blockInfo['timestamp']) * 1000).format(
+          "YYYY[-]MM[-]DD HH:mm"
+        ))
+      })()
     }
-    return "---";
-  };
+  }, [library, props.blockNum, props.item.exerciseBlock])
 
   const checkButton = () => {
     if (loadingButton() || (Number(props.blockNum) <= props.item.exerciseBlock.toNumber())) {
@@ -66,7 +77,7 @@ const OptionsList: FC<Props> = ({ ...props }) => {
       <td>{bigNumberToNormal(props.item.strikePrice, 6, 2)} USDT</td>
       <td
         className={`exerciseTime`}
-      >{`${t`Block`}:${props.item.exerciseBlock.toString()} (${timeString()})`}</td>
+      >{`${t`Block`}:${props.item.exerciseBlock.toString()} (${timeString})`}</td>
       <td>{bigNumberToNormal(props.item.balance, 18, 2)}</td>
       <td>
         <MainButton
