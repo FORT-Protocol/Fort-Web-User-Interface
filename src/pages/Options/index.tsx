@@ -160,9 +160,9 @@ const MintOptions: FC = () => {
         const timeString = moment(value).format("YYYY[-]MM[-]DD");
         // TODO:删除测试代码
         // const blockNum = parseFloat(
-        //   ((selectTime - nowTime) / 13000).toString()
+        //   ((selectTime - nowTime) / 14000).toString()
           const blockNum = parseFloat(
-            ((selectTime - nowTime) / 576000).toString()
+            ((selectTime - nowTime) / 672000).toString()
         ).toFixed(0);
         setExercise({
           time: timeString,
@@ -184,9 +184,7 @@ const MintOptions: FC = () => {
       priceNow !== "---" &&
       exercise.blockNum !== 0
     ) {
-      console.log(222);
       (async () => {
-        console.log(33333);
         try {
           const value = await fortEuropeanOption.estimate(
             ZERO_ADDRESS,
@@ -230,7 +228,7 @@ const MintOptions: FC = () => {
     return false;
   };
   function disabledDate(current: any) {
-    return current && current < moment().add(3, "days").startOf("day");
+    return current && current < moment().add(1, "days").startOf("day");
   }
   const active = useFortEuropeanOptionOpen(
     "ETH",
@@ -346,7 +344,7 @@ const MintOptions: FC = () => {
               <div className={`${classPrefix}-rightCard-smallCard-title`}>
                 <p>
                   <Trans>Spot price</Trans>
-                  {isLong ? ">" : "<"}
+                  {isLong ? " > " : " < "}
                   {bigNumberToNormal(
                     normalToBigNumber(strikePrice || "0"),
                     18,
@@ -369,7 +367,7 @@ const MintOptions: FC = () => {
               <div className={`${classPrefix}-rightCard-smallCard-title`}>
                 <p>
                   <Trans>Spot price</Trans>
-                  {isLong ? "<=" : ">="}
+                  {isLong ? " <= " : " >= "}
                   {bigNumberToNormal(
                     normalToBigNumber(strikePrice || "0"),
                     18,

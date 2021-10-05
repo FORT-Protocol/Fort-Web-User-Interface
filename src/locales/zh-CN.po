@@ -312,7 +312,7 @@ msgstr "取回"
 
 #: src/pages/Options/index.tsx
 msgid "compare with spot price and strike price"
-msgstr "比较ETH的现货价与行权价"
+msgstr "比较 ETH 的现货价与行权价"
 
 #: src/pages/Perpetuals/index.tsx
 msgid "lever"
