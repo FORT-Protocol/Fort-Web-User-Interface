@@ -255,7 +255,7 @@ const Perpetuals: FC = () => {
                   <Tooltip
                     placement="top"
                     color={"#ffffff"}
-                    title={t`Dynamic changes in Margin Assets, less than 10 will be liquidated`}
+                    title={t`Dynamic changes in Margin Assets, less than 5 will be liquidated`}
                   >
                     <span>
                       <Trans>Margin Assets</Trans>
