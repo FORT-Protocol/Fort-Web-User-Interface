@@ -1,5 +1,4 @@
 import { FC } from "react";
-// import { Link } from "react-router-dom";
 import {
   ChineseIcon,
   EnglishIcon,
@@ -31,9 +30,6 @@ const Footer: FC = () => {
         </button>
       </div>
       <div className={`${footer}-right`}>
-        {/* <embed src={'../../../../public/FORT_WhitePaper.pdf'} type="application/pdf" height={800} width={500}/>
-         */}
-         {/* <Link to={'/whitePaper'}><WhitePaper className={`${footer}-right-paper`} /></Link> */}
         <a href="https://github.com/FORT-Protocol/Docs/blob/main/FORT_WhitePaper.pdf" target="view_window"><WhitePaper className={`${footer}-right-paper`} /></a>
         <a href="https://t.me/fort_DeFi" target="view_window"><TelIcon className={`${footer}-right-tel`} /></a>
         <a href="https://www.google.com" target="view_window"><TwitterIcon className={`${footer}-right-twitter`} /></a>
