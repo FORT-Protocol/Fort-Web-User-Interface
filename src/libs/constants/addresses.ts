@@ -70,7 +70,7 @@ export const tokenList: { [key: string]: TokenType } = {
     addresses: {
       1: ZERO_ADDRESS,
       3: "0xEa9E43FAf5e7F38525238ED4aDf650f06DF4e87F",
-      4: ZERO_ADDRESS,
+      4: "0xaE73d363Cb4aC97734E07e48B01D0a1FF5D1190B",
     },
   },
   CoFi: {
@@ -80,7 +80,7 @@ export const tokenList: { [key: string]: TokenType } = {
     addresses: {
       1: ZERO_ADDRESS,
       3: "0x0D73aBdb1415f77698362b8d99FD2a2eD41b0558",
-      4: ZERO_ADDRESS,
+      4: "0xaE73d363Cb4aC97734E07e48B01D0a1FF5D1190B",
     },
   },
   FOR: {
@@ -90,7 +90,7 @@ export const tokenList: { [key: string]: TokenType } = {
     addresses: {
       1: ZERO_ADDRESS,
       3: "0x9bc2b3da2d2583ca489c053Df76DB2762f3aB394",
-      4: ZERO_ADDRESS,
+      4: "0xaE73d363Cb4aC97734E07e48B01D0a1FF5D1190B",
     },
   },
   PUSD: {
@@ -100,7 +100,7 @@ export const tokenList: { [key: string]: TokenType } = {
     addresses: {
       1: ZERO_ADDRESS,
       3: "0x49FDeD8d731204998ca9e2BDe277949E57bf63b1",
-      4: ZERO_ADDRESS,
+      4: "0xaE73d363Cb4aC97734E07e48B01D0a1FF5D1190B",
     },
   },
   PETH: {
@@ -110,7 +110,7 @@ export const tokenList: { [key: string]: TokenType } = {
     addresses: {
       1: ZERO_ADDRESS,
       3: "0xB3cAc06614642F614255D496302f8545Ea45f6fc",
-      4: ZERO_ADDRESS,
+      4: "0xaE73d363Cb4aC97734E07e48B01D0a1FF5D1190B",
     },
   },
   // "Margin-ETH1L": {
