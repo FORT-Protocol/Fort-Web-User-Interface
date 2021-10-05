@@ -26,7 +26,6 @@
     "react": "^17.0.2",
     "react-copy-to-clipboard": "^5.0.4",
     "react-dom": "^17.0.2",
-    "react-pdf": "^5.4.0",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
@@ -70,7 +69,6 @@
     "@types/lodash": "^4.14.175",
     "@types/react": "^17.0.15",
     "@types/react-copy-to-clipboard": "^5.0.1",
-    "@types/react-pdf": "^5.0.7",
     "@types/react-router-dom": "^5.1.8",
     "dynamic-cdn-webpack-plugin": "^5.0.0",
     "module-to-cdn": "^3.1.5"
