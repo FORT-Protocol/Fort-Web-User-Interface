@@ -1,7 +1,7 @@
 import { BigNumber } from "@ethersproject/bignumber";
 import { t, Trans } from "@lingui/macro";
 import { message } from "antd";
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useRef, useState } from "react";
 import ChooseType from "../../components/ChooseType";
 import { HoldLine } from "../../components/HoldLine";
 // import { PutDownIcon } from "../../components/Icon";
@@ -29,6 +29,7 @@ import {
 } from "../../libs/utils";
 import "./styles";
 import { Tooltip } from "antd";
+import { Contract } from "@ethersproject/contracts";
 
 export type LeverListType = {
   index: BigNumber; //  编号
@@ -51,6 +52,7 @@ const Perpetuals: FC = () => {
   const [leverListState, setLeverListState] = useState<Array<LeverListType>>(
     []
   );
+  const intervalRef = useRef<NodeJS.Timeout>();
   const classPrefix = "perpetuals";
   const dcuToken = ERC20Contract(tokenList["DCU"].addresses);
   const priceContract = NestPriceContract();
@@ -72,17 +74,27 @@ const Perpetuals: FC = () => {
       />
     );
   });
+  const getPrice = async (contract: Contract, chainId: number) => {
+    const price = await contract.latestPrice(
+      tokenList["USDT"].addresses[chainId]
+    );
+    setNowPrice(price[1]);
+  };
   // price
   useEffect(() => {
     if (!priceContract || !chainId) {
       return;
     }
-    (async () => {
-      const price = await priceContract.latestPrice(
-        tokenList["USDT"].addresses[chainId]
-      );
-      setNowPrice(price[1]);
-    })();
+    getPrice(priceContract, chainId);
+    const id = setInterval(() => {
+      getPrice(priceContract, chainId);
+    }, 60 * 1000);
+    intervalRef.current = id;
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
   }, [chainId, priceContract]);
   // balance
   useEffect(() => {
@@ -100,7 +112,7 @@ const Perpetuals: FC = () => {
       return;
     }
     const leverList = await leverContract.find("0", "13", "13", account);
-    console.log(leverList)
+    console.log(leverList);
     const resultList = leverList.filter((item: LeverListType) =>
       item.balance.gt(BigNumber.from("0"))
     );
@@ -109,7 +121,7 @@ const Perpetuals: FC = () => {
   }, [account, leverContract]);
   useEffect(() => {
     if (!isRefresh) {
-        getList();
+      getList();
     }
     if (!txList || txList.length === 0) {
       return;
@@ -158,14 +170,19 @@ const Perpetuals: FC = () => {
               <PutDownIcon />
             </button> */}
           </div>
-          <p>{`1 ETH = ${bigNumberToNormal(
+          <p>
+            {`1 ETH = ${bigNumberToNormal(
               nowPrice || BigNumber.from("0"),
               tokenList["USDT"].decimals,
               2
             )} USDT`}
           </p>
         </InfoShow>
-        <ChooseType callBack={handleType} isLong={isLong} textArray={[t`Long`, t`Short`]}/>
+        <ChooseType
+          callBack={handleType}
+          isLong={isLong}
+          textArray={[t`Long`, t`Short`]}
+        />
         <LeverChoose selected={leverNum} callBack={handleLeverNum} />
         <InfoShow
           topLeftText={t`Payment`}
@@ -185,7 +202,9 @@ const Perpetuals: FC = () => {
           <button
             className={"max-button"}
             onClick={() =>
-              setDcuInput(bigNumberToNormal(dcuBalance || BigNumber.from("0"), 18))
+              setDcuInput(
+                bigNumberToNormal(dcuBalance || BigNumber.from("0"), 18)
+              )
             }
           >
             MAX
@@ -217,13 +236,35 @@ const Perpetuals: FC = () => {
           <table>
             <thead>
               <tr className={`${classPrefix}-table-title`}>
-                <th><Trans>Token pair</Trans></th>
-                <th><Trans>Type</Trans></th>
-                <th><Trans>lever</Trans></th>
-                <th><Trans>Margin</Trans></th>
-                <th><Trans>Open Price</Trans></th>
-                <th className={'th-marginAssets'}><Tooltip  placement="top" color={'#ffffff'} title={t`Dynamic changes in Margin Assets, less than 10 will be liquidated`}><span><Trans>Margin Assets</Trans></span></Tooltip></th>
-                <th><Trans>Operate</Trans></th>
+                <th>
+                  <Trans>Token pair</Trans>
+                </th>
+                <th>
+                  <Trans>Type</Trans>
+                </th>
+                <th>
+                  <Trans>lever</Trans>
+                </th>
+                <th>
+                  <Trans>Margin</Trans>
+                </th>
+                <th>
+                  <Trans>Open Price</Trans>
+                </th>
+                <th className={"th-marginAssets"}>
+                  <Tooltip
+                    placement="top"
+                    color={"#ffffff"}
+                    title={t`Dynamic changes in Margin Assets, less than 10 will be liquidated`}
+                  >
+                    <span>
+                      <Trans>Margin Assets</Trans>
+                    </span>
+                  </Tooltip>
+                </th>
+                <th>
+                  <Trans>Operate</Trans>
+                </th>
               </tr>
             </thead>
             <tbody>{trList}</tbody>

@@ -1,6 +1,6 @@
 import { t, Trans } from "@lingui/macro";
-import { BigNumber } from "ethers";
-import { FC, useCallback, useEffect, useState } from "react";
+import { BigNumber, Contract } from "ethers";
+import { FC, useCallback, useEffect, useRef, useState } from "react";
 import ChooseType from "../../components/ChooseType";
 import { PutDownIcon } from "../../components/Icon";
 import InfoShow from "../../components/InfoShow";
@@ -51,7 +51,7 @@ const MintOptions: FC = () => {
   const { pendingList, txList } = useTransactionListCon();
   const [isRefresh, setIsRefresh] = useState<boolean>(false);
   const [latestBlock, setLatestBlock] = useState({ time: 0, blockNum: 0 });
-
+  const intervalRef = useRef<NodeJS.Timeout>();
   const [isLong, setIsLong] = useState(true);
   const [exercise, setExercise] = useState({ time: "", blockNum: 0 });
   const [fortNum, setFortNum] = useState("");
@@ -122,18 +122,27 @@ const MintOptions: FC = () => {
     }
     setFortBalance(BigNumber.from(0));
   }, [account, fortContract]);
-
+  const getPrice = async (contract: Contract, chainId: number) => {
+    const price = await contract.latestPrice(
+      tokenList["USDT"].addresses[chainId]
+    );
+    setPriceNow(bigNumberToNormal(price[1], tokenList["USDT"].decimals, 2));
+  };
   useEffect(() => {
-    if (nestPriceContract && priceNow === "---" && chainId) {
-      nestPriceContract
-        .latestPrice(tokenList["USDT"].addresses[chainId])
-        .then((value: any) => {
-          setPriceNow(
-            bigNumberToNormal(value[1], tokenList["USDT"].decimals, 2)
-          );
-        });
+    if (!nestPriceContract || !chainId) {
+      return;
     }
-  }, [chainId, nestPriceContract, priceNow]);
+    getPrice(nestPriceContract, chainId);
+    const id = setInterval(() => {
+      getPrice(nestPriceContract, chainId);
+    }, 60 * 1000);
+    intervalRef.current = id;
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [chainId, nestPriceContract]);
 
   useEffect(() => {
     if (moment().valueOf() - latestBlock.time > 15000 && library) {
@@ -153,7 +162,7 @@ const MintOptions: FC = () => {
       if (!latestBlock) {
         return;
       }
-      
+
       const nowTime = moment().valueOf();
       const selectTime = moment(value).valueOf();
       if (selectTime > nowTime) {
@@ -161,8 +170,8 @@ const MintOptions: FC = () => {
         // TODO:删除测试代码
         // const blockNum = parseFloat(
         //   ((selectTime - nowTime) / 14000).toString()
-          const blockNum = parseFloat(
-            ((selectTime - nowTime) / 672000).toString()
+        const blockNum = parseFloat(
+          ((selectTime - nowTime) / 672000).toString()
         ).toFixed(0);
         setExercise({
           time: timeString,
@@ -257,7 +266,9 @@ const MintOptions: FC = () => {
           />
           <InfoShow
             topLeftText={t`Exercise time`}
-            bottomRightText={`${t`Block number`}: ${exercise.blockNum === 0 ? '---' : exercise.blockNum}`}
+            bottomRightText={`${t`Block number`}: ${
+              exercise.blockNum === 0 ? "---" : exercise.blockNum
+            }`}
           >
             <DatePicker
               format="YYYY-MM-DD"
@@ -285,7 +296,11 @@ const MintOptions: FC = () => {
           </InfoShow>
           <InfoShow
             topLeftText={t`Payment`}
-            bottomRightText={`${t`Balance`}: ${bigNumberToNormal(fortBalance, 18 ,6)} DCU`}
+            bottomRightText={`${t`Balance`}: ${bigNumberToNormal(
+              fortBalance,
+              18,
+              6
+            )} DCU`}
             balanceRed={
               normalToBigNumber(fortNum).gt(fortBalance) ? true : false
             }
@@ -312,7 +327,9 @@ const MintOptions: FC = () => {
             <Trans>Option shares</Trans>
           </p>
           <p className={`${classPrefix}-rightCard-tokenValue`}>
-            {optionTokenValue ? bigNumberToNormal(optionTokenValue, 18, 6) : '---'}
+            {optionTokenValue
+              ? bigNumberToNormal(optionTokenValue, 18, 6)
+              : "---"}
           </p>
           <MainButton
             disable={checkButton()}
@@ -359,7 +376,9 @@ const MintOptions: FC = () => {
                 {isLong
                   ? t`(Spot price - Strike price)*`
                   : t`(Strike price - Spot price)*`}
-                {optionTokenValue ? bigNumberToNormal(optionTokenValue, 18, 6) : '---'}
+                {optionTokenValue
+                  ? bigNumberToNormal(optionTokenValue, 18, 6)
+                  : "---"}
               </p>
               <p className={`${classPrefix}-rightCard-smallCard-name`}>DCU</p>
             </MainCard>
@@ -388,7 +407,9 @@ const MintOptions: FC = () => {
       </div>
       {optionsListState.length > 0 ? (
         <div>
-          <HoldLine><Trans>Position</Trans></HoldLine>
+          <HoldLine>
+            <Trans>Position</Trans>
+          </HoldLine>
           <table>
             <thead>
               <tr className={`${classPrefix}-table-title`}>
