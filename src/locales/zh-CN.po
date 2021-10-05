@@ -91,8 +91,8 @@ msgid "Disconnect"
 msgstr "断开"
 
 #: src/pages/Perpetuals/index.tsx
-msgid "Dynamic changes in Margin Assets, less than 5 will be liquidated"
-msgstr "保证金净资产动态变化，小于 5 将被清算"
+msgid "Dynamic changes in Margin Assets, less than 10 will be liquidated"
+msgstr "保证金净资产动态变化，小于 10 将被清算"
 
 #: src/pages/Shared/TransactionModal/index.tsx
 msgid "European option Token minted successfully"
