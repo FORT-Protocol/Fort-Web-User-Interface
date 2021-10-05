@@ -161,7 +161,7 @@ const Perpetuals: FC = () => {
           <p>{`1 ETH = ${bigNumberToNormal(
               nowPrice || BigNumber.from("0"),
               tokenList["USDT"].decimals,
-              6
+              2
             )} USDT`}
           </p>
         </InfoShow>
