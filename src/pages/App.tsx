@@ -7,9 +7,11 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import TransactionModal from "./Shared/TransactionModal";
 
+
 const Perpetuals = loadable(() => import("./Perpetuals"));
 const Option = loadable(() => import("./Options"));
 const Mining = loadable(() => import("./Farm"));
+const WhitePaper = loadable(() => import("./WhitePaper"));
 
 const App: FC = () => {
   return (
@@ -30,11 +32,14 @@ const App: FC = () => {
             <Route path="/farm">
               <Mining />
             </Route>
+            <Route path="/whitePaper">
+              <WhitePaper />
+            </Route>
             <Redirect to="/perpetuals" />
           </Switch>
+          <Footer />
         </HashRouter>
       </div>
-      <Footer />
     </main>
   );
 };

@@ -84,7 +84,7 @@
 			{
 				"indexed": false,
 				"internalType": "uint256",
-				"name": "fortAmount",
+				"name": "dcuAmount",
 				"type": "uint256"
 			},
 			{
@@ -169,7 +169,7 @@
 			},
 			{
 				"internalType": "uint256",
-				"name": "fortAmount",
+				"name": "dcuAmount",
 				"type": "uint256"
 			}
 		],
@@ -260,7 +260,7 @@
 						"type": "uint256"
 					}
 				],
-				"internalType": "struct IFortEuropeanOption.OptionView[]",
+				"internalType": "struct IHedgeOptions.OptionView[]",
 				"name": "optionArray",
 				"type": "tuple[]"
 			}
@@ -296,7 +296,7 @@
 						"type": "uint32"
 					}
 				],
-				"internalType": "struct IFortEuropeanOption.Config",
+				"internalType": "struct IHedgeOptions.Config",
 				"name": "",
 				"type": "tuple"
 			}
@@ -375,7 +375,7 @@
 						"type": "uint256"
 					}
 				],
-				"internalType": "struct IFortEuropeanOption.OptionView",
+				"internalType": "struct IHedgeOptions.OptionView",
 				"name": "",
 				"type": "tuple"
 			}
@@ -449,7 +449,7 @@
 						"type": "uint256"
 					}
 				],
-				"internalType": "struct IFortEuropeanOption.OptionView[]",
+				"internalType": "struct IHedgeOptions.OptionView[]",
 				"name": "optionArray",
 				"type": "tuple[]"
 			}
@@ -499,7 +499,7 @@
 			},
 			{
 				"internalType": "uint256",
-				"name": "fortAmount",
+				"name": "dcuAmount",
 				"type": "uint256"
 			}
 		],
@@ -533,7 +533,7 @@
 						"type": "uint32"
 					}
 				],
-				"internalType": "struct IFortEuropeanOption.Config",
+				"internalType": "struct IHedgeOptions.Config",
 				"name": "config",
 				"type": "tuple"
 			}

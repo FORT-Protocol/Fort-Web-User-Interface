@@ -126,7 +126,7 @@ const MintOptions: FC = () => {
   useEffect(() => {
     if (nestPriceContract && priceNow === "---" && chainId) {
       nestPriceContract
-        .latestPriceView(tokenList["USDT"].addresses[chainId])
+        .latestPrice(tokenList["USDT"].addresses[chainId])
         .then((value: any) => {
           setPriceNow(
             bigNumberToNormal(value[1], tokenList["USDT"].decimals, 2)

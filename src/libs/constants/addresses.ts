@@ -50,7 +50,7 @@ export const tokenList: { [key: string]: TokenType } = {
     addresses: {
       1: "",
       3: "0xFe864063e10e5f7D99803765f28d2676A582A816",
-      4: "0xDB7b4FdF99eEE8E4Cb8373630c923c51c1275382",
+      4: "0xc408edF487e98bB932eD4A8983038FF19352eDbd",
     },
   },
   NHBTC: {
@@ -193,12 +193,16 @@ export const LeverIndex: { [key: string]: any } = {
         // 倍数
         1: 1,
         2: 2,
-        5: 3,
+        3: 3,
+        4: 4,
+        5: 5,
       },
       0: {
-        1: 4,
-        2: 5,
-        5: 6,
+        1: 6,
+        2: 7,
+        3: 8,
+        4: 9,
+        5: 10,
       },
     },
     3: {
@@ -225,19 +229,19 @@ export const LeverIndex: { [key: string]: any } = {
 export const FortEuropeanOptionContract: AddressesType = {
   1: "",
   3: "0xa6948042D7B68b4c28907cE8B450DC0e5BBe30a5",
-  4: "0xAB7B4a58078A76CEBd3f9DeB7cf308C34AAb71F2",
+  4: "0x702F97D4991e2155576548989fEdEE3971705465",
 };
 
 export const FortLeverContract: AddressesType = {
   1: "",
   3: "0x48437856C4f6C3F60eA014110066BB440A4530D7",
-  4: "0x269382F35b76C6d7C30980A9E835D7e6831e0D84",
+  4: "0x3Db207CadA55e556ab7A8534A7a6aD9EFfc27B01",
 };
 
 export const FortVaultForStakingContract: AddressesType = {
   1: "",
   3: "0x176D7C08e5BC8f7334a1b1A5DC2C3516F80e1195",
-  4: "0xF06Ca516B6e11AB7843FB0B1a7eECBf0e57B3B64",
+  4: "0x5cA5E616310c0Cca41B7E4329021C17a5a79a0F1",
 };
 
 export const NestPrice: AddressesType = {

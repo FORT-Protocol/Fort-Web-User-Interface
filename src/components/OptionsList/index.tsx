@@ -3,7 +3,7 @@ import moment from "moment";
 import { FC } from "react";
 import { useFortEuropeanOptionExercise } from "../../contracts/hooks/useFortEuropeanOptionTransation";
 import { tokenList } from "../../libs/constants/addresses";
-import useTransactionListCon from "../../libs/hooks/useTransactionInfo";
+import useTransactionListCon, { TransactionType } from "../../libs/hooks/useTransactionInfo";
 import { bigNumberToNormal } from "../../libs/utils";
 import { OptionsListType } from "../../pages/Options";
 import { LongIcon, ShortIcon } from "../Icon";
@@ -20,7 +20,7 @@ const OptionsList: FC<Props> = ({ ...props }) => {
   const { pendingList } = useTransactionListCon();
   const loadingButton = () => {
     const closeTx = pendingList.filter(
-      (item) => item.info === props.item.index.toString()
+      (item) => item.info === props.item.index.toString() && item.type === TransactionType.closeOption
     );
     return closeTx.length > 0 ? true : false;
   };
@@ -49,6 +49,13 @@ const OptionsList: FC<Props> = ({ ...props }) => {
     return "---";
   };
 
+  const checkButton = () => {
+    if (loadingButton() || (Number(props.blockNum) <= props.item.exerciseBlock.toNumber())) {
+      return true
+    }
+    return false
+  }
+
   return (
     <tr key={props.key} className={`${props.className}-table-normal`}>
       <td className={"tokenPair"}>
@@ -64,10 +71,10 @@ const OptionsList: FC<Props> = ({ ...props }) => {
       <td>
         <MainButton
           onClick={() => {
-            return loadingButton() ? null : active();
+            return checkButton() ? null : active();
           }}
           loading={loadingButton()}
-          disable={loadingButton()}
+          disable={checkButton()}
         >
           <Trans>Strike</Trans>
         </MainButton>

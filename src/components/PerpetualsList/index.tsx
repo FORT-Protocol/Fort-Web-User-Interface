@@ -4,7 +4,7 @@ import { FC, useEffect, useState } from "react";
 import { useFortLeverSell } from "../../contracts/hooks/useFortLeverTransation";
 import { FortLeverContract, tokenList } from "../../libs/constants/addresses";
 import { FortLever } from "../../libs/hooks/useContract";
-import useTransactionListCon from "../../libs/hooks/useTransactionInfo";
+import useTransactionListCon, { TransactionType } from "../../libs/hooks/useTransactionInfo";
 import useWeb3 from "../../libs/hooks/useWeb3";
 import { bigNumberToNormal } from "../../libs/utils";
 import { LeverListType } from "../../pages/Perpetuals";
@@ -25,7 +25,7 @@ const PerpetualsList: FC<Props> = ({ ...props }) => {
   const [marginAssets, setMarginAssets] = useState<BigNumber>()
   const loadingButton = () => {
     const closeTx = pendingList.filter(
-      (item) => item.info === props.item.index.toString()
+      (item) => item.info === props.item.index.toString() && item.type === TransactionType.closeLever
     );
     return closeTx.length > 0 ? true : false;
   };
@@ -59,7 +59,7 @@ const PerpetualsList: FC<Props> = ({ ...props }) => {
       <td>{props.item.lever.toString()}X</td>
       <td>{bigNumberToNormal(props.item.balance, 18, 2)} DCU</td>
       <td>
-        {bigNumberToNormal(props.item.price, tokenList["USDT"].decimals, 2)}{" "}
+        {bigNumberToNormal(props.item.basePrice, tokenList["USDT"].decimals, 2)}{" "}
         USDT
       </td>
       <td>

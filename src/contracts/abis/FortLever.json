@@ -5,6 +5,124 @@
 		"type": "constructor"
 	},
 	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "index",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "dcuAmount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			}
+		],
+		"name": "Buy",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "tokenAddress",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "lever",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "bool",
+				"name": "orientation",
+				"type": "bool"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "index",
+				"type": "uint256"
+			}
+		],
+		"name": "New",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "index",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "value",
+				"type": "uint256"
+			}
+		],
+		"name": "Sell",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "index",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "addr",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "sender",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "reward",
+				"type": "uint256"
+			}
+		],
+		"name": "Settle",
+		"type": "event"
+	},
+	{
 		"inputs": [],
 		"name": "_governance",
 		"outputs": [
@@ -65,7 +183,7 @@
 			},
 			{
 				"internalType": "uint256",
-				"name": "fortAmount",
+				"name": "dcuAmount",
 				"type": "uint256"
 			}
 		],
@@ -83,7 +201,7 @@
 			},
 			{
 				"internalType": "uint256",
-				"name": "fortAmount",
+				"name": "dcuAmount",
 				"type": "uint256"
 			}
 		],
@@ -169,18 +287,31 @@
 					},
 					{
 						"internalType": "uint256",
-						"name": "price",
+						"name": "basePrice",
 						"type": "uint256"
 					},
 					{
 						"internalType": "uint256",
-						"name": "settleBlock",
+						"name": "baseBlock",
 						"type": "uint256"
 					}
 				],
-				"internalType": "struct IFortLever.LeverView[]",
-				"name": "leverArray",
+				"internalType": "struct IHedgeFutures.FutureView[]",
+				"name": "futureArray",
 				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getFutureCount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -204,7 +335,7 @@
 				"type": "bool"
 			}
 		],
-		"name": "getLeverInfo",
+		"name": "getFutureInfo",
 		"outputs": [
 			{
 				"components": [
@@ -235,31 +366,18 @@
 					},
 					{
 						"internalType": "uint256",
-						"name": "price",
+						"name": "basePrice",
 						"type": "uint256"
 					},
 					{
 						"internalType": "uint256",
-						"name": "settleBlock",
+						"name": "baseBlock",
 						"type": "uint256"
 					}
 				],
-				"internalType": "struct IFortLever.LeverView",
+				"internalType": "struct IHedgeFutures.FutureView",
 				"name": "",
 				"type": "tuple"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "getTokenCount",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -327,17 +445,17 @@
 					},
 					{
 						"internalType": "uint256",
-						"name": "price",
+						"name": "basePrice",
 						"type": "uint256"
 					},
 					{
 						"internalType": "uint256",
-						"name": "settleBlock",
+						"name": "baseBlock",
 						"type": "uint256"
 					}
 				],
-				"internalType": "struct IFortLever.LeverView[]",
-				"name": "leverArray",
+				"internalType": "struct IHedgeFutures.FutureView[]",
+				"name": "futureArray",
 				"type": "tuple[]"
 			}
 		],

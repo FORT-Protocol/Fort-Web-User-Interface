@@ -36,8 +36,8 @@ export type LeverListType = {
   lever: BigNumber; //  X倍数
   orientation: boolean; //  涨跌
   balance: BigNumber; //  保证金
-  price: BigNumber; //  基础价格
-  settleBlock: BigNumber; //  基础区块号
+  basePrice: BigNumber; //  基础价格
+  baseBlock: BigNumber; //  基础区块号
 };
 
 const Perpetuals: FC = () => {
@@ -78,7 +78,7 @@ const Perpetuals: FC = () => {
       return;
     }
     (async () => {
-      const price = await priceContract.latestPriceView(
+      const price = await priceContract.latestPrice(
         tokenList["USDT"].addresses[chainId]
       );
       setNowPrice(price[1]);
@@ -100,6 +100,7 @@ const Perpetuals: FC = () => {
       return;
     }
     const leverList = await leverContract.find("0", "13", "13", account);
+    console.log(leverList)
     const resultList = leverList.filter((item: LeverListType) =>
       item.balance.gt(BigNumber.from("0"))
     );
