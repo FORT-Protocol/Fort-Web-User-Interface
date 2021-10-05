@@ -16,7 +16,10 @@ type Props = {
   key: string;
   className: string;
   nowPrice?: BigNumber;
+  k?: BigNumber;
 };
+
+const baseTotal = BigNumber.from('1000000000000000000')
 
 const PerpetualsList: FC<Props> = ({ ...props }) => {
   const { pendingList } = useTransactionListCon();
@@ -41,13 +44,22 @@ const PerpetualsList: FC<Props> = ({ ...props }) => {
   const TokenTwoSvg = tokenList["USDT"].Icon;
   const active = useFortLeverSell(props.item.index, props.item.balance);
   useEffect(() => {
-    if (!leverContract || !account || !props.nowPrice) {return}
+    if (!leverContract || !account || !props.nowPrice || !props.k) {return}
       (async () => {
-        console.log(props.item.index)
-        const num = await leverContract.balanceOf(props.item.index, props.nowPrice, account)
+        if (!props.nowPrice || !props.k) {return}
+        var price: BigNumber
+        if (!props.item.orientation) {
+          price = props.nowPrice.mul(baseTotal.add(props.k)).div(baseTotal)
+          console.log(22)
+        } else {
+          price = props.nowPrice.mul(baseTotal).div(baseTotal.add(props.k))
+          console.log(33)
+        }
+        console.log(price.toString())
+        const num = await leverContract.balanceOf(props.item.index, price, account)
         setMarginAssets(num)
     })()
-  }, [account, leverContract, props.item.index, props.nowPrice])
+  }, [account, leverContract, props.item.index, props.item.orientation, props.k, props.nowPrice])
   const marginAssetsStr = marginAssets ? bigNumberToNormal(marginAssets, 18, 2) : '---'
   return (
     <tr key={props.key} className={`${props.className}-table-normal`}>

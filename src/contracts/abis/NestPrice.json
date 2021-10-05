@@ -168,44 +168,6 @@
 		"internalType": "uint256",
 		"name": "count",
 		"type": "uint256"
-	}, {
-		"internalType": "address",
-		"name": "paybackAddress",
-		"type": "address"
-	}],
-	"name": "lastPriceListAndTriggeredPriceInfo",
-	"outputs": [{
-		"internalType": "uint256[]",
-		"name": "prices",
-		"type": "uint256[]"
-	}, {
-		"internalType": "uint256",
-		"name": "triggeredPriceBlockNumber",
-		"type": "uint256"
-	}, {
-		"internalType": "uint256",
-		"name": "triggeredPriceValue",
-		"type": "uint256"
-	}, {
-		"internalType": "uint256",
-		"name": "triggeredAvgPrice",
-		"type": "uint256"
-	}, {
-		"internalType": "uint256",
-		"name": "triggeredSigmaSQ",
-		"type": "uint256"
-	}],
-	"stateMutability": "payable",
-	"type": "function"
-}, {
-	"inputs": [{
-		"internalType": "address",
-		"name": "tokenAddress",
-		"type": "address"
-	}, {
-		"internalType": "uint256",
-		"name": "count",
-		"type": "uint256"
 	}],
 	"name": "lastPriceListAndTriggeredPriceInfo",
 	"outputs": [{

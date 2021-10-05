@@ -1,4 +1,4 @@
-import { FortVaultForStakingContract, NestPrice as NestPriceAddress } from './../constants/addresses';
+import { Cofix, FortVaultForStakingContract, NestPrice as NestPriceAddress } from './../constants/addresses';
 import useWeb3 from '../hooks/useWeb3';
 import { getAddress } from "@ethersproject/address"
 import { Contract } from "@ethersproject/contracts"
@@ -13,6 +13,7 @@ import FortEuropeanOptionABI from '../../contracts/abis/FortEuropeanOption.json'
 import FortLeverABI from '../../contracts/abis/FortLever.json';
 import NestPriceABI from '../../contracts/abis/NestPrice.json';
 import FortLeverTokenABI from '../../contracts/abis/FortLeverToken.json';
+import COFIXABI from '../../contracts/abis/cofix.json';
 
 function isAddress(value: any): string | false {
     try {
@@ -85,4 +86,8 @@ export function FortForStaking(): Contract | null {
 
 export function NestPriceContract(): Contract | null {
     return useContract(NestPriceAddress, NestPriceABI)
+}
+
+export function COFIX(): Contract | null {
+    return useContract(Cofix, COFIXABI)
 }
