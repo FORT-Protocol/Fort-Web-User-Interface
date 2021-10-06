@@ -34,8 +34,7 @@ const Header: FC = () => {
       >
         <b>
           <Trans>
-            Hedge Protocol is a Beta version, you need to use it at your own
-            risk, please be careful not to use too much money.
+          Now the price volatility has increased by 50 times. The slippage is relatively large. It is impossible to have such a large slippage in a real scene.
           </Trans>
         </b>
         <button onClick={() => setNoticeHidden(true)}>

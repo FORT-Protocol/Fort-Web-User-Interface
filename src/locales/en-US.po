@@ -122,8 +122,8 @@ msgid "Futures"
 msgstr "Futures"
 
 #: src/pages/Shared/Header/index.tsx
-msgid "Hedge Protocol is a Beta version, you need to use it at your own risk, please be careful not to use too much money."
-msgstr "Hedge Protocol is a Beta version, you need to use it at your own risk, please be careful not to use too much money."
+msgid "Now the price volatility has increased by 50 times. The slippage is relatively large. It is impossible to have such a large slippage in a real scene."
+msgstr "Now the price volatility has increased by 50 times. The slippage is relatively large. It is impossible to have such a large slippage in a real scene."
 
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx

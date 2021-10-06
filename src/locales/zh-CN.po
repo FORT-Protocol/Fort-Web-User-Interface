@@ -122,8 +122,8 @@ msgid "Futures"
 msgstr "永续合约"
 
 #: src/pages/Shared/Header/index.tsx
-msgid "Hedge Protocol is a Beta version, you need to use it at your own risk, please be careful not to use too much money."
-msgstr "Hedge Protocol 为 Beta 版本，使用时需要自担风险，请注意不用使用过多资金"
+msgid "Now the price volatility has increased by 50 times. The slippage is relatively large. It is impossible to have such a large slippage in a real scene.."
+msgstr "现在价格波动提高了 50 倍 滑点较大，真实的场景里不可能这么大的滑点"
 
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx
