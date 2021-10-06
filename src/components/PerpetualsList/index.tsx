@@ -15,9 +15,13 @@ type Props = {
   item: LeverListType;
   key: string;
   className: string;
+  kValue?: PerpetualsListKValue;
+};
+
+export type PerpetualsListKValue = {
   nowPrice?: BigNumber;
   k?: BigNumber;
-};
+}
 
 const baseTotal = BigNumber.from('1000000000000000000')
 
@@ -44,20 +48,21 @@ const PerpetualsList: FC<Props> = ({ ...props }) => {
   const TokenTwoSvg = tokenList["USDT"].Icon;
   const active = useFortLeverSell(props.item.index, props.item.balance);
   useEffect(() => {
-    if (!leverContract || !account || !props.nowPrice || !props.k) {return}
+    if (!leverContract || !account || !props.kValue || !props.kValue.nowPrice || !props.kValue.k) {return}
       (async () => {
-        if (!props.nowPrice || !props.k) {return}
+        if (!props.kValue || !props.kValue.nowPrice || !props.kValue.k) {return}
         var price: BigNumber
         if (!props.item.orientation) {
-          price = props.nowPrice.mul(baseTotal.add(props.k)).div(baseTotal)
+          price = props.kValue.nowPrice.mul(baseTotal.add(props.kValue.k)).div(baseTotal)
         } else {
-          price = props.nowPrice.mul(baseTotal).div(baseTotal.add(props.k))
+          price = props.kValue.nowPrice.mul(baseTotal).div(baseTotal.add(props.kValue.k))
         }
         const num:BigNumber = await leverContract.balanceOf(props.item.index, price, account)
         setMarginAssets(num)
+        console.log(props.kValue.k.toString())
         console.log(props.item.index.toString(), price.toString(), num.toString())
     })()
-  }, [account, leverContract, props.item.index, props.item.orientation, props.k, props.nowPrice])
+  }, [account, leverContract, props.item.index, props.item.orientation, props.kValue])
   const marginAssetsStr = marginAssets ? bigNumberToNormal(marginAssets, 18, 2) : '---'
   return (
     <tr key={props.key} className={`${props.className}-table-normal`}>

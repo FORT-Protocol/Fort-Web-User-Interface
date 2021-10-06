@@ -35,15 +35,19 @@
     justify-content: space-between;
     border-bottom: 1px solid $gray-background-color;
 
-    .header-logo {
-        position: relative;
-        width: 320px;
-        padding-right: 160px;
-        margin-left: 40px;
+    a {
         margin-top: auto;
         margin-bottom: auto;
-        justify-self: flex-start;
+
+        .header-logo {
+            position: relative;
+            width: 320px;
+            padding-right: 160px;
+            margin-left: 40px;
+            justify-self: flex-start;
+        }
     }
+
 
     ul {
         height: 66px;

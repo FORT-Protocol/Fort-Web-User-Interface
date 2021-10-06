@@ -43,7 +43,7 @@ const Header: FC = () => {
         </button>
       </div>
       <div className={`${header}-nav`}>
-        <FortLogo className={`${header}-logo`} />
+        <a href={'https://www.hedge.red'}><FortLogo className={`${header}-logo`}/></a>
         <nav>
           <ul>{routes}</ul>
         </nav>

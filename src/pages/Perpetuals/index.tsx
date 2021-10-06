@@ -9,7 +9,7 @@ import InfoShow from "../../components/InfoShow";
 import { LeverChoose } from "../../components/LeverChoose";
 import MainButton from "../../components/MainButton";
 import MainCard from "../../components/MainCard";
-import PerpetualsList from "../../components/PerpetualsList";
+import PerpetualsList, { PerpetualsListKValue } from "../../components/PerpetualsList";
 import { DoubleTokenShow, SingleTokenShow } from "../../components/TokenShow";
 import { useFortLeverBuy } from "../../contracts/hooks/useFortLeverTransation";
 import { FortLeverContract, tokenList } from "../../libs/constants/addresses";
@@ -45,14 +45,13 @@ const Perpetuals: FC = () => {
   const { account, chainId } = useWeb3();
   const [isLong, setIsLong] = useState(true);
   const [dcuBalance, setDcuBalance] = useState<BigNumber>();
-  const [nowPrice, setNowPrice] = useState<BigNumber>();
+  const [kValue, setKValue] = useState<PerpetualsListKValue>();
   const [leverNum, setLeverNum] = useState<number>(1);
   const [dcuInput, setDcuInput] = useState<string>("");
   const [isRefresh, setIsRefresh] = useState<boolean>(false);
   const [leverListState, setLeverListState] = useState<Array<LeverListType>>(
     []
   );
-  const [k, setK] = useState()
   const intervalRef = useRef<NodeJS.Timeout>();
   const classPrefix = "perpetuals";
   const dcuToken = ERC20Contract(tokenList["DCU"].addresses);
@@ -71,8 +70,7 @@ const Perpetuals: FC = () => {
         className={classPrefix}
         item={item}
         key={item.index.toString() + account}
-        k={k}
-        nowPrice={nowPrice}
+        kValue={kValue}
       />
     );
   });
@@ -83,10 +81,8 @@ const Perpetuals: FC = () => {
     const priceList = await contract.lastPriceListAndTriggeredPriceInfo(tokenAddress, 2)
     
     const k = await leverContract.calcRevisedK(priceList[4], priceList[0][3],priceList[0][2],priceList[0][1],priceList[0][0])
-    setNowPrice(priceList[0][1]);
-    setK(k)
+    setKValue({nowPrice: priceList[0][1], k: k})
     console.log(priceList)
-    console.log(`k值：${k}`)
   };
   // price
   useEffect(() => {
@@ -180,7 +176,7 @@ const Perpetuals: FC = () => {
           </div>
           <p>
             {`1 ETH = ${bigNumberToNormal(
-              nowPrice || BigNumber.from("0"),
+              kValue?.nowPrice || BigNumber.from("0"),
               tokenList["USDT"].decimals,
               2
             )} USDT`}
