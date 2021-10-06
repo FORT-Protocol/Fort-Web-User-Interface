@@ -123,7 +123,7 @@ const MintOptions: FC = () => {
     setFortBalance(BigNumber.from(0));
   }, [account, fortContract]);
   const getPrice = async (contract: Contract, chainId: number) => {
-    const price = await contract.latestPrice(
+    const price = await contract.triggeredPrice(
       tokenList["USDT"].addresses[chainId]
     );
     setPriceNow(bigNumberToNormal(price[1], tokenList["USDT"].decimals, 2));
@@ -315,7 +315,9 @@ const MintOptions: FC = () => {
             />
             <button
               className={"max-button"}
-              onClick={() => setFortNum(bigNumberToNormal(fortBalance, 18, 18, false))}
+              onClick={() =>
+                setFortNum(bigNumberToNormal(fortBalance, 18, 18, false))
+              }
             >
               MAX
             </button>

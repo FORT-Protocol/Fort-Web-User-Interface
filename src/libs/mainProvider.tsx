@@ -22,15 +22,17 @@ const Inner: FC = ({ children }) => {
 
 const MainProvider: FC = ({ children }) => {
   return (
-    <I18nProvider>
+    
       <Web3ReactProvider getLibrary={getLibrary}>
         <Web3Provider>
+        <I18nProvider>
           <TransactionProvider>
             <Inner>{children}</Inner>
           </TransactionProvider>
+          </I18nProvider>
         </Web3Provider>
       </Web3ReactProvider>
-    </I18nProvider>
+    
   );
 };
 

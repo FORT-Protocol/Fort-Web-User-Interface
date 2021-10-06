@@ -9,7 +9,9 @@ import InfoShow from "../../components/InfoShow";
 import { LeverChoose } from "../../components/LeverChoose";
 import MainButton from "../../components/MainButton";
 import MainCard from "../../components/MainCard";
-import PerpetualsList, { PerpetualsListKValue } from "../../components/PerpetualsList";
+import PerpetualsList, {
+  PerpetualsListKValue,
+} from "../../components/PerpetualsList";
 import { DoubleTokenShow, SingleTokenShow } from "../../components/TokenShow";
 import { useFortLeverBuy } from "../../contracts/hooks/useFortLeverTransation";
 import { FortLeverContract, tokenList } from "../../libs/constants/addresses";
@@ -74,24 +76,44 @@ const Perpetuals: FC = () => {
       />
     );
   });
-  const getPrice = async (contract: Contract, leverContract: Contract, tokenAddress:string, chainId: number) => {
-    // const price = await contract.latestPrice(
-    //   tokenList["USDT"].addresses[chainId]
-    // );
-    const priceList = await contract.lastPriceListAndTriggeredPriceInfo(tokenAddress, 2)
-    
-    const k = await leverContract.calcRevisedK(priceList[4], priceList[0][3],priceList[0][2],priceList[0][1],priceList[0][0])
-    setKValue({nowPrice: priceList[0][1], k: k})
-    console.log(priceList)
+  const getPrice = async (
+    contract: Contract,
+    leverContract: Contract,
+    tokenAddress: string,
+    chainId: number
+  ) => {
+    const priceList = await contract.lastPriceListAndTriggeredPriceInfo(
+      tokenAddress,
+      2
+    );
+    const k = await leverContract.calcRevisedK(
+      priceList[4],
+      priceList[0][3],
+      priceList[0][2],
+      priceList[0][1],
+      priceList[0][0]
+    );
+    setKValue({ nowPrice: priceList[0][1], k: k });
+    console.log(priceList);
   };
   // price
   useEffect(() => {
     if (!priceContract || !chainId || !leverContract) {
       return;
     }
-    getPrice(priceContract, leverContract, tokenList['USDT'].addresses[chainId], chainId);
+    getPrice(
+      priceContract,
+      leverContract,
+      tokenList["USDT"].addresses[chainId],
+      chainId
+    );
     const id = setInterval(() => {
-      getPrice(priceContract, leverContract, tokenList['USDT'].addresses[chainId], chainId);
+      getPrice(
+        priceContract,
+        leverContract,
+        tokenList["USDT"].addresses[chainId],
+        chainId
+      );
     }, 60 * 1000);
     intervalRef.current = id;
     return () => {
@@ -207,7 +229,12 @@ const Perpetuals: FC = () => {
             className={"max-button"}
             onClick={() =>
               setDcuInput(
-                bigNumberToNormal(dcuBalance || BigNumber.from("0"), 18, 18, false)
+                bigNumberToNormal(
+                  dcuBalance || BigNumber.from("0"),
+                  18,
+                  18,
+                  false
+                )
               )
             }
           >

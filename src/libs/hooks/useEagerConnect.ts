@@ -25,8 +25,8 @@ const useEagerConnect = () => {
         setTried(true);
       }
     })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+
+  }, [activate, deactivate]);
 
   useEffect(() => {
     if (!tried && active) {

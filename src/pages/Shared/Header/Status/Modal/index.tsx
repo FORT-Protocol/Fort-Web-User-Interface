@@ -44,7 +44,7 @@ const Modal: FC<Props> = ({ ...props }) => {
         </MainCard>
         <MainCard
           onClick={() => {
-            activate(SupportedConnectors[1].connector).catch(() => {
+            activate(SupportedConnectors[1].connector, undefined, true).catch(() => {
               message.error(
                 t`This network is not supported, please switch the network`
               );

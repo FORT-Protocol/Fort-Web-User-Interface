@@ -451,28 +451,6 @@
 		"internalType": "address",
 		"name": "tokenAddress",
 		"type": "address"
-	}, {
-		"internalType": "address",
-		"name": "paybackAddress",
-		"type": "address"
-	}],
-	"name": "triggeredPrice",
-	"outputs": [{
-		"internalType": "uint256",
-		"name": "blockNumber",
-		"type": "uint256"
-	}, {
-		"internalType": "uint256",
-		"name": "price",
-		"type": "uint256"
-	}],
-	"stateMutability": "payable",
-	"type": "function"
-}, {
-	"inputs": [{
-		"internalType": "address",
-		"name": "tokenAddress",
-		"type": "address"
 	}],
 	"name": "triggeredPrice2",
 	"outputs": [{
