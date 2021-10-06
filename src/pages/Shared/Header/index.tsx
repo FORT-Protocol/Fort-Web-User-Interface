@@ -34,7 +34,7 @@ const Header: FC = () => {
       >
         <b>
           <Trans>
-          Now the price volatility has increased by 50 times. The slippage is relatively large. It is impossible to have such a large slippage in a real scene.
+          Currently it is a test network, the price fluctuation has increased by 50 times, the slippage is large, and the real scene will not be so high slippage.
           </Trans>
         </b>
         <button onClick={() => setNoticeHidden(true)}>
