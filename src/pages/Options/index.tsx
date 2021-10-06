@@ -315,7 +315,7 @@ const MintOptions: FC = () => {
             />
             <button
               className={"max-button"}
-              onClick={() => setFortNum(bigNumberToNormal(fortBalance))}
+              onClick={() => setFortNum(bigNumberToNormal(fortBalance, 18, 18, false))}
             >
               MAX
             </button>
