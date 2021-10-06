@@ -50,14 +50,12 @@ const PerpetualsList: FC<Props> = ({ ...props }) => {
         var price: BigNumber
         if (!props.item.orientation) {
           price = props.nowPrice.mul(baseTotal.add(props.k)).div(baseTotal)
-          console.log(22)
         } else {
           price = props.nowPrice.mul(baseTotal).div(baseTotal.add(props.k))
-          console.log(33)
         }
-        console.log(price.toString())
-        const num = await leverContract.balanceOf(props.item.index, price, account)
+        const num:BigNumber = await leverContract.balanceOf(props.item.index, price, account)
         setMarginAssets(num)
+        console.log(props.item.index.toString(), price.toString(), num.toString())
     })()
   }, [account, leverContract, props.item.index, props.item.orientation, props.k, props.nowPrice])
   const marginAssetsStr = marginAssets ? bigNumberToNormal(marginAssets, 18, 2) : '---'

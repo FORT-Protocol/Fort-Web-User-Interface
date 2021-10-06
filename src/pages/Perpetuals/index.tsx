@@ -14,7 +14,6 @@ import { DoubleTokenShow, SingleTokenShow } from "../../components/TokenShow";
 import { useFortLeverBuy } from "../../contracts/hooks/useFortLeverTransation";
 import { FortLeverContract, tokenList } from "../../libs/constants/addresses";
 import {
-  COFIX,
   ERC20Contract,
   FortLever,
   NestPriceContract,
@@ -58,7 +57,6 @@ const Perpetuals: FC = () => {
   const classPrefix = "perpetuals";
   const dcuToken = ERC20Contract(tokenList["DCU"].addresses);
   const priceContract = NestPriceContract();
-  const cofixContract = COFIX();
   const leverContract = FortLever(FortLeverContract);
   const { pendingList, txList } = useTransactionListCon();
   const handleType = (isLong: boolean) => {
@@ -78,24 +76,26 @@ const Perpetuals: FC = () => {
       />
     );
   });
-  const getPrice = async (contract: Contract, cofix: Contract, tokenAddress:string, chainId: number) => {
+  const getPrice = async (contract: Contract, leverContract: Contract, tokenAddress:string, chainId: number) => {
     // const price = await contract.latestPrice(
     //   tokenList["USDT"].addresses[chainId]
     // );
     const priceList = await contract.lastPriceListAndTriggeredPriceInfo(tokenAddress, 2)
-    console.log(priceList)
-    const k = await cofix.calcRevisedK(priceList[4], priceList[0][3],priceList[0][2],priceList[0][1],priceList[0][0])
+    
+    const k = await leverContract.calcRevisedK(priceList[4], priceList[0][3],priceList[0][2],priceList[0][1],priceList[0][0])
     setNowPrice(priceList[0][1]);
     setK(k)
+    console.log(priceList)
+    console.log(`k值：${k}`)
   };
   // price
   useEffect(() => {
-    if (!priceContract || !chainId || !cofixContract) {
+    if (!priceContract || !chainId || !leverContract) {
       return;
     }
-    getPrice(priceContract, cofixContract, tokenList['USDT'].addresses[chainId], chainId);
+    getPrice(priceContract, leverContract, tokenList['USDT'].addresses[chainId], chainId);
     const id = setInterval(() => {
-      getPrice(priceContract, cofixContract, tokenList['USDT'].addresses[chainId], chainId);
+      getPrice(priceContract, leverContract, tokenList['USDT'].addresses[chainId], chainId);
     }, 60 * 1000);
     intervalRef.current = id;
     return () => {
@@ -103,7 +103,7 @@ const Perpetuals: FC = () => {
         clearInterval(intervalRef.current);
       }
     };
-  }, [chainId, priceContract, cofixContract]);
+  }, [chainId, priceContract, leverContract]);
   // balance
   useEffect(() => {
     if (!dcuToken) {

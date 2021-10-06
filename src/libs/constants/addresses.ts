@@ -249,10 +249,3 @@ export const NestPrice: AddressesType = {
   3: "0x85723E83A7E7d88b0F3Ceb4C5bE7C853e3Ed8a82",
   4: "0x40C3EB032f27fDa7AdcF1B753c75B84e27f26838",
 };
-
-
-export const Cofix: AddressesType = {
-  1: "",
-  3: "",
-  4: "0xC18B1feb7F41521cDAaa4ad5E0e5a8c54D0FF4a5",
-}
