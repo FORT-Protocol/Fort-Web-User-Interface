@@ -210,10 +210,12 @@ const MintOptions: FC = () => {
           );
           setOptionTokenValue(BigNumber.from(value));
         } catch {
-          setOptionTokenValue(BigNumber.from(0));
+          setOptionTokenValue(undefined);
         }
         setShowLoading(false)
       })();
+    } else {
+      setOptionTokenValue(undefined);
     }
   }, [
     exercise.blockNum,
