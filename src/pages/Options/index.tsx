@@ -94,6 +94,11 @@ const MintOptions: FC = () => {
   }, [account, fortEuropeanOption]);
 
   useEffect(() => {
+    setStrikePrice('')
+    setFortNum('')
+  }, [account])
+
+  useEffect(() => {
     if (!isRefresh) {
       getOptionsList();
     }
@@ -160,9 +165,8 @@ const MintOptions: FC = () => {
 
   const onOk = useCallback(
     async (value: any) => {
-      if (!latestBlock) {
-        return;
-      }
+
+      if (latestBlock.blockNum === 0) {return}
 
       const nowTime = moment().valueOf();
       const selectTime = moment(value).valueOf();
