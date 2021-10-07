@@ -122,7 +122,7 @@ msgid "Futures"
 msgstr "永续合约"
 
 #: src/pages/Shared/Header/index.tsx
-msgid "Currently it is a test network, the price fluctuation has increased by 50 times, the slippage is large, and the real scene will not be so high slippage."
+msgid "Currently it is a test network, the price fluctuation has increased by 50 times, the slippage is large, and the slippage will be lower in a more realistic scenario."
 msgstr "当前为测试网，价格波动提高了50倍，滑点较大，真实场景不会这么高滑点"
 
 #: src/pages/Options/index.tsx

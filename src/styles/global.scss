@@ -108,3 +108,8 @@ li {
 .ant-tooltip-inner {
     color: $gray-info-text-color;
 }
+
+.ant-picker-input input{
+    font-family: $boldFont;
+    font-size: 16px;
+}

@@ -34,7 +34,7 @@ const Header: FC = () => {
       >
         <b>
           <Trans>
-          Currently it is a test network, the price fluctuation has increased by 50 times, the slippage is large, and the real scene will not be so high slippage.
+          Currently it is a test network, the price fluctuation has increased by 50 times, the slippage is large, and the slippage will be lower in a more realistic scenario.
           </Trans>
         </b>
         <button onClick={() => setNoticeHidden(true)}>

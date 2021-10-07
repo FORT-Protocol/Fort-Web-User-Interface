@@ -122,8 +122,8 @@ msgid "Futures"
 msgstr "Futures"
 
 #: src/pages/Shared/Header/index.tsx
-msgid "Currently it is a test network, the price fluctuation has increased by 50 times, the slippage is large, and the real scene will not be so high slippage."
-msgstr "Currently it is a test network, the price fluctuation has increased by 50 times, the slippage is large, and the real scene will not be so high slippage."
+msgid "Currently it is a test network, the price fluctuation has increased by 50 times, the slippage is large, and the slippage will be lower in a more realistic scenario."
+msgstr "Currently it is a test network, the price fluctuation has increased by 50 times, the slippage is large, and the slippage will be lower in a more realistic scenario."
 
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx
