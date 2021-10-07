@@ -2,7 +2,7 @@ import { t, Trans } from "@lingui/macro";
 import { BigNumber, Contract } from "ethers";
 import { FC, useCallback, useEffect, useRef, useState } from "react";
 import ChooseType from "../../components/ChooseType";
-import { PutDownIcon } from "../../components/Icon";
+import { PutDownIcon, WhiteLoading } from "../../components/Icon";
 import InfoShow from "../../components/InfoShow";
 import MainButton from "../../components/MainButton";
 import MainCard from "../../components/MainCard";
@@ -59,6 +59,7 @@ const MintOptions: FC = () => {
   const [optionsListState, setOptionsListState] = useState<
     Array<OptionsListType>
   >([]);
+  const [showLoading, setShowLoading] = useState<boolean>(false)
   const [priceNow, setPriceNow] = useState("---");
   const [fortBalance, setFortBalance] = useState(BigNumber.from(0));
   const [optionTokenValue, setOptionTokenValue] = useState<BigNumber>();
@@ -194,6 +195,7 @@ const MintOptions: FC = () => {
       exercise.blockNum !== 0
     ) {
       (async () => {
+        setShowLoading(true)
         try {
           const value = await fortEuropeanOption.estimate(
             ZERO_ADDRESS,
@@ -210,6 +212,7 @@ const MintOptions: FC = () => {
         } catch {
           setOptionTokenValue(BigNumber.from(0));
         }
+        setShowLoading(false)
       })();
     }
   }, [
@@ -328,11 +331,12 @@ const MintOptions: FC = () => {
           <p className={`${classPrefix}-rightCard-tokenTitle`}>
             <Trans>Option shares</Trans>
           </p>
-          <p className={`${classPrefix}-rightCard-tokenValue`}>
+          {showLoading ? (<WhiteLoading className={'animation-spin'}/>) : (<p className={`${classPrefix}-rightCard-tokenValue`}>
             {optionTokenValue
               ? bigNumberToNormal(optionTokenValue, 18, 6)
               : "---"}
-          </p>
+          </p>)}
+          
           <MainButton
             disable={checkButton()}
             loading={loadingButton()}

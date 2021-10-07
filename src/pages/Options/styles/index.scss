@@ -49,6 +49,13 @@
         justify-content: space-between;
         flex-direction: column;
 
+        svg {
+            margin: 0 auto;
+            path {
+                fill: $button-disable-color;
+            }
+        }
+
         &-tokenTitle {
             @include normal-text;
         }
