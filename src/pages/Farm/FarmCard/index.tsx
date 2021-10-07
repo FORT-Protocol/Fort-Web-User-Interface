@@ -394,7 +394,7 @@ export const FarmCard: FC<Props> = ({ ...props }) => {
           rightText={`${bigNumberToNormal(
             stakingInfo?.expectedMining || BigNumber.from("0"),
             18,
-            8
+            6
           )} DCU`}
         />
         <LineShowInfo

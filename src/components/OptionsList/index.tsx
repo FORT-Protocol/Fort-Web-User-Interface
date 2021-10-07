@@ -4,7 +4,9 @@ import moment from "moment";
 import { FC, useEffect, useState } from "react";
 import { useFortEuropeanOptionExercise } from "../../contracts/hooks/useFortEuropeanOptionTransation";
 import { tokenList } from "../../libs/constants/addresses";
-import useTransactionListCon, { TransactionType } from "../../libs/hooks/useTransactionInfo";
+import useTransactionListCon, {
+  TransactionType,
+} from "../../libs/hooks/useTransactionInfo";
 import useWeb3 from "../../libs/hooks/useWeb3";
 import { bigNumberToNormal } from "../../libs/utils";
 import { OptionsListType } from "../../pages/Options";
@@ -20,11 +22,13 @@ type Props = {
 
 const OptionsList: FC<Props> = ({ ...props }) => {
   const { pendingList } = useTransactionListCon();
-  const {library} = useWeb3()
-  const [timeString, setTimeString] = useState('---')
+  const { library } = useWeb3();
+  const [timeString, setTimeString] = useState("---");
   const loadingButton = () => {
     const closeTx = pendingList.filter(
-      (item) => item.info === props.item.index.toString() && item.type === TransactionType.closeOption
+      (item) =>
+        item.info === props.item.index.toString() &&
+        item.type === TransactionType.closeOption
     );
     return closeTx.length > 0 ? true : false;
   };
@@ -43,29 +47,43 @@ const OptionsList: FC<Props> = ({ ...props }) => {
     props.item.balance
   );
   useEffect(() => {
-    if (!library || props.blockNum === '0' || props.blockNum === '' || props.item.exerciseBlock === BigNumber.from('0')) {return}
+    if (
+      !library ||
+      props.blockNum === "0" ||
+      props.blockNum === "" ||
+      props.item.exerciseBlock === BigNumber.from("0")
+    ) {
+      return;
+    }
     if (props.item.exerciseBlock.toNumber() >= Number(props.blockNum)) {
       const subTime =
         (props.item.exerciseBlock.toNumber() - Number(props.blockNum)) * 14000;
-        setTimeString(moment(moment().valueOf() + subTime).format(
-          "YYYY[-]MM[-]DD HH:mm"
-        ))
+      setTimeString(
+        moment(moment().valueOf() + subTime).format("YYYY[-]MM[-]DD HH:mm")
+      );
     } else {
-      ;(async () => {
-        const blockInfo = await library?.getBlock(props.item.exerciseBlock.toNumber())
-        setTimeString(moment(Number(blockInfo['timestamp']) * 1000).format(
-          "YYYY[-]MM[-]DD HH:mm"
-        ))
-      })()
+      (async () => {
+        const blockInfo = await library?.getBlock(
+          props.item.exerciseBlock.toNumber()
+        );
+        setTimeString(
+          moment(Number(blockInfo["timestamp"]) * 1000).format(
+            "YYYY[-]MM[-]DD HH:mm"
+          )
+        );
+      })();
     }
-  }, [library, props.blockNum, props.item.exerciseBlock])
+  }, [library, props.blockNum, props.item.exerciseBlock]);
 
   const checkButton = () => {
-    if (loadingButton() || (Number(props.blockNum) <= props.item.exerciseBlock.toNumber())) {
-      return true
+    if (
+      loadingButton() ||
+      Number(props.blockNum) <= props.item.exerciseBlock.toNumber()
+    ) {
+      return true;
     }
-    return false
-  }
+    return false;
+  };
 
   return (
     <tr key={props.key} className={`${props.className}-table-normal`}>
@@ -73,7 +91,12 @@ const OptionsList: FC<Props> = ({ ...props }) => {
         <TokenOneSvg />
         <TokenTwoSvg />
       </td>
-      <td className={'td-type'}>{props.item.orientation ? <LongIcon /> : <ShortIcon />}<p className={props.item.orientation ? 'red':'green'}>{props.item.orientation ? t`Call` : t`Put`}</p></td>
+      <td className={"td-type"}>
+        {props.item.orientation ? <LongIcon /> : <ShortIcon />}
+        <p className={props.item.orientation ? "red" : "green"}>
+          {props.item.orientation ? t`Call` : t`Put`}
+        </p>
+      </td>
       <td>{bigNumberToNormal(props.item.strikePrice, 6, 2)} USDT</td>
       <td
         className={`exerciseTime`}

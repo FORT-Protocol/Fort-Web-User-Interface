@@ -59,7 +59,7 @@ const MintOptions: FC = () => {
   const [optionsListState, setOptionsListState] = useState<
     Array<OptionsListType>
   >([]);
-  const [showLoading, setShowLoading] = useState<boolean>(false)
+  const [showLoading, setShowLoading] = useState<boolean>(false);
   const [priceNow, setPriceNow] = useState("---");
   const [fortBalance, setFortBalance] = useState(BigNumber.from(0));
   const [optionTokenValue, setOptionTokenValue] = useState<BigNumber>();
@@ -94,9 +94,9 @@ const MintOptions: FC = () => {
   }, [account, fortEuropeanOption]);
 
   useEffect(() => {
-    setStrikePrice('')
-    setFortNum('')
-  }, [account])
+    setStrikePrice("");
+    setFortNum("");
+  }, [account]);
 
   useEffect(() => {
     if (!isRefresh) {
@@ -165,8 +165,9 @@ const MintOptions: FC = () => {
 
   const onOk = useCallback(
     async (value: any) => {
-
-      if (latestBlock.blockNum === 0) {return}
+      if (latestBlock.blockNum === 0) {
+        return;
+      }
 
       const nowTime = moment().valueOf();
       const selectTime = moment(value).valueOf();
@@ -199,7 +200,7 @@ const MintOptions: FC = () => {
       exercise.blockNum !== 0
     ) {
       (async () => {
-        setShowLoading(true)
+        setShowLoading(true);
         try {
           const value = await fortEuropeanOption.estimate(
             ZERO_ADDRESS,
@@ -216,7 +217,7 @@ const MintOptions: FC = () => {
         } catch {
           setOptionTokenValue(undefined);
         }
-        setShowLoading(false)
+        setShowLoading(false);
       })();
     } else {
       setOptionTokenValue(undefined);
@@ -324,9 +325,7 @@ const MintOptions: FC = () => {
             />
             <button
               className={"max-button"}
-              onClick={() =>
-                setFortNum(bigNumberToNormal(fortBalance, 18, 18, false))
-              }
+              onClick={() => setFortNum(bigNumberToNormal(fortBalance, 18, 18))}
             >
               MAX
             </button>
@@ -337,12 +336,16 @@ const MintOptions: FC = () => {
           <p className={`${classPrefix}-rightCard-tokenTitle`}>
             <Trans>Option shares</Trans>
           </p>
-          {showLoading ? (<WhiteLoading className={'animation-spin'}/>) : (<p className={`${classPrefix}-rightCard-tokenValue`}>
-            {optionTokenValue
-              ? bigNumberToNormal(optionTokenValue, 18, 6)
-              : "---"}
-          </p>)}
-          
+          {showLoading ? (
+            <WhiteLoading className={"animation-spin"} />
+          ) : (
+            <p className={`${classPrefix}-rightCard-tokenValue`}>
+              {optionTokenValue
+                ? bigNumberToNormal(optionTokenValue, 18, 6)
+                : "---"}
+            </p>
+          )}
+
           <MainButton
             disable={checkButton()}
             loading={loadingButton()}

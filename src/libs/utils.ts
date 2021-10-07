@@ -14,8 +14,7 @@ export const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
 export function bigNumberToNormal(
   num: BigNumber,
   decimals: number = 18,
-  fix: number = 18,
-  exZero: boolean = true
+  fix: number = 18
 ): string {
   const str = num.toString();
   const strLength = str.length;
@@ -33,10 +32,14 @@ export function bigNumberToNormal(
     newStr = "0." + baseStr + str;
   }
   // 除0
-  const resultBaseStr = exZero ? parseFloat(newStr).toString() : newStr;
+  var resultBaseStr = newStr;
   if (resultBaseStr.indexOf(".") !== -1) {
     const resultBaseStrArray = resultBaseStr.split(".");
-    return resultBaseStrArray[0] + "." + resultBaseStrArray[1].substr(0, fix);
+    resultBaseStr =
+      resultBaseStrArray[0] + "." + resultBaseStrArray[1].substr(0, fix);
+  }
+  if (fix <= 6) {
+    resultBaseStr = parseFloat(resultBaseStr).toString();
   }
   return resultBaseStr;
 }
