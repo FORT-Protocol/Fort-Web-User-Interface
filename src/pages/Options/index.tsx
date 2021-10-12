@@ -23,7 +23,7 @@ import {
   normalToBigNumber,
   ZERO_ADDRESS,
 } from "../../libs/utils";
-import { DatePicker, message } from "antd";
+import { DatePicker, message, Tooltip } from "antd";
 import "../../styles/ant.css";
 import "./styles";
 import { HoldLine } from "../../components/HoldLine";
@@ -334,7 +334,15 @@ const MintOptions: FC = () => {
 
         <MainCard classNames={`${classPrefix}-rightCard`}>
           <p className={`${classPrefix}-rightCard-tokenTitle`}>
-            <Trans>Option shares</Trans>
+            <Tooltip
+              placement="top"
+              color={"#ffffff"}
+              title={t`One option shares to the return of a ETH.`}
+            >
+              <span>
+                <Trans>Option shares</Trans>
+              </span>
+            </Tooltip>
           </p>
           {showLoading ? (
             <WhiteLoading className={"animation-spin"} />
@@ -442,6 +450,9 @@ const MintOptions: FC = () => {
                 </th>
                 <th>
                   <Trans>Option shares</Trans>
+                </th>
+                <th>
+                  <Trans>Strike earn</Trans>
                 </th>
                 <th>
                   <Trans>Operate</Trans>

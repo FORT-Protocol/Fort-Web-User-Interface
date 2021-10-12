@@ -59,6 +59,10 @@
 
         &-tokenTitle {
             @include normal-text;
+
+            span {
+                border-bottom: 1px dashed $gray-info-text-color;
+            }
         }
 
         &-tokenValue {
@@ -140,11 +144,6 @@ table {
     margin: 0 auto;
     border-collapse: separate;
     border-spacing: 0px 20px;
-
-    // .exerciseTime {
-    //     text-align: left;
-    //     width: 370px;
-    // }
 
     .options-mintOptions-table-title {
         color: $gray-info-text-color;

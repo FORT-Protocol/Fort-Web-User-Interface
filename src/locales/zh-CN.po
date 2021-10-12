@@ -180,6 +180,10 @@ msgstr "我的锁仓"
 msgid "Number of Option Token"
 msgstr "期权币数量"
 
+#: src/pages/Options/index.tsx
+msgid "One option shares to the return of a ETH."
+msgstr "1份期权对应一个ETH的收益"
+
 #: src/pages/Shared/TransactionToast/index.tsx
 msgid "Open Future positions"
 msgstr "永续合约开仓"
@@ -191,6 +195,10 @@ msgstr "看涨开仓"
 #: src/pages/Perpetuals/index.tsx
 msgid "Open Price"
 msgstr "开仓价"
+
+#: src/pages/Perpetuals/index.tsx
+msgid "Open Price:"
+msgstr "开仓价："
 
 #: src/pages/Perpetuals/index.tsx
 msgid "Open Short"
@@ -267,9 +275,17 @@ msgid "Strike Options"
 msgstr "期权行权"
 
 #: src/pages/Options/index.tsx
+msgid "Strike earn"
+msgstr "行权收益"
+
+#: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx
 msgid "Strike price"
 msgstr "行权价"
+
+#: src/pages/Perpetuals/index.tsx
+msgid "The opening price is based on NEST oracle and corrected according to risk compensation."
+msgstr "开仓价是在NEST预言机价格基础上根据风险补偿修正得到"
 
 #: src/libs/hooks/useEagerConnect.ts
 #: src/pages/Shared/Header/Status/Modal/index.tsx

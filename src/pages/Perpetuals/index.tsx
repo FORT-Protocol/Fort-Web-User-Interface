@@ -187,28 +187,23 @@ const Perpetuals: FC = () => {
     normalToBigNumber(dcuInput)
   );
   const kPrice = useCallback(() => {
-    if (!kValue || !kValue.nowPrice || !kValue.k) {return '---'}
-    var price: BigNumber
-    if (isLong) {
-      price = kValue.nowPrice
-        .mul(BASE_AMOUNT.add(kValue.k))
-        .div(BASE_AMOUNT);
-    } else {
-      price = kValue.nowPrice
-        .mul(BASE_AMOUNT)
-        .div(BASE_AMOUNT.add(kValue.k));
+    if (!kValue || !kValue.nowPrice || !kValue.k) {
+      return "---";
     }
-    return bigNumberToNormal(price, 6, 2)
-  }, [isLong, kValue]) 
+    var price: BigNumber;
+    if (isLong) {
+      price = kValue.nowPrice.mul(BASE_AMOUNT.add(kValue.k)).div(BASE_AMOUNT);
+    } else {
+      price = kValue.nowPrice.mul(BASE_AMOUNT).div(BASE_AMOUNT.add(kValue.k));
+    }
+    return bigNumberToNormal(price, 6, 2);
+  }, [isLong, kValue]);
   return (
     <div>
       <MainCard classNames={`${classPrefix}-card`}>
-        <InfoShow topLeftText={t`Token pair`} bottomRightText={`开仓价(待翻译)：`+kPrice()+' USDT'}>
+        <InfoShow topLeftText={t`Token pair`} bottomRightText={""}>
           <div className={`${classPrefix}-card-tokenPair`}>
             <DoubleTokenShow tokenNameOne={"ETH"} tokenNameTwo={"USDT"} />
-            {/* <button className={"select-button"}>
-              <PutDownIcon />
-            </button> */}
           </div>
           <p>
             {`1 ETH = ${bigNumberToNormal(
@@ -218,6 +213,15 @@ const Perpetuals: FC = () => {
             )} USDT`}
           </p>
         </InfoShow>
+        <p className={"kPrice"}>
+          <Tooltip
+            placement="right"
+            color={"#ffffff"}
+            title={t`The opening price is based on NEST oracle and corrected according to risk compensation.`}
+          >
+            <span>{t`Open Price:` + kPrice() + " USDT"}</span>
+          </Tooltip>
+        </p>
         <ChooseType
           callBack={handleType}
           isLong={isLong}

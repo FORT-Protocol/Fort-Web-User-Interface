@@ -8,7 +8,7 @@ import useTransactionListCon, {
   TransactionType,
 } from "../../libs/hooks/useTransactionInfo";
 import useWeb3 from "../../libs/hooks/useWeb3";
-import { bigNumberToNormal } from "../../libs/utils";
+import { BASE_AMOUNT, bigNumberToNormal } from "../../libs/utils";
 import { LeverListType } from "../../pages/Perpetuals";
 import { LongIcon, ShortIcon } from "../Icon";
 import MainButton from "../MainButton";
@@ -24,8 +24,6 @@ export type PerpetualsListKValue = {
   nowPrice?: BigNumber;
   k?: BigNumber;
 };
-
-const baseTotal = BigNumber.from("1000000000000000000");
 
 const PerpetualsList: FC<Props> = ({ ...props }) => {
   const { pendingList } = useTransactionListCon();
@@ -68,12 +66,12 @@ const PerpetualsList: FC<Props> = ({ ...props }) => {
       var price: BigNumber;
       if (!props.item.orientation) {
         price = props.kValue.nowPrice
-          .mul(baseTotal.add(props.kValue.k))
-          .div(baseTotal);
+          .mul(BASE_AMOUNT.add(props.kValue.k))
+          .div(BASE_AMOUNT);
       } else {
         price = props.kValue.nowPrice
-          .mul(baseTotal)
-          .div(baseTotal.add(props.kValue.k));
+          .mul(BASE_AMOUNT)
+          .div(BASE_AMOUNT.add(props.kValue.k));
       }
       const num: BigNumber = await leverContract.balanceOf(
         props.item.index,

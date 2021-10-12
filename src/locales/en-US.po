@@ -180,6 +180,10 @@ msgstr "My staking"
 msgid "Number of Option Token"
 msgstr "Number of Option Token"
 
+#: src/pages/Options/index.tsx
+msgid "One option shares to the return of a ETH."
+msgstr "One option shares to the return of a ETH."
+
 #: src/pages/Shared/TransactionToast/index.tsx
 msgid "Open Future positions"
 msgstr "Open Future positions"
@@ -191,6 +195,10 @@ msgstr "Open Long"
 #: src/pages/Perpetuals/index.tsx
 msgid "Open Price"
 msgstr "Open Price"
+
+#: src/pages/Perpetuals/index.tsx
+msgid "Open Price:"
+msgstr "Open Price:"
 
 #: src/pages/Perpetuals/index.tsx
 msgid "Open Short"
@@ -267,9 +275,17 @@ msgid "Strike Options"
 msgstr "Strike Options"
 
 #: src/pages/Options/index.tsx
+msgid "Strike earn"
+msgstr "Strike earn"
+
+#: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx
 msgid "Strike price"
 msgstr "Strike price"
+
+#: src/pages/Perpetuals/index.tsx
+msgid "The opening price is based on NEST oracle and corrected according to risk compensation."
+msgstr "The opening price is based on NEST oracle and corrected according to risk compensation."
 
 #: src/libs/hooks/useEagerConnect.ts
 #: src/pages/Shared/Header/Status/Modal/index.tsx

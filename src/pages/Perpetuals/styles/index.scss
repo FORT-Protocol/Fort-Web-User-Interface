@@ -2,7 +2,6 @@
 @import 'src/styles/shared.scss';
 
 .perpetuals-card {
-
     width: $baseWidth;
     margin: 0 auto;
     padding: 40px 44px;
@@ -15,6 +14,19 @@
 
         button {
             margin-left: 10px;
+        }
+    }
+
+    .kPrice {
+        margin: 0 20px;
+        margin-top: -20px;
+        color: $gray-info-text-color;
+        font-size: $T4;
+        text-align: right;
+        height: 20px;
+
+        span {
+            border-bottom: 1px dashed $gray-info-text-color;
         }
     }
 
@@ -128,7 +140,7 @@ table {
 
             line-height: 28px;
             padding: 3px 0;
-            border-bottom: 1px solid $gray-info-text-color;
+            border-bottom: 1px dashed $gray-info-text-color;
         }
     }
 }
