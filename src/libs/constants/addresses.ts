@@ -5,7 +5,6 @@ import {
   TokenFortube,
   TokenNest,
   TokenNHBTC,
-  TokenPETH,
   TokenPUSD,
   TokenUSDT,
 } from "../../components/Icon";
@@ -60,7 +59,7 @@ export const tokenList: { [key: string]: TokenType } = {
     addresses: {
       1: ZERO_ADDRESS,
       3: "0x4c23ad0326C8ad411643cEde15E928E39afA728F",
-      4: "0xaE73d363Cb4aC97734E07e48B01D0a1FF5D1190B",
+      4: "0x801b69dA3210BAB7482E21085cd2A14d77b23475",
     },
   },
   NEST: {
@@ -70,7 +69,7 @@ export const tokenList: { [key: string]: TokenType } = {
     addresses: {
       1: ZERO_ADDRESS,
       3: "0xEa9E43FAf5e7F38525238ED4aDf650f06DF4e87F",
-      4: "0xaE73d363Cb4aC97734E07e48B01D0a1FF5D1190B",
+      4: "0xE313F3f49B647fBEDDC5F2389Edb5c93CBf4EE25",
     },
   },
   CoFi: {
@@ -80,7 +79,7 @@ export const tokenList: { [key: string]: TokenType } = {
     addresses: {
       1: ZERO_ADDRESS,
       3: "0x0D73aBdb1415f77698362b8d99FD2a2eD41b0558",
-      4: "0xaE73d363Cb4aC97734E07e48B01D0a1FF5D1190B",
+      4: "0x61EA050b28Ccca539F0faf79Fd26F6Df31b9f15B",
     },
   },
   FOR: {
@@ -90,7 +89,7 @@ export const tokenList: { [key: string]: TokenType } = {
     addresses: {
       1: ZERO_ADDRESS,
       3: "0x9bc2b3da2d2583ca489c053Df76DB2762f3aB394",
-      4: "0xaE73d363Cb4aC97734E07e48B01D0a1FF5D1190B",
+      4: "0x37591670bCc04af593287fbc16C58F12f0B57881",
     },
   },
   PUSD: {
@@ -100,19 +99,19 @@ export const tokenList: { [key: string]: TokenType } = {
     addresses: {
       1: ZERO_ADDRESS,
       3: "0x49FDeD8d731204998ca9e2BDe277949E57bf63b1",
-      4: "0xaE73d363Cb4aC97734E07e48B01D0a1FF5D1190B",
+      4: "0x5407cab67ad304FB8A4aC46D83b3Dd63A9dbA575",
     },
   },
-  PETH: {
-    symbol: "PETH",
-    Icon: TokenPETH,
-    decimals: 18,
-    addresses: {
-      1: ZERO_ADDRESS,
-      3: "0xB3cAc06614642F614255D496302f8545Ea45f6fc",
-      4: "0xaE73d363Cb4aC97734E07e48B01D0a1FF5D1190B",
-    },
-  },
+  // PETH: {
+  //   symbol: "PETH",
+  //   Icon: TokenPETH,
+  //   decimals: 18,
+  //   addresses: {
+  //     1: ZERO_ADDRESS,
+  //     3: "0xB3cAc06614642F614255D496302f8545Ea45f6fc",
+  //     4: "0xaE73d363Cb4aC97734E07e48B01D0a1FF5D1190B",
+  //   },
+  // },
   // "Margin-ETH1L": {
   //     symbol: 'Margin-ETH1L',
   //     Icon: TokenLeverUp,
