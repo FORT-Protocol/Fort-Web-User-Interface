@@ -18,10 +18,18 @@
         }
     }
 
+    .chooseType {
+        margin-top: 20px;
+    }
+
     &-tokenPair + p {
         line-height: 44px;
         font-size: $T2;
         color: $main-button-color;
+    }
+
+    .leverChoose {
+        margin-top: 20px;
     }
 
     .leverChoose + .infoView {

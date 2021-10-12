@@ -4,7 +4,6 @@ import { message } from "antd";
 import { FC, useCallback, useEffect, useRef, useState } from "react";
 import ChooseType from "../../components/ChooseType";
 import { HoldLine } from "../../components/HoldLine";
-// import { PutDownIcon } from "../../components/Icon";
 import InfoShow from "../../components/InfoShow";
 import { LeverChoose } from "../../components/LeverChoose";
 import MainButton from "../../components/MainButton";
@@ -25,6 +24,7 @@ import useTransactionListCon, {
 } from "../../libs/hooks/useTransactionInfo";
 import useWeb3 from "../../libs/hooks/useWeb3";
 import {
+  BASE_AMOUNT,
   bigNumberToNormal,
   formatInputNum,
   normalToBigNumber,
@@ -186,10 +186,24 @@ const Perpetuals: FC = () => {
     isLong,
     normalToBigNumber(dcuInput)
   );
+  const kPrice = useCallback(() => {
+    if (!kValue || !kValue.nowPrice || !kValue.k) {return '---'}
+    var price: BigNumber
+    if (isLong) {
+      price = kValue.nowPrice
+        .mul(BASE_AMOUNT.add(kValue.k))
+        .div(BASE_AMOUNT);
+    } else {
+      price = kValue.nowPrice
+        .mul(BASE_AMOUNT)
+        .div(BASE_AMOUNT.add(kValue.k));
+    }
+    return bigNumberToNormal(price, 6, 2)
+  }, [isLong, kValue]) 
   return (
     <div>
       <MainCard classNames={`${classPrefix}-card`}>
-        <InfoShow topLeftText={t`Token pair`} bottomRightText={""}>
+        <InfoShow topLeftText={t`Token pair`} bottomRightText={`开仓价(待翻译)：`+kPrice()+' USDT'}>
           <div className={`${classPrefix}-card-tokenPair`}>
             <DoubleTokenShow tokenNameOne={"ETH"} tokenNameTwo={"USDT"} />
             {/* <button className={"select-button"}>
