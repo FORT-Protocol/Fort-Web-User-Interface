@@ -52,6 +52,10 @@ msgstr "Buy Options"
 msgid "Call"
 msgstr "Call"
 
+#: src/pages/Farm/FarmCard/index.tsx
+msgid "Claim"
+msgstr "Claim"
+
 #: src/pages/Shared/TransactionToast/index.tsx
 msgid "Claim reward"
 msgstr "Claim reward"
@@ -86,6 +90,10 @@ msgstr "Copied"
 msgid "Current mining rate"
 msgstr "Current mining rate"
 
+#: src/pages/Shared/Header/index.tsx
+msgid "Currently it is a test network, the price fluctuation has increased by 50 times, the slippage is large, and the slippage will be lower in a more realistic scenario."
+msgstr "Currently it is a test network, the price fluctuation has increased by 50 times, the slippage is large, and the slippage will be lower in a more realistic scenario."
+
 #: src/pages/Shared/Header/Status/WalletModal/index.tsx
 msgid "Disconnect"
 msgstr "Disconnect"
@@ -113,6 +121,10 @@ msgstr "Expected get"
 msgid "Expected mining"
 msgstr "Expected mining"
 
+#: src/pages/Farm/FarmCard/index.tsx
+#: src/pages/Farm/FarmCard/index.tsx
+#: src/pages/Farm/FarmCard/index.tsx
+#: src/pages/Farm/FarmCard/index.tsx
 #: src/pages/Shared/Header/index.tsx
 msgid "Farm"
 msgstr "Farm"
@@ -120,10 +132,6 @@ msgstr "Farm"
 #: src/pages/Shared/Header/index.tsx
 msgid "Futures"
 msgstr "Futures"
-
-#: src/pages/Shared/Header/index.tsx
-msgid "Currently it is a test network, the price fluctuation has increased by 50 times, the slippage is large, and the slippage will be lower in a more realistic scenario."
-msgstr "Currently it is a test network, the price fluctuation has increased by 50 times, the slippage is large, and the slippage will be lower in a more realistic scenario."
 
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx
@@ -306,6 +314,7 @@ msgstr "Wait for confirm"
 msgid "Wallet"
 msgstr "Wallet"
 
+#: src/pages/Farm/FarmCard/index.tsx
 #: src/pages/Shared/TransactionToast/index.tsx
 msgid "Withdraw"
 msgstr "Withdraw"

@@ -89,14 +89,14 @@ export const FarmCard: FC<Props> = ({ ...props }) => {
       if (!stakingInfo) {
         return (
           <MainButton className={"farmButton"} disable>
-            Farm
+            <Trans>Farm</Trans>
           </MainButton>
         );
       }
       if (stakingInfo.buttonType === StakingButtonType.disable) {
         return (
           <MainButton className={"farmButton"} disable>
-            Farm
+            <Trans>Farm</Trans>
           </MainButton>
         );
       } else if (stakingInfo.buttonType === StakingButtonType.farm) {
@@ -105,7 +105,7 @@ export const FarmCard: FC<Props> = ({ ...props }) => {
             className={"farmButton"}
             onClick={() => setShowInput(true)}
           >
-            Farm
+            <Trans>Farm</Trans>
           </MainButton>
         );
       } else if (stakingInfo.buttonType === StakingButtonType.claim) {
@@ -120,7 +120,7 @@ export const FarmCard: FC<Props> = ({ ...props }) => {
               getReward();
             }}
           >
-            Claim
+            <Trans>Claim</Trans>
           </MainButton>
         );
       } else if (stakingInfo.buttonType === StakingButtonType.withdraw) {
@@ -135,11 +135,11 @@ export const FarmCard: FC<Props> = ({ ...props }) => {
               withdraw();
             }}
           >
-            Withdraw
+            <Trans>Withdraw</Trans>
           </MainButton>
         );
       }
-      return <MainButton disable>Farm</MainButton>;
+      return <MainButton disable><Trans>Farm</Trans></MainButton>;
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [getReward, stakingInfo, withdraw]
@@ -176,7 +176,7 @@ export const FarmCard: FC<Props> = ({ ...props }) => {
 
   const StakeButton = (
     <div className={"stake-button"}>
-      {showInput ? inputButton : buttonJSX}
+      {showInput ? inputButton : (<div className={"stake-button-div"}>{buttonJSX}</div>)}
       {showInput ? (
         <p
           className={classNames({
@@ -339,7 +339,7 @@ export const FarmCard: FC<Props> = ({ ...props }) => {
       stakingInfo?.buttonType === StakingButtonType.claim ||
       stakingInfo?.buttonType === StakingButtonType.withdraw
     ) {
-      return "----";
+      return "---";
     }
     return `${bigNumberToNormal(
       stakingInfo?.rate || BigNumber.from("0"),

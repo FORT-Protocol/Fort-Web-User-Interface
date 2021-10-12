@@ -52,6 +52,10 @@ msgstr "期权买入"
 msgid "Call"
 msgstr "看涨"
 
+#: src/pages/Farm/FarmCard/index.tsx
+msgid "Claim"
+msgstr "领取奖励"
+
 #: src/pages/Shared/TransactionToast/index.tsx
 msgid "Claim reward"
 msgstr "领取奖励"
@@ -86,6 +90,10 @@ msgstr "已复制"
 msgid "Current mining rate"
 msgstr "当前挖矿率"
 
+#: src/pages/Shared/Header/index.tsx
+msgid "Currently it is a test network, the price fluctuation has increased by 50 times, the slippage is large, and the slippage will be lower in a more realistic scenario."
+msgstr "当前为测试网，价格波动提高了50倍，滑点较大，真实场景不会这么高滑点"
+
 #: src/pages/Shared/Header/Status/WalletModal/index.tsx
 msgid "Disconnect"
 msgstr "断开"
@@ -113,6 +121,10 @@ msgstr "预计获得"
 msgid "Expected mining"
 msgstr "预计出矿"
 
+#: src/pages/Farm/FarmCard/index.tsx
+#: src/pages/Farm/FarmCard/index.tsx
+#: src/pages/Farm/FarmCard/index.tsx
+#: src/pages/Farm/FarmCard/index.tsx
 #: src/pages/Shared/Header/index.tsx
 msgid "Farm"
 msgstr "挖矿"
@@ -120,10 +132,6 @@ msgstr "挖矿"
 #: src/pages/Shared/Header/index.tsx
 msgid "Futures"
 msgstr "永续合约"
-
-#: src/pages/Shared/Header/index.tsx
-msgid "Currently it is a test network, the price fluctuation has increased by 50 times, the slippage is large, and the slippage will be lower in a more realistic scenario."
-msgstr "当前为测试网，价格波动提高了50倍，滑点较大，真实场景不会这么高滑点"
 
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx
@@ -306,6 +314,7 @@ msgstr "等待钱包确认交易"
 msgid "Wallet"
 msgstr "钱包"
 
+#: src/pages/Farm/FarmCard/index.tsx
 #: src/pages/Shared/TransactionToast/index.tsx
 msgid "Withdraw"
 msgstr "取回"

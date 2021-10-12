@@ -74,8 +74,12 @@
     }
 
     .stake-button {
-        margin: 20px 44px 0 44px;
+        margin: 20px 22px 0 22px;
         height: 84px;
+
+        &-div {
+            margin: 0 22px;
+        }
         
         &-inputView {
             display: flex;
