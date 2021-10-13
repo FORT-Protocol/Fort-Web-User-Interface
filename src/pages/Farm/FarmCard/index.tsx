@@ -241,7 +241,7 @@ export const FarmCard: FC<Props> = ({ ...props }) => {
         .mul(myStaking)
         .div(BigNumber.from("1000000000000000000"));
       const claimTime =
-        stopBlock.sub(latestBlock).toNumber() * 13000 + moment().valueOf();
+        stopBlock.sub(latestBlock).toNumber() * 14000 + moment().valueOf();
       const buttonType =
         latestBlock < startBlock.toNumber()
           ? StakingButtonType.disable
@@ -344,7 +344,7 @@ export const FarmCard: FC<Props> = ({ ...props }) => {
     return `${bigNumberToNormal(
       stakingInfo?.rate || BigNumber.from("0"),
       18,
-      8
+      2
     )} DCU/${props.name}`;
   };
   return (
