@@ -47,7 +47,7 @@ export const tokenList: { [key: string]: TokenType } = {
     Icon: TokenFORT,
     decimals: 18,
     addresses: {
-      1: "",
+      1: "0xf56c6eCE0C0d6Fbb9A53282C0DF71dBFaFA933eF",
       3: "0xFe864063e10e5f7D99803765f28d2676A582A816",
       4: "0xc408edF487e98bB932eD4A8983038FF19352eDbd",
     },
@@ -160,13 +160,13 @@ export const FortLeverContract: AddressesType = {
 };
 
 export const FortVaultForStakingContract: AddressesType = {
-  1: "",
+  1: "0xE3940A3E94bca34B9175d156a5E9C5728dFE922F",
   3: "0x176D7C08e5BC8f7334a1b1A5DC2C3516F80e1195",
   4: "0x5cA5E616310c0Cca41B7E4329021C17a5a79a0F1",
 };
 
 export const NestPrice: AddressesType = {
-  1: "",
+  1: "0xB5D2890c061c321A5B6A4a4254bb1522425BAF0A",
   3: "0x85723E83A7E7d88b0F3Ceb4C5bE7C853e3Ed8a82",
   4: "0x40C3EB032f27fDa7AdcF1B753c75B84e27f26838",
 };

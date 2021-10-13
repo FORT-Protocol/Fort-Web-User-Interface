@@ -21,6 +21,26 @@ msgstr "(现货价 - 行权价)*"
 msgid "(Strike price - Spot price)*"
 msgstr "(行权价 - 现货价)*"
 
+#: src/pages/Farm/FarmNoticeModal/index.tsx
+msgid "1. Users who participate in pledge mining need to pledge the Token supported by the agreement to the smart contract, and can retrieve the pledged Token after the lock-up period ends;"
+msgstr "1.参与质押挖矿的用户需要将协议支持的Token质押到智能合约中，并且在锁定期结束后才能取回质押的Token；"
+
+#: src/pages/Farm/FarmNoticeModal/index.tsx
+msgid "2. Participating in pledge mining can get DCU rewards. DCU Token is the only payment voucher for participating in perpetual contracts and European options in the Hedge agreement. DCU currently does not have liquidity and price."
+msgstr "2.参与质押挖矿可以获得DCU奖励，DCU Token是Hedge协议中参与永续合约和欧式期权的唯一支付凭证，DCU目前尚未具有流动性以及价格。"
+
+#: src/pages/Farm/FarmNoticeModal/index.tsx
+msgid "3. In the process of participating in pledge mining, certain miners’ fees are required for operations such as lock-up, receipt of rewards, and withdrawal of funds. Miners’ fees are collected by Ethereum miners. Pledge mining has a certain cost, and there is no guarantee that there will be income."
+msgstr "3.在参与质押挖矿过程中，锁仓、领取奖励、取回资金等操作需要支付一定的矿工费，矿工费由以太坊矿工收取，质押挖矿具有一定的成本，并不能保证一定会有收益。"
+
+#: src/pages/Farm/FarmNoticeModal/index.tsx
+msgid "4. There is no upper limit on the total amount of DCU Token. As the result of the game between users and the agreement, additional issuance or destruction will be carried out. If the agreement has been in the state of additional issuance, the DCU you obtained through mining will depreciate and may even return to zero."
+msgstr "4.DCU Token 总量不设上限，随着用户与协议博弈的结果进行增发或销毁，如果协议一直处于增发状态，那么您挖矿获得的DCU将会贬值，甚至会有归零的可能。"
+
+#: src/pages/Farm/FarmNoticeModal/index.tsx
+msgid "5. The Hedge protocol smart contract has not yet been audited. There may be fatal unknown risks in the smart contract that may cause your principal to be damaged. Please evaluate the risk yourself before deciding whether to participate."
+msgstr "5.Hedge协议智能合约尚未进行审计，智能合约中可能存在致命的未知风险导致您的本金受损，请自行评估风险再决定是否参与。"
+
 #: src/pages/Farm/FarmCard/index.tsx
 #: src/pages/Shared/TransactionToast/index.tsx
 msgid "Approve"
@@ -130,12 +150,12 @@ msgid "Farm"
 msgstr "挖矿"
 
 #: src/pages/Shared/Header/index.tsx
-msgid "Fort Protocol is a Beta version, you need to use it at your own risk, please be careful not to use too much money."
-msgstr "Fort Protocol 为 Beta 版本，使用时需要自担风险，请注意不用使用过多资金。"
-
-#: src/pages/Shared/Header/index.tsx
 msgid "Futures"
 msgstr "永续合约"
+
+#: src/pages/Farm/FarmNoticeModal/index.tsx
+msgid "I have read carefully and fully understand the above risks, and I am willing to bear the losses caused by the risks."
+msgstr "我已仔细阅读并充分理解以上风险，并愿意承担风险造成的损失。"
 
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx
@@ -244,6 +264,10 @@ msgstr "持仓"
 msgid "Put"
 msgstr "看跌"
 
+#: src/pages/Farm/FarmNoticeModal/index.tsx
+msgid "Read more"
+msgstr "了解更多"
+
 #: src/pages/Shared/Header/Status/WalletModal/index.tsx
 msgid "Recent transactions"
 msgstr "最近交易"
@@ -251,6 +275,10 @@ msgstr "最近交易"
 #: src/pages/Farm/FarmCard/index.tsx
 msgid "Reward claim time"
 msgstr "奖励领取时间"
+
+#: src/pages/Farm/FarmNoticeModal/index.tsx
+msgid "Risk Warning"
+msgstr "风险提示"
 
 #: src/components/PerpetualsList/index.tsx
 #: src/pages/Perpetuals/index.tsx
@@ -287,6 +315,10 @@ msgstr "行权收益"
 msgid "Strike price"
 msgstr "行权价"
 
+#: src/pages/Farm/FarmNoticeModal/index.tsx
+msgid "Sure"
+msgstr "确认"
+
 #: src/pages/Perpetuals/index.tsx
 msgid "The opening price is based on NEST oracle and corrected according to risk compensation."
 msgstr "开仓价是在NEST预言机价格基础上根据风险补偿修正得到"
@@ -296,6 +328,10 @@ msgstr "开仓价是在NEST预言机价格基础上根据风险补偿修正得�
 #: src/pages/Shared/Header/Status/Modal/index.tsx
 msgid "This network is not supported, please switch the network"
 msgstr "暂不支持该网络，请切换网络"
+
+#: src/pages/Farm/FarmNoticeModal/index.tsx
+msgid "To enter the Hedge protocol and participate in pledge mining users/smart contracts, they need to fully understand the mining rules and the following risks. Users who do not understand the rules or cannot bear the risks are not recommended to participate:"
+msgstr "进入Hedge 协议，参与质押挖矿的用户/智能合约，需要充分了解挖矿规则以及以下风险，没有理解规则或不能承受风险的用户不建议参与："
 
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx

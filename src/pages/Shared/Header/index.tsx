@@ -28,24 +28,23 @@ const Header: FC = () => {
   ));
   return (
     <header>
-      <div
+      {chainId === 4 ? (<div
         className={classNames({
           [`${header}-notice`]: true,
           [`isHidden`]: noticeHidden,
         })}
       >
-        <b>{chainId === 1 ? (<Trans>
-          Fort Protocol is a Beta version, you need to use it at your own risk, 
-please be careful not to use too much money.
-          </Trans>) : (<Trans>
+        <b><Trans>
           Currently it is a test network, the price fluctuation has increased by 50 times, the slippage is large, and the slippage will be lower in a more realistic scenario.
-          </Trans>)}
+          </Trans>
           
         </b>
+        
         <button onClick={() => setNoticeHidden(true)}>
           <XIconGray />
         </button>
-      </div>
+      </div>) : null}
+      
       <div className={`${header}-nav`}>
         <a href={'https://www.hedge.red'}><FortLogo className={`${header}-logo`}/></a>
         <nav>

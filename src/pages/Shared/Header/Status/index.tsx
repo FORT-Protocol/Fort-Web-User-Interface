@@ -20,6 +20,7 @@ const ConnectStatus: FC = () => {
   )[0];
   const classPrefix = "connectStatus";
   const { pendingList } = useTransactionListCon();
+  var cache = localStorage.getItem("FarmFirst");
   return (
     <div
       className={classNames({
@@ -31,7 +32,7 @@ const ConnectStatus: FC = () => {
         <div className={`${classPrefix}-chainName`}>{thisChain.name}</div>
       ) : null}
 
-      {(isFirst && !account) ? (<Popup open><Modal onClose={() => {
+      {(isFirst && !account && cache === '1') ? (<Popup open><Modal onClose={() => {
     setIsFirst(false)
     modal.current.close()}} /></Popup>) : null}
 

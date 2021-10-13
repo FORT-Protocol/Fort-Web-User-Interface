@@ -240,8 +240,15 @@ export const FarmCard: FC<Props> = ({ ...props }) => {
       var expectedMining = rate
         .mul(myStaking)
         .div(BigNumber.from("1000000000000000000"));
-      const claimTime =
-        stopBlock.sub(latestBlock).toNumber() * 14000 + moment().valueOf();
+      var claimTime = 0;
+      if (stopBlock.lt(latestBlock)) {
+        const blockInfo = await library?.getBlock(
+          stopBlock.toNumber()
+        );
+        claimTime = Number(blockInfo["timestamp"]) * 1000
+      } else {
+        claimTime = stopBlock.sub(latestBlock).toNumber() * 14000 + moment().valueOf()
+      }
       const buttonType =
         latestBlock < startBlock.toNumber()
           ? StakingButtonType.disable

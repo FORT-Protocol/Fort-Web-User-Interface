@@ -21,6 +21,26 @@ msgstr "(Spot price - Strike price)*"
 msgid "(Strike price - Spot price)*"
 msgstr "(Strike price - Spot price)*"
 
+#: src/pages/Farm/FarmNoticeModal/index.tsx
+msgid "1. Users who participate in pledge mining need to pledge the Token supported by the agreement to the smart contract, and can retrieve the pledged Token after the lock-up period ends;"
+msgstr "1. Users who participate in pledge mining need to pledge the Token supported by the agreement to the smart contract, and can retrieve the pledged Token after the lock-up period ends;"
+
+#: src/pages/Farm/FarmNoticeModal/index.tsx
+msgid "2. Participating in pledge mining can get DCU rewards. DCU Token is the only payment voucher for participating in perpetual contracts and European options in the Hedge agreement. DCU currently does not have liquidity and price."
+msgstr "2. Participating in pledge mining can get DCU rewards. DCU Token is the only payment voucher for participating in perpetual contracts and European options in the Hedge agreement. DCU currently does not have liquidity and price."
+
+#: src/pages/Farm/FarmNoticeModal/index.tsx
+msgid "3. In the process of participating in pledge mining, certain miners’ fees are required for operations such as lock-up, receipt of rewards, and withdrawal of funds. Miners’ fees are collected by Ethereum miners. Pledge mining has a certain cost, and there is no guarantee that there will be income."
+msgstr "3. In the process of participating in pledge mining, certain miners’ fees are required for operations such as lock-up, receipt of rewards, and withdrawal of funds. Miners’ fees are collected by Ethereum miners. Pledge mining has a certain cost, and there is no guarantee that there will be income."
+
+#: src/pages/Farm/FarmNoticeModal/index.tsx
+msgid "4. There is no upper limit on the total amount of DCU Token. As the result of the game between users and the agreement, additional issuance or destruction will be carried out. If the agreement has been in the state of additional issuance, the DCU you obtained through mining will depreciate and may even return to zero."
+msgstr "4. There is no upper limit on the total amount of DCU Token. As the result of the game between users and the agreement, additional issuance or destruction will be carried out. If the agreement has been in the state of additional issuance, the DCU you obtained through mining will depreciate and may even return to zero."
+
+#: src/pages/Farm/FarmNoticeModal/index.tsx
+msgid "5. The Hedge protocol smart contract has not yet been audited. There may be fatal unknown risks in the smart contract that may cause your principal to be damaged. Please evaluate the risk yourself before deciding whether to participate."
+msgstr "5. The Hedge protocol smart contract has not yet been audited. There may be fatal unknown risks in the smart contract that may cause your principal to be damaged. Please evaluate the risk yourself before deciding whether to participate."
+
 #: src/pages/Farm/FarmCard/index.tsx
 #: src/pages/Shared/TransactionToast/index.tsx
 msgid "Approve"
@@ -130,12 +150,12 @@ msgid "Farm"
 msgstr "Farm"
 
 #: src/pages/Shared/Header/index.tsx
-msgid "Fort Protocol is a Beta version, you need to use it at your own risk, please be careful not to use too much money."
-msgstr "Fort Protocol is a Beta version, you need to use it at your own risk, please be careful not to use too much money."
-
-#: src/pages/Shared/Header/index.tsx
 msgid "Futures"
 msgstr "Futures"
+
+#: src/pages/Farm/FarmNoticeModal/index.tsx
+msgid "I have read carefully and fully understand the above risks, and I am willing to bear the losses caused by the risks."
+msgstr "I have read carefully and fully understand the above risks, and I am willing to bear the losses caused by the risks."
 
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx
@@ -244,6 +264,10 @@ msgstr "Positions"
 msgid "Put"
 msgstr "Put"
 
+#: src/pages/Farm/FarmNoticeModal/index.tsx
+msgid "Read more"
+msgstr "Read more"
+
 #: src/pages/Shared/Header/Status/WalletModal/index.tsx
 msgid "Recent transactions"
 msgstr "Recent transactions"
@@ -251,6 +275,10 @@ msgstr "Recent transactions"
 #: src/pages/Farm/FarmCard/index.tsx
 msgid "Reward claim time"
 msgstr "Reward claim time"
+
+#: src/pages/Farm/FarmNoticeModal/index.tsx
+msgid "Risk Warning"
+msgstr "Risk Warning"
 
 #: src/components/PerpetualsList/index.tsx
 #: src/pages/Perpetuals/index.tsx
@@ -287,6 +315,10 @@ msgstr "Strike earn"
 msgid "Strike price"
 msgstr "Strike price"
 
+#: src/pages/Farm/FarmNoticeModal/index.tsx
+msgid "Sure"
+msgstr "Sure"
+
 #: src/pages/Perpetuals/index.tsx
 msgid "The opening price is based on NEST oracle and corrected according to risk compensation."
 msgstr "The opening price is based on NEST oracle and corrected according to risk compensation."
@@ -296,6 +328,10 @@ msgstr "The opening price is based on NEST oracle and corrected according to ris
 #: src/pages/Shared/Header/Status/Modal/index.tsx
 msgid "This network is not supported, please switch the network"
 msgstr "This network is not supported, please switch the network"
+
+#: src/pages/Farm/FarmNoticeModal/index.tsx
+msgid "To enter the Hedge protocol and participate in pledge mining users/smart contracts, they need to fully understand the mining rules and the following risks. Users who do not understand the rules or cannot bear the risks are not recommended to participate:"
+msgstr "To enter the Hedge protocol and participate in pledge mining users/smart contracts, they need to fully understand the mining rules and the following risks. Users who do not understand the rules or cannot bear the risks are not recommended to participate:"
 
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx
