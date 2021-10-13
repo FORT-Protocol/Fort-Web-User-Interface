@@ -8,7 +8,7 @@ type Chain = {
   infoURL: string;
 };
 
-const INFURA_API_KEY = "24386bfa69af4babb7d4849a7d904476";
+const INFURA_API_KEY = process.env.REACT_APP_INFURA_KEY;
 
 export const Mainnet = {
   name: "Mainnet",
