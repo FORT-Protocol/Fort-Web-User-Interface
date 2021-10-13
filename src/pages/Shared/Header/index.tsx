@@ -13,7 +13,7 @@ const Header: FC = () => {
   const [noticeHidden, setNoticeHidden] = useState(false);
   const header = "header";
   const routes = [
-    { path: "/perpetuals", content: t`Futures` },
+    { path: "/futures", content: t`Futures` },
     { path: "/options", content: t`Options` },
     { path: "/farm", content: t`Farm` },
   ].map((item) => (

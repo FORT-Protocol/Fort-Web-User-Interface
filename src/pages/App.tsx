@@ -42,7 +42,7 @@ const App: FC = () => {
         <HashRouter>
           <Header />
           <Switch>
-            <Route path="/perpetuals">
+            <Route path="/futures">
               <Perpetuals />
             </Route>
             <Route path="/options">
@@ -51,7 +51,7 @@ const App: FC = () => {
             <Route path="/farm">
               <Mining />
             </Route>
-            <Redirect to="/perpetuals" />
+            <Redirect to="/futures" />
           </Switch>
         </HashRouter>
       </div>
