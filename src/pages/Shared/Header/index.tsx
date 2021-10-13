@@ -5,8 +5,10 @@ import { FortLogo, XIconGray } from "../../../components/Icon";
 import "./styles";
 import { t, Trans } from "@lingui/macro";
 import ConnectStatus from "./Status";
+import useWeb3 from "../../../libs/hooks/useWeb3";
 
 const Header: FC = () => {
+  const { chainId } = useWeb3()
   const location = useLocation();
   const [noticeHidden, setNoticeHidden] = useState(false);
   const header = "header";
@@ -32,10 +34,13 @@ const Header: FC = () => {
           [`isHidden`]: noticeHidden,
         })}
       >
-        <b>
-          <Trans>
+        <b>{chainId === 1 ? (<Trans>
+          Fort Protocol is a Beta version, you need to use it at your own risk, 
+please be careful not to use too much money.
+          </Trans>) : (<Trans>
           Currently it is a test network, the price fluctuation has increased by 50 times, the slippage is large, and the slippage will be lower in a more realistic scenario.
-          </Trans>
+          </Trans>)}
+          
         </b>
         <button onClick={() => setNoticeHidden(true)}>
           <XIconGray />
