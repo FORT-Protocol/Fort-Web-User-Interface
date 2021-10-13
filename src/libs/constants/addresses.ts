@@ -57,7 +57,7 @@ export const tokenList: { [key: string]: TokenType } = {
     Icon: TokenNHBTC,
     decimals: 18,
     addresses: {
-      1: ZERO_ADDRESS,
+      1: "0x1F832091fAf289Ed4f50FE7418cFbD2611225d46",
       3: "0x4c23ad0326C8ad411643cEde15E928E39afA728F",
       4: "0x801b69dA3210BAB7482E21085cd2A14d77b23475",
     },
@@ -67,7 +67,7 @@ export const tokenList: { [key: string]: TokenType } = {
     Icon: TokenNest,
     decimals: 18,
     addresses: {
-      1: ZERO_ADDRESS,
+      1: "0x04abEdA201850aC0124161F037Efd70c74ddC74C",
       3: "0xEa9E43FAf5e7F38525238ED4aDf650f06DF4e87F",
       4: "0xE313F3f49B647fBEDDC5F2389Edb5c93CBf4EE25",
     },
@@ -77,7 +77,7 @@ export const tokenList: { [key: string]: TokenType } = {
     Icon: TokenCoFiX,
     decimals: 18,
     addresses: {
-      1: ZERO_ADDRESS,
+      1: "0x1a23a6BfBAdB59fa563008c0fB7cf96dfCF34Ea1",
       3: "0x0D73aBdb1415f77698362b8d99FD2a2eD41b0558",
       4: "0x61EA050b28Ccca539F0faf79Fd26F6Df31b9f15B",
     },
@@ -87,7 +87,7 @@ export const tokenList: { [key: string]: TokenType } = {
     Icon: TokenFortube,
     decimals: 18,
     addresses: {
-      1: ZERO_ADDRESS,
+      1: "0x1FCdcE58959f536621d76f5b7FfB955baa5A672F",
       3: "0x9bc2b3da2d2583ca489c053Df76DB2762f3aB394",
       4: "0x37591670bCc04af593287fbc16C58F12f0B57881",
     },
@@ -97,90 +97,12 @@ export const tokenList: { [key: string]: TokenType } = {
     Icon: TokenPUSD,
     decimals: 18,
     addresses: {
-      1: ZERO_ADDRESS,
+      1: "0xCCEcC702Ec67309Bc3DDAF6a42E9e5a6b8Da58f0",
       3: "0x49FDeD8d731204998ca9e2BDe277949E57bf63b1",
       4: "0x5407cab67ad304FB8A4aC46D83b3Dd63A9dbA575",
     },
-  },
-  // PETH: {
-  //   symbol: "PETH",
-  //   Icon: TokenPETH,
-  //   decimals: 18,
-  //   addresses: {
-  //     1: ZERO_ADDRESS,
-  //     3: "0xB3cAc06614642F614255D496302f8545Ea45f6fc",
-  //     4: "0xaE73d363Cb4aC97734E07e48B01D0a1FF5D1190B",
-  //   },
-  // },
-  // "Margin-ETH1L": {
-  //     symbol: 'Margin-ETH1L',
-  //     Icon: TokenLeverUp,
-  //     decimals: 18,
-  //     addresses: {
-  //         1: '',
-  //         3: '0x8B350EE1763213a07cbFC205be496f989eC7aEe6',
-  //         4: '0x1BcD7C075C6b94ef4D6a1aEE4496828d61B5f5F1'
-  //     }
-  // },
-  // "Margin-ETH2L": {
-  //     symbol: 'Margin-ETH2L',
-  //     Icon: TokenLeverUp,
-  //     decimals: 18,
-  //     addresses: {
-  //         1: '',
-  //         3: '0x4385b677FE069c2Ee9846967fAf33364Bf70eB06',
-  //         4: '0x1B7D9daDBE37Eb6dF32c8682Ee3090b630D24F3e'
-  //     }
-  // },
-  // "Margin-ETH5L": {
-  //     symbol: 'Margin-ETH5L',
-  //     Icon: TokenLeverUp,
-  //     decimals: 18,
-  //     addresses: {
-  //         1: '',
-  //         3: '0x7E4874fc55Be4109F9Bde3220fE4FF510dEFc989',
-  //         4: '0x6A308373912a73Fe17AB40637061A5eeeDD16975'
-  //     }
-  // },
-  // "Margin-ETH1S": {
-  //     symbol: 'Margin-ETH1S',
-  //     Icon: TokenLeverDown,
-  //     decimals: 18,
-  //     addresses: {
-  //         1: '',
-  //         3: '0xc36C2a814BE5A9E0b739a33821c46bba9a4AF088',
-  //         4: '0x9a1Aea23230447Da01E66Caa9D0D96c039805f89'
-  //     }
-  // },
-  // "Margin-ETH2S": {
-  //     symbol: 'Margin-ETH2S',
-  //     Icon: TokenLeverDown,
-  //     decimals: 18,
-  //     addresses: {
-  //         1: '',
-  //         3: '0x837bEc96b89ac3386cF754e125fE26676c7B1064',
-  //         4: '0x502eAfEB2e8b14C22118e0F5a15427Edc4D3B2bB'
-  //     }
-  // },
-  // "Margin-ETH5S": {
-  //     symbol: 'Margin-ETH5S',
-  //     Icon: TokenLeverDown,
-  //     decimals: 18,
-  //     addresses: {
-  //         1: '',
-  //         3: '0x61764d77161F3fBd945cB19ADdd9DB49d27A9dab',
-  //         4: '0xD46880A5bA1cA2167D71582d8f2D5acdB441aBD5'
-  //     }
-  // }
+  }
 };
-
-// export const LeverTokenList = [
-//     tokenList['Margin-ETH1L'],
-//     tokenList['Margin-ETH1S'],
-//     tokenList['Margin-ETH2L'],
-//     tokenList['Margin-ETH2S'],
-//     tokenList['Margin-ETH5L'],
-//     tokenList['Margin-ETH5S']]
 
 export const LeverIndex: { [key: string]: any } = {
   // 目标币

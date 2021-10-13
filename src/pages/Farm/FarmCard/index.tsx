@@ -43,8 +43,8 @@ type StakingType = {
   buttonType: StakingButtonType;
 };
 
-// TODO:主网上线替换 1month = 165000
-const oneMonthBlock = 300;
+const oneMonthBlock = 200000;
+// const oneMonthBlock = 300;
 
 export const FarmCard: FC<Props> = ({ ...props }) => {
   const { account, chainId, library } = useWeb3();
