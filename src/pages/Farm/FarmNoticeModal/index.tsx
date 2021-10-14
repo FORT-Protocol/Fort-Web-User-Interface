@@ -92,7 +92,7 @@ const FarmNoticeModal: FC<Props> = ({ ...props }) => {
           disable={!selected}
           className={`${classPrefix}-card-buttonGroup-sure`}
           onClick={(e) => {
-            if (props.onClose) {
+            if (props.onClose && selected) {
               localStorage.setItem("FarmFirst", "1");
               props.onClose(e);
             }

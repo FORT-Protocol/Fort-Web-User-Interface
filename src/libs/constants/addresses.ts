@@ -5,6 +5,7 @@ import {
   TokenFortube,
   TokenNest,
   TokenNHBTC,
+  TokenPETH,
   TokenPUSD,
   TokenUSDT,
 } from "../../components/Icon";
@@ -98,6 +99,16 @@ export const tokenList: { [key: string]: TokenType } = {
     decimals: 18,
     addresses: {
       1: "0xCCEcC702Ec67309Bc3DDAF6a42E9e5a6b8Da58f0",
+      3: "0x49FDeD8d731204998ca9e2BDe277949E57bf63b1",
+      4: "0x5407cab67ad304FB8A4aC46D83b3Dd63A9dbA575",
+    },
+  },
+  PETH: {
+    symbol: "PETH",
+    Icon: TokenPETH,
+    decimals: 18,
+    addresses: {
+      1: "0x53f878Fb7Ec7B86e4F9a0CB1E9a6c89C0555FbbD",
       3: "0x49FDeD8d731204998ca9e2BDe277949E57bf63b1",
       4: "0x5407cab67ad304FB8A4aC46D83b3Dd63A9dbA575",
     },
