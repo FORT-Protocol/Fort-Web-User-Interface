@@ -64,3 +64,29 @@ export function useFortEuropeanOptionExercise(
     const txPromise = useSendTransaction(contract, tx, {title:`Strike Options`, info:index.toString(), type: TransactionType.closeOption})
     return txPromise
 }
+
+export function useFortEuropeanOptionSell(
+    index: BigNumber,
+    amount: BigNumber
+) {
+    const { account, chainId } = useWeb3()
+    var contract = FortEuropeanOption(FortEuropeanOptionContract)
+    var callData: string | undefined
+    if (!chainId) {
+        contract = null
+    } else {
+        callData = contract?.interface.encodeFunctionData('sell', [
+            index, 
+            amount]
+        )
+    }
+    
+    const tx = {
+        from: account,
+        to: contract?.address,
+        data: callData,
+        value: PRICE_FEE
+    }
+    const txPromise = useSendTransaction(contract, tx, {title:`Sell Options`, info:index.toString(), type: TransactionType.sellOption})
+    return txPromise
+}

@@ -60,7 +60,7 @@ const MintOptions: FC = () => {
     Array<OptionsListType>
   >([]);
   const [showLoading, setShowLoading] = useState<boolean>(false);
-  const [priceNow, setPriceNow] = useState("---");
+  const [priceNow, setPriceNow] = useState<BigNumber>();
   const [fortBalance, setFortBalance] = useState(BigNumber.from(0));
   const [optionTokenValue, setOptionTokenValue] = useState<BigNumber>();
 
@@ -71,6 +71,7 @@ const MintOptions: FC = () => {
         key={item.index.toString() + account}
         item={item}
         blockNum={latestBlock.blockNum.toString()}
+        nowPrice={priceNow}
       />
     );
   });
@@ -108,7 +109,7 @@ const MintOptions: FC = () => {
     const latestTx = txList[txList.length - 1];
     if (
       latestTx.txState === 1 &&
-      (latestTx.type === 2 || latestTx.type === 3)
+      (latestTx.type === 2 || latestTx.type === 3 || latestTx.type === 8)
     ) {
       setTimeout(getOptionsList, 4000);
     }
@@ -132,7 +133,7 @@ const MintOptions: FC = () => {
     const price = await contract.triggeredPrice(
       tokenList["USDT"].addresses[chainId]
     );
-    setPriceNow(bigNumberToNormal(price[1], tokenList["USDT"].decimals, 2));
+    setPriceNow(price[1]);
   };
   useEffect(() => {
     if (!nestPriceContract || !chainId) {
@@ -196,7 +197,7 @@ const MintOptions: FC = () => {
       fortEuropeanOption &&
       strikePrice !== "" &&
       fortNum !== "" &&
-      priceNow !== "---" &&
+      priceNow &&
       exercise.blockNum !== 0
     ) {
       (async () => {
@@ -204,7 +205,7 @@ const MintOptions: FC = () => {
         try {
           const value = await fortEuropeanOption.estimate(
             ZERO_ADDRESS,
-            normalToBigNumber(priceNow, tokenList["USDT"].decimals).toString(),
+            priceNow,
             normalToBigNumber(
               strikePrice,
               tokenList["USDT"].decimals
@@ -267,7 +268,7 @@ const MintOptions: FC = () => {
               <PutDownIcon />
             </button> */}
             </div>
-            <p>{`1 ETH = ${priceNow} USDT`}</p>
+            <p>{`1 ETH = ${priceNow ? bigNumberToNormal(priceNow, 6, 2) : '---'} USDT`}</p>
           </InfoShow>
           <ChooseType
             callBack={handleType}
@@ -450,6 +451,9 @@ const MintOptions: FC = () => {
                 </th>
                 <th>
                   <Trans>Option shares</Trans>
+                </th>
+                <th>
+                  <Trans>Sale earn</Trans>
                 </th>
                 <th>
                   <Trans>Strike earn</Trans>

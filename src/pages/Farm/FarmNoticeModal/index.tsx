@@ -19,7 +19,7 @@ const FarmNoticeModal: FC<Props> = ({ ...props }) => {
         <Trans>Risk Warning</Trans>
       </p>
       <ul>
-        <input/>
+        <input />
         <li>
           <Trans>
             To enter the Hedge protocol and participate in pledge mining
@@ -70,19 +70,19 @@ const FarmNoticeModal: FC<Props> = ({ ...props }) => {
           </Trans>
         </li>
         <li className={`${classPrefix}-card-select`}>
-          
-            <button
-              className={classNames({
-                [`selectButton`]: true,
-                [`selected`]: selected,
-              })}
-              onClick={() => {
-                setSelected(!selected);
-              }}
-            >
-              <NoticeSelected />
-            </button>{" "}
-            <Trans>I have read carefully and fully understand the above risks, and I am
+          <button
+            className={classNames({
+              [`selectButton`]: true,
+              [`selected`]: selected,
+            })}
+            onClick={() => {
+              setSelected(!selected);
+            }}
+          >
+            <NoticeSelected />
+          </button>{" "}
+          <Trans>
+            I have read carefully and fully understand the above risks, and I am
             willing to bear the losses caused by the risks.
           </Trans>
         </li>
@@ -100,10 +100,14 @@ const FarmNoticeModal: FC<Props> = ({ ...props }) => {
         >
           <Trans>Sure</Trans>
         </MainButton>
-        <a href="https://github.com/FORT-Protocol/Docs/blob/main/Hedge_Product_Document.pdf" target="view_window"><MainButton className={`${classPrefix}-card-buttonGroup-more`}>
-          <Trans>Read more</Trans>
-        </MainButton></a>
-        
+        <a
+          href="https://github.com/FORT-Protocol/Docs/blob/main/Hedge_Product_Document.pdf"
+          target="view_window"
+        >
+          <button className={`${classPrefix}-card-buttonGroup-more`}>
+            <Trans>Read more</Trans>
+          </button>
+        </a>
       </div>
     </MainCard>
   );

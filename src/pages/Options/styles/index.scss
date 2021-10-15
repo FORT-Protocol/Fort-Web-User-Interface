@@ -49,14 +49,6 @@
         justify-content: space-between;
         flex-direction: column;
 
-        svg {
-            margin: 0 auto;
-            height: 60px;
-            path {
-                fill: $button-disable-color;
-            }
-        }
-
         &-tokenTitle {
             @include normal-text;
 
@@ -201,6 +193,19 @@ table {
             margin-left: 5px;
             line-height: 44px;
             color: $down-color;
+        }
+    }
+
+    td.buttonGroup {
+
+        div{
+            height: 28px;
+            display: flex;
+            justify-content: center;
+
+            .fort-button + .fort-button {
+                margin-left: 10px;
+            }
         }
     }
 }

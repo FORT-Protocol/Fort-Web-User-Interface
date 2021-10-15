@@ -27,7 +27,7 @@ const Farm: FC = () => {
   return (
     <div className={classPrefix}>
       {cache !== '1' ? (<Popup
-          ref={modal} open closeOnDocumentClick={false}><FarmNoticeModal onClose={() => modal.current.close()}></FarmNoticeModal></Popup>) : null}
+          ref={modal} open><FarmNoticeModal onClose={() => modal.current.close()}></FarmNoticeModal></Popup>) : null}
       <ul>{farms}</ul>
     </div>
   );

@@ -56,5 +56,16 @@
             display: block;
             margin-top: 20px;
         }
+
+        &-more {
+            width: 100%;
+            text-align: center;
+            font-family: $boldFont;
+            border-radius: 22px;
+            height: 44px;
+            border: 1px solid $main-button-color;
+            color: $main-button-color;
+            font-size: $T2;
+        }
     }
 }

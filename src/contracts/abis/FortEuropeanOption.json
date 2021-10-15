@@ -104,6 +104,37 @@
 		"type": "event"
 	},
 	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "index",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "dcuAmount",
+				"type": "uint256"
+			}
+		],
+		"name": "Sell",
+		"type": "event"
+	},
+	{
 		"inputs": [],
 		"name": "_governance",
 		"outputs": [
@@ -134,6 +165,45 @@
 			{
 				"internalType": "uint256",
 				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "tokenAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "oraclePrice",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "strikePrice",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "orientation",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "exerciseBlock",
+				"type": "uint256"
+			}
+		],
+		"name": "calcV",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "v",
 				"type": "uint256"
 			}
 		],
@@ -511,6 +581,24 @@
 	{
 		"inputs": [
 			{
+				"internalType": "uint256",
+				"name": "index",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "sell",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "address",
 				"name": "tokenAddress",
 				"type": "address"
@@ -539,19 +627,6 @@
 			}
 		],
 		"name": "setConfig",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "usdtTokenAddress",
-				"type": "address"
-			}
-		],
-		"name": "setUsdtTokenAddress",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"

@@ -280,6 +280,18 @@ msgstr "Reward claim time"
 msgid "Risk Warning"
 msgstr "Risk Warning"
 
+#: src/pages/Options/index.tsx
+msgid "Sale earn"
+msgstr "Sale earn"
+
+#: src/components/OptionsList/index.tsx
+msgid "Sell"
+msgstr "Sell"
+
+#: src/pages/Shared/TransactionToast/index.tsx
+msgid "Sell Options"
+msgstr "Sell Options"
+
 #: src/components/PerpetualsList/index.tsx
 #: src/pages/Perpetuals/index.tsx
 msgid "Short"

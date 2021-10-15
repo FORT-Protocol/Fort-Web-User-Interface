@@ -2,9 +2,9 @@ import { BigNumber } from "@ethersproject/bignumber";
 import { t, Trans } from "@lingui/macro";
 import moment from "moment";
 import { FC, useEffect, useState } from "react";
-import { useFortEuropeanOptionExercise } from "../../contracts/hooks/useFortEuropeanOptionTransation";
-import { tokenList } from "../../libs/constants/addresses";
-import { NestPriceContract } from "../../libs/hooks/useContract";
+import { useFortEuropeanOptionExercise, useFortEuropeanOptionSell } from "../../contracts/hooks/useFortEuropeanOptionTransation";
+import { FortEuropeanOptionContract, tokenList } from "../../libs/constants/addresses";
+import { FortEuropeanOption, NestPriceContract } from "../../libs/hooks/useContract";
 import useTransactionListCon, {
   TransactionType,
 } from "../../libs/hooks/useTransactionInfo";
@@ -19,6 +19,7 @@ type Props = {
   key: string;
   className: string;
   blockNum: string;
+  nowPrice?: BigNumber
 };
 
 const OptionsList: FC<Props> = ({ ...props }) => {
@@ -26,12 +27,22 @@ const OptionsList: FC<Props> = ({ ...props }) => {
   const { chainId, library } = useWeb3();
   const [timeString, setTimeString] = useState("---");
   const [strikeAmount, setStrikeAmount] = useState<BigNumber>();
+  const [saleAmount, setSaleAmount] = useState<BigNumber>();
   const priceContract = NestPriceContract();
+  const optionsContract = FortEuropeanOption(FortEuropeanOptionContract);
   const loadingButton = () => {
     const closeTx = pendingList.filter(
       (item) =>
         item.info === props.item.index.toString() &&
         item.type === TransactionType.closeOption
+    );
+    return closeTx.length > 0 ? true : false;
+  };
+  const loadingSellButton = () => {
+    const closeTx = pendingList.filter(
+      (item) =>
+        item.info === props.item.index.toString() &&
+        item.type === TransactionType.sellOption
     );
     return closeTx.length > 0 ? true : false;
   };
@@ -47,6 +58,10 @@ const OptionsList: FC<Props> = ({ ...props }) => {
   const TokenOneSvg = tokenList[tokenName()].Icon;
   const TokenTwoSvg = tokenList["USDT"].Icon;
   const active = useFortEuropeanOptionExercise(
+    props.item.index,
+    props.item.balance
+  );
+  const sellActive = useFortEuropeanOptionSell(
     props.item.index,
     props.item.balance
   );
@@ -69,7 +84,7 @@ const OptionsList: FC<Props> = ({ ...props }) => {
       );
     } else {
       (async () => {
-        const blockInfo = await library?.getBlock(
+        const blockInfo = await library.getBlock(
           props.item.exerciseBlock.toNumber()
         );
         setTimeString(
@@ -102,12 +117,33 @@ const OptionsList: FC<Props> = ({ ...props }) => {
         }
       })();
     }
-  }, [chainId, library, priceContract, props.blockNum, props.item.balance, props.item.exerciseBlock, props.item.orientation, props.item.strikePrice]);
+  }, [chainId, library, optionsContract, priceContract, props.blockNum, props.item.balance, props.item.exerciseBlock, props.item.index, props.item.orientation, props.item.strikePrice]);
+
+  useEffect(() => {
+    if (!optionsContract || !chainId || !props.nowPrice) {return}
+    if (props.item.exerciseBlock.toNumber() >= Number(props.blockNum)) {
+      (async() => {
+        const calcV:BigNumber = await optionsContract.calcV(tokenList['ETH'].addresses[chainId], props.nowPrice, props.item.strikePrice, props.item.orientation, props.item.exerciseBlock)
+        const letNum = BigNumber.from('18446744073709551616000000')
+        const sellNUm = calcV.mul(props.item.balance).mul(BigNumber.from('975')).div(BigNumber.from('1000').mul(letNum))
+        setSaleAmount(sellNUm)
+      })();
+    }
+  }, [chainId, optionsContract, props.blockNum, props.item.balance, props.item.exerciseBlock, props.item.orientation, props.item.strikePrice, props.nowPrice])
 
   const checkButton = () => {
     if (
       loadingButton() ||
       Number(props.blockNum) <= props.item.exerciseBlock.toNumber()
+    ) {
+      return true;
+    }
+    return false;
+  };
+  const checkSellButton = () => {
+    if (
+      loadingSellButton() ||
+      Number(props.blockNum) > props.item.exerciseBlock.toNumber()
     ) {
       return true;
     }
@@ -134,8 +170,20 @@ const OptionsList: FC<Props> = ({ ...props }) => {
         <p>{timeString}</p>
       </td>
       <td>{bigNumberToNormal(props.item.balance, 18, 2)}</td>
+      <td>{saleAmount ? bigNumberToNormal(saleAmount, 18, 2) : '---'}</td>
       <td>{strikeAmount ? bigNumberToNormal(strikeAmount, 18, 2) : '---'}</td>
-      <td>
+      <td className={'buttonGroup'}>
+     
+        <div>
+        <MainButton
+          onClick={() => {
+            return checkSellButton() ? null : sellActive();
+          }}
+          loading={loadingSellButton()}
+          disable={checkSellButton()}
+        >
+          <Trans>Sell</Trans>
+        </MainButton>
         <MainButton
           onClick={() => {
             return checkButton() ? null : active();
@@ -145,6 +193,8 @@ const OptionsList: FC<Props> = ({ ...props }) => {
         >
           <Trans>Strike</Trans>
         </MainButton>
+        </div>
+        
       </td>
     </tr>
   );

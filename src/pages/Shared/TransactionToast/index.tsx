@@ -78,6 +78,8 @@ export const transactionTitle = (type: TransactionType) => {
       return t`Claim reward`;
     case 7:
       return t`Withdraw`;
+    case 8:
+      return t`Sell Options`;
     default:
       break;
   }
