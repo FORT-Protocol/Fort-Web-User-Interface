@@ -21,6 +21,10 @@
             margin-top: 10px;
             font-size: $T2;
             font-family: $boldFont;
+
+            span {
+                border-bottom: 1px dashed $gray-info-text-color;
+            }
         }
     }
 
@@ -75,7 +79,6 @@
 
     .stake-button {
         margin: 20px 22px 0 22px;
-        height: 84px;
 
         &-div {
             margin: 0 22px;
@@ -138,6 +141,16 @@
             &.red {
                 color: $wrongAndNotice-color;
             }
+        }
+    }
+
+    .farm-getLink {
+        margin: 20px auto;
+        text-align: center;
+        font-size: $T3;
+
+        a {
+            color: $main-button-color;
         }
     }
 }

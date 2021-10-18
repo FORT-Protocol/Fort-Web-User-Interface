@@ -67,6 +67,10 @@ msgstr "Buy Option"
 msgid "Buy Options"
 msgstr "Buy Options"
 
+#: src/pages/Farm/FarmCard/index.tsx
+msgid "COFI is the governance token of COFIX, a decentralized transaction protocol, and can be buy in COFIX."
+msgstr "COFI is the governance token of COFIX, a decentralized transaction protocol, and can be buy in COFIX."
+
 #: src/components/OptionsList/index.tsx
 #: src/pages/Options/index.tsx
 msgid "Call"
@@ -200,6 +204,10 @@ msgstr "Mining pool number"
 msgid "My staking"
 msgstr "My staking"
 
+#: src/pages/Farm/FarmCard/index.tsx
+msgid "No"
+msgstr "No"
+
 #: src/pages/Shared/TransactionModal/index.tsx
 msgid "Number of Option Token"
 msgstr "Number of Option Token"
@@ -241,6 +249,14 @@ msgstr "Option shares"
 #: src/pages/Shared/Header/index.tsx
 msgid "Options"
 msgstr "Options"
+
+#: src/pages/Farm/FarmCard/index.tsx
+msgid "PETH is a collateralized synthetic asset of the Parasset protocol.The 1:1 anchor ETH can be synthesized by collateralizing USDT or NEST."
+msgstr "PETH is a collateralized synthetic asset of the Parasset protocol.The 1:1 anchor ETH can be synthesized by collateralizing USDT or NEST."
+
+#: src/pages/Farm/FarmCard/index.tsx
+msgid "PUSD is a collateralized synthetic asset of the Parasset protocol.USDT is anchored at 1:1 and can be synthesized by collateralizing ETH or NEST."
+msgstr "PUSD is a collateralized synthetic asset of the Parasset protocol.USDT is anchored at 1:1 and can be synthesized by collateralizing ETH or NEST."
 
 #: src/pages/Options/index.tsx
 #: src/pages/Perpetuals/index.tsx
@@ -391,9 +407,17 @@ msgstr "Withdraw"
 msgid "compare with spot price and strike price"
 msgstr "compare with spot price and strike price"
 
+#: src/pages/Farm/FarmCard/index.tsx
+msgid "get it now"
+msgstr "get it now"
+
 #: src/pages/Perpetuals/index.tsx
 msgid "lever"
 msgstr "lever"
+
+#: src/pages/Farm/FarmCard/index.tsx
+msgid "nHBTC is the quotation mining certificate for HBTC-ETH in the NEST protocol, which can be obtained through quotation mining or buy in Huobi exchange."
+msgstr "nHBTC is the quotation mining certificate for HBTC-ETH in the NEST protocol, which can be obtained through quotation mining or buy in Huobi exchange."
 
 #: src/pages/Farm/FarmCard/index.tsx
 msgid "wallet:"

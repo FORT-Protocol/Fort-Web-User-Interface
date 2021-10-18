@@ -4612,13 +4612,13 @@ mark {
 .ant-tooltip-inner {
   min-width: 30px;
   min-height: 32px;
-  padding: 6px 8px;
+  padding: 15px 15px;
   color: #fff;
   text-align: left;
   text-decoration: none;
   word-wrap: break-word;
   background-color: rgba(0, 0, 0, 0.75);
-  border-radius: 2px;
+  border-radius: 12px;
   box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
 }
 .ant-tooltip-arrow {
@@ -4629,6 +4629,7 @@ mark {
   overflow: hidden;
   background: transparent;
   pointer-events: none;
+  display: none;
 }
 .ant-tooltip-arrow-content {
   position: absolute;

@@ -1,6 +1,7 @@
 import { BigNumber } from "@ethersproject/bignumber";
 import { MaxUint256 } from "@ethersproject/constants";
 import { t, Trans } from "@lingui/macro";
+import { Tooltip } from "antd";
 import classNames from "classnames";
 import moment from "moment";
 import { FC, useCallback, useEffect, useState } from "react";
@@ -45,6 +46,33 @@ type StakingType = {
 
 const oneMonthBlock = 200000;
 // const oneMonthBlock = 300;
+type TokenLink = {
+  [key: string]: string;
+};
+type TokenLinkMap = { [key: string]: TokenLink };
+
+const tokenInfoList: TokenLinkMap = {
+  NEST: {
+    info: "",
+    link: "https://cofix.tech/",
+  },
+  CoFi: {
+    info: t`COFI is the governance token of COFIX, a decentralized transaction protocol, and can be buy in COFIX.`,
+    link: "https://cofix.tech/",
+  },
+  PETH: {
+    info: t`PETH is a collateralized synthetic asset of the Parasset protocol.The 1:1 anchor ETH can be synthesized by collateralizing USDT or NEST.`,
+    link: "https://parasset.top/",
+  },
+  NHBTC: {
+    info: t`nHBTC is the quotation mining certificate for HBTC-ETH in the NEST protocol, which can be obtained through quotation mining or buy in Huobi exchange.`,
+    link: "https://cofix.tech/",
+  },
+  PUSD: {
+    info: t`PUSD is a collateralized synthetic asset of the Parasset protocol.USDT is anchored at 1:1 and can be synthesized by collateralizing ETH or NEST.`,
+    link: "https://parasset.top/",
+  },
+};
 
 export const FarmCard: FC<Props> = ({ ...props }) => {
   const { account, chainId, library } = useWeb3();
@@ -139,7 +167,11 @@ export const FarmCard: FC<Props> = ({ ...props }) => {
           </MainButton>
         );
       }
-      return <MainButton disable><Trans>Farm</Trans></MainButton>;
+      return (
+        <MainButton disable>
+          <Trans>Farm</Trans>
+        </MainButton>
+      );
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [getReward, stakingInfo, withdraw]
@@ -176,7 +208,11 @@ export const FarmCard: FC<Props> = ({ ...props }) => {
 
   const StakeButton = (
     <div className={"stake-button"}>
-      {showInput ? inputButton : (<div className={"stake-button-div"}>{buttonJSX}</div>)}
+      {showInput ? (
+        inputButton
+      ) : (
+        <div className={"stake-button-div"}>{buttonJSX}</div>
+      )}
       {showInput ? (
         <p
           className={classNames({
@@ -242,12 +278,11 @@ export const FarmCard: FC<Props> = ({ ...props }) => {
         .div(BigNumber.from("1000000000000000000"));
       var claimTime = 0;
       if (stopBlock.lt(latestBlock)) {
-        const blockInfo = await library?.getBlock(
-          stopBlock.toNumber()
-        );
-        claimTime = Number(blockInfo["timestamp"]) * 1000
+        const blockInfo = await library?.getBlock(stopBlock.toNumber());
+        claimTime = Number(blockInfo["timestamp"]) * 1000;
       } else {
-        claimTime = stopBlock.sub(latestBlock).toNumber() * 14000 + moment().valueOf()
+        claimTime =
+          stopBlock.sub(latestBlock).toNumber() * 14000 + moment().valueOf();
       }
       const buttonType =
         latestBlock < startBlock.toNumber()
@@ -358,7 +393,16 @@ export const FarmCard: FC<Props> = ({ ...props }) => {
     <MainCard classNames={`stakeCard`}>
       <div className={`${classPrefix}-li-tokenInfo`}>
         <TokenIcon />
-        <p>{props.name}</p>
+        {props.name === 'NEST' ? (<p>{props.name}</p>) : (<p>
+          <Tooltip
+            placement="top"
+            color={"#ffffff"}
+            title={tokenInfoList[props.name].info}
+          >
+            <span>{props.name}</span>
+          </Tooltip>
+        </p>)}
+        
       </div>
       <div className={`${classPrefix}-middleInfo`}>
         <LineShowInfo
@@ -412,6 +456,12 @@ export const FarmCard: FC<Props> = ({ ...props }) => {
         />
       </div>
       {StakeButton}
+      <p className={`${classPrefix}-getLink`}>
+        <Trans>No</Trans> {props.name},{" "}
+        <a href={`${tokenInfoList[props.name].link}`} target="view_window">
+          <Trans>get it now</Trans>
+        </a>
+      </p>
     </MainCard>
   );
 };
