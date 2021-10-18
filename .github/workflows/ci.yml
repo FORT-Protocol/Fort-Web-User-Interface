@@ -3,7 +3,7 @@ name: deploy
 on:
   push:
     branches:
-      - main
+      - rinkeby
 
 jobs:
   build:
@@ -35,8 +35,8 @@ jobs:
           name: static
           path: build/
 
-  deploy-main:
-    environment: main
+  deploy-rinkeby:
+    environment: rinkeby
     needs: build
     runs-on: ubuntu-latest
     env:
