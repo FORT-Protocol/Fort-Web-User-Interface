@@ -25,6 +25,7 @@ type Props = {
   name: string;
   time: number;
   total: BigNumber;
+  showNotice: () => boolean;
 };
 
 enum StakingButtonType {
@@ -142,7 +143,7 @@ export const FarmCard: FC<Props> = ({ ...props }) => {
             disable={claimButtonDis()}
             className={"farmButton"}
             onClick={() => {
-              if (claimButtonDis()) {
+              if (claimButtonDis() || props.showNotice()) {
                 return;
               }
               getReward();
@@ -157,7 +158,7 @@ export const FarmCard: FC<Props> = ({ ...props }) => {
             disable={withdrawButtonDis()}
             className={"farmButton"}
             onClick={() => {
-              if (withdrawButtonDis()) {
+              if (withdrawButtonDis() || props.showNotice()) {
                 return;
               }
               withdraw();
@@ -193,6 +194,7 @@ export const FarmCard: FC<Props> = ({ ...props }) => {
           approveTrue && normalToBigNumber(inputValue).gt(balanceAmount)
         }
         onClick={() => {
+          if (props.showNotice()) {return}
           if (approveTrue) {
             stake();
             setShowInput(false);

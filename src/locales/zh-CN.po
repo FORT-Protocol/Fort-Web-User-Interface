@@ -123,8 +123,8 @@ msgid "Disconnect"
 msgstr "断开"
 
 #: src/pages/Perpetuals/index.tsx
-msgid "Dynamic changes in Margin Assets, less than 10 will be liquidated"
-msgstr "保证金净资产动态变化，小于 10 将被清算"
+msgid "Dynamic changes in net assets, less than a certain amount of liquidation will be liquidated, the amount of liquidation is Max{margin*leverage*0.02, 10}"
+msgstr "净资产动态变化，小于一定的清算额将被清算，清算额为Max'{'保证金*杠杆系数*0.02，10'}'"
 
 #: src/pages/Shared/TransactionModal/index.tsx
 msgid "European option Token minted successfully"

@@ -79,12 +79,6 @@ const PerpetualsList: FC<Props> = ({ ...props }) => {
         account
       );
       setMarginAssets(num);
-      console.log(props.kValue.k.toString());
-      console.log(
-        props.item.index.toString(),
-        price.toString(),
-        num.toString()
-      );
     })();
   }, [
     account,

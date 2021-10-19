@@ -94,7 +94,6 @@ const Perpetuals: FC = () => {
       priceList[0][0]
     );
     setKValue({ nowPrice: priceList[0][1], k: k });
-    console.log(priceList);
   };
   // price
   useEffect(() => {
@@ -138,7 +137,6 @@ const Perpetuals: FC = () => {
       return;
     }
     const leverList = await leverContract.find("0", "13", "13", account);
-    console.log(leverList);
     const resultList = leverList.filter((item: LeverListType) =>
       item.balance.gt(BigNumber.from("0"))
     );
@@ -299,7 +297,7 @@ const Perpetuals: FC = () => {
                   <Tooltip
                     placement="top"
                     color={"#ffffff"}
-                    title={t`Dynamic changes in Margin Assets, less than 10 will be liquidated`}
+                    title={t`Dynamic changes in net assets, less than a certain amount of liquidation will be liquidated, the amount of liquidation is Max{margin*leverage*0.02, 10}`}
                   >
                     <span>
                       <Trans>Margin Assets</Trans>
