@@ -19,6 +19,7 @@ type Props = {
   key: string;
   className: string;
   blockNum: string;
+  showNotice: () => boolean;
   nowPrice?: BigNumber
 };
 
@@ -177,6 +178,7 @@ const OptionsList: FC<Props> = ({ ...props }) => {
         <div>
         <MainButton
           onClick={() => {
+            if (props.showNotice()) {return}
             return checkSellButton() ? null : sellActive();
           }}
           loading={loadingSellButton()}
@@ -186,6 +188,7 @@ const OptionsList: FC<Props> = ({ ...props }) => {
         </MainButton>
         <MainButton
           onClick={() => {
+            if (props.showNotice()) {return}
             return checkButton() ? null : active();
           }}
           loading={loadingButton()}

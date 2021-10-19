@@ -21,6 +21,14 @@ msgstr "(现货价 - 行权价)*"
 msgid "(Strike price - Spot price)*"
 msgstr "(行权价 - 现货价)*"
 
+#: src/pages/Options/OptionsNoticeModal/index.tsx
+msgid "1. Hedge Protocol option pricing is derived from the BS option pricing model. Unlike traditional option pricing methods, Hedge options are completely priced by algorithms, while traditional centralized exchanges are freely quoted by users. This pricing method is a bold one. Attempts and innovations, but it may also bring unknown risks."
+msgstr "1. Hedge Protocol 期权定价采用B-S期权定价模型推算而来，与传统的期权定价方式不同，Hedge 期权完全由算法定价，而传统中心化交易所由用户自由报价而来，这种定价方式是一次大胆的尝试与创新，但也可能带来未知的风险。"
+
+#: src/pages/Perpetuals/PerpetualsNoticeModal/index.tsx
+msgid "1. Uncertainty risk of income: The calculation method of Hedge perpetual contract is different from the calculation method of perpetual contract of traditional centralized exchange. The Hedge perpetual contract converts the future price of the asset based on the historical rate of return of the asset. Therefore, the asset price increases by 100% after the user opens a position. The user's income is not 100%. In extreme cases, even if the asset price is rising, your income may be negative."
+msgstr "1. 收益的不确定性风险：Hedge永续合约的收益计算方式与传统中心化交易所的永续合约计算方式不一样，Hedge永续合约根据资产的历史收益率，对资产的未来价格进行折算定价，因此用户开仓后资产价格上涨100%，用户的收益并不是100%，在极端情况下即使资产价格是上涨的，您的收益也可能是负的。"
+
 #: src/pages/Farm/FarmNoticeModal/index.tsx
 msgid "1. Users who participate in pledge mining need to pledge the Token supported by the agreement to the smart contract, and can retrieve the pledged Token after the lock-up period ends;"
 msgstr "1.参与质押挖矿的用户需要将协议支持的Token质押到智能合约中，并且在锁定期结束后才能取回质押的Token；"
@@ -29,13 +37,41 @@ msgstr "1.参与质押挖矿的用户需要将协议支持的Token质押到智�
 msgid "2. Participating in pledge mining can get DCU rewards. DCU Token is the only payment voucher for participating in perpetual contracts and European options in the Hedge agreement. DCU currently does not have liquidity and price."
 msgstr "2.参与质押挖矿可以获得DCU奖励，DCU Token是Hedge协议中参与永续合约和欧式期权的唯一支付凭证，DCU目前尚未具有流动性以及价格。"
 
+#: src/pages/Perpetuals/PerpetualsNoticeModal/index.tsx
+msgid "2. Position liquidation risk: Hedge perpetual contracts provide leverage of 1-5 times. When your leverage is greater than 1 times leverage, the price fluctuation of the underlying asset may cause liquidation."
+msgstr "2. 持仓清算风险：Hedge 永续合约提供1-5倍的杠杆，当您的杠杆大于1倍杠杆时，标的资产的价格波动可能会引起清算。"
+
+#: src/pages/Options/OptionsNoticeModal/index.tsx
+msgid "2. The premium paid for options purchased by Hedge Protocol and the income at settlement are all used in DCU Token. DCU itself is also a highly volatile asset. In extreme cases, even if your perpetual contract position is profitable, it is due to the price of DCU itself. Volatility, which may cause you to lose money based on legal currency."
+msgstr "2. Hedge Protocol 购买期权支付的权利金和结算时的收益，全部使用DCU Token，DCU本身也是高波动资产，在极端情况下，即使您的永续合约仓位是盈利的，但由于DCU价格本身的波动，可能导致您按照法币来计算是亏损的。"
+
+#: src/pages/Perpetuals/PerpetualsNoticeModal/index.tsx
+msgid "3. DCU Token price fluctuation risk: Both the margin and the final profit and loss use DCU Token, and DCU itself is also a highly volatile asset. In extreme cases, even if your perpetual contract position is profitable, However, due to the fluctuation of the DCU price itself, it may cause you to lose money in terms of fiat currency."
+msgstr "3. DCU Token价格波动风险：保证金和最终的盈亏都是使用DCU Token，而DCU本身也是高波动资产，在极端情况下，即使您的永续合约仓位是盈利的，但由于DCU价格本身的波动，可能导致您按照法币来计算是亏损的。"
+
 #: src/pages/Farm/FarmNoticeModal/index.tsx
 msgid "3. In the process of participating in pledge mining, certain miners’ fees are required for operations such as lock-up, receipt of rewards, and withdrawal of funds. Miners’ fees are collected by Ethereum miners. Pledge mining has a certain cost, and there is no guarantee that there will be income."
 msgstr "3.在参与质押挖矿过程中，锁仓、领取奖励、取回资金等操作需要支付一定的矿工费，矿工费由以太坊矿工收取，质押挖矿具有一定的成本，并不能保证一定会有收益。"
 
+#: src/pages/Options/OptionsNoticeModal/index.tsx
+msgid "3. The option price of Hedge protocol comes from the NEST oracle machine. If the oracle machine is attacked or the price is abnormal due to other reasons, the system may experience settlement abnormalities, resulting in errors in the user's income calculation."
+msgstr "3. Hedge protocol 的期权价格来源于 NEST 预言机，若预言机被攻击或其他原因导致价格异常，系统可能会出现结算异常，导致用户的收益计算出现错误。"
+
+#: src/pages/Perpetuals/PerpetualsNoticeModal/index.tsx
+msgid "4. External oracle risk: Hedge protocol's perpetual contract price comes from the NEST oracle. If the oracle is attacked or other reasons cause the price to be abnormal, The system may encounter settlement exceptions, which may cause errors in the user's revenue calculation."
+msgstr "4. 外部预言机风险：Hedge protocol 的永续合约价格来源于 NEST 预言机，若预言机被攻击或其他原因导致价格异常，系统可能会出现结算异常，导致用户的收益计算出现错误。"
+
+#: src/pages/Options/OptionsNoticeModal/index.tsx
+msgid "4. The smart contract of the Hedge protocol has not been audited. There may be fatal unknown risks in the smart contract that will damage your principal. Please evaluate the risk yourself before deciding whether to participate."
+msgstr "4. Hedge 协议智能合约尚未进行审计，智能合约中可能存在致命的未知风险导致您的本金受损，请自行评估风险再决定是否参与。"
+
 #: src/pages/Farm/FarmNoticeModal/index.tsx
 msgid "4. There is no upper limit on the total amount of DCU Token. As the result of the game between users and the agreement, additional issuance or destruction will be carried out. If the agreement has been in the state of additional issuance, the DCU you obtained through mining will depreciate and may even return to zero."
 msgstr "4.DCU Token 总量不设上限，随着用户与协议博弈的结果进行增发或销毁，如果协议一直处于增发状态，那么您挖矿获得的DCU将会贬值，甚至会有归零的可能。"
+
+#: src/pages/Perpetuals/PerpetualsNoticeModal/index.tsx
+msgid "5. Smart contract risk: The smart contract of the Hedge protocol has not been audited. There may be fatal unknown risks in the smart contract that may cause your principal to be damaged. Please evaluate the risk yourself before deciding whether to participate."
+msgstr "5. 智能合约风险：Hedge 协议智能合约尚未进行审计，智能合约中可能存在致命的未知风险导致您的本金受损，请自行评估风险再决定是否参与。"
 
 #: src/pages/Farm/FarmNoticeModal/index.tsx
 msgid "5. The Hedge protocol smart contract has not yet been audited. There may be fatal unknown risks in the smart contract that may cause your principal to be damaged. Please evaluate the risk yourself before deciding whether to participate."
@@ -123,7 +159,7 @@ msgid "Disconnect"
 msgstr "断开"
 
 #: src/pages/Perpetuals/index.tsx
-msgid "Dynamic changes in net assets, less than a certain amount of liquidation will be liquidated, the amount of liquidation is Max{margin*leverage*0.02, 10}"
+msgid "Dynamic changes in net assets, less than a certain amount of liquidation will be liquidated, the amount of liquidation is Max'{'margin*leverage*0.02, 10'}'"
 msgstr "净资产动态变化，小于一定的清算额将被清算，清算额为Max'{'保证金*杠杆系数*0.02，10'}'"
 
 #: src/pages/Shared/TransactionModal/index.tsx
@@ -153,11 +189,21 @@ msgstr "预计出矿"
 msgid "Farm"
 msgstr "挖矿"
 
+#: src/pages/Options/OptionsNoticeModal/index.tsx
+msgid "For users/smart contracts using Hedge Protocol European options, when purchasing options, exercising, selling options and other related operations, please understand the rules and the differences of similar products in the market, and fully understand the following possible risks and Participate when you can bear the risk:"
+msgstr "使用Hedge Protocol欧式期权的用户/智能合约，在进行购买期权、行权、卖出期权等相关操作时，请先了解其规则，以及市场上同类产品的差异，在充分了解以下可能存在的风险并且可以承受其风险的情况再参与："
+
+#: src/pages/Perpetuals/PerpetualsNoticeModal/index.tsx
+msgid "For users/smart contracts using Hedge Protocol perpetual contracts, please understand its rules and the differences of similar products in the market when performing positions, settlement, liquidation and other related operations. After fully understanding the following possible risks and can bear Participate in the risk situation:"
+msgstr "使用Hedge Protocol永续合约的用户/智能合约，在进行开仓、结算、清算等相关操作时，请先了解其规则，以及市场上同类产品的差异，在充分了解以下可能存在的风险并且可以承受其风险的情况再参与："
+
 #: src/pages/Shared/Header/index.tsx
 msgid "Futures"
 msgstr "永续合约"
 
 #: src/pages/Farm/FarmNoticeModal/index.tsx
+#: src/pages/Options/OptionsNoticeModal/index.tsx
+#: src/pages/Perpetuals/PerpetualsNoticeModal/index.tsx
 msgid "I have read carefully and fully understand the above risks, and I am willing to bear the losses caused by the risks."
 msgstr "我已仔细阅读并充分理解以上风险，并愿意承担风险造成的损失。"
 
@@ -281,6 +327,8 @@ msgid "Put"
 msgstr "看跌"
 
 #: src/pages/Farm/FarmNoticeModal/index.tsx
+#: src/pages/Options/OptionsNoticeModal/index.tsx
+#: src/pages/Perpetuals/PerpetualsNoticeModal/index.tsx
 msgid "Read more"
 msgstr "了解更多"
 
@@ -293,6 +341,8 @@ msgid "Reward claim time"
 msgstr "奖励领取时间"
 
 #: src/pages/Farm/FarmNoticeModal/index.tsx
+#: src/pages/Options/OptionsNoticeModal/index.tsx
+#: src/pages/Perpetuals/PerpetualsNoticeModal/index.tsx
 msgid "Risk Warning"
 msgstr "风险提示"
 
@@ -344,6 +394,8 @@ msgid "Strike price"
 msgstr "行权价"
 
 #: src/pages/Farm/FarmNoticeModal/index.tsx
+#: src/pages/Options/OptionsNoticeModal/index.tsx
+#: src/pages/Perpetuals/PerpetualsNoticeModal/index.tsx
 msgid "Sure"
 msgstr "确认"
 
