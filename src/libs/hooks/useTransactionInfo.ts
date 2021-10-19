@@ -95,7 +95,6 @@ const useTransactionList = () => {
   }, [chainId, txList]);
   const updateList = useCallback((item: TransactionInfoType) => {
     const index = txList.findIndex((t) => t.hash === item.hash);
-    console.log(11111)
     if (index > -1) {
       txList[index] = item;
       setTxList([...txList]);
