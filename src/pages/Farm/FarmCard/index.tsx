@@ -191,10 +191,10 @@ export const FarmCard: FC<Props> = ({ ...props }) => {
       </div>
       <button
         disabled={
-          approveTrue && normalToBigNumber(inputValue).gt(balanceAmount)
+          (approveTrue && normalToBigNumber(inputValue).gt(balanceAmount)) || normalToBigNumber(inputValue).eq(BigNumber.from('0'))
         }
         onClick={() => {
-          if (props.showNotice()) {
+          if (props.showNotice() || normalToBigNumber(inputValue).eq(BigNumber.from('0'))) {
             return;
           }
           if (approveTrue) {
