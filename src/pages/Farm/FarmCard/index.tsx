@@ -194,7 +194,9 @@ export const FarmCard: FC<Props> = ({ ...props }) => {
           approveTrue && normalToBigNumber(inputValue).gt(balanceAmount)
         }
         onClick={() => {
-          if (props.showNotice()) {return}
+          if (props.showNotice()) {
+            return;
+          }
           if (approveTrue) {
             stake();
             setShowInput(false);
@@ -395,16 +397,19 @@ export const FarmCard: FC<Props> = ({ ...props }) => {
     <MainCard classNames={`stakeCard`}>
       <div className={`${classPrefix}-li-tokenInfo`}>
         <TokenIcon />
-        {props.name === 'NEST' ? (<p>{props.name}</p>) : (<p>
-          <Tooltip
-            placement="top"
-            color={"#ffffff"}
-            title={tokenInfoList[props.name].info}
-          >
-            <span>{props.name}</span>
-          </Tooltip>
-        </p>)}
-        
+        {props.name === "NEST" ? (
+          <p>{props.name}</p>
+        ) : (
+          <p>
+            <Tooltip
+              placement="top"
+              color={"#ffffff"}
+              title={tokenInfoList[props.name].info}
+            >
+              <span>{props.name}</span>
+            </Tooltip>
+          </p>
+        )}
       </div>
       <div className={`${classPrefix}-middleInfo`}>
         <LineShowInfo

@@ -10,7 +10,7 @@ type Props = {
   onClose?: MouseEventHandler<HTMLButtonElement>;
 };
 
-const FarmNoticeModal: FC<Props> = ({ ...props }) => {
+const OptionsNoticeModal: FC<Props> = ({ ...props }) => {
   const [selected, setSelected] = useState(false);
   const classPrefix = "notice";
   return (
@@ -22,50 +22,46 @@ const FarmNoticeModal: FC<Props> = ({ ...props }) => {
         <input />
         <li>
           <Trans>
-            To enter the Hedge protocol and participate in pledge mining
-            users/smart contracts, they need to fully understand the mining
-            rules and the following risks. Users who do not understand the rules
-            or cannot bear the risks are not recommended to participate:
+            For users/smart contracts using Hedge Protocol European options,
+            when purchasing options, exercising, selling options and other
+            related operations, please understand the rules and the differences
+            of similar products in the market, and fully understand the
+            following possible risks and Participate when you can bear the risk:
           </Trans>
         </li>
         <li>
           <Trans>
-            1. Users who participate in pledge mining need to pledge the Token
-            supported by the agreement to the smart contract, and can retrieve
-            the pledged Token after the lock-up period ends;
+            1. Hedge Protocol option pricing is derived from the BS option
+            pricing model. Unlike traditional option pricing methods, Hedge
+            options are completely priced by algorithms, while traditional
+            centralized exchanges are freely quoted by users. This pricing
+            method is a bold one. Attempts and innovations, but it may also
+            bring unknown risks.
           </Trans>
         </li>
         <li>
           <Trans>
-            2. Participating in pledge mining can get DCU rewards. DCU Token is
-            the only payment voucher for participating in perpetual contracts
-            and European options in the Hedge agreement. DCU currently does not
-            have liquidity and price.
+            2. The premium paid for options purchased by Hedge Protocol and the
+            income at settlement are all used in DCU Token. DCU itself is also a
+            highly volatile asset. In extreme cases, even if your perpetual
+            contract position is profitable, it is due to the price of DCU
+            itself. Volatility, which may cause you to lose money based on legal
+            currency.
           </Trans>
         </li>
         <li>
           <Trans>
-            3. In the process of participating in pledge mining, certain miners’
-            fees are required for operations such as lock-up, receipt of
-            rewards, and withdrawal of funds. Miners’ fees are collected by
-            Ethereum miners. Pledge mining has a certain cost, and there is no
-            guarantee that there will be income.
+            3. The option price of Hedge protocol comes from the NEST oracle
+            machine. If the oracle machine is attacked or the price is abnormal
+            due to other reasons, the system may experience settlement
+            abnormalities, resulting in errors in the user's income calculation.
           </Trans>
         </li>
         <li>
           <Trans>
-            4. There is no upper limit on the total amount of DCU Token. As the
-            result of the game between users and the agreement, additional
-            issuance or destruction will be carried out. If the agreement has
-            been in the state of additional issuance, the DCU you obtained
-            through mining will depreciate and may even return to zero.
-          </Trans>
-        </li>
-        <li>
-          <Trans>
-            5. The Hedge protocol smart contract has not yet been audited. There
-            may be fatal unknown risks in the smart contract that may cause your
-            principal to be damaged. Please evaluate the risk yourself before
+            4. The smart contract of the Hedge protocol has not been audited.
+            There may be fatal unknown risks in the smart contract that will
+            damage your principal. Please evaluate the risk yourself before
             deciding whether to participate.
           </Trans>
         </li>
@@ -93,7 +89,7 @@ const FarmNoticeModal: FC<Props> = ({ ...props }) => {
           className={`${classPrefix}-card-buttonGroup-sure`}
           onClick={(e) => {
             if (props.onClose && selected) {
-              localStorage.setItem("FarmFirst", "1");
+              localStorage.setItem("OptionsFirst", "1");
               props.onClose(e);
             }
           }}
@@ -113,4 +109,4 @@ const FarmNoticeModal: FC<Props> = ({ ...props }) => {
   );
 };
 
-export default FarmNoticeModal;
+export default OptionsNoticeModal;

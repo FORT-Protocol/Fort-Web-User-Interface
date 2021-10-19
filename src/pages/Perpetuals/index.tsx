@@ -32,6 +32,8 @@ import {
 import "./styles";
 import { Tooltip } from "antd";
 import { Contract } from "@ethersproject/contracts";
+import { Popup } from "reactjs-popup";
+import PerpetualsNoticeModal from "./PerpetualsNoticeModal";
 
 export type LeverListType = {
   index: BigNumber; //  编号
@@ -45,6 +47,8 @@ export type LeverListType = {
 
 const Perpetuals: FC = () => {
   const { account, chainId } = useWeb3();
+  const [showNotice, setShowNotice] = useState(false)
+  const modal = useRef<any>();
   const [isLong, setIsLong] = useState(true);
   const [dcuBalance, setDcuBalance] = useState<BigNumber>();
   const [kValue, setKValue] = useState<PerpetualsListKValue>();
@@ -66,12 +70,21 @@ const Perpetuals: FC = () => {
   const handleLeverNum = (selected: number) => {
     setLeverNum(selected);
   };
+  const showNoticeModal = () => {
+    var cache = localStorage.getItem("PerpetualsFirst");
+    if (cache !== '1') {
+      setShowNotice(true)
+      return true
+    }
+    return false
+  };
   const trList = leverListState.map((item) => {
     return (
       <PerpetualsList
         className={classPrefix}
         item={item}
         key={item.index.toString() + account}
+        showNotice={showNoticeModal}
         kValue={kValue}
       />
     );
@@ -198,6 +211,8 @@ const Perpetuals: FC = () => {
   }, [isLong, kValue]);
   return (
     <div>
+      {showNotice ? (<Popup
+          ref={modal} open onClose={() => {setShowNotice(false)}}><PerpetualsNoticeModal onClose={() => modal.current.close()}></PerpetualsNoticeModal></Popup>) : null}
       <MainCard classNames={`${classPrefix}-card`}>
         <InfoShow topLeftText={t`Token pair`} bottomRightText={""}>
           <div className={`${classPrefix}-card-tokenPair`}>
@@ -255,7 +270,7 @@ const Perpetuals: FC = () => {
         <MainButton
           className={`${classPrefix}-card-button`}
           onClick={() => {
-            if (!checkMainButton()) {
+            if (!checkMainButton() || showNoticeModal()) {
               return;
             }
             if (normalToBigNumber(dcuInput).lt(normalToBigNumber("100"))) {
@@ -297,7 +312,7 @@ const Perpetuals: FC = () => {
                   <Tooltip
                     placement="top"
                     color={"#ffffff"}
-                    title={t`Dynamic changes in net assets, less than a certain amount of liquidation will be liquidated, the amount of liquidation is Max{margin*leverage*0.02, 10}`}
+                    title={t`Dynamic changes in net assets, less than a certain amount of liquidation will be liquidated, the amount of liquidation is Max'{'margin*leverage*0.02, 10'}'`}
                   >
                     <span>
                       <Trans>Margin Assets</Trans>

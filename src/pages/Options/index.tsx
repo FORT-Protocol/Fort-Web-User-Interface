@@ -31,6 +31,8 @@ import moment from "moment";
 import { useFortEuropeanOptionOpen } from "../../contracts/hooks/useFortEuropeanOptionTransation";
 import OptionsList from "../../components/OptionsList";
 import useTransactionListCon from "../../libs/hooks/useTransactionInfo";
+import { Popup } from "reactjs-popup";
+import OptionsNoticeModal from "./OptionsNoticeModal";
 // import _ from 'lodash';
 
 export type OptionsListType = {
@@ -45,6 +47,8 @@ export type OptionsListType = {
 const MintOptions: FC = () => {
   const classPrefix = "options-mintOptions";
   const { account, chainId, library } = useWeb3();
+  const [showNotice, setShowNotice] = useState(false)
+  const modal = useRef<any>();
   const nestPriceContract = NestPriceContract();
   const fortEuropeanOption = FortEuropeanOption(FortEuropeanOptionContract);
   const fortContract = ERC20Contract(tokenList["DCU"].addresses);
@@ -64,6 +68,15 @@ const MintOptions: FC = () => {
   const [fortBalance, setFortBalance] = useState(BigNumber.from(0));
   const [optionTokenValue, setOptionTokenValue] = useState<BigNumber>();
 
+  const showNoticeModal = () => {
+    var cache = localStorage.getItem("OptionsFirst");
+    if (cache !== '1') {
+      setShowNotice(true)
+      return true
+    }
+    return false
+  };
+  
   const trList = optionsListState.map((item) => {
     return (
       <OptionsList
@@ -71,6 +84,7 @@ const MintOptions: FC = () => {
         key={item.index.toString() + account}
         item={item}
         blockNum={latestBlock.blockNum.toString()}
+        showNotice={showNoticeModal}
         nowPrice={priceNow}
       />
     );
@@ -119,7 +133,6 @@ const MintOptions: FC = () => {
     const latestTx = pendingList.filter((item) => item.type === 2);
     return latestTx.length > 0 ? true : false;
   };
-
   useEffect(() => {
     if (fortContract) {
       fortContract.balanceOf(account).then((value: any) => {
@@ -259,6 +272,8 @@ const MintOptions: FC = () => {
   );
   return (
     <div>
+      {showNotice ? (<Popup
+          ref={modal} open onClose={() => {setShowNotice(false)}}><OptionsNoticeModal onClose={() => modal.current.close()}></OptionsNoticeModal></Popup>) : null}
       <div className={classPrefix}>
         <MainCard classNames={`${classPrefix}-leftCard`}>
           <InfoShow topLeftText={t`Token pair`} bottomRightText={""}>
@@ -359,6 +374,7 @@ const MintOptions: FC = () => {
             disable={checkButton()}
             loading={loadingButton()}
             onClick={() => {
+              if (showNoticeModal()) {return}
               if (normalToBigNumber(fortNum).gt(fortBalance)) {
                 message.error(t`Insufficient balance`);
                 return;
