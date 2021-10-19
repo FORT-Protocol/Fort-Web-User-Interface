@@ -76,7 +76,7 @@ const MintOptions: FC = () => {
     }
     return false
   };
-  
+
   const trList = optionsListState.map((item) => {
     return (
       <OptionsList
@@ -187,11 +187,10 @@ const MintOptions: FC = () => {
       const selectTime = moment(value).valueOf();
       if (selectTime > nowTime) {
         const timeString = moment(value).format("YYYY[-]MM[-]DD");
-        // TODO:删除测试代码
-        // const blockNum = parseFloat(
-        //   ((selectTime - nowTime) / 14000).toString()
         const blockNum = parseFloat(
-          ((selectTime - nowTime) / 672000).toString()
+          ((selectTime - nowTime) / 14000).toString()
+        // const blockNum = parseFloat(
+        //   ((selectTime - nowTime) / 672000).toString()
         ).toFixed(0);
         setExercise({
           time: timeString,
