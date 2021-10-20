@@ -1,6 +1,5 @@
-import { LeverIndex } from './../../libs/constants/addresses';
 import { BigNumber } from "ethers";
-import { FortLeverContract } from "../../libs/constants/addresses";
+import { FortLeverContract, tokenList } from "../../libs/constants/addresses";
 import { FortLever } from "../../libs/hooks/useContract";
 import { useSendTransaction } from "../../libs/hooks/useSendTransaction";
 import useWeb3 from "../../libs/hooks/useWeb3";
@@ -19,9 +18,10 @@ export function useFortLeverBuy(
     if (!chainId) {
         contract = null
     } else {
-        const leverIndex = LeverIndex[tokenName][chainId][isLong?1:0][leverNum]
-        callData = contract?.interface.encodeFunctionData('buyDirect', [
-            leverIndex, 
+        callData = contract?.interface.encodeFunctionData('buy', [
+            tokenList[tokenName].addresses[chainId],
+            leverNum,
+            isLong,
             fortAmount]
         )
     }

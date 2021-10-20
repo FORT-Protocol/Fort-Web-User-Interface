@@ -19,12 +19,12 @@ const Farm: FC = () => {
     return false
   };
   const farms = [
-    { name: "NEST", time: 24, total: BigNumber.from('36000000').mul(BASE_AMOUNT) },
-    { name: "NEST", time: 1, total: BigNumber.from('2000000').mul(BASE_AMOUNT) },
-    { name: "CoFi", time: 1, total: BigNumber.from('500000').mul(BASE_AMOUNT) },
-    { name: "PETH", time: 1, total: BigNumber.from('500000').mul(BASE_AMOUNT) },
-    { name: "NHBTC", time: 1, total: BigNumber.from('500000').mul(BASE_AMOUNT) },
-    { name: "PUSD", time: 1, total: BigNumber.from('500000').mul(BASE_AMOUNT) },
+    { name: "NEST", time: 24, total: BigNumber.from('3600000').mul(BASE_AMOUNT) },
+    { name: "NEST", time: 1, total: BigNumber.from('200000').mul(BASE_AMOUNT) },
+    { name: "CoFi", time: 1, total: BigNumber.from('50000').mul(BASE_AMOUNT) },
+    { name: "PETH", time: 1, total: BigNumber.from('50000').mul(BASE_AMOUNT) },
+    { name: "NHBTC", time: 1, total: BigNumber.from('50000').mul(BASE_AMOUNT) },
+    { name: "PUSD", time: 1, total: BigNumber.from('50000').mul(BASE_AMOUNT) },
   ].map((item) => {
     return (
       <li key={item.name + item.time.toString()}>

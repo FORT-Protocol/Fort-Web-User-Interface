@@ -38,7 +38,7 @@ export const tokenList: { [key: string]: TokenType } = {
     Icon: TokenUSDT,
     decimals: 6,
     addresses: {
-      1: "",
+      1: "0xdac17f958d2ee523a2206206994597c13d831ec7",
       3: "0xc6611844fD9FAE67ABFAdB5a67E33A4fbbB00893",
       4: "0x2d750210c0b5343a0b79beff8F054C9add7d2411",
     },
@@ -115,57 +115,14 @@ export const tokenList: { [key: string]: TokenType } = {
   }
 };
 
-export const LeverIndex: { [key: string]: any } = {
-  // 目标币
-  ETH: {
-    // 链
-    4: {
-      // 看涨看跌
-      1: {
-        // 倍数
-        1: 1,
-        2: 2,
-        3: 3,
-        4: 4,
-        5: 5,
-      },
-      0: {
-        1: 6,
-        2: 7,
-        3: 8,
-        4: 9,
-        5: 10,
-      },
-    },
-    3: {
-      // 看涨看跌
-      1: {
-        // 倍数
-        1: 1,
-        2: 2,
-        3: 3,
-        4: 4,
-        5: 5,
-      },
-      0: {
-        1: 6,
-        2: 7,
-        3: 8,
-        4: 9,
-        5: 10,
-      },
-    },
-  },
-};
-
 export const FortEuropeanOptionContract: AddressesType = {
-  1: "",
+  1: "0x6C844d364c2836f2111891111F25C7a24da976A9",
   3: "0xa6948042D7B68b4c28907cE8B450DC0e5BBe30a5",
   4: "0x702F97D4991e2155576548989fEdEE3971705465",
 };
 
 export const FortLeverContract: AddressesType = {
-  1: "",
+  1: "0x622f1CB39AdE2131061C68E61334D41321033ab4",
   3: "0x48437856C4f6C3F60eA014110066BB440A4530D7",
   4: "0x3Db207CadA55e556ab7A8534A7a6aD9EFfc27B01",
 };

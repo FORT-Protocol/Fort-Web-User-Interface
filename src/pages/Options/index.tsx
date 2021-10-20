@@ -308,7 +308,7 @@ const MintOptions: FC = () => {
 
           <InfoShow
             topLeftText={t`Strike price`}
-            bottomRightText={`1 ETH = ${priceNow} USDT`}
+            bottomRightText={`1 ETH = ${priceNow ? bigNumberToNormal(priceNow,6,2) : '---'} USDT`}
           >
             <input
               type="text"
