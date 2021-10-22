@@ -38,7 +38,7 @@ export const tokenList: { [key: string]: TokenType } = {
     Icon: TokenUSDT,
     decimals: 6,
     addresses: {
-      1: "",
+      1: "0xdac17f958d2ee523a2206206994597c13d831ec7",
       3: "0xc6611844fD9FAE67ABFAdB5a67E33A4fbbB00893",
       4: "0x2d750210c0b5343a0b79beff8F054C9add7d2411",
     },
@@ -115,57 +115,14 @@ export const tokenList: { [key: string]: TokenType } = {
   }
 };
 
-export const LeverIndex: { [key: string]: any } = {
-  // 目标币
-  ETH: {
-    // 链
-    4: {
-      // 看涨看跌
-      1: {
-        // 倍数
-        1: 1,
-        2: 2,
-        3: 3,
-        4: 4,
-        5: 5,
-      },
-      0: {
-        1: 6,
-        2: 7,
-        3: 8,
-        4: 9,
-        5: 10,
-      },
-    },
-    3: {
-      // 看涨看跌
-      1: {
-        // 倍数
-        1: 1,
-        2: 2,
-        3: 3,
-        4: 4,
-        5: 5,
-      },
-      0: {
-        1: 6,
-        2: 7,
-        3: 8,
-        4: 9,
-        5: 10,
-      },
-    },
-  },
-};
-
 export const FortEuropeanOptionContract: AddressesType = {
-  1: "",
+  1: "0x6C844d364c2836f2111891111F25C7a24da976A9",
   3: "0xa6948042D7B68b4c28907cE8B450DC0e5BBe30a5",
   4: "0x702F97D4991e2155576548989fEdEE3971705465",
 };
 
 export const FortLeverContract: AddressesType = {
-  1: "",
+  1: "0x622f1CB39AdE2131061C68E61334D41321033ab4",
   3: "0x48437856C4f6C3F60eA014110066BB440A4530D7",
   4: "0x3Db207CadA55e556ab7A8534A7a6aD9EFfc27B01",
 };
@@ -180,4 +137,22 @@ export const NestPrice: AddressesType = {
   1: "0xB5D2890c061c321A5B6A4a4254bb1522425BAF0A",
   3: "0x85723E83A7E7d88b0F3Ceb4C5bE7C853e3Ed8a82",
   4: "0x40C3EB032f27fDa7AdcF1B753c75B84e27f26838",
+};
+
+export const SwapAddress: AddressesType = {
+  1: ZERO_ADDRESS,
+  3: ZERO_ADDRESS,
+  4: "0x0a94eb67c4bfa14094d6aaf0d1fec8afd0e7a25b",
+};
+
+export const CofixSwapAddress: AddressesType = {
+  1: ZERO_ADDRESS,
+  3: ZERO_ADDRESS,
+  4: "0x9f7997EFb0aF6f5e370dea99b1941D73330825C9",
+};
+
+export const CofixControllerAddress: AddressesType = {
+  1: ZERO_ADDRESS,
+  3: ZERO_ADDRESS,
+  4: "0x59c2EAF8FC22C10C2EB79Be3c23c2916BD0ec81e",
 };

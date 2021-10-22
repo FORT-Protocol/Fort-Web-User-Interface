@@ -60,6 +60,15 @@
             width: 100%;
         }
 
+        .showValue {
+            font-family: $boldFont;
+            border: 0;
+            font-size: $T2;
+            width: 100%;
+            line-height: 44px;
+            text-align: right;
+        }
+
         .input-middle {
             width: 100%;
             text-align: right;
@@ -92,13 +101,13 @@
         font-size: $T4;
         text-align: right;
         height: 20px;
-
         &.balanceRed {
             color: $wrongAndNotice-color;
         }
     }
 
     &-tokenSelect {
+        position: relative;
         display: none;
         background-color: $gray-info-background-color;
         height: 150px;
@@ -107,7 +116,6 @@
         border: 1px solid $gray-line-color;
         box-shadow: $shadow-inside;
         border-radius: 22px;
-        
 
         li {
             display: flex;
@@ -130,6 +138,8 @@
 
             svg {
                 margin: auto 0;
+                width: 28px;
+                height: 28px;
             }
         }
 

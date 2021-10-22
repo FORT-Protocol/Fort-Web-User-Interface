@@ -79,11 +79,14 @@ msgstr "5.Hedge协议智能合约尚未进行审计，智能合约中可能存�
 
 #: src/pages/Farm/FarmCard/index.tsx
 #: src/pages/Shared/TransactionToast/index.tsx
+#: src/pages/Swap/index.tsx
 msgid "Approve"
 msgstr "授权"
 
 #: src/pages/Options/index.tsx
 #: src/pages/Perpetuals/index.tsx
+#: src/pages/Swap/index.tsx
+#: src/pages/Swap/index.tsx
 msgid "Balance"
 msgstr "余额"
 
@@ -137,12 +140,7 @@ msgstr "确定"
 msgid "Connect Wallet"
 msgstr "连接钱包"
 
-#: src/pages/Shared/TransactionModal/index.tsx
-msgid "Contract address"
-msgstr "合约地址"
-
 #: src/pages/Shared/Header/Status/WalletModal/index.tsx
-#: src/pages/Shared/TransactionModal/index.tsx
 msgid "Copied"
 msgstr "已复制"
 
@@ -161,10 +159,6 @@ msgstr "断开"
 #: src/pages/Perpetuals/index.tsx
 msgid "Dynamic changes in net assets, less than a certain amount of liquidation will be liquidated, the amount of liquidation is Max'{'margin*leverage*0.02, 10'}'"
 msgstr "净资产动态变化，小于一定的清算额将被清算，清算额为Max'{'保证金*杠杆系数*0.02，10'}'"
-
-#: src/pages/Shared/TransactionModal/index.tsx
-msgid "European option Token minted successfully"
-msgstr "欧式期权币铸币成功"
 
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx
@@ -197,6 +191,10 @@ msgstr "使用Hedge Protocol欧式期权的用户/智能合约，在进行购买
 msgid "For users/smart contracts using Hedge Protocol perpetual contracts, please understand its rules and the differences of similar products in the market when performing positions, settlement, liquidation and other related operations. After fully understanding the following possible risks and can bear Participate in the risk situation:"
 msgstr "使用Hedge Protocol永续合约的用户/智能合约，在进行开仓、结算、清算等相关操作时，请先了解其规则，以及市场上同类产品的差异，在充分了解以下可能存在的风险并且可以承受其风险的情况再参与："
 
+#: src/pages/Swap/index.tsx
+msgid "From"
+msgstr "支付"
+
 #: src/pages/Shared/Header/index.tsx
 msgid "Futures"
 msgstr "永续合约"
@@ -210,6 +208,7 @@ msgstr "我已仔细阅读并充分理解以上风险，并愿意承担风险造
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx
 #: src/pages/Perpetuals/index.tsx
+#: src/pages/Swap/index.tsx
 msgid "Input"
 msgstr "请输入"
 
@@ -253,10 +252,6 @@ msgstr "我的锁仓"
 #: src/pages/Farm/FarmCard/index.tsx
 msgid "No"
 msgstr "没有"
-
-#: src/pages/Shared/TransactionModal/index.tsx
-msgid "Number of Option Token"
-msgstr "期权币数量"
 
 #: src/pages/Options/index.tsx
 msgid "One option shares to the return of a ETH."
@@ -399,6 +394,12 @@ msgstr "行权价"
 msgid "Sure"
 msgstr "确认"
 
+#: src/pages/Shared/Header/index.tsx
+#: src/pages/Shared/TransactionToast/index.tsx
+#: src/pages/Swap/index.tsx
+msgid "Swap"
+msgstr "交易"
+
 #: src/pages/Perpetuals/index.tsx
 msgid "The opening price is based on NEST oracle and corrected according to risk compensation."
 msgstr "开仓价是在NEST预言机价格基础上根据风险补偿修正得到"
@@ -413,12 +414,24 @@ msgstr "暂不支持该网络，请切换网络"
 msgid "To enter the Hedge protocol and participate in pledge mining users/smart contracts, they need to fully understand the mining rules and the following risks. Users who do not understand the rules or cannot bear the risks are not recommended to participate:"
 msgstr "进入Hedge 协议，参与质押挖矿的用户/智能合约，需要充分了解挖矿规则以及以下风险，没有理解规则或不能承受风险的用户不建议参与："
 
+#: src/pages/Swap/index.tsx
+msgid "To(Estimated)"
+msgstr "获得（预估）"
+
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx
 #: src/pages/Perpetuals/index.tsx
 #: src/pages/Perpetuals/index.tsx
 msgid "Token pair"
 msgstr "交易对"
+
+#: src/pages/Swap/index.tsx
+msgid "Trading Price"
+msgstr "兑换价格"
+
+#: src/pages/Swap/index.tsx
+msgid "Trading rate displayed on the page will be different from the actual rate. If your actual rate is 5% higher than the current page, the transaction will be rejected."
+msgstr "页面显示的汇率与实际兑换的汇率会有差异，若您实际实际兑换的汇率于高出当前页面5%，交易将被拒绝"
 
 #: src/pages/Shared/TransactionModal/index.tsx
 msgid "Transaction declined"
@@ -437,7 +450,6 @@ msgstr "类型"
 msgid "View"
 msgstr "查看"
 
-#: src/pages/Shared/TransactionModal/index.tsx
 #: src/pages/Shared/TransactionModal/index.tsx
 msgid "View on etherscan"
 msgstr "浏览器查看"

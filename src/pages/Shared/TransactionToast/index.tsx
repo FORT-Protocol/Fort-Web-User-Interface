@@ -80,6 +80,8 @@ export const transactionTitle = (type: TransactionType) => {
       return t`Withdraw`;
     case 8:
       return t`Sell Options`;
+    case 9:
+    return t`Swap`;
     default:
       break;
   }

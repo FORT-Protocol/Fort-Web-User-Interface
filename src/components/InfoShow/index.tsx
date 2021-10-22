@@ -73,7 +73,7 @@ const InfoShow: FC<Props> = ({children, ...props}) => {
     }
 
     function clickSelect(event: any) {
-        if (props.tokenSelect && event.target.className !== 'input-right' && 
+        if (props.tokenSelect && event.target.className !== 'input-right' && event.target.className !== 'input-middle' && 
         event.target.className !== 'max-button' && 
         event.target.className !== 'infoView-mainView-maxView') {
             setIsShowSelect(!isShowSelect)

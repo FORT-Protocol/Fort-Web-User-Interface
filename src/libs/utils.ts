@@ -4,6 +4,7 @@ export const PRICE_FEE = BigNumber.from(normalToBigNumber("0.01"));
 export const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
 export const BASE_AMOUNT = BigNumber.from('1000000000000000000');
 export const USDT_BASE_AMOUNT = BigNumber.from('1000000');
+export const COFIX_THETA = BigNumber.from('30');
 
 /**
  * BigNumber转为浮点字符串
@@ -40,8 +41,12 @@ export function bigNumberToNormal(
     resultBaseStr =
       resultBaseStrArray[0] + "." + resultBaseStrArray[1].substr(0, fix);
   }
-  if (fix <= 6) {
-    resultBaseStr = parseFloat(resultBaseStr).toString();
+  if (fix <= 6 || fix === 10) {
+    
+    // resultBaseStr = parseFloat(resultBaseStr).toString();
+    while (resultBaseStr[resultBaseStr.length-1] === '0') {
+      resultBaseStr = resultBaseStr.substr(0, resultBaseStr.length-1)
+    }
   }
   return resultBaseStr;
 }

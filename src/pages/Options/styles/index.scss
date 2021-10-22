@@ -35,7 +35,7 @@
             color: $main-button-color;
         }
         
-        & .infoView:nth-child(5) {
+        &.infoView:nth-child(5) {
             .TokenShow {
                 svg {
                     z-index: auto;

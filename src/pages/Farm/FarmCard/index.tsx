@@ -191,10 +191,10 @@ export const FarmCard: FC<Props> = ({ ...props }) => {
       </div>
       <button
         disabled={
-          approveTrue && normalToBigNumber(inputValue).gt(balanceAmount)
+          (approveTrue && normalToBigNumber(inputValue).gt(balanceAmount)) || normalToBigNumber(inputValue).eq(BigNumber.from('0'))
         }
         onClick={() => {
-          if (props.showNotice()) {
+          if (props.showNotice() || normalToBigNumber(inputValue).eq(BigNumber.from('0'))) {
             return;
           }
           if (approveTrue) {
@@ -328,56 +328,6 @@ export const FarmCard: FC<Props> = ({ ...props }) => {
       }
       setStakingInfo(newStakingInfo);
     }, timeOut);
-    // ;(async () => {
-    //     const config = await stakingContract.getConfig()
-    //     const channelInfo = await stakingContract.getChannelInfo(tokenList[props.name].addresses[chainId], (props.time * 1000))
-    //     const balanceOf = await stakingContract.balanceOf(tokenList[props.name].addresses[chainId], (props.time * 1000), account)
-    //     const latestBlock = await library.getBlockNumber()
-    //     // 开始锁仓
-    //     const startBlock:BigNumber = config[1]
-    //     // 结束锁仓
-    //     const stopBlock:BigNumber = config[2]
-    //     // 总锁仓量
-    //     const totalStaked:BigNumber = channelInfo[0]
-    //     // 总出矿量
-    //     const totalRewards:BigNumber = BigNumber.from(props.total)
-    //     // 解锁区块号
-    //     const unlockBlock:BigNumber = channelInfo[2]
-    //     // 我的锁仓数量
-    //     const myStakeAmount:BigNumber = balanceOf
-
-    //     const rate = totalStaked.toString() === '0' ? BigNumber.from('0') : totalRewards.mul(BigNumber.from('1000000000000000000')).div(totalStaked)
-    //     const stakingNumber = totalStaked
-    //     const miningPoolNumber = totalRewards
-    //     const myStaking = myStakeAmount
-    //     const expectedMining = rate.mul(myStaking).div(BigNumber.from('1000000000000000000'))
-    //     const claimTime = stopBlock.sub(latestBlock).toNumber() * 13000 + moment().valueOf()
-    //     const buttonType =
-    //     latestBlock < startBlock.toNumber() ? StakingButtonType.disable :
-    //     latestBlock < stopBlock.toNumber() ? StakingButtonType.farm :
-    //     latestBlock < unlockBlock.toNumber() ? StakingButtonType.claim : StakingButtonType.withdraw
-
-    //     const newStakingInfo = {
-    //         rate: rate,
-    //         stakingNumber: stakingNumber,
-    //         miningPoolNumber: miningPoolNumber,
-    //         myStaking: myStaking,
-    //         expectedMining: expectedMining,
-    //         claimTime: claimTime,
-    //         buttonType : buttonType
-    //     }
-    //     if (buttonType === StakingButtonType.farm) {
-    //         const tokenBalance = await tokenContract.balanceOf(account)
-    //         const allowance = await tokenContract.allowance(account, stakingContract.address)
-    //         setBalanceAmount(tokenBalance)
-    //         setApproveAmount(allowance)
-    //     }
-    //     setStakingInfo(newStakingInfo)
-    //     // TODO:删除
-    //     if (tokenList[props.name].addresses[chainId] === '0xDB7b4FdF99eEE8E4Cb8373630c923c51c1275382' && props.time === 1) {
-    //         console.log(startBlock.toString(), stopBlock.toString(), totalStaked.toString(), totalRewards.toString(), unlockBlock.toString(), myStakeAmount.toString())
-    //     }
-    // })()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [account, chainId, library, pendingList]);
   const miningRate = () => {
@@ -390,7 +340,7 @@ export const FarmCard: FC<Props> = ({ ...props }) => {
     return `${bigNumberToNormal(
       stakingInfo?.rate || BigNumber.from("0"),
       18,
-      2
+      4
     )} DCU/${props.name}`;
   };
   return (

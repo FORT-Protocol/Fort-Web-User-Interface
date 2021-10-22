@@ -79,11 +79,14 @@ msgstr "5. The Hedge protocol smart contract has not yet been audited. There may
 
 #: src/pages/Farm/FarmCard/index.tsx
 #: src/pages/Shared/TransactionToast/index.tsx
+#: src/pages/Swap/index.tsx
 msgid "Approve"
 msgstr "Approve"
 
 #: src/pages/Options/index.tsx
 #: src/pages/Perpetuals/index.tsx
+#: src/pages/Swap/index.tsx
+#: src/pages/Swap/index.tsx
 msgid "Balance"
 msgstr "Balance"
 
@@ -137,12 +140,7 @@ msgstr "Confirm"
 msgid "Connect Wallet"
 msgstr "Connect Wallet"
 
-#: src/pages/Shared/TransactionModal/index.tsx
-msgid "Contract address"
-msgstr "Contract address"
-
 #: src/pages/Shared/Header/Status/WalletModal/index.tsx
-#: src/pages/Shared/TransactionModal/index.tsx
 msgid "Copied"
 msgstr "Copied"
 
@@ -161,10 +159,6 @@ msgstr "Disconnect"
 #: src/pages/Perpetuals/index.tsx
 msgid "Dynamic changes in net assets, less than a certain amount of liquidation will be liquidated, the amount of liquidation is Max'{'margin*leverage*0.02, 10'}'"
 msgstr "Dynamic changes in net assets, less than a certain amount of liquidation will be liquidated, the amount of liquidation is Max'{'margin*leverage*0.02, 10'}'"
-
-#: src/pages/Shared/TransactionModal/index.tsx
-msgid "European option Token minted successfully"
-msgstr "European option Token minted successfully"
 
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx
@@ -197,6 +191,10 @@ msgstr "For users/smart contracts using Hedge Protocol European options, when pu
 msgid "For users/smart contracts using Hedge Protocol perpetual contracts, please understand its rules and the differences of similar products in the market when performing positions, settlement, liquidation and other related operations. After fully understanding the following possible risks and can bear Participate in the risk situation:"
 msgstr "For users/smart contracts using Hedge Protocol perpetual contracts, please understand its rules and the differences of similar products in the market when performing positions, settlement, liquidation and other related operations. After fully understanding the following possible risks and can bear Participate in the risk situation:"
 
+#: src/pages/Swap/index.tsx
+msgid "From"
+msgstr "From"
+
 #: src/pages/Shared/Header/index.tsx
 msgid "Futures"
 msgstr "Futures"
@@ -210,6 +208,7 @@ msgstr "I have read carefully and fully understand the above risks, and I am wil
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx
 #: src/pages/Perpetuals/index.tsx
+#: src/pages/Swap/index.tsx
 msgid "Input"
 msgstr "Input"
 
@@ -253,10 +252,6 @@ msgstr "My staking"
 #: src/pages/Farm/FarmCard/index.tsx
 msgid "No"
 msgstr "No"
-
-#: src/pages/Shared/TransactionModal/index.tsx
-msgid "Number of Option Token"
-msgstr "Number of Option Token"
 
 #: src/pages/Options/index.tsx
 msgid "One option shares to the return of a ETH."
@@ -399,6 +394,12 @@ msgstr "Strike price"
 msgid "Sure"
 msgstr "Sure"
 
+#: src/pages/Shared/Header/index.tsx
+#: src/pages/Shared/TransactionToast/index.tsx
+#: src/pages/Swap/index.tsx
+msgid "Swap"
+msgstr "Swap"
+
 #: src/pages/Perpetuals/index.tsx
 msgid "The opening price is based on NEST oracle and corrected according to risk compensation."
 msgstr "The opening price is based on NEST oracle and corrected according to risk compensation."
@@ -413,12 +414,24 @@ msgstr "This network is not supported, please switch the network"
 msgid "To enter the Hedge protocol and participate in pledge mining users/smart contracts, they need to fully understand the mining rules and the following risks. Users who do not understand the rules or cannot bear the risks are not recommended to participate:"
 msgstr "To enter the Hedge protocol and participate in pledge mining users/smart contracts, they need to fully understand the mining rules and the following risks. Users who do not understand the rules or cannot bear the risks are not recommended to participate:"
 
+#: src/pages/Swap/index.tsx
+msgid "To(Estimated)"
+msgstr "To(Estimated)"
+
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx
 #: src/pages/Perpetuals/index.tsx
 #: src/pages/Perpetuals/index.tsx
 msgid "Token pair"
 msgstr "Token pair"
+
+#: src/pages/Swap/index.tsx
+msgid "Trading Price"
+msgstr "Trading Price"
+
+#: src/pages/Swap/index.tsx
+msgid "Trading rate displayed on the page will be different from the actual rate. If your actual rate is 5% higher than the current page, the transaction will be rejected."
+msgstr "Trading rate displayed on the page will be different from the actual rate. If your actual rate is 5% higher than the current page, the transaction will be rejected."
 
 #: src/pages/Shared/TransactionModal/index.tsx
 msgid "Transaction declined"
@@ -437,7 +450,6 @@ msgstr "Type"
 msgid "View"
 msgstr "View"
 
-#: src/pages/Shared/TransactionModal/index.tsx
 #: src/pages/Shared/TransactionModal/index.tsx
 msgid "View on etherscan"
 msgstr "View on etherscan"

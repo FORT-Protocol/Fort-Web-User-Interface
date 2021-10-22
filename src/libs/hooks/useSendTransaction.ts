@@ -20,23 +20,24 @@ export function useSendTransaction(
       hash: "0x0",
       txType: TransactionModalType.wait,
     });
-    if (!library || !contract) {
+    const failModal = (info: string) => {
       setShowModal({
         isShow: true,
         hash: "0x0",
         txType: TransactionModalType.fail,
+        info: info
       });
+    }
+
+    if (!library || !contract) {
+      failModal('!library || !contract')
       return;
     }
-    const estimateGas = await library.estimateGas(tx).catch(() => {
+    const estimateGas = await library.estimateGas(tx).catch((error) => {
+      failModal(error.message)
       return;
     });
     if (!estimateGas) {
-      setShowModal({
-        isShow: true,
-        hash: "0x0",
-        txType: TransactionModalType.fail,
-      });
       return;
     }
     const newTx = { ...tx, gasLimit: addGasLimit(estimateGas) };
@@ -51,12 +52,8 @@ export function useSendTransaction(
           txType: TransactionModalType.success,
         });
       })
-      .catch(() => {
-        setShowModal({
-          isShow: true,
-          hash: "0x0",
-          txType: TransactionModalType.fail,
-        });
+      .catch((error) => {
+        failModal(error.message)
       });
   }, [contract, library, pushTx, setShowModal, tx, txInfo]);
 

@@ -1,7 +1,7 @@
 @use "sass:math";
 @import 'src/styles/shared.scss';
 
-.stakeCard{
+.stakeCard {
     width: 400px;
     margin-top: 33px;
 
@@ -14,7 +14,7 @@
 
         svg {
             width: 68px;
-            height:68px;
+            height: 68px;
         }
 
         p {
@@ -32,12 +32,13 @@
         &-leftText {
             font-size: $T4;
         }
+
         &-rightText {
             font-size: $T3;
         }
     }
 
-    .lineShowInfo + .lineShowInfo {
+    .lineShowInfo+.lineShowInfo {
         margin-top: 22px;
     }
 
@@ -46,9 +47,10 @@
         margin: 0 44px;
         border-bottom: 1px solid $gray-line-color;
 
-        & > div:first-child {
+        &>div:first-child {
             .lineShowInfo-rightText {
                 color: #00B388;
+
                 &.red {
                     color: $wrongAndNotice-color;
                 }
@@ -66,7 +68,7 @@
         padding-top: 22px;
         margin: 0 44px;
 
-        & > div:last-child {
+        &>div:last-child {
             .lineShowInfo-rightText {
                 color: $main-button-color;
             }
@@ -83,7 +85,7 @@
         &-div {
             margin: 0 22px;
         }
-        
+
         &-inputView {
             display: flex;
             justify-content: space-between;
@@ -117,7 +119,7 @@
                 border: 1px solid $button-disable-color;
             }
 
-            div + button {
+            div+button {
                 width: 100px;
                 height: 100%;
                 background-color: $main-button-color;
@@ -126,6 +128,14 @@
                 font-size: $T2;
                 border-bottom-right-radius: 22px;
                 border-top-right-radius: 22px;
+
+                &:disabled {
+                    background-color: $button-disable-color;
+
+                    &:hover {
+                        cursor: not-allowed;
+                    }
+                }
             }
         }
 

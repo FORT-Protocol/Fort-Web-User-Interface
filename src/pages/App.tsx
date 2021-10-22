@@ -6,34 +6,14 @@ import loadable from "@loadable/component";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import TransactionModal from "./Shared/TransactionModal";
-import useWeb3 from "../libs/hooks/useWeb3";
 
 const Perpetuals = loadable(() => import("./Perpetuals"));
 const Option = loadable(() => import("./Options"));
 const Mining = loadable(() => import("./Farm"));
+const Swap = loadable(() => import("./Swap"));
 
 const App: FC = () => {
-  // TODO:暂时只显示锁仓
-  const {chainId} = useWeb3()
-  return chainId === 1 ? (
-    <main>
-      <div className={"main-content"}>
-        <TransactionModal />
-        {/* <ToastContainer autoClose={8000}/> */}
-        <ToastContainer />
-        <HashRouter>
-          <Header />
-          <Switch>
-            <Route path="/farm">
-              <Mining />
-            </Route>
-            <Redirect to="/farm" />
-          </Switch>
-        </HashRouter>
-      </div>
-      <Footer />
-    </main>
-  ) : (
+  return (
     <main>
       <div className={"main-content"}>
         <TransactionModal />
@@ -50,6 +30,9 @@ const App: FC = () => {
             </Route>
             <Route path="/farm">
               <Mining />
+            </Route>
+            <Route path="/swap">
+              <Swap />
             </Route>
             <Redirect to="/futures" />
           </Switch>
