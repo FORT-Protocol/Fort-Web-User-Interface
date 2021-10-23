@@ -1,12 +1,6 @@
 @use "sass:math";
 @import 'src/styles/shared.scss';
 
-@media screen and (max-width: 1000px) {
-    .modal-transaction {
-        max-width: $baseWidth;
-    }
-}
-
 .modal-transaction {
     width: $baseWidth;
     text-align: center;
@@ -32,5 +26,11 @@
         color: $main-button-color;
         font-size: $T4;
         margin-top: 12px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .modal-transaction {
+        width: 100%;
     }
 }

@@ -39,6 +39,7 @@ const MobileHeader: FC = () => {
       className={classNames({
         selected: location.pathname.indexOf(item.path) === 0,
       })}
+      onClick={() => setShowList(false)}
     >
       <Link to={item.path}>{item.content}</Link>
     </li>
@@ -90,6 +91,7 @@ const MobileHeader: FC = () => {
                 [`fort-button-mobile`]: true,
                 [`showNum`]: pendingList.length > 0,
               })}
+              onClick={() => setShowList(false)}
             >
               <div className={"transactionNum"}>
                 <WhiteLoading className={"animation-spin"} />
