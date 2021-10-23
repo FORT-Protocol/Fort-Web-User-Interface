@@ -6,14 +6,29 @@
     font-size: $T2;
 }
 
-.options-mintOptions {
+@media screen and (max-width: 1000px) {
+    .options-mintOptions {
+        
+        display: inline;
+        flex-flow: column;
+        .mainCard {
+            max-width: 100%;
+        }
 
+        .options-mintOptions-leftCard {
+            margin-right: 0px;
+            margin-bottom: 10px;
+        }
+    }
+}
+
+.options-mintOptions {
     margin: 0 auto;
     margin-bottom: 44px;
     margin-top: 22px;
     display: flex;
     justify-content: center;
-    width: 1200px;
+    max-width: 1200px;
 
     .mainCard {
         width: $baseWidth;

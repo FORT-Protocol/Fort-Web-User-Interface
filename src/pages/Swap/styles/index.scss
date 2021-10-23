@@ -2,7 +2,7 @@
 @import 'src/styles/shared.scss';
 
 .swap-card {
-    width: $baseWidth;
+    max-width: $baseWidth;
     margin: 0 auto;
     padding: 40px 44px;
     margin-top: 22px;
