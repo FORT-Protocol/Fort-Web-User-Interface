@@ -105,7 +105,7 @@
             color: $wrongAndNotice-color;
         }
     }
-
+    &-tokenSelect::-webkit-scrollbar { width: 0 !important;height: 0 !important;}
     &-tokenSelect {
         position: relative;
         display: none;
@@ -116,7 +116,8 @@
         border: 1px solid $gray-line-color;
         box-shadow: $shadow-inside;
         border-radius: 22px;
-
+        -ms-overflow-style: none;
+        overflow: -moz-scrollbars-none;
         li {
             display: flex;
             justify-content: flex-start;
