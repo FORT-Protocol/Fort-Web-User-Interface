@@ -1,8 +1,12 @@
 @use "sass:math";
 @import 'src/styles/shared.scss';
-
+@media screen and (max-width: 1000px) {
+    .modal-status {
+        max-width: $baseWidth;
+    }
+}
 .modal-status {
-    max-width: $baseWidth;
+    width: $baseWidth;
 
     &-notice {
         margin-top: 10px;

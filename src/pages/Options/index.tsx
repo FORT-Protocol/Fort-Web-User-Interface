@@ -19,6 +19,7 @@ import {
 import useWeb3 from "../../libs/hooks/useWeb3";
 import {
   bigNumberToNormal,
+  checkWidth,
   formatInputNum,
   normalToBigNumber,
   ZERO_ADDRESS,
@@ -276,11 +277,8 @@ const MintOptions: FC = () => {
           <InfoShow topLeftText={t`Token pair`} bottomRightText={""}>
             <div className={`${classPrefix}-leftCard-tokenPair`}>
               <DoubleTokenShow tokenNameOne={"ETH"} tokenNameTwo={"USDT"} />
-              {/* <button className={"select-button"}>
-              <PutDownIcon />
-            </button> */}
             </div>
-            <p>{`1 ETH = ${priceNow ? bigNumberToNormal(priceNow, 6, 2) : '---'} USDT`}</p>
+            <p>{`${checkWidth() ? '1 ETH = ' : ''}${priceNow ? bigNumberToNormal(priceNow, 6, 2) : '---'} USDT`}</p>
           </InfoShow>
           <ChooseType
             callBack={handleType}

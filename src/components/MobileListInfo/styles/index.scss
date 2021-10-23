@@ -1,0 +1,24 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.mobileListInfo {
+
+    &-title {
+        font-size: $T2;
+        color: $gray-info-text-color;
+        margin-bottom: 15px;
+
+        span {
+            &.underLine {
+                border-bottom: 1px dashed $gray-info-text-color;
+            }
+        }
+    }
+
+    p {
+        font-family: $boldFont;
+        font-size: $T2;
+    }
+
+    
+}

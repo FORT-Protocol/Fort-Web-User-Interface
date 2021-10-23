@@ -72,7 +72,7 @@ const MobileHeader: FC = () => {
           modal
           ref={modal}
           trigger={
-            <button className={"fort-button"}>
+            <button className={"fort-button fort-button-mobile"}>
               <Trans>Connect Wallet</Trans>
             </button>
           }
@@ -87,6 +87,7 @@ const MobileHeader: FC = () => {
             <button
               className={classNames({
                 [`fort-button`]: true,
+                [`fort-button-mobile`]: true,
                 [`showNum`]: pendingList.length > 0,
               })}
             >

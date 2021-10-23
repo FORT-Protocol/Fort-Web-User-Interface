@@ -44,6 +44,10 @@ export function bigNumberToNormal(
   if (fix <= 6 || fix === 10) {
     while (resultBaseStr[resultBaseStr.length-1] === '0') {
       resultBaseStr = resultBaseStr.substr(0, resultBaseStr.length-1)
+      if (resultBaseStr[resultBaseStr.length-1] === '.') {
+        resultBaseStr = resultBaseStr.substr(0, resultBaseStr.length-1)
+        break
+      }
     }
   }
   return resultBaseStr;
@@ -109,7 +113,7 @@ export function showEllipsisAddress(address: string): string {
 
 export function checkWidth():boolean {
   const width = window.innerWidth;
-  const breakpoint = 620;
+  const breakpoint = 1000;
   return width < breakpoint ? false : true
 }
 

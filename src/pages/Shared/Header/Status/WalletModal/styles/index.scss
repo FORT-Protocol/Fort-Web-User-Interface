@@ -1,8 +1,12 @@
 @use "sass:math";
 @import 'src/styles/shared.scss';
-
+@media screen and (max-width: 1000px) {
+    .modal-wallet {
+        max-width: $baseWidth;
+    }
+}
 .modal-wallet {
-    max-width: $baseWidth;
+    width: $baseWidth;
 
     &-metamask {
         display: flex;
