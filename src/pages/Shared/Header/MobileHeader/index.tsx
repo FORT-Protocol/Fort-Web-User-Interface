@@ -91,7 +91,6 @@ const MobileHeader: FC = () => {
                 [`fort-button-mobile`]: true,
                 [`showNum`]: pendingList.length > 0,
               })}
-              onClick={() => setShowList(false)}
             >
               <div className={"transactionNum"}>
                 <WhiteLoading className={"animation-spin"} />
