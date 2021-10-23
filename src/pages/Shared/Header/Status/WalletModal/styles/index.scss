@@ -2,7 +2,7 @@
 @import 'src/styles/shared.scss';
 
 .modal-wallet {
-    width: $baseWidth;
+    max-width: $baseWidth;
 
     &-metamask {
         display: flex;

@@ -42,8 +42,6 @@ export function bigNumberToNormal(
       resultBaseStrArray[0] + "." + resultBaseStrArray[1].substr(0, fix);
   }
   if (fix <= 6 || fix === 10) {
-    
-    // resultBaseStr = parseFloat(resultBaseStr).toString();
     while (resultBaseStr[resultBaseStr.length-1] === '0') {
       resultBaseStr = resultBaseStr.substr(0, resultBaseStr.length-1)
     }
@@ -107,6 +105,12 @@ export function addGasLimit(value: BigNumber): BigNumber {
  */
 export function showEllipsisAddress(address: string): string {
   return address.substr(0, 8) + "...." + address.substr(address.length - 6, 6);
+}
+
+export function checkWidth():boolean {
+  const width = window.innerWidth;
+  const breakpoint = 620;
+  return width < breakpoint ? false : true
 }
 
 export function formatInputNum(value: string): string {

@@ -2,7 +2,7 @@
 @import 'src/styles/shared.scss';
 
 .modal-status {
-    width: $baseWidth;
+    max-width: $baseWidth;
 
     &-notice {
         margin-top: 10px;

@@ -2,7 +2,8 @@
 @import 'src/styles/shared.scss';
 
 .perpetuals-card {
-    width: $baseWidth;
+    max-width: $baseWidth;
+    width: auto;
     margin: 0 auto;
     padding: 40px 44px;
     margin-top: 22px;
