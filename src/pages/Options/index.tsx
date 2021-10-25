@@ -189,7 +189,7 @@ const MintOptions: FC = () => {
       if (selectTime > nowTime) {
         const timeString = moment(value).format("YYYY[-]MM[-]DD");
         const blockNum = parseFloat(
-          ((selectTime - nowTime) / 14000).toString()
+          ((selectTime - nowTime) / 652000).toString()
         ).toFixed(0);
         setExercise({
           time: timeString,
