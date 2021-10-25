@@ -226,7 +226,7 @@ const Perpetuals: FC = () => {
           <Trans>Type</Trans>
         </th>
         <th>
-          <Trans>lever</Trans>
+          <Trans>Lever</Trans>
         </th>
         <th>
           <Trans>Margin</Trans>

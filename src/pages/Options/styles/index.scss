@@ -20,6 +20,19 @@
             margin-bottom: 10px;
         }
     }
+
+    .OptionsList-mobile {
+        margin-top: 20px;
+        padding: 0 10px;
+    }
+
+    .options-mintOptions {
+        padding: 0 10px;
+    }
+    
+    .options-mintOptions + div > ul {
+        margin-bottom: 20px;
+    }
 }
 
 .options-mintOptions {

@@ -8,6 +8,7 @@
     padding: 40px 44px;
     margin-top: 22px;
     margin-bottom: 44px;
+    
 
     &-tokenPair {
         display: flex;
@@ -57,6 +58,10 @@
 
 .holdLine {
     margin-top: 40px;
+}
+
+.holdLine + ul {
+    margin-bottom: 20px;
 }
 
 table {
@@ -143,5 +148,11 @@ table {
             padding: 3px 0;
             border-bottom: 1px dashed $gray-info-text-color;
         }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .perpetuals-card {
+        margin: 0 10px;
     }
 }

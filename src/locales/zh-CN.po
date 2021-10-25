@@ -91,6 +91,7 @@ msgid "Balance"
 msgstr "余额"
 
 #: src/components/OptionsList/index.tsx
+#: src/components/OptionsList/index.tsx
 msgid "Block"
 msgstr "区块号"
 
@@ -123,6 +124,7 @@ msgstr "领取奖励"
 msgid "Claim reward"
 msgstr "领取奖励"
 
+#: src/components/PerpetualsList/PerpetualsListMobile/index.tsx
 #: src/components/PerpetualsList/index.tsx
 msgid "Close"
 msgstr "结算"
@@ -135,6 +137,7 @@ msgstr "永续合约结算"
 msgid "Confirm"
 msgstr "确定"
 
+#: src/pages/Shared/Header/MobileHeader/index.tsx
 #: src/pages/Shared/Header/Status/Modal/index.tsx
 #: src/pages/Shared/Header/Status/index.tsx
 msgid "Connect Wallet"
@@ -156,10 +159,12 @@ msgstr "当前为测试网，价格波动提高了50倍，滑点较大，真实�
 msgid "Disconnect"
 msgstr "断开"
 
+#: src/components/PerpetualsList/PerpetualsListMobile/index.tsx
 #: src/pages/Perpetuals/index.tsx
 msgid "Dynamic changes in net assets, less than a certain amount of liquidation will be liquidated, the amount of liquidation is Max'{'margin*leverage*0.02, 10'}'"
 msgstr "净资产动态变化，小于一定的清算额将被清算，清算额为Max'{'保证金*杠杆系数*0.02，10'}'"
 
+#: src/components/OptionsList/index.tsx
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx
@@ -179,6 +184,7 @@ msgstr "预计出矿"
 #: src/pages/Farm/FarmCard/index.tsx
 #: src/pages/Farm/FarmCard/index.tsx
 #: src/pages/Farm/FarmCard/index.tsx
+#: src/pages/Shared/Header/MobileHeader/index.tsx
 #: src/pages/Shared/Header/index.tsx
 msgid "Farm"
 msgstr "挖矿"
@@ -195,6 +201,7 @@ msgstr "使用Hedge Protocol永续合约的用户/智能合约，在进行开仓
 msgid "From"
 msgstr "支付"
 
+#: src/pages/Shared/Header/MobileHeader/index.tsx
 #: src/pages/Shared/Header/index.tsx
 msgid "Futures"
 msgstr "永续合约"
@@ -216,6 +223,11 @@ msgstr "请输入"
 msgid "Insufficient balance"
 msgstr "余额不足"
 
+#: src/components/PerpetualsList/PerpetualsListMobile/index.tsx
+#: src/pages/Perpetuals/index.tsx
+msgid "Lever"
+msgstr "杠杆倍数"
+
 #: src/components/LeverChoose/index.tsx
 msgid "Leverage"
 msgstr "选择杠杆"
@@ -224,15 +236,19 @@ msgstr "选择杠杆"
 msgid "Lock period"
 msgstr "锁定期"
 
+#: src/components/OptionsList/index.tsx
+#: src/components/PerpetualsList/PerpetualsListMobile/index.tsx
 #: src/components/PerpetualsList/index.tsx
 #: src/pages/Perpetuals/index.tsx
 msgid "Long"
 msgstr "看涨"
 
+#: src/components/PerpetualsList/PerpetualsListMobile/index.tsx
 #: src/pages/Perpetuals/index.tsx
 msgid "Margin"
 msgstr "保证金"
 
+#: src/components/PerpetualsList/PerpetualsListMobile/index.tsx
 #: src/pages/Perpetuals/index.tsx
 msgid "Margin Assets"
 msgstr "保证金净资产"
@@ -265,6 +281,7 @@ msgstr "永续合约开仓"
 msgid "Open Long"
 msgstr "看涨开仓"
 
+#: src/components/PerpetualsList/PerpetualsListMobile/index.tsx
 #: src/pages/Perpetuals/index.tsx
 msgid "Open Price"
 msgstr "开仓价"
@@ -282,11 +299,13 @@ msgstr "看跌开仓"
 msgid "Operate"
 msgstr "操作"
 
+#: src/components/OptionsList/index.tsx
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx
 msgid "Option shares"
 msgstr "期权份数"
 
+#: src/pages/Shared/Header/MobileHeader/index.tsx
 #: src/pages/Shared/Header/index.tsx
 msgid "Options"
 msgstr "期权"
@@ -341,10 +360,12 @@ msgstr "奖励领取时间"
 msgid "Risk Warning"
 msgstr "风险提示"
 
+#: src/components/OptionsList/index.tsx
 #: src/pages/Options/index.tsx
 msgid "Sale earn"
 msgstr "卖出收益"
 
+#: src/components/OptionsList/index.tsx
 #: src/components/OptionsList/index.tsx
 msgid "Sell"
 msgstr "卖出"
@@ -353,6 +374,8 @@ msgstr "卖出"
 msgid "Sell Options"
 msgstr "卖出期权"
 
+#: src/components/OptionsList/index.tsx
+#: src/components/PerpetualsList/PerpetualsListMobile/index.tsx
 #: src/components/PerpetualsList/index.tsx
 #: src/pages/Perpetuals/index.tsx
 msgid "Short"
@@ -372,6 +395,7 @@ msgid "Staking number"
 msgstr "当前锁仓量"
 
 #: src/components/OptionsList/index.tsx
+#: src/components/OptionsList/index.tsx
 msgid "Strike"
 msgstr "行权"
 
@@ -379,10 +403,12 @@ msgstr "行权"
 msgid "Strike Options"
 msgstr "期权行权"
 
+#: src/components/OptionsList/index.tsx
 #: src/pages/Options/index.tsx
 msgid "Strike earn"
 msgstr "行权收益"
 
+#: src/components/OptionsList/index.tsx
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx
 msgid "Strike price"
@@ -394,6 +420,7 @@ msgstr "行权价"
 msgid "Sure"
 msgstr "确认"
 
+#: src/pages/Shared/Header/MobileHeader/index.tsx
 #: src/pages/Shared/Header/index.tsx
 #: src/pages/Shared/TransactionToast/index.tsx
 #: src/pages/Swap/index.tsx
@@ -418,6 +445,8 @@ msgstr "进入Hedge 协议，参与质押挖矿的用户/智能合约，需要�
 msgid "To(Estimated)"
 msgstr "获得（预估）"
 
+#: src/components/OptionsList/index.tsx
+#: src/components/PerpetualsList/PerpetualsListMobile/index.tsx
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx
 #: src/pages/Perpetuals/index.tsx
@@ -441,6 +470,8 @@ msgstr "交易已拒绝"
 msgid "Transaction submitted"
 msgstr "交易已提交"
 
+#: src/components/OptionsList/index.tsx
+#: src/components/PerpetualsList/PerpetualsListMobile/index.tsx
 #: src/pages/Options/index.tsx
 #: src/pages/Perpetuals/index.tsx
 msgid "Type"
@@ -474,10 +505,6 @@ msgstr "比较 ETH 的现货价与行权价"
 #: src/pages/Farm/FarmCard/index.tsx
 msgid "get it now"
 msgstr "立刻获取"
-
-#: src/pages/Perpetuals/index.tsx
-msgid "lever"
-msgstr "杠杆倍数"
 
 #: src/pages/Farm/FarmCard/index.tsx
 msgid "nHBTC is the quotation mining certificate for HBTC-ETH in the NEST protocol, which can be obtained through quotation mining or buy in Huobi exchange."
