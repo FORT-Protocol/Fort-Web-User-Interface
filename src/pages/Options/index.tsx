@@ -445,7 +445,7 @@ const MintOptions: FC = () => {
           <HoldLine>
             <Trans>Position</Trans>
           </HoldLine>
-          <table>
+          {checkWidth() ? (<table>
             <thead>
               <tr className={`${classPrefix}-table-title`}>
                 <th>
@@ -475,7 +475,12 @@ const MintOptions: FC = () => {
               </tr>
             </thead>
             <tbody>{trList}</tbody>
-          </table>
+          </table>) : (
+            <ul>
+              {trList}
+            </ul>
+          )}
+          
         </div>
       ) : null}
     </div>

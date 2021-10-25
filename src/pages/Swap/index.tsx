@@ -20,15 +20,16 @@ import {
   CofixControllerContract,
   CofixSwapContract,
   getERC20Contract,
+  NestPriceContract,
 } from "../../libs/hooks/useContract";
+import useTransactionListCon, { TransactionType } from "../../libs/hooks/useTransactionInfo";
 import useWeb3 from "../../libs/hooks/useWeb3";
 import {
   BASE_AMOUNT,
   bigNumberToNormal,
   COFIX_THETA,
   formatInputNum,
-  normalToBigNumber,
-  PRICE_FEE,
+  normalToBigNumber
 } from "../../libs/utils";
 import "./styles";
 
@@ -63,7 +64,8 @@ const Swap: FC = () => {
     setSwapToken({ src: swapToken.dest, dest: swapToken.src });
     setInputValue("");
   };
-  // const priceContract = NestPriceContract();
+  const { pendingList } = useTransactionListCon();
+  const priceContract = NestPriceContract();
   // 余额
   useEffect(() => {
     if (!chainId || !account || !library) {
@@ -148,13 +150,29 @@ const Swap: FC = () => {
       amountIn: BigNumber
     ) => {
       const priceToken = srcName === "ETH" ? destName : srcName;
-      const priceAndK = await cofixControllerContract?.callStatic.queryOracle(
-        tokenList[priceToken].addresses[chainId],
-        account,
-        { value: PRICE_FEE }
-      );
-      const k: BigNumber = priceAndK[0];
-      const tokenAmount: BigNumber = priceAndK[2];
+      // var priceAndK
+      //   try {
+      //     priceAndK = await cofixControllerContract?.callStatic.queryOracle(
+      //       tokenList[priceToken].addresses[chainId],
+      //       account,
+      //       { value: PRICE_FEE }
+      //     )
+      //   } catch(error) {
+      //     return
+      //   }
+        const priceList = await priceContract?.lastPriceListAndTriggeredPriceInfo(
+          tokenList[priceToken].addresses[chainId],
+          2
+        );
+        const kValue = await cofixControllerContract?.calcRevisedK(
+          priceList[4],
+          priceList[0][3],
+          priceList[0][2],
+          priceList[0][1],
+          priceList[0][0]
+        );
+      const k: BigNumber = kValue;
+      const tokenAmount: BigNumber = priceList[0][1];
       if (srcName === "ETH") {
         const fee = amountIn.mul(COFIX_THETA).div(BigNumber.from("10000"));
         const amountOut = amountIn
@@ -228,7 +246,7 @@ const Swap: FC = () => {
           : amount
       );
     })();
-  }, [account, chainId, cofixControllerContract, library, swapToken, inputValue, path]);
+  }, [account, chainId, cofixControllerContract, library, swapToken, inputValue, path, priceContract]);
 
   const tokenData = [tokenList["NEST"], tokenList["ETH"]];
   const getSelectedToken = (tokenName: string) => {
@@ -301,6 +319,12 @@ const Swap: FC = () => {
     account,
     account
   );
+  const mainButtonState = () => {
+    const pendingTransaction = pendingList.filter(
+      (item) => item.type === TransactionType.swap
+    );
+    return pendingTransaction.length > 0 ? true : false;
+  };
   return (
     <div className={`${classPrefix}`}>
       <MainCard classNames={`${classPrefix}-card`}>
@@ -391,9 +415,9 @@ const Swap: FC = () => {
           } ${swapToken.dest}`}</p>
         </div>
         <MainButton
-          disable={!checkButton()}
+          disable={!checkButton() || mainButtonState()}
           onClick={() => {
-            if (!checkButton()) {
+            if (!checkButton() || mainButtonState()) {
               return;
             }
             if (checkAllowance()) {
@@ -402,6 +426,7 @@ const Swap: FC = () => {
               approve();
             }
           }}
+          loading={mainButtonState()}
         >
           {checkAllowance() ? <Trans>Swap</Trans> : <Trans>Approve</Trans>}
         </MainButton>

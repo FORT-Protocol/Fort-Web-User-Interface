@@ -1,0 +1,85 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.OptionsList-mobile-card {
+    width: 100%;
+    padding: 20px;
+
+    .mobileListInfo+.mobileListInfo {
+        text-align: right;
+    }
+
+    .mobileListInfo {
+        svg {
+            z-index: 1;
+
+        }
+
+        svg+svg {
+            margin-left: -8px;
+            z-index: 0;
+        }
+    }
+
+    &-top {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 0.5px solid $gray-background-color;
+        padding-bottom: 10px;
+
+        &-type{
+            display: flex;
+            justify-content: center;
+            height: 28px;
+
+            svg {
+                margin: auto 0;
+            }
+
+            p.red {
+                margin-left: 5px;
+                line-height: 28px;
+                color: $up-color;
+            }
+
+            p.green {
+                margin-left: 5px;
+                line-height: 28px;
+                color: $down-color;
+            }
+        }
+    }
+
+    &-mid {
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 0.5px solid $gray-background-color;
+        padding-bottom: 10px;
+    }
+
+    &-bottom {
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 0.5px solid $gray-background-color;
+        padding-bottom: 10px;
+    }
+
+    &-block {
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 10px;
+    }
+
+    .fort-button {
+        width: 45%;
+        margin-top: 10px;
+    }
+
+    &-buttonGroup {
+        display: flex;
+        justify-content: space-between;
+    }
+}
