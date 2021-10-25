@@ -212,14 +212,23 @@ table {
 
 @media screen and (max-width: 1000px) {
     .options-mintOptions {
-        
-        display: inline;
         flex-flow: column;
+        padding: 0 10px;
         
         .mainCard {
-            max-width: 100%;
+            width: 100%;
             padding: 20px 20px;
         }
+
+        // &-leftCard {
+        //     margin-left: 10px;
+        //     margin-right: 10px;
+        // }
+
+        // &-rightCard {
+        //     margin-left: 10px;
+        //     margin-right: 10px;
+        // }
 
         .options-mintOptions-leftCard {
             margin-right: 0px;
