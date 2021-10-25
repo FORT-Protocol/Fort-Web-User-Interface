@@ -105,8 +105,11 @@ const Perpetuals: FC = () => {
       tokenAddress,
       2
     );
+    console.log(priceList[0][3].toString(),
+      priceList[0][2].toString(),
+      priceList[0][1].toString(),
+      priceList[0][0].toString())
     const k = await leverContract.calcRevisedK(
-      priceList[4],
       priceList[0][3],
       priceList[0][2],
       priceList[0][1],
