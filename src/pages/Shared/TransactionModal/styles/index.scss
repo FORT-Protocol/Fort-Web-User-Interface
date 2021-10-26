@@ -13,6 +13,13 @@
         margin-top: 20px;
         font-family: $boldFont;
         font-size: $T1;
+
+        &-error {
+            margin-top: 10px;
+            font-size: 8px;
+            word-break:break-all;
+            color: $gray-info-text-color;
+        }
     }
 
     &>a {
@@ -20,31 +27,10 @@
         font-size: $T4;
         margin-top: 12px;
     }
+}
 
-    .mainCard-eurModal {
-        margin-top: 10px;
-        margin-bottom: 20px;
-        padding: 20px;
-        background-color: $gray-info-background-color;
-        box-shadow: none;
-
-        &>.lineShowInfo {
-            font-size: $T4;
-        }
-
-        &-lastAddress {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-
-            .lineShowInfo {
-                width: 100%;
-                margin-right: 10px;
-
-                &-rightText {
-                    color: $main-button-color;
-                }
-            }
-        }
+@media screen and (max-width: 1000px) {
+    .modal-transaction {
+        width: 100%;
     }
 }

@@ -1,13 +1,14 @@
 @use "sass:math";
 @import 'src/styles/shared.scss';
 
-.infoView{
+.infoView {
 
     .select-button {
-        & > svg {
+        &>svg {
             margin: auto 0
         }
     }
+
     &-topLeft {
         margin: 0 20px;
         color: $gray-info-text-color;
@@ -37,7 +38,7 @@
             display: flex;
             justify-content: space-between;
 
-            & > svg {
+            &>svg {
                 display: block;
                 margin-top: auto;
                 margin-bottom: auto;
@@ -47,17 +48,28 @@
 
         &.noSelect {
             .infoView-mainView-leftSelect {
-                & > svg {
+                &>svg {
                     display: none;
                 }
             }
         }
 
-        .input-right, .input-left, .input-middle {
+        .input-right,
+        .input-left,
+        .input-middle {
             font-family: $boldFont;
             border: 0;
             font-size: $T2;
             width: 100%;
+        }
+
+        .showValue {
+            font-family: $boldFont;
+            border: 0;
+            font-size: $T2;
+            width: 100%;
+            line-height: 44px;
+            text-align: right;
         }
 
         .input-middle {
@@ -98,7 +110,13 @@
         }
     }
 
+    &-tokenSelect::-webkit-scrollbar {
+        width: 0 !important;
+        height: 0 !important;
+    }
+
     &-tokenSelect {
+        position: relative;
         display: none;
         background-color: $gray-info-background-color;
         height: 150px;
@@ -107,7 +125,8 @@
         border: 1px solid $gray-line-color;
         box-shadow: $shadow-inside;
         border-radius: 22px;
-        
+        -ms-overflow-style: none;
+        overflow: -moz-scrollbars-none;
 
         li {
             display: flex;
@@ -130,10 +149,12 @@
 
             svg {
                 margin: auto 0;
+                width: 28px;
+                height: 28px;
             }
         }
 
-        &.isShow{
+        &.isShow {
             display: block;
         }
 

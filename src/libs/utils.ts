@@ -4,6 +4,7 @@ export const PRICE_FEE = BigNumber.from(normalToBigNumber("0.001"));
 export const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
 export const BASE_AMOUNT = BigNumber.from('1000000000000000000');
 export const USDT_BASE_AMOUNT = BigNumber.from('1000000');
+export const COFIX_THETA = BigNumber.from('30');
 
 /**
  * BigNumber转为浮点字符串
@@ -40,8 +41,14 @@ export function bigNumberToNormal(
     resultBaseStr =
       resultBaseStrArray[0] + "." + resultBaseStrArray[1].substr(0, fix);
   }
-  if (fix <= 6) {
-    resultBaseStr = parseFloat(resultBaseStr).toString();
+  if (fix <= 6 || fix === 10) {
+    while (resultBaseStr[resultBaseStr.length-1] === '0') {
+      resultBaseStr = resultBaseStr.substr(0, resultBaseStr.length-1)
+      if (resultBaseStr[resultBaseStr.length-1] === '.') {
+        resultBaseStr = resultBaseStr.substr(0, resultBaseStr.length-1)
+        break
+      }
+    }
   }
   return resultBaseStr;
 }
@@ -102,6 +109,12 @@ export function addGasLimit(value: BigNumber): BigNumber {
  */
 export function showEllipsisAddress(address: string): string {
   return address.substr(0, 8) + "...." + address.substr(address.length - 6, 6);
+}
+
+export function checkWidth():boolean {
+  const width = window.innerWidth;
+  const breakpoint = 1000;
+  return width < breakpoint ? false : true
 }
 
 export function formatInputNum(value: string): string {

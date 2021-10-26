@@ -8,7 +8,7 @@ import ConnectStatus from "./Status";
 import useWeb3 from "../../../libs/hooks/useWeb3";
 
 const Header: FC = () => {
-  const { chainId } = useWeb3()
+  const { chainId } = useWeb3();
   const location = useLocation();
   const [noticeHidden, setNoticeHidden] = useState(false);
   const header = "header";
@@ -16,6 +16,7 @@ const Header: FC = () => {
     { path: "/futures", content: t`Futures` },
     { path: "/options", content: t`Options` },
     { path: "/farm", content: t`Farm` },
+    { path: "/swap", content: t`Swap` },
   ].map((item) => (
     <li
       key={item.path}
@@ -28,25 +29,31 @@ const Header: FC = () => {
   ));
   return (
     <header>
-      {chainId === 4 ? (<div
-        className={classNames({
-          [`${header}-notice`]: true,
-          [`isHidden`]: noticeHidden,
-        })}
-      >
-        <b><Trans>
-          Currently it is a test network, the price fluctuation has increased by 50 times, the slippage is large, and the slippage will be lower in a more realistic scenario.
-          </Trans>
-          
-        </b>
-        
-        <button onClick={() => setNoticeHidden(true)}>
-          <XIconGray />
-        </button>
-      </div>) : null}
-      
+      {chainId === 4 ? (
+        <div
+          className={classNames({
+            [`${header}-notice`]: true,
+            [`isHidden`]: noticeHidden,
+          })}
+        >
+          <b>
+            <Trans>
+              Currently it is a test network, the price fluctuation has
+              increased by 50 times, the slippage is large, and the slippage
+              will be lower in a more realistic scenario.
+            </Trans>
+          </b>
+
+          <button onClick={() => setNoticeHidden(true)}>
+            <XIconGray />
+          </button>
+        </div>
+      ) : null}
+
       <div className={`${header}-nav`}>
-        <a href={'https://www.hedge.red'}><FortLogo className={`${header}-logo`}/></a>
+        <a href={"https://www.hedge.red"}>
+          <FortLogo className={`${header}-logo`} />
+        </a>
         <nav>
           <ul>{routes}</ul>
         </nav>

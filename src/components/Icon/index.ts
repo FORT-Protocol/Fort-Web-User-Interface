@@ -37,7 +37,7 @@ export { ReactComponent as LongIconWhite } from './svg/longIcon_white.svg'
 export { ReactComponent as ShortIconWhite } from './svg/shortIcon_white.svg'
 export { ReactComponent as WhitePaper } from './svg/whitePaper.svg'
 export { ReactComponent as NoticeSelected } from './svg/noticeSelected.svg'
-
+export { ReactComponent as HeaderListMobile } from './svg/headerListMobile.svg'
 
 
 

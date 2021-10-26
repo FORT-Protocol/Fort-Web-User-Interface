@@ -17,6 +17,7 @@ export enum TransactionType {
   claim = 6,
   unStake = 7,
   sellOption = 8,
+  swap = 9
 }
 
 export enum TransactionState {
@@ -42,17 +43,18 @@ export type TransactionInfoType = {
   type: TransactionType;
 };
 
-type ShoeModalType = {
+type ShowModalType = {
   isShow: boolean;
   hash: string;
   txType: TransactionModalType;
   tokenInfo?: TransactionModalTokenInfo;
+  info?: string
 };
 
 const useTransactionList = () => {
   const { chainId, library } = useWeb3();
   const [txList, setTxList] = useState<TransactionInfoType[]>([]);
-  const [showModal, setShowModal] = useState<ShoeModalType>({
+  const [showModal, setShowModal] = useState<ShowModalType>({
     isShow: false,
     hash: "0x0",
     txType: TransactionModalType.wait,

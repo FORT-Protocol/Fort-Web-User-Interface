@@ -8,7 +8,7 @@ import useTransactionListCon, {
   TransactionType,
 } from "../../libs/hooks/useTransactionInfo";
 import useWeb3 from "../../libs/hooks/useWeb3";
-import { BASE_AMOUNT, bigNumberToNormal } from "../../libs/utils";
+import { BASE_AMOUNT, bigNumberToNormal, ZERO_ADDRESS } from "../../libs/utils";
 import { LeverListType } from "../../pages/Perpetuals";
 import { LongIcon, ShortIcon } from "../Icon";
 import MainButton from "../MainButton";
@@ -41,7 +41,7 @@ const PerpetualsList: FC<Props> = ({ ...props }) => {
   };
   const tokenName = () => {
     if (
-      props.item.tokenAddress === "0x0000000000000000000000000000000000000000"
+      props.item.tokenAddress === ZERO_ADDRESS
     ) {
       return "ETH";
     }

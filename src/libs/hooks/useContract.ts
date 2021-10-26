@@ -1,4 +1,4 @@
-import { FortVaultForStakingContract, NestPrice as NestPriceAddress } from './../constants/addresses';
+import { CofixControllerAddress, CofixSwapAddress, FortVaultForStakingContract, NestPrice as NestPriceAddress } from './../constants/addresses';
 import useWeb3 from '../hooks/useWeb3';
 import { getAddress } from "@ethersproject/address"
 import { Contract } from "@ethersproject/contracts"
@@ -11,6 +11,9 @@ import FortForStakingABI from '../../contracts/abis/FortForStaking.json'
 import FortEuropeanOptionABI from '../../contracts/abis/FortEuropeanOption.json';
 import FortLeverABI from '../../contracts/abis/FortLever.json';
 import NestPriceABI from '../../contracts/abis/NestPrice.json';
+import CofixSwapABI from '../../contracts/abis/CofixSwap.json';
+import CofixControllerABI from '../../contracts/abis/CofixController.json';
+import { ZERO_ADDRESS } from '../utils';
 
 function isAddress(value: any): string | false {
     try {
@@ -27,7 +30,7 @@ function getSigner(
     return provider.getSigner(account).connectUnchecked()
 }
 
-function getContract(
+export function getContract(
     address: string, 
     ABI: any, 
     provider:Web3Provider, 
@@ -45,7 +48,7 @@ export function useContract(
 ): Contract | null {
     const {library, account, chainId} = useWeb3()
     return useMemo(() => {
-        if (!library || !(library instanceof Web3Provider) || !account || !ABI || !chainId) return null
+        if (!library || !(library instanceof Web3Provider) || !account || !ABI || !chainId || addresses[chainId] === ZERO_ADDRESS) return null
         try {
             return getContract(addresses[chainId], ABI, library, account)
         } catch (error) {
@@ -53,6 +56,11 @@ export function useContract(
             return null
         }
     }, [addresses, ABI, library, account, chainId])
+}
+
+export function getERC20Contract(address:string, provider:Web3Provider, 
+    account: string): Contract | null {
+    return getContract(address, ERC20ABI, provider, account)
 }
 
 export function ERC20Contract(addresses: AddressesType): Contract | null {
@@ -73,4 +81,12 @@ export function FortForStaking(): Contract | null {
 
 export function NestPriceContract(): Contract | null {
     return useContract(NestPriceAddress, NestPriceABI)
+}
+
+export function CofixSwapContract(): Contract | null {
+    return useContract(CofixSwapAddress,CofixSwapABI)
+}
+
+export function CofixControllerContract(): Contract | null {
+    return useContract(CofixControllerAddress,CofixControllerABI)
 }

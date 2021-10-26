@@ -1,6 +1,7 @@
 @use "sass:math";
 @import 'src/styles/shared.scss';
 
+
 .modal-wallet {
     width: $baseWidth;
 
@@ -92,5 +93,10 @@
         li+li {
             margin-top: 15px;
         }
+    }
+}
+@media screen and (max-width: 1000px) {
+    .modal-wallet {
+        width: 100%;
     }
 }

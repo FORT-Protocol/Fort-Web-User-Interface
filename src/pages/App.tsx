@@ -6,10 +6,14 @@ import loadable from "@loadable/component";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import TransactionModal from "./Shared/TransactionModal";
+import { checkWidth } from "../libs/utils";
+import MobileFooter from "./Shared/Footer/MobileFooter";
+import MobileHeader from "./Shared/Header/MobileHeader";
 
 const Perpetuals = loadable(() => import("./Perpetuals"));
 const Option = loadable(() => import("./Options"));
 const Mining = loadable(() => import("./Farm"));
+const Swap = loadable(() => import("./Swap"));
 
 const App: FC = () => {
   return (
@@ -19,7 +23,7 @@ const App: FC = () => {
         {/* <ToastContainer autoClose={8000}/> */}
         <ToastContainer />
         <HashRouter>
-          <Header />
+          {checkWidth() ? (<Header />) : (<MobileHeader/>)}
           <Switch>
             <Route path="/futures">
               <Perpetuals />
@@ -30,11 +34,14 @@ const App: FC = () => {
             <Route path="/farm">
               <Mining />
             </Route>
+            <Route path="/swap">
+              <Swap />
+            </Route>
             <Redirect to="/futures" />
           </Switch>
         </HashRouter>
       </div>
-      <Footer />
+      {checkWidth() ? (<Footer/>) : (<MobileFooter/>)}
     </main>
   );
 };

@@ -1,7 +1,7 @@
 @use "sass:math";
 @import 'src/styles/shared.scss';
 
-.OptionsList-mobile-card {
+.perListMobile {
     width: 100%;
     padding: 20px;
 
@@ -62,24 +62,17 @@
         margin-top: 10px;
         display: flex;
         justify-content: space-between;
-        border-bottom: 0.5px solid $gray-background-color;
-        padding-bottom: 10px;
-    }
-
-    &-block {
-        margin-top: 10px;
-        display: flex;
-        justify-content: space-between;
         padding-bottom: 10px;
     }
 
     .fort-button {
-        width: 45%;
+        width: 100%;
         margin-top: 10px;
     }
 
-    &-buttonGroup {
-        display: flex;
-        justify-content: space-between;
-    }
+}
+
+.perListMobile-li {
+    margin-top: 20px;
+    padding: 0 10px;
 }

@@ -26,6 +26,7 @@ import useWeb3 from "../../libs/hooks/useWeb3";
 import {
   BASE_AMOUNT,
   bigNumberToNormal,
+  checkWidth,
   formatInputNum,
   normalToBigNumber,
 } from "../../libs/utils";
@@ -34,6 +35,7 @@ import { Tooltip } from "antd";
 import { Contract } from "@ethersproject/contracts";
 import { Popup } from "reactjs-popup";
 import PerpetualsNoticeModal from "./PerpetualsNoticeModal";
+import PerpetualsListMobile from "../../components/PerpetualsList/PerpetualsListMobile";
 
 export type LeverListType = {
   index: BigNumber; //  编号
@@ -79,7 +81,7 @@ const Perpetuals: FC = () => {
     return false
   };
   const trList = leverListState.map((item) => {
-    return (
+    return checkWidth() ? (
       <PerpetualsList
         className={classPrefix}
         item={item}
@@ -87,7 +89,11 @@ const Perpetuals: FC = () => {
         showNotice={showNoticeModal}
         kValue={kValue}
       />
-    );
+    ) : (<PerpetualsListMobile className={classPrefix}
+      item={item}
+      key={item.index.toString() + account}
+      showNotice={showNoticeModal}
+      kValue={kValue}/>);
   });
   const getPrice = async (
     contract: Contract,
@@ -100,7 +106,6 @@ const Perpetuals: FC = () => {
       2
     );
     const k = await leverContract.calcRevisedK(
-      priceList[4],
       priceList[0][3],
       priceList[0][2],
       priceList[0][1],
@@ -209,6 +214,44 @@ const Perpetuals: FC = () => {
     }
     return bigNumberToNormal(price, 6, 2);
   }, [isLong, kValue]);
+
+  const pcTable = (<table>
+    <thead>
+      <tr className={`${classPrefix}-table-title`}>
+        <th>
+          <Trans>Token pair</Trans>
+        </th>
+        <th>
+          <Trans>Type</Trans>
+        </th>
+        <th>
+          <Trans>Lever</Trans>
+        </th>
+        <th>
+          <Trans>Margin</Trans>
+        </th>
+        <th>
+          <Trans>Open Price</Trans>
+        </th>
+        <th className={"th-marginAssets"}>
+          <Tooltip
+            placement="top"
+            color={"#ffffff"}
+            title={t`Dynamic changes in net assets, less than a certain amount of liquidation will be liquidated, the amount of liquidation is Max'{'margin*leverage*0.02, 10'}'`}
+          >
+            <span>
+              <Trans>Margin Assets</Trans>
+            </span>
+          </Tooltip>
+        </th>
+        <th>
+          <Trans>Operate</Trans>
+        </th>
+      </tr>
+    </thead>
+    <tbody>{trList}</tbody>
+  </table>)
+  
   return (
     <div>
       {showNotice ? (<Popup
@@ -219,7 +262,7 @@ const Perpetuals: FC = () => {
             <DoubleTokenShow tokenNameOne={"ETH"} tokenNameTwo={"USDT"} />
           </div>
           <p>
-            {`1 ETH = ${bigNumberToNormal(
+            {`${checkWidth() ? '1 ETH = ' : ''}${bigNumberToNormal(
               kValue?.nowPrice || BigNumber.from("0"),
               tokenList["USDT"].decimals,
               2
@@ -290,42 +333,11 @@ const Perpetuals: FC = () => {
           <HoldLine>
             <Trans>Positions</Trans>
           </HoldLine>
-          <table>
-            <thead>
-              <tr className={`${classPrefix}-table-title`}>
-                <th>
-                  <Trans>Token pair</Trans>
-                </th>
-                <th>
-                  <Trans>Type</Trans>
-                </th>
-                <th>
-                  <Trans>lever</Trans>
-                </th>
-                <th>
-                  <Trans>Margin</Trans>
-                </th>
-                <th>
-                  <Trans>Open Price</Trans>
-                </th>
-                <th className={"th-marginAssets"}>
-                  <Tooltip
-                    placement="top"
-                    color={"#ffffff"}
-                    title={t`Dynamic changes in net assets, less than a certain amount of liquidation will be liquidated, the amount of liquidation is Max'{'margin*leverage*0.02, 10'}'`}
-                  >
-                    <span>
-                      <Trans>Margin Assets</Trans>
-                    </span>
-                  </Tooltip>
-                </th>
-                <th>
-                  <Trans>Operate</Trans>
-                </th>
-              </tr>
-            </thead>
-            <tbody>{trList}</tbody>
-          </table>
+          {checkWidth() ? (pcTable) : (
+            <ul>
+              {trList}
+            </ul>
+          )}
         </div>
       ) : null}
     </div>
