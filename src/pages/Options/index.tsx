@@ -144,7 +144,7 @@ const MintOptions: FC = () => {
     setFortBalance(BigNumber.from(0));
   }, [account, fortContract]);
   const getPrice = async (contract: Contract, chainId: number) => {
-    const price = await contract.triggeredPrice(
+    const price = await contract.latestPrice(
       tokenList["USDT"].addresses[chainId]
     );
     setPriceNow(price[1]);

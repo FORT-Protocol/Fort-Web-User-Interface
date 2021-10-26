@@ -140,19 +140,19 @@ export const NestPrice: AddressesType = {
 };
 
 export const SwapAddress: AddressesType = {
-  1: ZERO_ADDRESS,
+  1: '0x6e7fd4BA02A5a7a75Ea3CcE37e221dC144D606Dd',
   3: ZERO_ADDRESS,
   4: "0x0a94eb67c4bfa14094d6aaf0d1fec8afd0e7a25b",
 };
 
 export const CofixSwapAddress: AddressesType = {
-  1: ZERO_ADDRESS,
+  1: '0x57F0A4ef374B35eb32B61Dd8bc68C58e886CFC84',
   3: ZERO_ADDRESS,
   4: "0x9f7997EFb0aF6f5e370dea99b1941D73330825C9",
 };
 
 export const CofixControllerAddress: AddressesType = {
-  1: ZERO_ADDRESS,
+  1: '0x8eFFbf9CA7dB20481cE9C25EA4B410b3B835D70E',
   3: ZERO_ADDRESS,
   4: "0x59c2EAF8FC22C10C2EB79Be3c23c2916BD0ec81e",
 };

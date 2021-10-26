@@ -150,16 +150,6 @@ const Swap: FC = () => {
       amountIn: BigNumber
     ) => {
       const priceToken = srcName === "ETH" ? destName : srcName;
-      // var priceAndK
-      //   try {
-      //     priceAndK = await cofixControllerContract?.callStatic.queryOracle(
-      //       tokenList[priceToken].addresses[chainId],
-      //       account,
-      //       { value: PRICE_FEE }
-      //     )
-      //   } catch(error) {
-      //     return
-      //   }
         const priceList = await priceContract?.lastPriceListAndTriggeredPriceInfo(
           tokenList[priceToken].addresses[chainId],
           2
