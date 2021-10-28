@@ -28,12 +28,18 @@ export function useSwapExactTokensForTokens(
             BigNumber.from(deadline.toString())]
         )
     }
-    const value = path[0] === ZERO_ADDRESS ? amountIn.add(PRICE_FEE) : PRICE_FEE
+    const value = () => {
+        if (path.length === 2) {
+            return 0
+        } else {
+            return path[0] === ZERO_ADDRESS ? amountIn.add(PRICE_FEE) : PRICE_FEE
+        }
+    }
     const tx = {
         from: account,
         to: contract?.address,
         data: callData,
-        value: value
+        value: value()
     }
     const txPromise = useSendTransaction(contract, tx, {title:`Swap`, info:'', type: TransactionType.swap})
     return txPromise
