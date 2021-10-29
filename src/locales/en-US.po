@@ -236,6 +236,10 @@ msgstr "Leverage"
 msgid "Lock period"
 msgstr "Lock period"
 
+#: src/pages/Farm/index.tsx
+msgid "Locked position mining has ended, return the locked assets and DCU after taking out the operation"
+msgstr "Locked position mining has ended, return the locked assets and DCU after taking out the operation"
+
 #: src/components/OptionsList/index.tsx
 #: src/components/PerpetualsList/PerpetualsListMobile/index.tsx
 #: src/components/PerpetualsList/index.tsx

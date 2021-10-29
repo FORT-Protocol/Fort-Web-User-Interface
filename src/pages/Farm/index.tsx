@@ -1,4 +1,5 @@
 import { BigNumber } from "@ethersproject/bignumber";
+import { Trans } from "@lingui/macro";
 import { FC, useRef, useState } from "react";
 import Popup from "reactjs-popup";
 import { BASE_AMOUNT } from "../../libs/utils";
@@ -34,6 +35,7 @@ const Farm: FC = () => {
   });
   return (
     <div className={classPrefix}>
+      <p className={'farmNotice'}><Trans>Locked position mining has ended, return the locked assets and DCU after taking out the operation</Trans></p>
       {showNotice ? (<Popup
           ref={modal} open onClose={() => {setShowNotice(false)}}><FarmNoticeModal onClose={() => modal.current.close()}></FarmNoticeModal></Popup>) : null}
       <ul>{farms}</ul>
