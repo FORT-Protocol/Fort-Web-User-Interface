@@ -24,39 +24,13 @@
 .farm {
   max-width: 1400px;
   margin: 0 auto;
-  &-circleInfo {
-    margin: 0 auto;
+  
+  .farmNotice {
+    text-align: center;
+    font-family: $boldFont;
+    font-weight: bold;
     margin-top: 44px;
-    display: flex;
-    justify-content: center;
-
-    div + div {
-      margin-left: 40px;
-    }
-
-    &-one {
-      @include circleInfo;
-      background: linear-gradient(135deg, #dc706a 0%, #dd8751 100%);
-      box-shadow: 0px 0px 10px #e5e5e5;
-    }
-
-    &-two {
-      @include circleInfo;
-      background: linear-gradient(135deg, #85d6f7 0%, #56bff4 100%);
-      box-shadow: 0px 0px 10px #e5e5e5;
-    }
-
-    &-three {
-      @include circleInfo;
-      background: linear-gradient(135deg, #98cf71 0%, #63c8a7 100%);
-      box-shadow: 0px 0px 10px #e5e5e5;
-    }
-
-    &-four {
-      @include circleInfo;
-      background: linear-gradient(135deg, #e4cb58 0%, #e8bb58 100%);
-      box-shadow: 0px 0px 10px #e5e5e5;
-    }
+    color: $wrongAndNotice-color;
   }
 
   ul {
