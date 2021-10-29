@@ -236,6 +236,10 @@ msgstr "选择杠杆"
 msgid "Lock period"
 msgstr "锁定期"
 
+#: src/pages/Farm/index.tsx
+msgid "Locked position mining has ended, return the locked assets and DCU after taking out the operation"
+msgstr "锁仓挖矿已结束，取出操作后返还锁仓资产与 DCU"
+
 #: src/components/OptionsList/index.tsx
 #: src/components/PerpetualsList/PerpetualsListMobile/index.tsx
 #: src/components/PerpetualsList/index.tsx

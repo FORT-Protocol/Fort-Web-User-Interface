@@ -364,8 +364,7 @@ export const FarmCard: FC<Props> = ({ ...props }) => {
       <div className={`${classPrefix}-middleInfo`}>
         <LineShowInfo
           leftText={t`Lock period`}
-          rightText={`${props.time} Month`}
-          red={props.time === 24}
+          rightText={`---`}
         />
         <LineShowInfo
           leftText={t`Current mining rate`}
