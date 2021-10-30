@@ -49,7 +49,7 @@ export type LeverListType = {
 
 const Perpetuals: FC = () => {
   const { account, chainId } = useWeb3();
-  const [showNotice, setShowNotice] = useState(false)
+  const [showNotice, setShowNotice] = useState(false);
   const modal = useRef<any>();
   const [isLong, setIsLong] = useState(true);
   const [dcuBalance, setDcuBalance] = useState<BigNumber>();
@@ -74,11 +74,11 @@ const Perpetuals: FC = () => {
   };
   const showNoticeModal = () => {
     var cache = localStorage.getItem("PerpetualsFirst");
-    if (cache !== '1') {
-      setShowNotice(true)
-      return true
+    if (cache !== "1") {
+      setShowNotice(true);
+      return true;
     }
-    return false
+    return false;
   };
   const trList = leverListState.map((item) => {
     return checkWidth() ? (
@@ -89,11 +89,15 @@ const Perpetuals: FC = () => {
         showNotice={showNoticeModal}
         kValue={kValue}
       />
-    ) : (<PerpetualsListMobile className={classPrefix}
-      item={item}
-      key={item.index.toString() + account}
-      showNotice={showNoticeModal}
-      kValue={kValue}/>);
+    ) : (
+      <PerpetualsListMobile
+        className={classPrefix}
+        item={item}
+        key={item.index.toString() + account}
+        showNotice={showNoticeModal}
+        kValue={kValue}
+      />
+    );
   });
   const getPrice = async (
     contract: Contract,
@@ -174,8 +178,15 @@ const Perpetuals: FC = () => {
       (latestTx.type === 0 || latestTx.type === 1)
     ) {
       setTimeout(getList, 4000);
+      setTimeout(async () => {
+        if (!dcuToken || !account) {
+          return;
+        }
+        const balance = await dcuToken.balanceOf(account);
+        setDcuBalance(balance);
+      }, 4000);
     }
-  }, [getList, isRefresh, txList]);
+  }, [account, dcuToken, getList, isRefresh, txList]);
   const checkDCUBalance = normalToBigNumber(dcuInput).gt(
     dcuBalance || BigNumber.from("0")
   );
@@ -215,54 +226,67 @@ const Perpetuals: FC = () => {
     return bigNumberToNormal(price, 6, 2);
   }, [isLong, kValue]);
 
-  const pcTable = (<table>
-    <thead>
-      <tr className={`${classPrefix}-table-title`}>
-        <th>
-          <Trans>Token pair</Trans>
-        </th>
-        <th>
-          <Trans>Type</Trans>
-        </th>
-        <th>
-          <Trans>Lever</Trans>
-        </th>
-        <th>
-          <Trans>Margin</Trans>
-        </th>
-        <th>
-          <Trans>Open Price</Trans>
-        </th>
-        <th className={"th-marginAssets"}>
-          <Tooltip
-            placement="top"
-            color={"#ffffff"}
-            title={t`Dynamic changes in net assets, less than a certain amount of liquidation will be liquidated, the amount of liquidation is Max'{'margin*leverage*0.02, 10'}'`}
-          >
-            <span>
-              <Trans>Margin Assets</Trans>
-            </span>
-          </Tooltip>
-        </th>
-        <th>
-          <Trans>Operate</Trans>
-        </th>
-      </tr>
-    </thead>
-    <tbody>{trList}</tbody>
-  </table>)
-  
+  const pcTable = (
+    <table>
+      <thead>
+        <tr className={`${classPrefix}-table-title`}>
+          <th>
+            <Trans>Token pair</Trans>
+          </th>
+          <th>
+            <Trans>Type</Trans>
+          </th>
+          <th>
+            <Trans>Lever</Trans>
+          </th>
+          <th>
+            <Trans>Margin</Trans>
+          </th>
+          <th>
+            <Trans>Open Price</Trans>
+          </th>
+          <th className={"th-marginAssets"}>
+            <Tooltip
+              placement="top"
+              color={"#ffffff"}
+              title={t`Dynamic changes in net assets, less than a certain amount of liquidation will be liquidated, the amount of liquidation is Max'{'margin*leverage*0.02, 10'}'`}
+            >
+              <span>
+                <Trans>Margin Assets</Trans>
+              </span>
+            </Tooltip>
+          </th>
+          <th>
+            <Trans>Operate</Trans>
+          </th>
+        </tr>
+      </thead>
+      <tbody>{trList}</tbody>
+    </table>
+  );
+
   return (
     <div>
-      {showNotice ? (<Popup
-          ref={modal} open onClose={() => {setShowNotice(false)}}><PerpetualsNoticeModal onClose={() => modal.current.close()}></PerpetualsNoticeModal></Popup>) : null}
+      {showNotice ? (
+        <Popup
+          ref={modal}
+          open
+          onClose={() => {
+            setShowNotice(false);
+          }}
+        >
+          <PerpetualsNoticeModal
+            onClose={() => modal.current.close()}
+          ></PerpetualsNoticeModal>
+        </Popup>
+      ) : null}
       <MainCard classNames={`${classPrefix}-card`}>
         <InfoShow topLeftText={t`Token pair`} bottomRightText={""}>
           <div className={`${classPrefix}-card-tokenPair`}>
             <DoubleTokenShow tokenNameOne={"ETH"} tokenNameTwo={"USDT"} />
           </div>
           <p>
-            {`${checkWidth() ? '1 ETH = ' : ''}${bigNumberToNormal(
+            {`${checkWidth() ? "1 ETH = " : ""}${bigNumberToNormal(
               kValue?.nowPrice || BigNumber.from("0"),
               tokenList["USDT"].decimals,
               2
@@ -333,11 +357,7 @@ const Perpetuals: FC = () => {
           <HoldLine>
             <Trans>Positions</Trans>
           </HoldLine>
-          {checkWidth() ? (pcTable) : (
-            <ul>
-              {trList}
-            </ul>
-          )}
+          {checkWidth() ? pcTable : <ul>{trList}</ul>}
         </div>
       ) : null}
     </div>

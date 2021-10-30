@@ -29,7 +29,7 @@ const Header: FC = () => {
   ));
   return (
     <header>
-      {chainId === 4 ? (
+      {chainId === 5 ? (
         <div
           className={classNames({
             [`${header}-notice`]: true,
