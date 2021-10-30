@@ -48,7 +48,7 @@ export type OptionsListType = {
 const MintOptions: FC = () => {
   const classPrefix = "options-mintOptions";
   const { account, chainId, library } = useWeb3();
-  const [showNotice, setShowNotice] = useState(false)
+  const [showNotice, setShowNotice] = useState(false);
   const modal = useRef<any>();
   const nestPriceContract = NestPriceContract();
   const fortEuropeanOption = FortEuropeanOption(FortEuropeanOptionContract);
@@ -71,11 +71,11 @@ const MintOptions: FC = () => {
 
   const showNoticeModal = () => {
     var cache = localStorage.getItem("OptionsFirst");
-    if (cache !== '1') {
-      setShowNotice(true)
-      return true
+    if (cache !== "1") {
+      setShowNotice(true);
+      return true;
     }
-    return false
+    return false;
   };
 
   const trList = optionsListState.map((item) => {
@@ -127,8 +127,16 @@ const MintOptions: FC = () => {
       (latestTx.type === 2 || latestTx.type === 3 || latestTx.type === 8)
     ) {
       setTimeout(getOptionsList, 4000);
+      setTimeout(() => {
+        if (!fortContract) {
+          return;
+        }
+        fortContract.balanceOf(account).then((value: any) => {
+          setFortBalance(BigNumber.from(value));
+        });
+      }, 4000);
     }
-  }, [getOptionsList, isRefresh, txList]);
+  }, [account, fortContract, getOptionsList, isRefresh, txList]);
 
   const loadingButton = () => {
     const latestTx = pendingList.filter((item) => item.type === 2);
@@ -270,15 +278,28 @@ const MintOptions: FC = () => {
   );
   return (
     <div>
-      {showNotice ? (<Popup
-          ref={modal} open onClose={() => {setShowNotice(false)}}><OptionsNoticeModal onClose={() => modal.current.close()}></OptionsNoticeModal></Popup>) : null}
+      {showNotice ? (
+        <Popup
+          ref={modal}
+          open
+          onClose={() => {
+            setShowNotice(false);
+          }}
+        >
+          <OptionsNoticeModal
+            onClose={() => modal.current.close()}
+          ></OptionsNoticeModal>
+        </Popup>
+      ) : null}
       <div className={classPrefix}>
         <MainCard classNames={`${classPrefix}-leftCard`}>
           <InfoShow topLeftText={t`Token pair`} bottomRightText={""}>
             <div className={`${classPrefix}-leftCard-tokenPair`}>
               <DoubleTokenShow tokenNameOne={"ETH"} tokenNameTwo={"USDT"} />
             </div>
-            <p>{`${checkWidth() ? '1 ETH = ' : ''}${priceNow ? bigNumberToNormal(priceNow, 6, 2) : '---'} USDT`}</p>
+            <p>{`${checkWidth() ? "1 ETH = " : ""}${
+              priceNow ? bigNumberToNormal(priceNow, 6, 2) : "---"
+            } USDT`}</p>
           </InfoShow>
           <ChooseType
             callBack={handleType}
@@ -304,7 +325,9 @@ const MintOptions: FC = () => {
 
           <InfoShow
             topLeftText={t`Strike price`}
-            bottomRightText={`1 ETH = ${priceNow ? bigNumberToNormal(priceNow,6,2) : '---'} USDT`}
+            bottomRightText={`1 ETH = ${
+              priceNow ? bigNumberToNormal(priceNow, 6, 2) : "---"
+            } USDT`}
           >
             <input
               type="text"
@@ -369,7 +392,9 @@ const MintOptions: FC = () => {
             disable={checkButton()}
             loading={loadingButton()}
             onClick={() => {
-              if (showNoticeModal()) {return}
+              if (showNoticeModal()) {
+                return;
+              }
               if (normalToBigNumber(fortNum).gt(fortBalance)) {
                 message.error(t`Insufficient balance`);
                 return;
@@ -445,42 +470,41 @@ const MintOptions: FC = () => {
           <HoldLine>
             <Trans>Position</Trans>
           </HoldLine>
-          {checkWidth() ? (<table>
-            <thead>
-              <tr className={`${classPrefix}-table-title`}>
-                <th>
-                  <Trans>Token pair</Trans>
-                </th>
-                <th>
-                  <Trans>Type</Trans>
-                </th>
-                <th>
-                  <Trans>Strike price</Trans>
-                </th>
-                <th className={`exerciseTime`}>
-                  <Trans>Exercise time</Trans>
-                </th>
-                <th>
-                  <Trans>Option shares</Trans>
-                </th>
-                <th>
-                  <Trans>Sale earn</Trans>
-                </th>
-                <th>
-                  <Trans>Strike earn</Trans>
-                </th>
-                <th>
-                  <Trans>Operate</Trans>
-                </th>
-              </tr>
-            </thead>
-            <tbody>{trList}</tbody>
-          </table>) : (
-            <ul>
-              {trList}
-            </ul>
+          {checkWidth() ? (
+            <table>
+              <thead>
+                <tr className={`${classPrefix}-table-title`}>
+                  <th>
+                    <Trans>Token pair</Trans>
+                  </th>
+                  <th>
+                    <Trans>Type</Trans>
+                  </th>
+                  <th>
+                    <Trans>Strike price</Trans>
+                  </th>
+                  <th className={`exerciseTime`}>
+                    <Trans>Exercise time</Trans>
+                  </th>
+                  <th>
+                    <Trans>Option shares</Trans>
+                  </th>
+                  <th>
+                    <Trans>Sale earn</Trans>
+                  </th>
+                  <th>
+                    <Trans>Strike earn</Trans>
+                  </th>
+                  <th>
+                    <Trans>Operate</Trans>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>{trList}</tbody>
+            </table>
+          ) : (
+            <ul>{trList}</ul>
           )}
-          
         </div>
       ) : null}
     </div>

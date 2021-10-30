@@ -22,14 +22,16 @@ import {
   getERC20Contract,
   NestPriceContract,
 } from "../../libs/hooks/useContract";
-import useTransactionListCon, { TransactionType } from "../../libs/hooks/useTransactionInfo";
+import useTransactionListCon, {
+  TransactionType,
+} from "../../libs/hooks/useTransactionInfo";
 import useWeb3 from "../../libs/hooks/useWeb3";
 import {
   BASE_AMOUNT,
   bigNumberToNormal,
   COFIX_THETA,
   formatInputNum,
-  normalToBigNumber
+  normalToBigNumber,
 } from "../../libs/utils";
 import "./styles";
 
@@ -64,45 +66,60 @@ const Swap: FC = () => {
     setSwapToken({ src: swapToken.dest, dest: swapToken.src });
     setInputValue("");
   };
-  const { pendingList } = useTransactionListCon();
+  const { pendingList, txList } = useTransactionListCon();
   const priceContract = NestPriceContract();
   // 余额
-  useEffect(() => {
+  const getBalance = useCallback(async () => {
     if (!chainId || !account || !library) {
       return;
     }
-    (async () => {
-      if (swapToken.src === "ETH") {
-        const srcTokenBalance = await library?.getBalance(account);
-        const destTokenBalance = await getERC20Contract(
-          tokenList[swapToken.dest].addresses[chainId],
-          library,
-          account
-        )?.balanceOf(account);
-        setSwapTokenBalance({ src: srcTokenBalance, dest: destTokenBalance });
-      } else if (swapToken.dest === "ETH") {
-        const srcTokenBalance = await getERC20Contract(
-          tokenList[swapToken.src].addresses[chainId],
-          library,
-          account
-        )?.balanceOf(account);
-        const destTokenBalance = await library?.getBalance(account);
-        setSwapTokenBalance({ src: srcTokenBalance, dest: destTokenBalance });
-      } else {
-        const srcTokenBalance = await getERC20Contract(
-          tokenList[swapToken.src].addresses[chainId],
-          library,
-          account
-        )?.balanceOf(account);
-        const destTokenBalance = await getERC20Contract(
-          tokenList[swapToken.dest].addresses[chainId],
-          library,
-          account
-        )?.balanceOf(account);
-        setSwapTokenBalance({ src: srcTokenBalance, dest: destTokenBalance });
-      }
-    })();
+    if (swapToken.src === "ETH") {
+      const srcTokenBalance = await library?.getBalance(account);
+      const destTokenBalance = await getERC20Contract(
+        tokenList[swapToken.dest].addresses[chainId],
+        library,
+        account
+      )?.balanceOf(account);
+      setSwapTokenBalance({ src: srcTokenBalance, dest: destTokenBalance });
+    } else if (swapToken.dest === "ETH") {
+      const srcTokenBalance = await getERC20Contract(
+        tokenList[swapToken.src].addresses[chainId],
+        library,
+        account
+      )?.balanceOf(account);
+      const destTokenBalance = await library?.getBalance(account);
+      setSwapTokenBalance({ src: srcTokenBalance, dest: destTokenBalance });
+    } else {
+      const srcTokenBalance = await getERC20Contract(
+        tokenList[swapToken.src].addresses[chainId],
+        library,
+        account
+      )?.balanceOf(account);
+      const destTokenBalance = await getERC20Contract(
+        tokenList[swapToken.dest].addresses[chainId],
+        library,
+        account
+      )?.balanceOf(account);
+      setSwapTokenBalance({ src: srcTokenBalance, dest: destTokenBalance });
+    }
   }, [account, chainId, library, swapToken]);
+  useEffect(() => {
+    getBalance();
+  }, [account, chainId, getBalance, library, swapToken]);
+  useEffect(() => {
+    if (!txList || txList.length === 0) {
+      return;
+    }
+    const latestTx = txList[txList.length - 1];
+    if (
+      latestTx.txState === 1 &&
+      (latestTx.type === 4 || latestTx.type === 9)
+    ) {
+      setTimeout(() => {
+        getBalance();
+      }, 4000);
+    }
+  }, [getBalance, txList]);
   // 授权
   useEffect(() => {
     if (!chainId || !account || !library) {
@@ -138,7 +155,7 @@ const Swap: FC = () => {
       return ["DCU", "NEST", "ETH"];
     }
     return [swapToken.src, swapToken.dest];
-  },[swapToken]);
+  }, [swapToken]);
   // 价格和预估
   useEffect(() => {
     if (!chainId || !library || !account) {
@@ -150,17 +167,17 @@ const Swap: FC = () => {
       amountIn: BigNumber
     ) => {
       const priceToken = srcName === "ETH" ? destName : srcName;
-        const priceList = await priceContract?.lastPriceListAndTriggeredPriceInfo(
-          tokenList[priceToken].addresses[chainId],
-          2
-        );
-        const kValue = await cofixControllerContract?.calcRevisedK(
-          priceList[4],
-          priceList[0][3],
-          priceList[0][2],
-          priceList[0][1],
-          priceList[0][0]
-        );
+      const priceList = await priceContract?.lastPriceListAndTriggeredPriceInfo(
+        tokenList[priceToken].addresses[chainId],
+        2
+      );
+      const kValue = await cofixControllerContract?.calcRevisedK(
+        priceList[4],
+        priceList[0][3],
+        priceList[0][2],
+        priceList[0][1],
+        priceList[0][0]
+      );
       const k: BigNumber = kValue;
       const tokenAmount: BigNumber = priceList[0][1];
       if (srcName === "ETH") {
@@ -236,7 +253,16 @@ const Swap: FC = () => {
           : amount
       );
     })();
-  }, [account, chainId, cofixControllerContract, library, swapToken, inputValue, path, priceContract]);
+  }, [
+    account,
+    chainId,
+    cofixControllerContract,
+    library,
+    swapToken,
+    inputValue,
+    path,
+    priceContract,
+  ]);
 
   const tokenData = [tokenList["NEST"], tokenList["ETH"]];
   const getSelectedToken = (tokenName: string) => {
