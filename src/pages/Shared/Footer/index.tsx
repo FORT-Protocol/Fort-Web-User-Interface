@@ -1,33 +1,31 @@
 import { FC } from "react";
 import {
-  ChineseIcon,
-  EnglishIcon,
   GithubIcon,
   MiIcon,
   TelIcon,
   TwitterIcon,
   WhitePaper,
 } from "../../../components/Icon";
-import { dynamicActivate } from "../../../libs/i18nConfig";
+// import { dynamicActivate } from "../../../libs/i18nConfig";
 import "./styles/index";
 
 const Footer: FC = () => {
   const footer = "footer";
 
-  const switchLang = (locale: string) => {
-    return () => {
-      dynamicActivate(locale);
-    };
-  };
+  // const switchLang = (locale: string) => {
+  //   return () => {
+  //     dynamicActivate(locale);
+  //   };
+  // };
   return (
     <footer>
       <div className={`${footer}-left`}>
-        <button onClick={switchLang("en-US")}>
+        {/* <button onClick={switchLang("en-US")}>
           <EnglishIcon className={`${footer}-left-english`} />
         </button>
         <button onClick={switchLang("zh-CN")}>
           <ChineseIcon className={`${footer}-left-chinese`} />
-        </button>
+        </button> */}
       </div>
       <div className={`${footer}-right`}>
         <a href="https://app.hedge.red/whitePaper/web/viewer.html" target="view_window"><WhitePaper className={`${footer}-right-paper`} /></a>

@@ -12,7 +12,7 @@ import MobileHeader from "./Shared/Header/MobileHeader";
 
 const Perpetuals = loadable(() => import("./Perpetuals"));
 const Option = loadable(() => import("./Options"));
-const Mining = loadable(() => import("./Farm"));
+// const Mining = loadable(() => import("./Farm"));
 const Swap = loadable(() => import("./Swap"));
 
 const App: FC = () => {
@@ -31,9 +31,9 @@ const App: FC = () => {
             <Route path="/options">
               <Option />
             </Route>
-            <Route path="/farm">
+            {/* <Route path="/farm">
               <Mining />
-            </Route>
+            </Route> */}
             <Route path="/swap">
               <Swap />
             </Route>

@@ -3,10 +3,10 @@ import classNames from "classnames";
 import { FC, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Popup } from "reactjs-popup";
-import { ChineseIcon, EnglishIcon, FortLogo, HeaderListMobile, WhiteLoading, XIcon } from "../../../../components/Icon";
+import { FortLogo, HeaderListMobile, WhiteLoading, XIcon } from "../../../../components/Icon";
 import useTransactionListCon from "../../../../libs/hooks/useTransactionInfo";
 import useWeb3 from "../../../../libs/hooks/useWeb3";
-import { dynamicActivate } from "../../../../libs/i18nConfig";
+// import { dynamicActivate } from "../../../../libs/i18nConfig";
 import { showEllipsisAddress } from "../../../../libs/utils";
 import Modal from "../Status/Modal";
 import WalletModal from "../Status/WalletModal";
@@ -17,22 +17,19 @@ import "./styles";
 const MobileHeader: FC = () => {
   const classPrefix = "header-mobile";
   const { account} = useWeb3();
-//   const thisChain = SupportedChains.filter(
-//     (item) => item.chainId === chainId
-//   )[0];
   const [showList, setShowList] = useState(false);
-  const switchLang = (locale: string) => {
-    return () => {
-      dynamicActivate(locale);
-    };
-  };
+  // const switchLang = (locale: string) => {
+  //   return () => {
+  //     dynamicActivate(locale);
+  //   };
+  // };
   const location = useLocation();
   const { pendingList } = useTransactionListCon();
   const routes = [
     { path: "/futures", content: t`Futures` },
     { path: "/options", content: t`Options` },
     { path: "/swap", content: t`Swap` },
-    { path: "/farm", content: t`Farm` }
+    // { path: "/farm", content: t`Farm` }
   ].map((item) => (
     <li
       key={item.path}
@@ -56,12 +53,12 @@ const MobileHeader: FC = () => {
         Rinkeby
         </div>
         <div className={`${classPrefix}-headerList-top-right`}>
-        <button onClick={switchLang("en-US")}>
+        {/* <button onClick={switchLang("en-US")}>
           <EnglishIcon className={`${classPrefix}-right-english`} />
         </button>
         <button onClick={switchLang("zh-CN")}>
           <ChineseIcon className={`${classPrefix}-right-chinese`} />
-        </button>
+        </button> */}
         </div>
       </div>
       <ul>
