@@ -14,7 +14,7 @@ const MobileFooter: FC = () => {
     <footer>
       <div className={`${footer}`}>
         <a
-          href="https://app.hedge.red/whitePaper/web/viewer.html"
+          href="https://docs.hedge.red/"
           target="view_window"
         >
           <WhitePaper className={`${footer}-right-paper`} />
