@@ -35,7 +35,7 @@ jobs:
           name: static
           path: build/
 
-  deploy-main:
+  deploy-BSCTest:
     environment: bsc-test
     needs: build
     runs-on: ubuntu-latest
