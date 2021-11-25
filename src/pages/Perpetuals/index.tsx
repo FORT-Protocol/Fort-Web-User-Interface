@@ -24,6 +24,7 @@ import useTransactionListCon, {
 } from "../../libs/hooks/useTransactionInfo";
 import useWeb3 from "../../libs/hooks/useWeb3";
 import {
+  BASE_2000ETH_AMOUNT,
   BASE_AMOUNT,
   bigNumberToNormal,
   checkWidth,
@@ -104,17 +105,18 @@ const Perpetuals: FC = () => {
     leverContract: Contract,
     chainId: number
   ) => {
-    const priceList = await contract.lastPriceListAndTriggeredPriceInfo(
+    const priceList = await contract.lastPriceList(
       ETHUSDTPriceChannelId[chainId],
       2
     );
+
+    const priceValue = BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(priceList[1])
     const k = await leverContract.calcRevisedK(
-      priceList[0][3],
-      priceList[0][2],
-      priceList[0][1],
-      priceList[0][0]
+      BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(priceList[3]),
+      priceList[2],
+      priceValue,
+      priceList[0]
     );
-    const priceValue = normalToBigNumber('2000').mul(normalToBigNumber('1')).div(priceList[0][1])
     setKValue({ nowPrice: priceValue, k: k });
   };
   // price

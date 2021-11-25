@@ -19,9 +19,9 @@ import useTransactionListCon, {
 } from "../../libs/hooks/useTransactionInfo";
 import useWeb3 from "../../libs/hooks/useWeb3";
 import {
+  BASE_AMOUNT,
   bigNumberToNormal,
   checkWidth,
-  USDT_BASE_AMOUNT,
   ZERO_ADDRESS,
 } from "../../libs/utils";
 import { OptionsListType } from "../../pages/Options";
@@ -119,7 +119,7 @@ const OptionsList: FC<Props> = ({ ...props }) => {
             blockPrice[1] > props.item.strikePrice
               ? props.item.balance
                   .mul(blockPrice[1].sub(props.item.strikePrice))
-                  .div(USDT_BASE_AMOUNT)
+                  .div(BASE_AMOUNT)
               : BigNumber.from("0");
           setStrikeAmount(amount);
         } else {
@@ -127,7 +127,7 @@ const OptionsList: FC<Props> = ({ ...props }) => {
             props.item.strikePrice > blockPrice[1]
               ? props.item.balance
                   .mul(props.item.strikePrice.sub(blockPrice[1]))
-                  .div(USDT_BASE_AMOUNT)
+                  .div(BASE_AMOUNT)
               : BigNumber.from("0");
           setStrikeAmount(amount);
         }

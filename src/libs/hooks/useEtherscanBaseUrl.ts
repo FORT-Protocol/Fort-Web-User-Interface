@@ -11,6 +11,10 @@ export function useEtherscanBaseUrl(): string {
         return "https://rinkeby.etherscan.io/tx/";
       } else if (chainId === 3) {
         return "https://ropsten.etherscan.io/tx/";
+      } else if (chainId === 56) {
+        return "https://bscscan.com/tx/";
+      } else if (chainId ===97) {
+        return "https://testnet.bscscan.com/tx/";
       }
     }
     return "";
