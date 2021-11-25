@@ -13,7 +13,7 @@ import PerpetualsList, {
 } from "../../components/PerpetualsList";
 import { DoubleTokenShow, SingleTokenShow } from "../../components/TokenShow";
 import { useFortLeverBuy } from "../../contracts/hooks/useFortLeverTransation";
-import { FortLeverContract, tokenList } from "../../libs/constants/addresses";
+import { ETHUSDTPriceChannelId, FortLeverContract, tokenList } from "../../libs/constants/addresses";
 import {
   ERC20Contract,
   FortLever,
@@ -102,11 +102,10 @@ const Perpetuals: FC = () => {
   const getPrice = async (
     contract: Contract,
     leverContract: Contract,
-    tokenAddress: string,
     chainId: number
   ) => {
     const priceList = await contract.lastPriceListAndTriggeredPriceInfo(
-      tokenAddress,
+      ETHUSDTPriceChannelId[chainId],
       2
     );
     const k = await leverContract.calcRevisedK(
@@ -115,7 +114,8 @@ const Perpetuals: FC = () => {
       priceList[0][1],
       priceList[0][0]
     );
-    setKValue({ nowPrice: priceList[0][1], k: k });
+    const priceValue = normalToBigNumber('2000').mul(normalToBigNumber('1')).div(priceList[0][1])
+    setKValue({ nowPrice: priceValue, k: k });
   };
   // price
   useEffect(() => {
@@ -125,14 +125,12 @@ const Perpetuals: FC = () => {
     getPrice(
       priceContract,
       leverContract,
-      tokenList["USDT"].addresses[chainId],
       chainId
     );
     const id = setInterval(() => {
       getPrice(
         priceContract,
         leverContract,
-        tokenList["USDT"].addresses[chainId],
         chainId
       );
     }, 60 * 1000);
@@ -223,7 +221,7 @@ const Perpetuals: FC = () => {
     } else {
       price = kValue.nowPrice.mul(BASE_AMOUNT).div(BASE_AMOUNT.add(kValue.k));
     }
-    return bigNumberToNormal(price, 6, 2);
+    return bigNumberToNormal(price, 18, 2);
   }, [isLong, kValue]);
 
   const pcTable = (
@@ -249,7 +247,7 @@ const Perpetuals: FC = () => {
             <Tooltip
               placement="top"
               color={"#ffffff"}
-              title={t`Dynamic changes in net assets, less than a certain amount of liquidation will be liquidated, the amount of liquidation is Max'{'margin*leverage*0.02, 10'}'`}
+              title={"Dynamic changes in net assets, less than a certain amount of liquidation will be liquidated, the amount of liquidation is Max'{'margin*leverage*0.02, 10'}'"}
             >
               <span>
                 <Trans>Margin Assets</Trans>

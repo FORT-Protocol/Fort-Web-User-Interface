@@ -8,6 +8,7 @@ import MainButton from "../../components/MainButton";
 import MainCard from "../../components/MainCard";
 import { DoubleTokenShow, SingleTokenShow } from "../../components/TokenShow";
 import {
+  ETHUSDTPriceChannelId,
   FortEuropeanOptionContract,
   tokenList,
 } from "../../libs/constants/addresses";
@@ -153,9 +154,10 @@ const MintOptions: FC = () => {
   }, [account, fortContract]);
   const getPrice = async (contract: Contract, chainId: number) => {
     const price = await contract.latestPrice(
-      tokenList["USDT"].addresses[chainId]
+      ETHUSDTPriceChannelId[chainId]
     );
-    setPriceNow(price[1]);
+    const priceValue = normalToBigNumber('2000').mul(normalToBigNumber('1')).div(price[1])
+    setPriceNow(priceValue);
   };
   useEffect(() => {
     if (!nestPriceContract || !chainId) {
@@ -274,7 +276,7 @@ const MintOptions: FC = () => {
     isLong,
     BigNumber.from(exercise.blockNum),
     normalToBigNumber(fortNum),
-    strikePrice ? normalToBigNumber(strikePrice, 6) : undefined
+    strikePrice ? normalToBigNumber(strikePrice, 18) : undefined
   );
   return (
     <div>
@@ -298,7 +300,7 @@ const MintOptions: FC = () => {
               <DoubleTokenShow tokenNameOne={"ETH"} tokenNameTwo={"USDT"} />
             </div>
             <p>{`${checkWidth() ? "1 ETH = " : ""}${
-              priceNow ? bigNumberToNormal(priceNow, 6, 2) : "---"
+              priceNow ? bigNumberToNormal(priceNow, 18, 2) : "---"
             } USDT`}</p>
           </InfoShow>
           <ChooseType
@@ -326,7 +328,7 @@ const MintOptions: FC = () => {
           <InfoShow
             topLeftText={t`Strike price`}
             bottomRightText={`1 ETH = ${
-              priceNow ? bigNumberToNormal(priceNow, 6, 2) : "---"
+              priceNow ? bigNumberToNormal(priceNow, 18, 2) : "---"
             } USDT`}
           >
             <input

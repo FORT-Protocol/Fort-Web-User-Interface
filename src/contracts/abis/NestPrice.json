@@ -161,9 +161,9 @@
 	"type": "function"
 }, {
 	"inputs": [{
-		"internalType": "address",
-		"name": "tokenAddress",
-		"type": "address"
+		"internalType": "uint256",
+		"name": "channelId",
+		"type": "uint256"
 	}, {
 		"internalType": "uint256",
 		"name": "count",
@@ -195,9 +195,9 @@
 	"type": "function"
 }, {
 	"inputs": [{
-		"internalType": "address",
-		"name": "tokenAddress",
-		"type": "address"
+		"internalType": "uint256",
+		"name": "channelId",
+		"type": "uint256"
 	}],
 	"name": "latestPrice",
 	"outputs": [{
@@ -207,62 +207,6 @@
 	}, {
 		"internalType": "uint256",
 		"name": "price",
-		"type": "uint256"
-	}],
-	"stateMutability": "view",
-	"type": "function"
-}, {
-	"inputs": [{
-		"internalType": "address",
-		"name": "tokenAddress",
-		"type": "address"
-	}, {
-		"internalType": "address",
-		"name": "paybackAddress",
-		"type": "address"
-	}],
-	"name": "latestPrice2",
-	"outputs": [{
-		"internalType": "uint256",
-		"name": "blockNumber",
-		"type": "uint256"
-	}, {
-		"internalType": "uint256",
-		"name": "price",
-		"type": "uint256"
-	}, {
-		"internalType": "uint256",
-		"name": "ntokenBlockNumber",
-		"type": "uint256"
-	}, {
-		"internalType": "uint256",
-		"name": "ntokenPrice",
-		"type": "uint256"
-	}],
-	"stateMutability": "payable",
-	"type": "function"
-}, {
-	"inputs": [{
-		"internalType": "address",
-		"name": "tokenAddress",
-		"type": "address"
-	}],
-	"name": "latestPrice2",
-	"outputs": [{
-		"internalType": "uint256",
-		"name": "blockNumber",
-		"type": "uint256"
-	}, {
-		"internalType": "uint256",
-		"name": "price",
-		"type": "uint256"
-	}, {
-		"internalType": "uint256",
-		"name": "ntokenBlockNumber",
-		"type": "uint256"
-	}, {
-		"internalType": "uint256",
-		"name": "ntokenPrice",
 		"type": "uint256"
 	}],
 	"stateMutability": "view",
