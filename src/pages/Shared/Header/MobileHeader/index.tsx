@@ -50,7 +50,7 @@ const MobileHeader: FC = () => {
             <button onClick={() => setShowList(false)}><XIcon/></button>
         </div>
         <div className={`${classPrefix}-headerList-top-mid`}>
-        Rinkeby
+        Mainnet
         </div>
         <div className={`${classPrefix}-headerList-top-right`}>
         {/* <button onClick={switchLang("en-US")}>
