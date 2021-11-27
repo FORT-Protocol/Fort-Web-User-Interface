@@ -38,6 +38,9 @@ export { ReactComponent as ShortIconWhite } from './svg/shortIcon_white.svg'
 export { ReactComponent as WhitePaper } from './svg/whitePaper.svg'
 export { ReactComponent as NoticeSelected } from './svg/noticeSelected.svg'
 export { ReactComponent as HeaderListMobile } from './svg/headerListMobile.svg'
+export { ReactComponent as LittleETH } from './svg/littleETH.svg'
+export { ReactComponent as LittleBSC } from './svg/littleBSC.svg'
+export { ReactComponent as NetworkNow } from './svg/networkNow.svg'
 
 
 

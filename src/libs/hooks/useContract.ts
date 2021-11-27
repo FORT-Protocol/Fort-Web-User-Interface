@@ -1,4 +1,4 @@
-import { CofixControllerAddress, CofixSwapAddress, FortVaultForStakingContract, NestPrice as NestPriceAddress } from './../constants/addresses';
+import { CofixNestUsdtPoolAddress, CofixSwapAddress, NestPrice as NestPriceAddress } from './../constants/addresses';
 import useWeb3 from '../hooks/useWeb3';
 import { getAddress } from "@ethersproject/address"
 import { Contract } from "@ethersproject/contracts"
@@ -7,12 +7,11 @@ import { AddressZero } from "@ethersproject/constants"
 import { useMemo } from 'react';
 import { AddressesType } from '../constants/addresses';
 import ERC20ABI from '../../contracts/abis/ERC20.json'
-import FortForStakingABI from '../../contracts/abis/FortForStaking.json'
 import FortEuropeanOptionABI from '../../contracts/abis/FortEuropeanOption.json';
 import FortLeverABI from '../../contracts/abis/FortLever.json';
 import NestPriceABI from '../../contracts/abis/NestPrice.json';
 import CofixSwapABI from '../../contracts/abis/CofixSwap.json';
-import CofixControllerABI from '../../contracts/abis/CofixController.json';
+import CofixOpenPoolABI from '../../contracts/abis/CofixOpenPool.json';
 import { ZERO_ADDRESS } from '../utils';
 
 function isAddress(value: any): string | false {
@@ -75,10 +74,6 @@ export function FortLever(addresses: AddressesType): Contract | null {
     return useContract(addresses, FortLeverABI)
 }
 
-export function FortForStaking(): Contract | null {
-    return useContract(FortVaultForStakingContract, FortForStakingABI)
-}
-
 export function NestPriceContract(): Contract | null {
     return useContract(NestPriceAddress, NestPriceABI)
 }
@@ -87,6 +82,6 @@ export function CofixSwapContract(): Contract | null {
     return useContract(CofixSwapAddress,CofixSwapABI)
 }
 
-export function CofixControllerContract(): Contract | null {
-    return useContract(CofixControllerAddress,CofixControllerABI)
+export function CofixNestUsdtPool(): Contract | null {
+    return useContract(CofixNestUsdtPoolAddress, CofixOpenPoolABI)
 }

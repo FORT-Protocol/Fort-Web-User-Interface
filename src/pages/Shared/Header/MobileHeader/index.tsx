@@ -28,8 +28,7 @@ const MobileHeader: FC = () => {
   const routes = [
     { path: "/futures", content: t`Futures` },
     { path: "/options", content: t`Options` },
-    { path: "/swap", content: t`Swap` },
-    // { path: "/farm", content: t`Farm` }
+    { path: "/swap", content: t`Swap` }
   ].map((item) => (
     <li
       key={item.path}
@@ -50,7 +49,7 @@ const MobileHeader: FC = () => {
             <button onClick={() => setShowList(false)}><XIcon/></button>
         </div>
         <div className={`${classPrefix}-headerList-top-mid`}>
-        Mainnet
+        BSC
         </div>
         <div className={`${classPrefix}-headerList-top-right`}>
         {/* <button onClick={switchLang("en-US")}>
