@@ -162,7 +162,7 @@ const OptionsList: FC<Props> = ({ ...props }) => {
         const letNum = BigNumber.from("18446744073709551616000000");
         const sellNUm = calcV
           .mul(props.item.balance)
-          .mul(BigNumber.from("975"))
+          .mul(BigNumber.from("950"))
           .div(BigNumber.from("1000").mul(letNum));
         setSaleAmount(sellNUm);
       })();
