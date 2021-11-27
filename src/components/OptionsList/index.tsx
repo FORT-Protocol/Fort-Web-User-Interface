@@ -116,7 +116,7 @@ const OptionsList: FC<Props> = ({ ...props }) => {
         );
         if (props.item.orientation) {
           const amount =
-            blockPrice[1] > props.item.strikePrice
+            blockPrice[1].gt(props.item.strikePrice)
               ? props.item.balance
                   .mul(blockPrice[1].sub(props.item.strikePrice))
                   .div(USDT_BASE_AMOUNT)
@@ -124,7 +124,7 @@ const OptionsList: FC<Props> = ({ ...props }) => {
           setStrikeAmount(amount);
         } else {
           const amount =
-            props.item.strikePrice > blockPrice[1]
+            props.item.strikePrice.gt(blockPrice[1])
               ? props.item.balance
                   .mul(props.item.strikePrice.sub(blockPrice[1]))
                   .div(USDT_BASE_AMOUNT)

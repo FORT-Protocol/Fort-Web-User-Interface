@@ -3,21 +3,18 @@ import classNames from "classnames";
 import { FC, useRef, useState } from "react";
 import Popup from "reactjs-popup";
 import { WhiteLoading } from "../../../../components/Icon";
-import { SupportedChains } from "../../../../libs/constants/chain";
 import useTransactionListCon from "../../../../libs/hooks/useTransactionInfo";
 import useWeb3 from "../../../../libs/hooks/useWeb3";
 import { showEllipsisAddress } from "../../../../libs/utils";
 import Modal from "./Modal";
+import SelectNetwork from "./SelectNetwork";
 import "./styles";
 import WalletModal from "./WalletModal";
 
 const ConnectStatus: FC = () => {
-  const { account, chainId } = useWeb3();
+  const { account } = useWeb3();
   const [isFirst, setIsFirst] = useState(true)
   const modal = useRef<any>();
-  const thisChain = SupportedChains.filter(
-    (item) => item.chainId === chainId
-  )[0];
   const classPrefix = "connectStatus";
   const { pendingList } = useTransactionListCon();
   return (
@@ -27,9 +24,9 @@ const ConnectStatus: FC = () => {
         [`isConnect`]: false,
       })}
     >
-      {thisChain !== undefined && thisChain.chainId !== 1 ? (
-        <div className={`${classPrefix}-chainName`}>{thisChain.name}</div>
-      ) : null}
+      
+      <SelectNetwork/>
+      
 
       {(isFirst && !account) ? (<Popup open><Modal onClose={() => {
     setIsFirst(false)
