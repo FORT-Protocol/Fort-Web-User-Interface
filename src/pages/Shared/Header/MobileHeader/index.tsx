@@ -3,7 +3,7 @@ import classNames from "classnames";
 import { FC, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Popup } from "reactjs-popup";
-import { FortLogo, HeaderListMobile, WhiteLoading, XIcon } from "../../../../components/Icon";
+import { FortLogo, HeaderListMobile, LittleETH, WhiteLoading, XIcon } from "../../../../components/Icon";
 import useTransactionListCon from "../../../../libs/hooks/useTransactionInfo";
 import useWeb3 from "../../../../libs/hooks/useWeb3";
 // import { dynamicActivate } from "../../../../libs/i18nConfig";
@@ -12,6 +12,7 @@ import Modal from "../Status/Modal";
 import WalletModal from "../Status/WalletModal";
 import "../Status/styles"
 import "./styles";
+import SelectNetworkModal from "./SelectNetworkModal";
 
 
 const MobileHeader: FC = () => {
@@ -28,8 +29,7 @@ const MobileHeader: FC = () => {
   const routes = [
     { path: "/futures", content: t`Futures` },
     { path: "/options", content: t`Options` },
-    { path: "/swap", content: t`Swap` },
-    // { path: "/farm", content: t`Farm` }
+    { path: "/swap", content: t`Swap` }
   ].map((item) => (
     <li
       key={item.path}
@@ -49,16 +49,21 @@ const MobileHeader: FC = () => {
         <div className={`${classPrefix}-headerList-top-left`}>
             <button onClick={() => setShowList(false)}><XIcon/></button>
         </div>
-        <div className={`${classPrefix}-headerList-top-mid`}>
-        Rinkeby
+
+        <Popup
+          modal
+          ref={modal}
+          trigger={
+            <div className={`${classPrefix}-headerList-top-mid`}>
+        <LittleETH/><p>Rinkeby</p>
         </div>
+          }
+        >
+          <SelectNetworkModal onClose={() => modal.current.close()} />
+        </Popup>
+
+        
         <div className={`${classPrefix}-headerList-top-right`}>
-        {/* <button onClick={switchLang("en-US")}>
-          <EnglishIcon className={`${classPrefix}-right-english`} />
-        </button>
-        <button onClick={switchLang("zh-CN")}>
-          <ChineseIcon className={`${classPrefix}-right-chinese`} />
-        </button> */}
         </div>
       </div>
       <ul>
