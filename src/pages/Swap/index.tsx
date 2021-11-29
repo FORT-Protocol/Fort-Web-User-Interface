@@ -149,13 +149,14 @@ const Swap: FC = () => {
         NESTUSDTPriceChannelId[chainId],
         2
       );
+
       const kValue = await cofixOpenPool?.calcRevisedK(
-        '102739726027',
         priceList[0][3],
         priceList[0][2],
         priceList[0][1],
         priceList[0][0]
       );
+      
       const k: BigNumber = kValue;
       const tokenAmount: BigNumber = priceList[0][1];
       if (srcName === "USDT") {
@@ -170,7 +171,6 @@ const Swap: FC = () => {
               amountIn.mul(200).div(BigNumber.from("100000"))
             )
           );
-          console.log(amountOut.toString())
         return amountOut;
       } else {
         const amountETHOut = amountIn.mul(BASE_AMOUNT.mul(BigNumber.from('2000'))).div(tokenAmount);

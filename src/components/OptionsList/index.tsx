@@ -125,7 +125,6 @@ const OptionsList: FC<Props> = ({ ...props }) => {
                   .div(BASE_AMOUNT)
               : BigNumber.from("0");
           setStrikeAmount(amount);
-          console.log(amount)
         } else {
           const amount =
             props.item.strikePrice.gt(blockPrice_toUSDT)
