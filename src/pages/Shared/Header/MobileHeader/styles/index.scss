@@ -47,7 +47,7 @@
             }
 
             &-mid {
-                width: 100px;
+                display: flex;
                 text-align: center;
                 font-size: $T3;
                 color: black;
@@ -55,6 +55,12 @@
                 border-radius: 22px;
                 border: 1px solid black;
                 line-height: 44px;
+                padding: 0 14px;
+
+                svg {
+                    margin: auto 0;
+                    margin-right: 10px; 
+                }
             }
 
             &-right {
