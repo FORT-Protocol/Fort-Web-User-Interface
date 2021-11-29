@@ -1,0 +1,53 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.baseModal{
+    .selectNetworkMobile {
+        padding: 14px 0px;
+    }
+
+    &-top-title {
+        color: $gray-info-text-color;
+        font-size: $T2;
+        font-family: Montserrat;
+    }
+}
+.selectNetworkMobile {
+
+    
+    
+    ul {
+        display: contents;
+
+        li {
+            display: flex;
+            height: 48px;
+            padding: 0 14px;
+
+            a {
+                display: contents;
+
+                svg {
+                    margin: auto 0;
+                    margin-right: 10px;
+                }
+
+                p {
+                    margin: 0;
+                    line-height: 48px;
+                    color: black;
+                }
+
+                p+svg {
+                    text-align: right;
+                    margin-right: 0;
+                }
+            }
+
+        }
+
+        li:hover {
+            background-color: $gray-line-color;
+        }
+    }
+}
