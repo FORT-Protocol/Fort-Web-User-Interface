@@ -168,7 +168,7 @@ const Swap: FC = () => {
           .div(BASE_AMOUNT.mul(BigNumber.from('2000')))
           .div(
             BASE_AMOUNT.add(k).add(
-              amountIn.mul(200).div(BigNumber.from("100000"))
+              amountIn.mul(200).div(BigNumber.from("500000000"))
             )
           );
         return amountOut;
@@ -178,7 +178,7 @@ const Swap: FC = () => {
           .mul(BASE_AMOUNT)
           .div(
             BASE_AMOUNT.add(k).add(
-              amountETHOut.mul(200).div(BigNumber.from("100000"))
+              amountETHOut.mul(200).div(BigNumber.from("500000000"))
             )
           );
         const fee = amountETHOut2.mul(COFIX_THETA).div(BigNumber.from("10000"));
