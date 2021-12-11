@@ -6,26 +6,16 @@ import {
   TwitterIcon,
   WhitePaper,
 } from "../../../components/Icon";
-// import { dynamicActivate } from "../../../libs/i18nConfig";
+import { useWithdrawToken } from "../../../contracts/hooks/useReceiveDcuTransation";
 import "./styles/index";
 
 const Footer: FC = () => {
   const footer = "footer";
-
-  // const switchLang = (locale: string) => {
-  //   return () => {
-  //     dynamicActivate(locale);
-  //   };
-  // };
+  const receiveDcu = useWithdrawToken();
   return (
     <footer>
       <div className={`${footer}-left`}>
-        {/* <button onClick={switchLang("en-US")}>
-          <EnglishIcon className={`${footer}-left-english`} />
-        </button>
-        <button onClick={switchLang("zh-CN")}>
-          <ChineseIcon className={`${footer}-left-chinese`} />
-        </button> */}
+        <button className={`${footer}-left-receive`} onClick={receiveDcu}>Receive DCU</button>
       </div>
       <div className={`${footer}-right`}>
         <a href="https://docs.hedge.red/" target="view_window"><WhitePaper className={`${footer}-right-paper`} /></a>

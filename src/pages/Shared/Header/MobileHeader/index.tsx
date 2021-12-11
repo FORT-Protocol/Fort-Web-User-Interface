@@ -13,6 +13,7 @@ import WalletModal from "../Status/WalletModal";
 import "../Status/styles"
 import "./styles";
 import SelectNetworkModal from "./SelectNetworkModal";
+import { useWithdrawToken } from "../../../../contracts/hooks/useReceiveDcuTransation";
 
 
 const MobileHeader: FC = () => {
@@ -106,8 +107,9 @@ const MobileHeader: FC = () => {
         </Popup>
       )}
       </div>
-      
+      <div className={'receiveDcu'}><button onClick={useWithdrawToken()}>Receive DCU</button></div>
     </div>
+    
   );
   return (
     <header>

@@ -156,3 +156,9 @@ export const CofixControllerAddress: AddressesType = {
   3: ZERO_ADDRESS,
   4: "0x59c2EAF8FC22C10C2EB79Be3c23c2916BD0ec81e",
 };
+
+export const ReceiveDcuFaucet: AddressesType = {
+  1: ZERO_ADDRESS,
+  3: ZERO_ADDRESS,
+  4: "0x333b1F055390fa2f6726283eddd231008262f75E",
+}

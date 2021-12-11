@@ -81,7 +81,9 @@ export const transactionTitle = (type: TransactionType) => {
     case 8:
       return t`Sell Options`;
     case 9:
-    return t`Swap`;
+      return t`Swap`;
+    case 99:
+      return "Receive DCU";
     default:
       break;
   }

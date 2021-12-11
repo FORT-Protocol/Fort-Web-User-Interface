@@ -1,4 +1,4 @@
-import { CofixControllerAddress, CofixSwapAddress, FortVaultForStakingContract, NestPrice as NestPriceAddress } from './../constants/addresses';
+import { CofixControllerAddress, CofixSwapAddress, FortVaultForStakingContract, NestPrice as NestPriceAddress, ReceiveDcuFaucet } from './../constants/addresses';
 import useWeb3 from '../hooks/useWeb3';
 import { getAddress } from "@ethersproject/address"
 import { Contract } from "@ethersproject/contracts"
@@ -13,6 +13,7 @@ import FortLeverABI from '../../contracts/abis/FortLever.json';
 import NestPriceABI from '../../contracts/abis/NestPrice.json';
 import CofixSwapABI from '../../contracts/abis/CofixSwap.json';
 import CofixControllerABI from '../../contracts/abis/CofixController.json';
+import ReceiveDcuABI from '../../contracts/abis/ReceiveDcu.json';
 import { ZERO_ADDRESS } from '../utils';
 
 function isAddress(value: any): string | false {
@@ -89,4 +90,8 @@ export function CofixSwapContract(): Contract | null {
 
 export function CofixControllerContract(): Contract | null {
     return useContract(CofixControllerAddress,CofixControllerABI)
+}
+
+export function ReceiveDcuFaucetContract(): Contract | null {
+    return useContract(ReceiveDcuFaucet, ReceiveDcuABI)
 }
