@@ -34,6 +34,25 @@
         "inputs": [
             {
                 "indexed": false,
+                "internalType": "uint256",
+                "name": "lastWithdrawBlock",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "currentBlock",
+                "type": "uint256"
+            }
+        ],
+        "name": "WithdrawCheckBlockNumber",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
                 "internalType": "address",
                 "name": "user",
                 "type": "address"
@@ -56,12 +75,12 @@
                 "type": "address"
             }
         ],
-        "name": "addressLimit",
+        "name": "lastWithdrawBlock",
         "outputs": [
             {
-                "internalType": "bool",
+                "internalType": "uint256",
                 "name": "",
-                "type": "bool"
+                "type": "uint256"
             }
         ],
         "stateMutability": "view",
