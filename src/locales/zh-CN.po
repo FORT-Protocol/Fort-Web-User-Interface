@@ -258,8 +258,8 @@ msgid "Margin Assets"
 msgstr "保证金净资产"
 
 #: src/pages/Perpetuals/index.tsx
-msgid "Minimum input 100"
-msgstr "最小输入100"
+msgid "Minimum input 50"
+msgstr "最小输入50"
 
 #: src/pages/Farm/FarmCard/index.tsx
 msgid "Mining pool number"

@@ -258,8 +258,8 @@ msgid "Margin Assets"
 msgstr "Margin Assets"
 
 #: src/pages/Perpetuals/index.tsx
-msgid "Minimum input 100"
-msgstr "Minimum input 100"
+msgid "Minimum input 50"
+msgstr "Minimum input 50"
 
 #: src/pages/Farm/FarmCard/index.tsx
 msgid "Mining pool number"

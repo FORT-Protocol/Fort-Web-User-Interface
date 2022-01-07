@@ -341,8 +341,8 @@ const Perpetuals: FC = () => {
             if (!checkMainButton() || showNoticeModal()) {
               return;
             }
-            if (normalToBigNumber(dcuInput).lt(normalToBigNumber("100"))) {
-              message.error(t`Minimum input 100`);
+            if (normalToBigNumber(dcuInput).lt(normalToBigNumber("50"))) {
+              message.error(t`Minimum input 50`);
               return;
             }
             active();
