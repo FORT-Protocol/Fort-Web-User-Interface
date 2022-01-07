@@ -212,9 +212,9 @@ const Swap: FC = () => {
       destName: string,
       amountIn: BigNumber
     ) => {
-      const k = BigNumber.from("3000000")
+      const k = BigNumber.from("1500000")
         .mul(BASE_AMOUNT)
-        .mul(BigNumber.from("3000000").mul(BASE_AMOUNT));
+        .mul(BigNumber.from("1500000").mul(BASE_AMOUNT));
       const srcTokenBalance: BigNumber = await getERC20Contract(
         tokenList[srcName].addresses[chainId],
         library,
