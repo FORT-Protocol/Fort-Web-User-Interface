@@ -3,7 +3,7 @@ import classNames from "classnames";
 import { FC, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Popup } from "reactjs-popup";
-import { FortLogo, HeaderListMobile, LittleETH, WhiteLoading, XIcon } from "../../../../components/Icon";
+import { FortLogo, HeaderListMobile, LittleBSC, WhiteLoading, XIcon } from "../../../../components/Icon";
 import useTransactionListCon from "../../../../libs/hooks/useTransactionInfo";
 import useWeb3 from "../../../../libs/hooks/useWeb3";
 // import { dynamicActivate } from "../../../../libs/i18nConfig";
@@ -29,7 +29,7 @@ const MobileHeader: FC = () => {
   const routes = [
     { path: "/futures", content: t`Futures` },
     { path: "/options", content: t`Options` },
-    { path: "/swap", content: t`Swap` }
+    // { path: "/swap", content: t`Swap` }
   ].map((item) => (
     <li
       key={item.path}
@@ -55,7 +55,7 @@ const MobileHeader: FC = () => {
           ref={modal}
           trigger={
             <div className={`${classPrefix}-headerList-top-mid`}>
-        <LittleETH/><p>Ethereum</p>
+        <LittleBSC/><p>BSC</p>
         </div>
           }
         >

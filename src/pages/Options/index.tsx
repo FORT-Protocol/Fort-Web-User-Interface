@@ -8,6 +8,7 @@ import MainButton from "../../components/MainButton";
 import MainCard from "../../components/MainCard";
 import { DoubleTokenShow, SingleTokenShow } from "../../components/TokenShow";
 import {
+  ETHUSDTPriceChannelId,
   FortEuropeanOptionContract,
   tokenList,
 } from "../../libs/constants/addresses";
@@ -18,6 +19,8 @@ import {
 } from "../../libs/hooks/useContract";
 import useWeb3 from "../../libs/hooks/useWeb3";
 import {
+  BASE_2000ETH_AMOUNT,
+  BASE_AMOUNT,
   bigNumberToNormal,
   checkWidth,
   formatInputNum,
@@ -152,10 +155,13 @@ const MintOptions: FC = () => {
     setFortBalance(BigNumber.from(0));
   }, [account, fortContract]);
   const getPrice = async (contract: Contract, chainId: number) => {
-    const price = await contract.latestPrice(
-      tokenList["USDT"].addresses[chainId]
+    const price = await contract.lastPriceList(
+      ETHUSDTPriceChannelId[chainId],
+      [0],
+      1
     );
-    setPriceNow(price[1]);
+    const priceValue = BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(price[1])
+    setPriceNow(priceValue);
   };
   useEffect(() => {
     if (!nestPriceContract || !chainId) {
@@ -174,7 +180,7 @@ const MintOptions: FC = () => {
   }, [chainId, nestPriceContract]);
 
   useEffect(() => {
-    if (moment().valueOf() - latestBlock.time > 15000 && library) {
+    if (moment().valueOf() - latestBlock.time > 6000 && library) {
       (async () => {
         const latest = await library?.getBlockNumber();
         setLatestBlock({ time: moment().valueOf(), blockNum: latest || 0 });
@@ -197,7 +203,7 @@ const MintOptions: FC = () => {
       if (selectTime > nowTime) {
         const timeString = moment(value).format("YYYY[-]MM[-]DD");
         const blockNum = parseFloat(
-          ((selectTime - nowTime) / 14000).toString()
+          ((selectTime - nowTime) / 3000).toString()
         ).toFixed(0);
         setExercise({
           time: timeString,
@@ -274,7 +280,7 @@ const MintOptions: FC = () => {
     isLong,
     BigNumber.from(exercise.blockNum),
     normalToBigNumber(fortNum),
-    strikePrice ? normalToBigNumber(strikePrice, 6) : undefined
+    strikePrice ? normalToBigNumber(strikePrice, 18) : undefined
   );
   return (
     <div>
@@ -298,7 +304,7 @@ const MintOptions: FC = () => {
               <DoubleTokenShow tokenNameOne={"ETH"} tokenNameTwo={"USDT"} />
             </div>
             <p>{`${checkWidth() ? "1 ETH = " : ""}${
-              priceNow ? bigNumberToNormal(priceNow, 6, 2) : "---"
+              priceNow ? bigNumberToNormal(priceNow, 18, 2) : "---"
             } USDT`}</p>
           </InfoShow>
           <ChooseType
@@ -326,7 +332,7 @@ const MintOptions: FC = () => {
           <InfoShow
             topLeftText={t`Strike price`}
             bottomRightText={`1 ETH = ${
-              priceNow ? bigNumberToNormal(priceNow, 6, 2) : "---"
+              priceNow ? bigNumberToNormal(priceNow, 18, 2) : "---"
             } USDT`}
           >
             <input

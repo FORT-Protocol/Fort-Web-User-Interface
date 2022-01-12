@@ -4,6 +4,7 @@ import {
   LittleBSC,
   LittleETH,
   NetworkNow,
+  PolygonIcon,
 } from "../../../../../components/Icon";
 import './styles'
 
@@ -24,7 +25,6 @@ const SelectNetworkModal: FC<Props> = ({ ...props }) => {
           <a href={"https://app.hedge.red"}>
             <LittleETH />
             <p>Ethereum</p>
-            <NetworkNow />
           </a>
         </li>
         <li>
@@ -37,6 +37,13 @@ const SelectNetworkModal: FC<Props> = ({ ...props }) => {
           <a href={"https://bsc.hedge.red"}>
             <LittleBSC />
             <p>BSC</p>
+          </a>
+        </li>
+        <li>
+          <a href={"/"}>
+            <PolygonIcon />
+            <p>Polygon</p>
+            <NetworkNow />
           </a>
         </li>
       </ul>

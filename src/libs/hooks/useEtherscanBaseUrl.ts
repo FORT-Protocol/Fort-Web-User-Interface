@@ -5,12 +5,10 @@ export function useEtherscanBaseUrl(): string {
   const { chainId } = useWeb3();
   return useMemo(() => {
     if (chainId) {
-      if (chainId === 1) {
-        return "https://etherscan.io/tx/";
-      } else if (chainId === 4) {
-        return "https://rinkeby.etherscan.io/tx/";
-      } else if (chainId === 3) {
-        return "https://ropsten.etherscan.io/tx/";
+      if (chainId === 137) {
+        return "https://polygonscan.com/tx/";
+      } else if (chainId === 80001) {
+        return "https://mumbai.polygonscan.com/tx/";
       }
     }
     return "";

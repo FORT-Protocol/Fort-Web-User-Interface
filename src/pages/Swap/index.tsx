@@ -13,11 +13,12 @@ import { useSwapExactTokensForTokens } from "../../contracts/hooks/useCofixSwap"
 import { useERC20Approve } from "../../contracts/hooks/useERC20Approve";
 import {
   CofixSwapAddress,
+  NESTUSDTPriceChannelId,
   SwapAddress,
   tokenList,
 } from "../../libs/constants/addresses";
 import {
-  CofixControllerContract,
+  CofixNestUsdtPool,
   CofixSwapContract,
   getERC20Contract,
   NestPriceContract,
@@ -61,7 +62,7 @@ const Swap: FC = () => {
     useState<SwapTokenBalanceType>();
   const [destValue, setDestValue] = useState<BigNumber>();
   const cofixSwapContract = CofixSwapContract();
-  const cofixControllerContract = CofixControllerContract();
+  const cofixOpenPool = CofixNestUsdtPool();
   const exchangeSwapTokens = () => {
     setSwapToken({ src: swapToken.dest, dest: swapToken.src });
     setInputValue("");
@@ -73,35 +74,18 @@ const Swap: FC = () => {
     if (!chainId || !account || !library) {
       return;
     }
-    if (swapToken.src === "ETH") {
-      const srcTokenBalance = await library?.getBalance(account);
-      const destTokenBalance = await getERC20Contract(
-        tokenList[swapToken.dest].addresses[chainId],
-        library,
-        account
-      )?.balanceOf(account);
-      setSwapTokenBalance({ src: srcTokenBalance, dest: destTokenBalance });
-    } else if (swapToken.dest === "ETH") {
-      const srcTokenBalance = await getERC20Contract(
-        tokenList[swapToken.src].addresses[chainId],
-        library,
-        account
-      )?.balanceOf(account);
-      const destTokenBalance = await library?.getBalance(account);
-      setSwapTokenBalance({ src: srcTokenBalance, dest: destTokenBalance });
-    } else {
-      const srcTokenBalance = await getERC20Contract(
-        tokenList[swapToken.src].addresses[chainId],
-        library,
-        account
-      )?.balanceOf(account);
-      const destTokenBalance = await getERC20Contract(
-        tokenList[swapToken.dest].addresses[chainId],
-        library,
-        account
-      )?.balanceOf(account);
-      setSwapTokenBalance({ src: srcTokenBalance, dest: destTokenBalance });
-    }
+    const srcTokenBalance = await getERC20Contract(
+      tokenList[swapToken.src].addresses[chainId],
+      library,
+      account
+    )?.balanceOf(account);
+    const destTokenBalance = await getERC20Contract(
+      tokenList[swapToken.dest].addresses[chainId],
+      library,
+      account
+    )?.balanceOf(account);
+    setSwapTokenBalance({ src: srcTokenBalance, dest: destTokenBalance });
+    
   }, [account, chainId, library, swapToken]);
   useEffect(() => {
     getBalance();
@@ -125,10 +109,6 @@ const Swap: FC = () => {
     if (!chainId || !account || !library) {
       return;
     }
-    if (swapToken.src === "ETH") {
-      setSrcAllowance(BigNumber.from("0"));
-      return;
-    }
     const srcToken = getERC20Contract(
       tokenList[swapToken.src].addresses[chainId],
       library,
@@ -145,14 +125,14 @@ const Swap: FC = () => {
       );
       setSrcAllowance(allowance);
     })();
-  }, [account, chainId, library, swapToken]);
+  }, [account, chainId, library, swapToken, txList]);
 
   const path = useCallback(() => {
-    if (swapToken.src === "ETH") {
-      return ["ETH", "NEST", "DCU"];
+    if (swapToken.src === "USDT") {
+      return ["USDT", "NEST", "DCU"];
     }
-    if (swapToken.dest === "ETH") {
-      return ["DCU", "NEST", "ETH"];
+    if (swapToken.dest === "USDT") {
+      return ["DCU", "NEST", "USDT"];
     }
     return [swapToken.src, swapToken.dest];
   }, [swapToken]);
@@ -163,43 +143,42 @@ const Swap: FC = () => {
     }
     const swapWithK = async (
       srcName: string,
-      destName: string,
       amountIn: BigNumber
     ) => {
-      const priceToken = srcName === "ETH" ? destName : srcName;
       const priceList = await priceContract?.lastPriceListAndTriggeredPriceInfo(
-        tokenList[priceToken].addresses[chainId],
+        NESTUSDTPriceChannelId[chainId],
         2
       );
-      const kValue = await cofixControllerContract?.calcRevisedK(
-        priceList[4],
+
+      const kValue = await cofixOpenPool?.calcRevisedK(
         priceList[0][3],
         priceList[0][2],
         priceList[0][1],
         priceList[0][0]
       );
+      
       const k: BigNumber = kValue;
       const tokenAmount: BigNumber = priceList[0][1];
-      if (srcName === "ETH") {
+      if (srcName === "USDT") {
         const fee = amountIn.mul(COFIX_THETA).div(BigNumber.from("10000"));
         const amountOut = amountIn
           .sub(fee)
           .mul(tokenAmount)
           .mul(BASE_AMOUNT)
-          .div(BASE_AMOUNT)
+          .div(BASE_AMOUNT.mul(BigNumber.from('2000')))
           .div(
             BASE_AMOUNT.add(k).add(
-              amountIn.mul(200).div(BigNumber.from("100000"))
+              amountIn.mul(200).div(BigNumber.from("500000000"))
             )
           );
         return amountOut;
       } else {
-        const amountETHOut = amountIn.mul(BASE_AMOUNT).div(tokenAmount);
+        const amountETHOut = amountIn.mul(BASE_AMOUNT.mul(BigNumber.from('2000'))).div(tokenAmount);
         const amountETHOut2 = amountETHOut
           .mul(BASE_AMOUNT)
           .div(
             BASE_AMOUNT.add(k).add(
-              amountETHOut.mul(200).div(BigNumber.from("100000"))
+              amountETHOut.mul(200).div(BigNumber.from("500000000"))
             )
           );
         const fee = amountETHOut2.mul(COFIX_THETA).div(BigNumber.from("10000"));
@@ -238,8 +217,8 @@ const Swap: FC = () => {
         ? normalToBigNumber(inputValue!)
         : BASE_AMOUNT;
       for (let index = 0; index < usePath.length - 1; index++) {
-        if (usePath[index] === "ETH" || usePath[index + 1] === "ETH") {
-          amount = await swapWithK(usePath[index], usePath[index + 1], amount);
+        if (usePath[index] === "USDT" || usePath[index + 1] === "USDT") {
+          amount = await swapWithK(usePath[index], amount);
         } else {
           amount = await swapXY(usePath[index], usePath[index + 1], amount);
         }
@@ -256,7 +235,7 @@ const Swap: FC = () => {
   }, [
     account,
     chainId,
-    cofixControllerContract,
+    cofixOpenPool,
     library,
     swapToken,
     inputValue,
@@ -264,7 +243,7 @@ const Swap: FC = () => {
     priceContract,
   ]);
 
-  const tokenData = [tokenList["NEST"], tokenList["ETH"]];
+  const tokenData = [tokenList["NEST"], tokenList["USDT"]];
   const getSelectedToken = (tokenName: string) => {
     if (swapToken.src === "DCU") {
       setSwapToken({ src: swapToken.src, dest: tokenName });
@@ -285,9 +264,6 @@ const Swap: FC = () => {
     return true;
   };
   const checkAllowance = () => {
-    if (swapToken.src === "ETH") {
-      return true;
-    }
     if (!inputValue) {
       return true;
     }

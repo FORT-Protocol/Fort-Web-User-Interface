@@ -41,6 +41,8 @@ export { ReactComponent as HeaderListMobile } from './svg/headerListMobile.svg'
 export { ReactComponent as LittleETH } from './svg/littleETH.svg'
 export { ReactComponent as LittleBSC } from './svg/littleBSC.svg'
 export { ReactComponent as NetworkNow } from './svg/networkNow.svg'
+export { ReactComponent as PolygonIcon } from './svg/polygonIcon.svg'
+
 
 
 
