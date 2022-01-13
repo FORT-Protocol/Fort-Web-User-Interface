@@ -230,7 +230,7 @@ const MintOptions: FC = () => {
         try {
           const value = await fortEuropeanOption.estimate(
             ZERO_ADDRESS,
-            priceNow,
+            priceNow.div(BigNumber.from('1000000000000')),
             normalToBigNumber(
               strikePrice,
               tokenList["USDT"].decimals
@@ -280,7 +280,7 @@ const MintOptions: FC = () => {
     isLong,
     BigNumber.from(exercise.blockNum),
     normalToBigNumber(fortNum),
-    strikePrice ? normalToBigNumber(strikePrice, 18) : undefined
+    strikePrice ? normalToBigNumber(strikePrice, tokenList["USDT"].decimals) : undefined
   );
   return (
     <div>

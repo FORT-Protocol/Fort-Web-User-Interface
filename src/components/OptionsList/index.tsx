@@ -158,17 +158,17 @@ const OptionsList: FC<Props> = ({ ...props }) => {
       (async () => {
         const calcV: BigNumber = await optionsContract.calcV(
           tokenList["ETH"].addresses[chainId],
-          props.nowPrice,
+          props.nowPrice!.div(BigNumber.from('1000000000000')),
           props.item.strikePrice,
           props.item.orientation,
           props.item.exerciseBlock
         );
-        const letNum = BigNumber.from("18446744073709551616000000000000000000");
+
+        const letNum = BigNumber.from("18446744073709551616000000");
         const sellNUm = calcV
           .mul(props.item.balance)
           .mul(BigNumber.from("950"))
           .div(BigNumber.from("1000").mul(letNum));
-          console.log(props.item.strikePrice.toString())
         setSaleAmount(sellNUm);
       })();
     }
@@ -221,7 +221,7 @@ const OptionsList: FC<Props> = ({ ...props }) => {
         </div>
         <div className={`${classPrefix}-mobile-card-mid`}>
           <MobileListInfo title={t`Strike price`}>
-            <p>{bigNumberToNormal(props.item.strikePrice, 18, 2)} USDT</p>
+            <p>{bigNumberToNormal(props.item.strikePrice, tokenList['USDT'].decimals, 2)} USDT</p>
           </MobileListInfo>
           <MobileListInfo title={t`Option shares`}>
             <p>{bigNumberToNormal(props.item.balance, 18, 2)}</p>
@@ -291,7 +291,7 @@ const OptionsList: FC<Props> = ({ ...props }) => {
           {props.item.orientation ? t`Call` : t`Put`}
         </p>
       </td>
-      <td>{bigNumberToNormal(props.item.strikePrice, 18, 2)} USDT</td>
+      <td>{bigNumberToNormal(props.item.strikePrice, tokenList['USDT'].decimals, 2)} USDT</td>
       <td className={`exerciseTime`}>
         <p>
           {t`Block`}:{props.item.exerciseBlock.toString()}

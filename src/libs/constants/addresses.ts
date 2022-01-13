@@ -30,7 +30,7 @@ export const tokenList: { [key: string]: TokenType } = {
   USDT: {
     symbol: "USDT",
     Icon: TokenUSDT,
-    decimals: 18,
+    decimals: 6,
     addresses: {
       137: "0x55d398326f99059ff775485246999027b3197955",
       80001: "0xd32502b39da054dfF448AaBc1cb8210C756535f6"

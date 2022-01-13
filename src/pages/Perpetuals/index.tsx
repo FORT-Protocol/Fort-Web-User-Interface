@@ -289,7 +289,7 @@ const Perpetuals: FC = () => {
           <p>
             {`${checkWidth() ? "1 ETH = " : ""}${bigNumberToNormal(
               kValue?.nowPrice || BigNumber.from("0"),
-              tokenList["USDT"].decimals,
+              18,
               2
             )} USDT`}
           </p>
