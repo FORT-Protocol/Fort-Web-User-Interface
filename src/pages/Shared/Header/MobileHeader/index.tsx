@@ -3,7 +3,7 @@ import classNames from "classnames";
 import { FC, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Popup } from "reactjs-popup";
-import { FortLogo, HeaderListMobile, LittleBSC, WhiteLoading, XIcon } from "../../../../components/Icon";
+import { FortLogo, HeaderListMobile, PolygonIcon, WhiteLoading, XIcon } from "../../../../components/Icon";
 import useTransactionListCon from "../../../../libs/hooks/useTransactionInfo";
 import useWeb3 from "../../../../libs/hooks/useWeb3";
 // import { dynamicActivate } from "../../../../libs/i18nConfig";
@@ -55,7 +55,7 @@ const MobileHeader: FC = () => {
           ref={modal}
           trigger={
             <div className={`${classPrefix}-headerList-top-mid`}>
-        <LittleBSC/><p>BSC</p>
+        <PolygonIcon/><p>Polygon</p>
         </div>
           }
         >

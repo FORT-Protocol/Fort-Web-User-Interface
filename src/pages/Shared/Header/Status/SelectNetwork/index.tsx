@@ -8,7 +8,7 @@ const SelectNetwork: FC = () => {
     return (
         <div className={classPrefix}>
             <div className={`${classPrefix}-chainName`}>
-                <LittleBSC/><p>BSC</p>
+                <PolygonIcon/><p>Polygon</p>
             </div>
             <div className={`${classPrefix}-hover`}>
                 <MainCard classNames={`${classPrefix}-ul`}>
