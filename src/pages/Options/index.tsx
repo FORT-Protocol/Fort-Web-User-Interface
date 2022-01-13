@@ -230,7 +230,7 @@ const MintOptions: FC = () => {
         try {
           const value = await fortEuropeanOption.estimate(
             ZERO_ADDRESS,
-            priceNow.div(BigNumber.from('1000000000000')),
+            priceNow,
             normalToBigNumber(
               strikePrice,
               tokenList["USDT"].decimals
@@ -304,7 +304,7 @@ const MintOptions: FC = () => {
               <DoubleTokenShow tokenNameOne={"ETH"} tokenNameTwo={"USDT"} />
             </div>
             <p>{`${checkWidth() ? "1 ETH = " : ""}${
-              priceNow ? bigNumberToNormal(priceNow, 18, 2) : "---"
+              priceNow ? bigNumberToNormal(priceNow, tokenList['USDT'].decimals, 2) : "---"
             } USDT`}</p>
           </InfoShow>
           <ChooseType
@@ -332,7 +332,7 @@ const MintOptions: FC = () => {
           <InfoShow
             topLeftText={t`Strike price`}
             bottomRightText={`1 ETH = ${
-              priceNow ? bigNumberToNormal(priceNow, 18, 2) : "---"
+              priceNow ? bigNumberToNormal(priceNow, tokenList['USDT'].decimals, 2) : "---"
             } USDT`}
           >
             <input

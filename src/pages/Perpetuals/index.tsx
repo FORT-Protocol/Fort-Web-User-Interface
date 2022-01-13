@@ -226,7 +226,6 @@ const Perpetuals: FC = () => {
     }
     return bigNumberToNormal(price, 18, 2);
   }, [dcuInput, isLong, kValue]);
-
   const pcTable = (
     <table>
       <thead>

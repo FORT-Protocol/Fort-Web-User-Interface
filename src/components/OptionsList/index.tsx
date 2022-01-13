@@ -126,6 +126,7 @@ const OptionsList: FC<Props> = ({ ...props }) => {
                   .div(BASE_AMOUNT)
               : BigNumber.from("0");
           setStrikeAmount(amount);
+          console.log(amount.toString())
         } else {
           const amount =
             props.item.strikePrice.gt(blockPrice_toUSDT)
@@ -158,7 +159,7 @@ const OptionsList: FC<Props> = ({ ...props }) => {
       (async () => {
         const calcV: BigNumber = await optionsContract.calcV(
           tokenList["ETH"].addresses[chainId],
-          props.nowPrice!.div(BigNumber.from('1000000000000')),
+          props.nowPrice,
           props.item.strikePrice,
           props.item.orientation,
           props.item.exerciseBlock
