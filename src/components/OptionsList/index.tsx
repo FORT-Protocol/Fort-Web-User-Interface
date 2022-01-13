@@ -123,16 +123,15 @@ const OptionsList: FC<Props> = ({ ...props }) => {
           blockPrice_toUSDT.gt(props.item.strikePrice)
               ? props.item.balance
                   .mul(blockPrice_toUSDT.sub(props.item.strikePrice))
-                  .div(BASE_AMOUNT)
+                  .div(BigNumber.from('1000000'))
               : BigNumber.from("0");
           setStrikeAmount(amount);
-          console.log(amount.toString())
         } else {
           const amount =
             props.item.strikePrice.gt(blockPrice_toUSDT)
               ? props.item.balance
                   .mul(props.item.strikePrice.sub(blockPrice_toUSDT))
-                  .div(BASE_AMOUNT)
+                  .div(BigNumber.from('1000000'))
               : BigNumber.from("0");
           setStrikeAmount(amount);
         }
