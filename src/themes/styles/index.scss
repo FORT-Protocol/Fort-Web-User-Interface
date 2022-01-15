@@ -56,6 +56,37 @@
     background-repeat: no-repeat;
     background-position: center;
 
+    .OptionsList-mobile {
+        .mobileListInfo-title {
+            span {
+                color: #C5C5C5;
+            }
+        }
+
+        .OptionsList-mobile-card-mid .mobileListInfo,
+        .OptionsList-mobile-card-bottom .mobileListInfo,
+        .OptionsList-mobile-card-block .mobileListInfo {
+            p {
+                color: $main-background-color;
+            }
+        }
+    }
+
+    .perListMobile-li {
+        .mobileListInfo-title {
+            span {
+                color: #C5C5C5;
+            }
+        }
+
+        .perListMobile-mid .mobileListInfo,
+        .perListMobile-bottom .mobileListInfo {
+            p {
+                color: $main-background-color;
+            }
+        }
+    }
+
     .footer-right {
         svg {
             &:hover {
@@ -433,6 +464,7 @@
                     color: #C5C5C5;
                 }
             }
+
             a svg path {
                 fill: #BDD6FF;
             }
