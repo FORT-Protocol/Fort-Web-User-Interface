@@ -9,6 +9,8 @@ import TransactionModal from "./Shared/TransactionModal";
 import { checkWidth } from "../libs/utils";
 import MobileFooter from "./Shared/Footer/MobileFooter";
 import MobileHeader from "./Shared/Header/MobileHeader";
+import useThemes from "../libs/hooks/useThemes";
+import '../themes/styles'
 
 const Perpetuals = loadable(() => import("./Perpetuals"));
 const Option = loadable(() => import("./Options"));
@@ -16,8 +18,9 @@ const Option = loadable(() => import("./Options"));
 const Swap = loadable(() => import("./Swap"));
 
 const App: FC = () => {
+  const {theme} = useThemes()
   return (
-    <main>
+    <main className={`main-${theme.valueOf()}`}>
       <div className={"main-content"}>
         <TransactionModal />
         {/* <ToastContainer autoClose={8000}/> */}

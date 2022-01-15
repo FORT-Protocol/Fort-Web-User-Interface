@@ -1,20 +1,40 @@
 import { FC } from "react";
 import {
+  DarkIcon,
   GithubIcon,
   MiIcon,
   TelIcon,
   TwitterIcon,
+  WhiteIcon,
   WhitePaper,
 } from "../../../components/Icon";
 import { useWithdrawToken } from "../../../contracts/hooks/useReceiveDcuTransation";
+import useThemes, { ThemeType } from "../../../libs/hooks/useThemes";
 import "./styles/index";
 
 const Footer: FC = () => {
   const footer = "footer";
   const receiveDcu = useWithdrawToken();
+  const {theme, setTheme} = useThemes();
+  const themeIcon = () => {
+    if (theme === ThemeType.dark) {
+      return (<DarkIcon/>)
+    } else {
+      return (<WhiteIcon/>)
+    }
+  }
+  
   return (
     <footer>
       <div className={`${footer}-left`}>
+        
+        <button className={`${footer}-left-theme`} onClick={() => {
+          if (theme === ThemeType.dark) {
+            setTheme(ThemeType.white)
+          } else {
+            setTheme(ThemeType.dark)
+          }
+        }}>{themeIcon()}</button>
         <button className={`${footer}-left-receive`} onClick={receiveDcu}>Receive DCU</button>
       </div>
       <div className={`${footer}-right`}>

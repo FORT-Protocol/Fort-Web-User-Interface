@@ -8,7 +8,6 @@ footer {
     $footerWidth: 100%;
     width: $footerWidth;
     height: $footerHeight;
-    background-color: $main-background-color;
     display: flex;
     justify-content: space-between;
     border-top: 1px solid $gray-background-color;
@@ -17,6 +16,11 @@ footer {
         display: flex;
         height: $footerHeight;
         width: 50%;
+
+        &-theme {
+            margin: auto 0;
+            margin-left: 44px;
+        }
 
         &-receive {
             margin: auto 0;

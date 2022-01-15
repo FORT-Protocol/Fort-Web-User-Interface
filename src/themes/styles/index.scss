@@ -1,0 +1,15 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.main-white {
+    background-image: url(../white/whiteBK.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.main-dark {
+    background-image: url(../dark/darkBK.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
