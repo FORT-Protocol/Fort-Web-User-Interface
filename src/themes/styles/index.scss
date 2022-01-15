@@ -60,14 +60,16 @@
         svg {
             &:hover {
                 &>path:first-child {
-                    fill: linear-gradient(90deg, #8BB7FF 0%, #0061FF 100%);
+                    fill: #0061FF;
                 }
             }
         }
     }
 
     .options-mintOptions-rightCard-smallCard-title {
-        color: #C5C5C5;
+        p {
+            color: #C5C5C5;
+        }
     }
 
     .options-mintOptions-rightCard-smallCard-value {
@@ -82,7 +84,7 @@
         .mainCard {
             background: rgba(255, 255, 255, 0.15);
             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-
+            backdrop-filter: blur(0px);
         }
     }
 
@@ -203,12 +205,23 @@
         .max-button {
             color: #BDD6FF;
         }
+
+        .ant-picker-suffix {
+            svg path {
+                fill: #BDD6FF;
+            }
+
+            svg circle {
+                stroke: #BDD6FF;
+            }
+        }
     }
 
     .mainCard {
         background: rgba(255, 255, 255, 0.15);
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         border: 0px;
+        backdrop-filter: blur(10px);
     }
 
     .baseModal .mainCard {
@@ -296,6 +309,7 @@
         tr {
             background: rgba(255, 255, 255, 0.15);
             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(8px);
 
             td:first-child {
                 border-bottom-left-radius: 12px;
@@ -430,6 +444,7 @@
     background: rgba(255, 255, 255, 0.15);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border: 0px;
+    backdrop-filter: blur(24px);
 
     .modal-transaction-text {
         color: $main-background-color;
