@@ -6,6 +6,36 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+
+    table {
+        tr {
+            background-color: $main-background-color;
+            td:first-child {
+                border-bottom-left-radius: 12px;
+            }
+            td:last-child {
+                border-bottom-right-radius: 12px;
+            }
+            td:first-child {
+                border-top-left-radius: 12px;
+            }
+            td:last-child {
+                border-top-right-radius: 12px;
+            }
+            th:first-child {
+                border-bottom-left-radius: 12px;
+            }
+            th:last-child {
+                border-bottom-right-radius: 12px;
+            }
+            th:first-child {
+                border-top-left-radius: 12px;
+            }
+            th:last-child {
+                border-top-right-radius: 12px;
+            }
+        }
+    }
 }
 .main-dark {
     background-image: url(../dark/darkBK.jpg);
