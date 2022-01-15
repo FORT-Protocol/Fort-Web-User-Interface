@@ -18,9 +18,9 @@ const Footer: FC = () => {
   const {theme, setTheme} = useThemes();
   const themeIcon = () => {
     if (theme === ThemeType.dark) {
-      return (<DarkIcon/>)
-    } else {
       return (<WhiteIcon/>)
+    } else {
+      return (<DarkIcon/>)
     }
   }
   

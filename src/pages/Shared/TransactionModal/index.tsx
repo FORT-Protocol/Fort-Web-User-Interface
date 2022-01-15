@@ -6,6 +6,8 @@ import { Loading, Refuse, Success } from "../../../components/Icon";
 import useTransactionListCon from "../../../libs/hooks/useTransactionInfo";
 import "./styles";
 import { useEtherscanBaseUrl } from "../../../libs/hooks/useEtherscanBaseUrl";
+import useThemes, { ThemeType } from "../../../libs/hooks/useThemes";
+import classNames from "classnames";
 
 export enum TransactionModalType {
   wait = 0,
@@ -23,6 +25,7 @@ const TransactionModal: FC = () => {
   const classPrefix = "modal-transaction";
   const { showModal, closeModal } = useTransactionListCon();
   const etherscanBase = useEtherscanBaseUrl();
+  const { theme } = useThemes();
 
   const wait = (
     <>
@@ -70,7 +73,14 @@ const TransactionModal: FC = () => {
 
   return (
     <Popup open={showModal.isShow}>
-      <BaseModal onClose={closeModal} classNames={classPrefix} titleName={""}>
+      <BaseModal
+        onClose={closeModal}
+        classNames={classNames({
+          [`${classPrefix}`]: true,
+          [`${classPrefix}-dark`]: theme === ThemeType.dark,
+        })}
+        titleName={""}
+      >
         {iconContent}
       </BaseModal>
     </Popup>

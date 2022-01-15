@@ -56,6 +56,60 @@
     background-repeat: no-repeat;
     background-position: center;
 
+    .footer-right {
+        svg {
+            &:hover {
+                &>path:first-child {
+                    fill: linear-gradient(90deg, #8BB7FF 0%, #0061FF 100%);
+                }
+            }
+        }
+    }
+
+    .options-mintOptions-rightCard-smallCard-title {
+        color: #C5C5C5;
+    }
+
+    .options-mintOptions-rightCard-smallCard-value {
+        color: $main-background-color;
+    }
+
+    .options-mintOptions-rightCard-smallCard-name {
+        color: #C5C5C5;
+    }
+
+    .options-mintOptions-rightCard-smallCard {
+        .mainCard {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+        }
+    }
+
+    .options-mintOptions-rightCard-tokenTitle {
+        span {
+            color: #C5C5C5;
+        }
+    }
+
+    .options-mintOptions-rightCard-tokenValue {
+        color: $main-background-color;
+    }
+
+    .options-mintOptions-rightCard-timeValue {
+        color: #C5C5C5;
+    }
+
+    .swap-card-trading {
+        span {
+            color: #C5C5C5;
+        }
+
+        p {
+            color: $main-background-color;
+        }
+    }
+
     .swap-card-exchange {
         background: linear-gradient(90deg, #8BB7FF 0%, #0061FF 100%);
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -129,7 +183,8 @@
             border: 1px solid #8BB7FF;
         }
 
-        p {
+        p,
+        span {
             color: #BDD6FF;
         }
 
@@ -287,5 +342,104 @@
             border: 0;
             color: $main-background-color;
         }
+    }
+}
+
+.modal-status-dark {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border: 0px;
+    backdrop-filter: blur(24px);
+
+    .baseModal-top-title {
+        color: $main-background-color;
+    }
+
+    .baseModal-top-rightButton svg path {
+        fill: #C5C5C5;
+    }
+
+    .modal-status-notice {
+        color: #C5C5C5;
+    }
+
+    .modal-status-walletSelect {
+        .mainCard {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border: 0px;
+
+            p {
+                color: $main-background-color;
+            }
+        }
+    }
+
+}
+
+.modal-wallet-dark {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border: 0px;
+    backdrop-filter: blur(24px);
+
+    .baseModal-top-title {
+        color: $main-background-color;
+    }
+
+    .baseModal-top-rightButton svg path {
+        fill: #C5C5C5;
+    }
+
+    .modal-wallet-metamask {
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border: 0px;
+
+        .modal-wallet-metamask-address {
+            p {
+                color: #BDD6FF;
+            }
+        }
+
+    }
+
+    .modal-wallet-ulTitle {
+        color: #C5C5C5;
+    }
+
+    ul {
+        li {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border: 0px;
+
+            .transactionInfo {
+                p {
+                    color: #C5C5C5;
+                }
+            }
+            a svg path {
+                fill: #BDD6FF;
+            }
+        }
+    }
+}
+
+.modal-transaction-dark {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border: 0px;
+
+    .modal-transaction-text {
+        color: $main-background-color;
+    }
+
+    .baseModal-top-rightButton svg path {
+        fill: #C5C5C5;
+    }
+
+    a {
+        color: #BDD6FF;
     }
 }
