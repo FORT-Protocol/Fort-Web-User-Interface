@@ -45,9 +45,6 @@ const App: FC = () => {
         </HashRouter>
       </div>
       {checkWidth() ? <Footer /> : <MobileFooter />}
-      <defs>
-        
-      </defs>
     </main>
   );
 };
