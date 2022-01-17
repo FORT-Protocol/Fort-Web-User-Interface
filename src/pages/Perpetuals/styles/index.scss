@@ -28,6 +28,7 @@
         height: 20px;
 
         span {
+            padding-bottom: 5px;
             border-bottom: 1px dashed $gray-info-text-color;
         }
     }
@@ -143,9 +144,9 @@ table {
 
     th.th-marginAssets {
         span {
-
             line-height: 28px;
             padding: 3px 0;
+            padding-bottom: 5px;
             border-bottom: 1px dashed $gray-info-text-color;
         }
     }

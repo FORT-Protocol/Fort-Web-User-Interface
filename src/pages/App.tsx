@@ -10,7 +10,7 @@ import { checkWidth } from "../libs/utils";
 import MobileFooter from "./Shared/Footer/MobileFooter";
 import MobileHeader from "./Shared/Header/MobileHeader";
 import useThemes from "../libs/hooks/useThemes";
-import '../themes/styles'
+import "../themes/styles";
 
 const Perpetuals = loadable(() => import("./Perpetuals"));
 const Option = loadable(() => import("./Options"));
@@ -18,7 +18,7 @@ const Option = loadable(() => import("./Options"));
 const Swap = loadable(() => import("./Swap"));
 
 const App: FC = () => {
-  const {theme} = useThemes()
+  const { theme } = useThemes();
   return (
     <main className={`main-${theme.valueOf()}`}>
       <div className={"main-content"}>
@@ -26,7 +26,7 @@ const App: FC = () => {
         {/* <ToastContainer autoClose={8000}/> */}
         <ToastContainer />
         <HashRouter>
-          {checkWidth() ? (<Header />) : (<MobileHeader/>)}
+          {checkWidth() ? <Header /> : <MobileHeader />}
           <Switch>
             <Route path="/futures">
               <Perpetuals />
@@ -44,7 +44,10 @@ const App: FC = () => {
           </Switch>
         </HashRouter>
       </div>
-      {checkWidth() ? (<Footer/>) : (<MobileFooter/>)}
+      {checkWidth() ? <Footer /> : <MobileFooter />}
+      <defs>
+        
+      </defs>
     </main>
   );
 };

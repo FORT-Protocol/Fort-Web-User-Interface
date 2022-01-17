@@ -6,6 +6,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    background-attachment: fixed;
 
     .header-nav {
         background-color: rgba(255, 255, 255, 0.5);
@@ -55,6 +56,13 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    background-attachment: fixed;
+
+    .header-mobile {
+        svg path {
+            fill: $main-background-color;
+        }
+    }
 
     .OptionsList-mobile {
         .mobileListInfo-title {
@@ -70,8 +78,14 @@
                 color: $main-background-color;
             }
         }
-    }
 
+        .OptionsList-mobile-card-top,
+        .OptionsList-mobile-card-mid,
+        .OptionsList-mobile-card-bottom {
+            border-bottom: 0.5px solid rgba(255, 255, 255, 0.15);
+        }
+    }
+    
     .perListMobile-li {
         .mobileListInfo-title {
             span {
@@ -85,18 +99,23 @@
                 color: $main-background-color;
             }
         }
+
+        .perListMobile-top,
+        .perListMobile-mid {
+            border-bottom: 0.5px solid rgba(255, 255, 255, 0.15);
+        }
     }
 
     .footer-right {
         svg {
             &:hover {
                 &>path:first-child {
-                    fill: #0061FF;
+                    fill: url(#paint0_linear_2217_205);
                 }
             }
         }
     }
-
+    
     .options-mintOptions-rightCard-smallCard-title {
         p {
             color: #C5C5C5;
@@ -153,6 +172,14 @@
         }
     }
 
+    .th-marginAssets,
+    .options-mintOptions-rightCard-tokenTitle,
+    .swap-card-trading {
+        span {
+            border-color: $main-background-color;
+        }
+    }
+
     .chooseType-left,
     .chooseType-right {
         background: rgba(255, 255, 255, 0.15);
@@ -164,8 +191,9 @@
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     }
 
-    .kPrice span {
+    .perpetuals-card .kPrice span {
         color: #C5C5C5;
+        border-bottom: 1px dashed $main-background-color;
     }
 
     .leverChoose {
@@ -237,7 +265,8 @@
             color: #BDD6FF;
         }
 
-        .ant-picker-suffix {
+        .ant-picker-suffix,
+        .swap-card-selected p {
             svg path {
                 fill: #BDD6FF;
             }
@@ -266,9 +295,14 @@
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     }
 
+
+
     .header-nav {
-        background-color: rgba(255, 255, 255, 0.15);
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+        backdrop-filter: blur(2px);
         border-bottom: 0px;
+        z-index: 10;
 
         a svg.header-logo path {
             fill: $main-background-color;
@@ -297,30 +331,35 @@
 
         }
 
-        .fort-button {
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        }
-
         .selectNetwork-ul {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(44, 46, 50);
             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
             border: 0px;
+            z-index: 99;
 
             ul li a p {
                 color: $main-background-color;
+            }
+
+            ul li {
+                &:hover {
+                    background: rgba(255, 255, 255, 0.15);
+                    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+                }
             }
         }
     }
 
     .holdLine {
         .holdLine-line {
-            border-top: 1px solid #5C5C5C;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            ;
         }
 
         .holdLine-mainBG {
-            background: #5C5C5C;
+            background: rgba(255, 255, 255, 0.15);
             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(8px);
             color: $main-background-color;
         }
     }
