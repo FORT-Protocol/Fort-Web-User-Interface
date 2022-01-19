@@ -218,11 +218,23 @@ const Perpetuals: FC = () => {
       return "---";
     }
     var price: BigNumber;
-    const inputNum = normalToBigNumber(dcuInput)
+    const inputNum = normalToBigNumber(dcuInput);
     if (isLong) {
-      price = kValue.nowPrice.mul(BASE_AMOUNT.add(kValue.k).add(inputNum.div(BigNumber.from('10000000')))).div(BASE_AMOUNT);
+      price = kValue.nowPrice
+        .mul(
+          BASE_AMOUNT.add(kValue.k).add(
+            inputNum.div(BigNumber.from("10000000"))
+          )
+        )
+        .div(BASE_AMOUNT);
     } else {
-      price = kValue.nowPrice.mul(BASE_AMOUNT).div(BASE_AMOUNT.add(kValue.k).add(inputNum.div(BigNumber.from('10000000'))));
+      price = kValue.nowPrice
+        .mul(BASE_AMOUNT)
+        .div(
+          BASE_AMOUNT.add(kValue.k).add(
+            inputNum.div(BigNumber.from("10000000"))
+          )
+        );
     }
     return bigNumberToNormal(price, 6, 2);
   }, [dcuInput, isLong, kValue]);

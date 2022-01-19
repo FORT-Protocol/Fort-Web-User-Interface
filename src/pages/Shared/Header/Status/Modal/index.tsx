@@ -1,5 +1,6 @@
 import { t, Trans } from "@lingui/macro";
 import { message } from "antd";
+import classNames from "classnames";
 import { FC, MouseEventHandler } from "react";
 import BaseModal from "../../../../../components/BaseModal";
 import {
@@ -8,6 +9,7 @@ import {
 } from "../../../../../components/Icon";
 import MainCard from "../../../../../components/MainCard";
 import { SupportedConnectors } from "../../../../../libs/connectors";
+import useThemes, { ThemeType } from "../../../../../libs/hooks/useThemes";
 import useWeb3 from "../../../../../libs/hooks/useWeb3";
 import "./styles";
 
@@ -18,10 +20,14 @@ type Props = {
 const Modal: FC<Props> = ({ ...props }) => {
   const { activate } = useWeb3();
   const classPrefix = "modal-status";
+  const { theme } = useThemes();
   return (
     <BaseModal
       onClose={props.onClose}
-      classNames={classPrefix}
+      classNames={classNames({
+        [`${classPrefix}`]: true,
+        [`${classPrefix}-dark`]: theme === ThemeType.dark,
+      })}
       titleName={t`Connect Wallet`}
     >
       <p className={`${classPrefix}-notice`}>
@@ -44,11 +50,13 @@ const Modal: FC<Props> = ({ ...props }) => {
         </MainCard>
         <MainCard
           onClick={() => {
-            activate(SupportedConnectors[1].connector, undefined, true).catch(() => {
-              message.error(
-                t`This network is not supported, please switch the network`
-              );
-            });
+            activate(SupportedConnectors[1].connector, undefined, true).catch(
+              () => {
+                message.error(
+                  t`This network is not supported, please switch the network`
+                );
+              }
+            );
           }}
         >
           <WalletConnectIcon />
