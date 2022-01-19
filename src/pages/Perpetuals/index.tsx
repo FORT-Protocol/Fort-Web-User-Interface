@@ -13,7 +13,11 @@ import PerpetualsList, {
 } from "../../components/PerpetualsList";
 import { DoubleTokenShow, SingleTokenShow } from "../../components/TokenShow";
 import { useFortLeverBuy } from "../../contracts/hooks/useFortLeverTransation";
-import { ETHUSDTPriceChannelId, FortLeverContract, tokenList } from "../../libs/constants/addresses";
+import {
+  ETHUSDTPriceChannelId,
+  FortLeverContract,
+  tokenList,
+} from "../../libs/constants/addresses";
 import {
   ERC20Contract,
   FortLever,
@@ -110,7 +114,7 @@ const Perpetuals: FC = () => {
       2
     );
 
-    const priceValue = BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(priceList[1])
+    const priceValue = BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(priceList[1]);
     const k = await leverContract.calcRevisedK(
       BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(priceList[3]),
       priceList[2],
@@ -124,17 +128,9 @@ const Perpetuals: FC = () => {
     if (!priceContract || !chainId || !leverContract) {
       return;
     }
-    getPrice(
-      priceContract,
-      leverContract,
-      chainId
-    );
+    getPrice(priceContract, leverContract, chainId);
     const id = setInterval(() => {
-      getPrice(
-        priceContract,
-        leverContract,
-        chainId
-      );
+      getPrice(priceContract, leverContract, chainId);
     }, 60 * 1000);
     intervalRef.current = id;
     return () => {
@@ -218,11 +214,23 @@ const Perpetuals: FC = () => {
       return "---";
     }
     var price: BigNumber;
-    const inputNum = normalToBigNumber(dcuInput)
+    const inputNum = normalToBigNumber(dcuInput);
     if (isLong) {
-      price = kValue.nowPrice.mul(BASE_AMOUNT.add(kValue.k).add(inputNum.div(BigNumber.from('10000000')))).div(BASE_AMOUNT);
+      price = kValue.nowPrice
+        .mul(
+          BASE_AMOUNT.add(kValue.k).add(
+            inputNum.div(BigNumber.from("10000000"))
+          )
+        )
+        .div(BASE_AMOUNT);
     } else {
-      price = kValue.nowPrice.mul(BASE_AMOUNT).div(BASE_AMOUNT.add(kValue.k).add(inputNum.div(BigNumber.from('10000000'))));
+      price = kValue.nowPrice
+        .mul(BASE_AMOUNT)
+        .div(
+          BASE_AMOUNT.add(kValue.k).add(
+            inputNum.div(BigNumber.from("10000000"))
+          )
+        );
     }
     return bigNumberToNormal(price, 18, 2);
   }, [dcuInput, isLong, kValue]);
@@ -250,7 +258,9 @@ const Perpetuals: FC = () => {
             <Tooltip
               placement="top"
               color={"#ffffff"}
-              title={"Dynamic changes in net assets, less than a certain amount of liquidation will be liquidated, the amount of liquidation is Max'{'margin*leverage*0.02, 10'}'"}
+              title={
+                "Dynamic changes in net assets, less than a certain amount of liquidation will be liquidated, the amount of liquidation is Max'{'margin*leverage*0.02, 10'}'"
+              }
             >
               <span>
                 <Trans>Margin Assets</Trans>
