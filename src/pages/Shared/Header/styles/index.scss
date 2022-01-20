@@ -10,13 +10,11 @@
     border-bottom: 1px solid $gray-background-color;
 
     a {
-        margin-top: auto;
-        margin-bottom: auto;
+        margin-top: 11px;
+        margin-bottom: 11px;
 
         .header-logo {
             position: relative;
-            width: 320px;
-            padding-right: 160px;
             margin-left: 40px;
             justify-self: flex-start;
         }
