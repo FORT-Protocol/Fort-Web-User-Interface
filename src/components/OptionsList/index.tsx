@@ -164,7 +164,7 @@ const OptionsList: FC<Props> = ({ ...props }) => {
           props.item.exerciseBlock
         );
 
-        const letNum = BigNumber.from("18446744073709551616000000");
+        const letNum = BigNumber.from("18446744073709551616000000000000000000");
         const sellNUm = calcV
           .mul(props.item.balance)
           .mul(BigNumber.from("950"))

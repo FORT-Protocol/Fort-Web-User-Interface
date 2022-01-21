@@ -3,7 +3,7 @@ import classNames from "classnames";
 import { FC, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Popup } from "reactjs-popup";
-import { FortLogo, HeaderListMobile, PolygonIcon, WhiteLoading, XIcon } from "../../../../components/Icon";
+import { DarkIcon, FortLogo, HeaderListMobile, PolygonIcon, WhiteIcon, WhiteLoading, XIcon } from "../../../../components/Icon";
 import useTransactionListCon from "../../../../libs/hooks/useTransactionInfo";
 import useWeb3 from "../../../../libs/hooks/useWeb3";
 // import { dynamicActivate } from "../../../../libs/i18nConfig";
@@ -13,7 +13,7 @@ import WalletModal from "../Status/WalletModal";
 import "../Status/styles"
 import "./styles";
 import SelectNetworkModal from "./SelectNetworkModal";
-
+import useThemes, { ThemeType } from "../../../../libs/hooks/useThemes";
 
 const MobileHeader: FC = () => {
   const classPrefix = "header-mobile";
@@ -42,6 +42,14 @@ const MobileHeader: FC = () => {
     </li>
   ));
   const modal = useRef<any>();
+  const { theme, setTheme } = useThemes();
+  const themeIcon = () => {
+    if (theme === ThemeType.dark) {
+      return <WhiteIcon />;
+    } else {
+      return <DarkIcon />;
+    }
+  };
 
   const headerListShow = (
     <div className={`${classPrefix}-headerList`}>
@@ -64,6 +72,17 @@ const MobileHeader: FC = () => {
 
         
         <div className={`${classPrefix}-headerList-top-right`}>
+        <button
+            onClick={() => {
+              if (theme === ThemeType.dark) {
+                setTheme(ThemeType.white);
+              } else {
+                setTheme(ThemeType.dark);
+              }
+            }}
+          >
+            {themeIcon()}
+          </button>
         </div>
       </div>
       <ul>

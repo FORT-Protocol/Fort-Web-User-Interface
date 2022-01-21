@@ -53,6 +53,7 @@
             @include normal-text;
 
             span {
+                padding-bottom: 5px;
                 border-bottom: 1px dashed $gray-info-text-color;
             }
         }

@@ -486,7 +486,7 @@ msgid "View"
 msgstr "查看"
 
 #: src/pages/Shared/TransactionModal/index.tsx
-msgid "View on etherscan"
+msgid "View on polygonscan"
 msgstr "浏览器查看"
 
 #: src/pages/Shared/TransactionModal/index.tsx

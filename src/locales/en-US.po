@@ -486,8 +486,8 @@ msgid "View"
 msgstr "View"
 
 #: src/pages/Shared/TransactionModal/index.tsx
-msgid "View on etherscan"
-msgstr "View on etherscan"
+msgid "View on polygonscan"
+msgstr "View on polygonscan"
 
 #: src/pages/Shared/TransactionModal/index.tsx
 msgid "Wait for confirm"
