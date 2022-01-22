@@ -25,7 +25,6 @@ const SelectNetworkModal: FC<Props> = ({ ...props }) => {
           <a href={"https://app.hedge.red"}>
             <LittleETH />
             <p>Ethereum</p>
-            <NetworkNow />
           </a>
         </li>
         <li>
@@ -41,9 +40,10 @@ const SelectNetworkModal: FC<Props> = ({ ...props }) => {
           </a>
         </li>
         <li>
-          <a href={"https://polygon.hedge.red"}>
+          <a href={"/"}>
             <PolygonIcon />
             <p>Polygon</p>
+            <NetworkNow />
           </a>
         </li>
       </ul>
