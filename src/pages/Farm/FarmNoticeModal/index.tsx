@@ -22,7 +22,7 @@ const FarmNoticeModal: FC<Props> = ({ ...props }) => {
         <input />
         <li>
           <Trans>
-            To enter the Hedge protocol and participate in pledge mining
+            To enter the Fort protocol and participate in pledge mining
             users/smart contracts, they need to fully understand the mining
             rules and the following risks. Users who do not understand the rules
             or cannot bear the risks are not recommended to participate:
@@ -39,7 +39,7 @@ const FarmNoticeModal: FC<Props> = ({ ...props }) => {
           <Trans>
             2. Participating in pledge mining can get DCU rewards. DCU Token is
             the only payment voucher for participating in perpetual contracts
-            and European options in the Hedge agreement. DCU currently does not
+            and European options in the Fort agreement. DCU currently does not
             have liquidity and price.
           </Trans>
         </li>
@@ -63,7 +63,7 @@ const FarmNoticeModal: FC<Props> = ({ ...props }) => {
         </li>
         <li>
           <Trans>
-            5. The Hedge protocol smart contract has not yet been audited. There
+            5. The Fort protocol smart contract has not yet been audited. There
             may be fatal unknown risks in the smart contract that may cause your
             principal to be damaged. Please evaluate the risk yourself before
             deciding whether to participate.
@@ -101,7 +101,7 @@ const FarmNoticeModal: FC<Props> = ({ ...props }) => {
           <Trans>Sure</Trans>
         </MainButton>
         <a
-          href="https://github.com/FORT-Protocol/Docs/blob/main/Hedge_Product_Document.pdf"
+          href="https://github.com/FORT-Protocol/Docs/blob/main/Fort_Product_Document.pdf"
           target="view_window"
         >
           <button className={`${classPrefix}-card-buttonGroup-more`}>
