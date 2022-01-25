@@ -22,7 +22,7 @@ const OptionsNoticeModal: FC<Props> = ({ ...props }) => {
         <input />
         <li>
           <Trans>
-            For users/smart contracts using Hedge Protocol European options,
+            For users/smart contracts using Fort Protocol European options,
             when purchasing options, exercising, selling options and other
             related operations, please understand the rules and the differences
             of similar products in the market, and fully understand the
@@ -31,8 +31,8 @@ const OptionsNoticeModal: FC<Props> = ({ ...props }) => {
         </li>
         <li>
           <Trans>
-            1. Hedge Protocol option pricing is derived from the BS option
-            pricing model. Unlike traditional option pricing methods, Hedge
+            1. Fort Protocol option pricing is derived from the BS option
+            pricing model. Unlike traditional option pricing methods, Fort
             options are completely priced by algorithms, while traditional
             centralized exchanges are freely quoted by users. This pricing
             method is a bold one. Attempts and innovations, but it may also
@@ -41,7 +41,7 @@ const OptionsNoticeModal: FC<Props> = ({ ...props }) => {
         </li>
         <li>
           <Trans>
-            2. The premium paid for options purchased by Hedge Protocol and the
+            2. The premium paid for options purchased by Fort Protocol and the
             income at settlement are all used in DCU Token. DCU itself is also a
             highly volatile asset. In extreme cases, even if your perpetual
             contract position is profitable, it is due to the price of DCU
@@ -51,7 +51,7 @@ const OptionsNoticeModal: FC<Props> = ({ ...props }) => {
         </li>
         <li>
           <Trans>
-            3. The option price of Hedge protocol comes from the NEST oracle
+            3. The option price of Fort protocol comes from the NEST oracle
             machine. If the oracle machine is attacked or the price is abnormal
             due to other reasons, the system may experience settlement
             abnormalities, resulting in errors in the user's income calculation.
@@ -59,7 +59,7 @@ const OptionsNoticeModal: FC<Props> = ({ ...props }) => {
         </li>
         <li>
           <Trans>
-            4. The smart contract of the Hedge protocol has not been audited.
+            4. The smart contract of the Fort protocol has not been audited.
             There may be fatal unknown risks in the smart contract that will
             damage your principal. Please evaluate the risk yourself before
             deciding whether to participate.
@@ -97,7 +97,7 @@ const OptionsNoticeModal: FC<Props> = ({ ...props }) => {
           <Trans>Sure</Trans>
         </MainButton>
         <a
-          href="https://github.com/FORT-Protocol/Docs/blob/main/Hedge_Product_Document.pdf"
+          href="https://github.com/FORT-Protocol/Docs/blob/main/Fort_Product_Document.pdf"
           target="view_window"
         >
           <button className={`${classPrefix}-card-buttonGroup-more`}>
