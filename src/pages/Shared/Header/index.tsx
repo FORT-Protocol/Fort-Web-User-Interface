@@ -27,7 +27,7 @@ const Header: FC = () => {
   return (
     <header>
       <div className={`${header}-nav`}>
-        <a href={"https://www.hedge.red"}>
+        <a href={"https://www.fortprotocol.com"}>
           <FortLogo className={`${header}-logo`} />
         </a>
         <nav>

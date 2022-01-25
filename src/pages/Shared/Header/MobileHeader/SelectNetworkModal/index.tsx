@@ -22,19 +22,19 @@ const SelectNetworkModal: FC<Props> = ({ ...props }) => {
     >
       <ul>
         <li>
-          <a href={"https://app.hedge.red"}>
+          <a href={"https://app.fortprotocol.com"}>
             <LittleETH />
             <p>Ethereum</p>
           </a>
         </li>
         <li>
-          <a href={"https://test.hedge.red"}>
+          <a href={"https://test.fortprotocol.com"}>
             <LittleETH />
             <p>Rinkeby</p>
           </a>
         </li>
         <li>
-          <a href={"https://bsc.hedge.red"}>
+          <a href={"https://bsc.fortprotocol.com"}>
             <LittleBSC />
             <p>BSC</p>
           </a>

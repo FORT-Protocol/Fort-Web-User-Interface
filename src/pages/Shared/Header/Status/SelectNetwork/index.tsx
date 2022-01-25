@@ -14,9 +14,9 @@ const SelectNetwork: FC = () => {
                 <MainCard classNames={`${classPrefix}-ul`}>
                     <p>Select a network</p>
                     <ul>
-                        <li><a href={'https://app.hedge.red'}><LittleETH/><p>Ethereum</p></a></li>
-                        <li><a href={'https://test.hedge.red'}><LittleETH/><p>Rinkeby</p></a></li>
-                        <li><a href={'https://bsc.hedge.red'}><LittleBSC/><p>BSC</p></a></li>
+                        <li><a href={'https://app.fortprotocol.com'}><LittleETH/><p>Ethereum</p></a></li>
+                        <li><a href={'https://test.fortprotocol.com'}><LittleETH/><p>Rinkeby</p></a></li>
+                        <li><a href={'https://bsc.fortprotocol.com'}><LittleBSC/><p>BSC</p></a></li>
                         <li><a href={'/'}><PolygonIcon/><p>Polygon</p><NetworkNow/></a></li>
                     </ul>
                 </MainCard>

@@ -22,28 +22,28 @@ msgid "(Strike price - Spot price)*"
 msgstr "(Strike price - Spot price)*"
 
 #: src/pages/Options/OptionsNoticeModal/index.tsx
-msgid "1. Hedge Protocol option pricing is derived from the BS option pricing model. Unlike traditional option pricing methods, Hedge options are completely priced by algorithms, while traditional centralized exchanges are freely quoted by users. This pricing method is a bold one. Attempts and innovations, but it may also bring unknown risks."
-msgstr "1. Hedge Protocol option pricing is derived from the BS option pricing model. Unlike traditional option pricing methods, Hedge options are completely priced by algorithms, while traditional centralized exchanges are freely quoted by users. This pricing method is a bold one. Attempts and innovations, but it may also bring unknown risks."
+msgid "1. Fort Protocol option pricing is derived from the BS option pricing model. Unlike traditional option pricing methods, Fort options are completely priced by algorithms, while traditional centralized exchanges are freely quoted by users. This pricing method is a bold one. Attempts and innovations, but it may also bring unknown risks."
+msgstr "1. Fort Protocol option pricing is derived from the BS option pricing model. Unlike traditional option pricing methods, Fort options are completely priced by algorithms, while traditional centralized exchanges are freely quoted by users. This pricing method is a bold one. Attempts and innovations, but it may also bring unknown risks."
 
 #: src/pages/Perpetuals/PerpetualsNoticeModal/index.tsx
-msgid "1. Uncertainty risk of income: The calculation method of Hedge perpetual contract is different from the calculation method of perpetual contract of traditional centralized exchange. The Hedge perpetual contract converts the future price of the asset based on the historical rate of return of the asset. Therefore, the asset price increases by 100% after the user opens a position. The user's income is not 100%. In extreme cases, even if the asset price is rising, your income may be negative."
-msgstr "1. Uncertainty risk of income: The calculation method of Hedge perpetual contract is different from the calculation method of perpetual contract of traditional centralized exchange. The Hedge perpetual contract converts the future price of the asset based on the historical rate of return of the asset. Therefore, the asset price increases by 100% after the user opens a position. The user's income is not 100%. In extreme cases, even if the asset price is rising, your income may be negative."
+msgid "1. Uncertainty risk of income: The calculation method of Fort perpetual contract is different from the calculation method of perpetual contract of traditional centralized exchange. The Fort perpetual contract converts the future price of the asset based on the historical rate of return of the asset. Therefore, the asset price increases by 100% after the user opens a position. The user's income is not 100%. In extreme cases, even if the asset price is rising, your income may be negative."
+msgstr "1. Uncertainty risk of income: The calculation method of Fort perpetual contract is different from the calculation method of perpetual contract of traditional centralized exchange. The Fort perpetual contract converts the future price of the asset based on the historical rate of return of the asset. Therefore, the asset price increases by 100% after the user opens a position. The user's income is not 100%. In extreme cases, even if the asset price is rising, your income may be negative."
 
 #: src/pages/Farm/FarmNoticeModal/index.tsx
 msgid "1. Users who participate in pledge mining need to pledge the Token supported by the agreement to the smart contract, and can retrieve the pledged Token after the lock-up period ends;"
 msgstr "1. Users who participate in pledge mining need to pledge the Token supported by the agreement to the smart contract, and can retrieve the pledged Token after the lock-up period ends;"
 
 #: src/pages/Farm/FarmNoticeModal/index.tsx
-msgid "2. Participating in pledge mining can get DCU rewards. DCU Token is the only payment voucher for participating in perpetual contracts and European options in the Hedge agreement. DCU currently does not have liquidity and price."
-msgstr "2. Participating in pledge mining can get DCU rewards. DCU Token is the only payment voucher for participating in perpetual contracts and European options in the Hedge agreement. DCU currently does not have liquidity and price."
+msgid "2. Participating in pledge mining can get DCU rewards. DCU Token is the only payment voucher for participating in perpetual contracts and European options in the Fort agreement. DCU currently does not have liquidity and price."
+msgstr "2. Participating in pledge mining can get DCU rewards. DCU Token is the only payment voucher for participating in perpetual contracts and European options in the Fort agreement. DCU currently does not have liquidity and price."
 
 #: src/pages/Perpetuals/PerpetualsNoticeModal/index.tsx
-msgid "2. Position liquidation risk: Hedge perpetual contracts provide leverage of 1-5 times. When your leverage is greater than 1 times leverage, the price fluctuation of the underlying asset may cause liquidation."
-msgstr "2. Position liquidation risk: Hedge perpetual contracts provide leverage of 1-5 times. When your leverage is greater than 1 times leverage, the price fluctuation of the underlying asset may cause liquidation."
+msgid "2. Position liquidation risk: Fort perpetual contracts provide leverage of 1-5 times. When your leverage is greater than 1 times leverage, the price fluctuation of the underlying asset may cause liquidation."
+msgstr "2. Position liquidation risk: Fort perpetual contracts provide leverage of 1-5 times. When your leverage is greater than 1 times leverage, the price fluctuation of the underlying asset may cause liquidation."
 
 #: src/pages/Options/OptionsNoticeModal/index.tsx
-msgid "2. The premium paid for options purchased by Hedge Protocol and the income at settlement are all used in DCU Token. DCU itself is also a highly volatile asset. In extreme cases, even if your perpetual contract position is profitable, it is due to the price of DCU itself. Volatility, which may cause you to lose money based on legal currency."
-msgstr "2. The premium paid for options purchased by Hedge Protocol and the income at settlement are all used in DCU Token. DCU itself is also a highly volatile asset. In extreme cases, even if your perpetual contract position is profitable, it is due to the price of DCU itself. Volatility, which may cause you to lose money based on legal currency."
+msgid "2. The premium paid for options purchased by Fort Protocol and the income at settlement are all used in DCU Token. DCU itself is also a highly volatile asset. In extreme cases, even if your perpetual contract position is profitable, it is due to the price of DCU itself. Volatility, which may cause you to lose money based on legal currency."
+msgstr "2. The premium paid for options purchased by Fort Protocol and the income at settlement are all used in DCU Token. DCU itself is also a highly volatile asset. In extreme cases, even if your perpetual contract position is profitable, it is due to the price of DCU itself. Volatility, which may cause you to lose money based on legal currency."
 
 #: src/pages/Perpetuals/PerpetualsNoticeModal/index.tsx
 msgid "3. DCU Token price fluctuation risk: Both the margin and the final profit and loss use DCU Token, and DCU itself is also a highly volatile asset. In extreme cases, even if your perpetual contract position is profitable, However, due to the fluctuation of the DCU price itself, it may cause you to lose money in terms of fiat currency."
@@ -54,28 +54,28 @@ msgid "3. In the process of participating in pledge mining, certain miners’ fe
 msgstr "3. In the process of participating in pledge mining, certain miners’ fees are required for operations such as lock-up, receipt of rewards, and withdrawal of funds. Miners’ fees are collected by Ethereum miners. Pledge mining has a certain cost, and there is no guarantee that there will be income."
 
 #: src/pages/Options/OptionsNoticeModal/index.tsx
-msgid "3. The option price of Hedge protocol comes from the NEST oracle machine. If the oracle machine is attacked or the price is abnormal due to other reasons, the system may experience settlement abnormalities, resulting in errors in the user's income calculation."
-msgstr "3. The option price of Hedge protocol comes from the NEST oracle machine. If the oracle machine is attacked or the price is abnormal due to other reasons, the system may experience settlement abnormalities, resulting in errors in the user's income calculation."
+msgid "3. The option price of Fort protocol comes from the NEST oracle machine. If the oracle machine is attacked or the price is abnormal due to other reasons, the system may experience settlement abnormalities, resulting in errors in the user's income calculation."
+msgstr "3. The option price of Fort protocol comes from the NEST oracle machine. If the oracle machine is attacked or the price is abnormal due to other reasons, the system may experience settlement abnormalities, resulting in errors in the user's income calculation."
 
 #: src/pages/Perpetuals/PerpetualsNoticeModal/index.tsx
-msgid "4. External oracle risk: Hedge protocol's perpetual contract price comes from the NEST oracle. If the oracle is attacked or other reasons cause the price to be abnormal, The system may encounter settlement exceptions, which may cause errors in the user's revenue calculation."
-msgstr "4. External oracle risk: Hedge protocol's perpetual contract price comes from the NEST oracle. If the oracle is attacked or other reasons cause the price to be abnormal, The system may encounter settlement exceptions, which may cause errors in the user's revenue calculation."
+msgid "4. External oracle risk: Fort protocol's perpetual contract price comes from the NEST oracle. If the oracle is attacked or other reasons cause the price to be abnormal, The system may encounter settlement exceptions, which may cause errors in the user's revenue calculation."
+msgstr "4. External oracle risk: Fort protocol's perpetual contract price comes from the NEST oracle. If the oracle is attacked or other reasons cause the price to be abnormal, The system may encounter settlement exceptions, which may cause errors in the user's revenue calculation."
 
 #: src/pages/Options/OptionsNoticeModal/index.tsx
-msgid "4. The smart contract of the Hedge protocol has not been audited. There may be fatal unknown risks in the smart contract that will damage your principal. Please evaluate the risk yourself before deciding whether to participate."
-msgstr "4. The smart contract of the Hedge protocol has not been audited. There may be fatal unknown risks in the smart contract that will damage your principal. Please evaluate the risk yourself before deciding whether to participate."
+msgid "4. The smart contract of the Fort protocol has not been audited. There may be fatal unknown risks in the smart contract that will damage your principal. Please evaluate the risk yourself before deciding whether to participate."
+msgstr "4. The smart contract of the Fort protocol has not been audited. There may be fatal unknown risks in the smart contract that will damage your principal. Please evaluate the risk yourself before deciding whether to participate."
 
 #: src/pages/Farm/FarmNoticeModal/index.tsx
 msgid "4. There is no upper limit on the total amount of DCU Token. As the result of the game between users and the agreement, additional issuance or destruction will be carried out. If the agreement has been in the state of additional issuance, the DCU you obtained through mining will depreciate and may even return to zero."
 msgstr "4. There is no upper limit on the total amount of DCU Token. As the result of the game between users and the agreement, additional issuance or destruction will be carried out. If the agreement has been in the state of additional issuance, the DCU you obtained through mining will depreciate and may even return to zero."
 
 #: src/pages/Perpetuals/PerpetualsNoticeModal/index.tsx
-msgid "5. Smart contract risk: The smart contract of the Hedge protocol has not been audited. There may be fatal unknown risks in the smart contract that may cause your principal to be damaged. Please evaluate the risk yourself before deciding whether to participate."
-msgstr "5. Smart contract risk: The smart contract of the Hedge protocol has not been audited. There may be fatal unknown risks in the smart contract that may cause your principal to be damaged. Please evaluate the risk yourself before deciding whether to participate."
+msgid "5. Smart contract risk: The smart contract of the Fort protocol has not been audited. There may be fatal unknown risks in the smart contract that may cause your principal to be damaged. Please evaluate the risk yourself before deciding whether to participate."
+msgstr "5. Smart contract risk: The smart contract of the Fort protocol has not been audited. There may be fatal unknown risks in the smart contract that may cause your principal to be damaged. Please evaluate the risk yourself before deciding whether to participate."
 
 #: src/pages/Farm/FarmNoticeModal/index.tsx
-msgid "5. The Hedge protocol smart contract has not yet been audited. There may be fatal unknown risks in the smart contract that may cause your principal to be damaged. Please evaluate the risk yourself before deciding whether to participate."
-msgstr "5. The Hedge protocol smart contract has not yet been audited. There may be fatal unknown risks in the smart contract that may cause your principal to be damaged. Please evaluate the risk yourself before deciding whether to participate."
+msgid "5. The Fort protocol smart contract has not yet been audited. There may be fatal unknown risks in the smart contract that may cause your principal to be damaged. Please evaluate the risk yourself before deciding whether to participate."
+msgstr "5. The Fort protocol smart contract has not yet been audited. There may be fatal unknown risks in the smart contract that may cause your principal to be damaged. Please evaluate the risk yourself before deciding whether to participate."
 
 #: src/pages/Farm/FarmCard/index.tsx
 #: src/pages/Shared/TransactionToast/index.tsx
@@ -190,12 +190,12 @@ msgid "Farm"
 msgstr "Farm"
 
 #: src/pages/Options/OptionsNoticeModal/index.tsx
-msgid "For users/smart contracts using Hedge Protocol European options, when purchasing options, exercising, selling options and other related operations, please understand the rules and the differences of similar products in the market, and fully understand the following possible risks and Participate when you can bear the risk:"
-msgstr "For users/smart contracts using Hedge Protocol European options, when purchasing options, exercising, selling options and other related operations, please understand the rules and the differences of similar products in the market, and fully understand the following possible risks and Participate when you can bear the risk:"
+msgid "For users/smart contracts using Fort Protocol European options, when purchasing options, exercising, selling options and other related operations, please understand the rules and the differences of similar products in the market, and fully understand the following possible risks and Participate when you can bear the risk:"
+msgstr "For users/smart contracts using Fort Protocol European options, when purchasing options, exercising, selling options and other related operations, please understand the rules and the differences of similar products in the market, and fully understand the following possible risks and Participate when you can bear the risk:"
 
 #: src/pages/Perpetuals/PerpetualsNoticeModal/index.tsx
-msgid "For users/smart contracts using Hedge Protocol perpetual contracts, please understand its rules and the differences of similar products in the market when performing positions, settlement, liquidation and other related operations. After fully understanding the following possible risks and can bear Participate in the risk situation:"
-msgstr "For users/smart contracts using Hedge Protocol perpetual contracts, please understand its rules and the differences of similar products in the market when performing positions, settlement, liquidation and other related operations. After fully understanding the following possible risks and can bear Participate in the risk situation:"
+msgid "For users/smart contracts using Fort Protocol perpetual contracts, please understand its rules and the differences of similar products in the market when performing positions, settlement, liquidation and other related operations. After fully understanding the following possible risks and can bear Participate in the risk situation:"
+msgstr "For users/smart contracts using Fort Protocol perpetual contracts, please understand its rules and the differences of similar products in the market when performing positions, settlement, liquidation and other related operations. After fully understanding the following possible risks and can bear Participate in the risk situation:"
 
 #: src/pages/Swap/index.tsx
 msgid "From"
@@ -442,8 +442,8 @@ msgid "This network is not supported, please switch the network"
 msgstr "This network is not supported, please switch the network"
 
 #: src/pages/Farm/FarmNoticeModal/index.tsx
-msgid "To enter the Hedge protocol and participate in pledge mining users/smart contracts, they need to fully understand the mining rules and the following risks. Users who do not understand the rules or cannot bear the risks are not recommended to participate:"
-msgstr "To enter the Hedge protocol and participate in pledge mining users/smart contracts, they need to fully understand the mining rules and the following risks. Users who do not understand the rules or cannot bear the risks are not recommended to participate:"
+msgid "To enter the Fort protocol and participate in pledge mining users/smart contracts, they need to fully understand the mining rules and the following risks. Users who do not understand the rules or cannot bear the risks are not recommended to participate:"
+msgstr "To enter the Fort protocol and participate in pledge mining users/smart contracts, they need to fully understand the mining rules and the following risks. Users who do not understand the rules or cannot bear the risks are not recommended to participate:"
 
 #: src/pages/Swap/index.tsx
 msgid "To(Estimated)"
