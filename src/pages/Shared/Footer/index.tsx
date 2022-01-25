@@ -40,7 +40,7 @@ const Footer: FC = () => {
         </button>
       </div>
       <div className={`${footer}-right`}>
-        <a href="https://docs.hedge.red/" target="view_window">
+        <a href="https://docs.fortprotocol.com/" target="view_window">
           <WhitePaper className={`${footer}-right-paper`} />
         </a>
         <a href="https://t.me/fort_DeFi" target="view_window">
