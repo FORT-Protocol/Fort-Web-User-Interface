@@ -35,7 +35,7 @@ export function useFortEuropeanOptionOpen(
         data: callData,
         value: PRICE_FEE
     }
-    const txPromise = useSendTransaction(contract, tx, {title:`Buy Options`, info:'', type: TransactionType.buyOption})
+    const txPromise = useSendTransaction(contract, tx, {title:`Buy Option`, info:'', type: TransactionType.buyOption})
     return txPromise
 }
 
@@ -61,7 +61,7 @@ export function useFortEuropeanOptionExercise(
         data: callData,
         value: PRICE_FEE
     }
-    const txPromise = useSendTransaction(contract, tx, {title:`Strike Options`, info:index.toString(), type: TransactionType.closeOption})
+    const txPromise = useSendTransaction(contract, tx, {title:`Strike Option`, info:index.toString(), type: TransactionType.closeOption})
     return txPromise
 }
 
@@ -87,6 +87,6 @@ export function useFortEuropeanOptionSell(
         data: callData,
         value: PRICE_FEE
     }
-    const txPromise = useSendTransaction(contract, tx, {title:`Sell Options`, info:index.toString(), type: TransactionType.sellOption})
+    const txPromise = useSendTransaction(contract, tx, {title:`Sell Option`, info:index.toString(), type: TransactionType.sellOption})
     return txPromise
 }

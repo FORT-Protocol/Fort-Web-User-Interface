@@ -20,6 +20,9 @@ footer {
         &-theme {
             margin: auto 0;
             margin-left: 44px;
+            &:hover {
+                cursor: pointer;
+            }
         }
 
         &-receive {

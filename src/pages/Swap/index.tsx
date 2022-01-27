@@ -350,7 +350,7 @@ const Swap: FC = () => {
             t`Balance` +
             `:${
               swapTokenBalance
-                ? bigNumberToNormal(swapTokenBalance.src, 18, 2)
+                ? bigNumberToNormal(swapTokenBalance.src, 18, 6)
                 : "---"
             } ${swapToken.src}`
           }
@@ -369,6 +369,7 @@ const Swap: FC = () => {
             placeholder={t`Input`}
             className={"input-middle"}
             value={inputValue}
+            maxLength={32}
             onChange={(e) => setInputValue(formatInputNum(e.target.value))}
             onBlur={(e: any) => {}}
           />
@@ -399,7 +400,7 @@ const Swap: FC = () => {
             t`Balance` +
             `:${
               swapTokenBalance
-                ? bigNumberToNormal(swapTokenBalance.dest, 18, 2)
+                ? bigNumberToNormal(swapTokenBalance.dest, 18, 6)
                 : "---"
             } ${swapToken.dest}`
           }
@@ -420,7 +421,7 @@ const Swap: FC = () => {
           <Tooltip
             placement="leftBottom"
             color={"#ffffff"}
-            title={t`Trading rate displayed on the page will be different from the actual rate. If your actual rate is 5% higher than the current page, the transaction will be rejected.`}
+            title={t`Trading price displayed on the page will be different from the actual price. If your actual price is 5% higher than the current page, the transaction will be rejected.`}
           >
             <span>
               <Trans>Trading Price</Trans>

@@ -318,7 +318,7 @@ const MintOptions: FC = () => {
               onChange={onOk}
               bordered={false}
               suffixIcon={<PutDownIcon />}
-              placeholder={t`Exercise time`}
+              placeholder={'Select'}
               allowClear={false}
             />
           </InfoShow>
@@ -334,6 +334,7 @@ const MintOptions: FC = () => {
               placeholder={t`Input`}
               className={"input-left"}
               value={strikePrice}
+              maxLength={32}
               onChange={(e) => setStrikePrice(formatInputNum(e.target.value))}
             />
             <span>USDT</span>
@@ -355,6 +356,7 @@ const MintOptions: FC = () => {
               placeholder={t`Input`}
               className={"input-middle"}
               value={fortNum}
+              maxLength={32}
               onChange={(e) => setFortNum(formatInputNum(e.target.value))}
             />
             <button
