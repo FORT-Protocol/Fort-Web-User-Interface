@@ -104,8 +104,8 @@ msgid "Buy Option"
 msgstr "Buy Option"
 
 #: src/pages/Shared/TransactionToast/index.tsx
-msgid "Buy Options"
-msgstr "Buy Options"
+msgid "Buy Option"
+msgstr "Buy Option"
 
 #: src/pages/Farm/FarmCard/index.tsx
 msgid "COFI is the governance token of COFIX, a decentralized transaction protocol, and can be buy in COFIX."
@@ -254,12 +254,12 @@ msgstr "Margin"
 
 #: src/components/PerpetualsList/PerpetualsListMobile/index.tsx
 #: src/pages/Perpetuals/index.tsx
-msgid "Margin Assets"
-msgstr "Margin Assets"
+msgid "Margin assets"
+msgstr "Margin assets"
 
 #: src/pages/Perpetuals/index.tsx
-msgid "Minimum input 50"
-msgstr "Minimum input 50"
+msgid "Minimum input 100"
+msgstr "Minimum input 100"
 
 #: src/pages/Farm/FarmCard/index.tsx
 msgid "Mining pool number"
@@ -287,12 +287,12 @@ msgstr "Open Long"
 
 #: src/components/PerpetualsList/PerpetualsListMobile/index.tsx
 #: src/pages/Perpetuals/index.tsx
-msgid "Open Price"
-msgstr "Open Price"
+msgid "Open price"
+msgstr "Open price"
 
 #: src/pages/Perpetuals/index.tsx
-msgid "Open Price:"
-msgstr "Open Price:"
+msgid "Open price:"
+msgstr "Open price:"
 
 #: src/pages/Perpetuals/index.tsx
 msgid "Open Short"
@@ -375,8 +375,8 @@ msgid "Sell"
 msgstr "Sell"
 
 #: src/pages/Shared/TransactionToast/index.tsx
-msgid "Sell Options"
-msgstr "Sell Options"
+msgid "Sell Option"
+msgstr "Sell Option"
 
 #: src/components/OptionsList/index.tsx
 #: src/components/PerpetualsList/PerpetualsListMobile/index.tsx
@@ -404,8 +404,8 @@ msgid "Strike"
 msgstr "Strike"
 
 #: src/pages/Shared/TransactionToast/index.tsx
-msgid "Strike Options"
-msgstr "Strike Options"
+msgid "Strike Option"
+msgstr "Strike Option"
 
 #: src/components/OptionsList/index.tsx
 #: src/pages/Options/index.tsx
@@ -463,8 +463,8 @@ msgid "Trading Price"
 msgstr "Trading Price"
 
 #: src/pages/Swap/index.tsx
-msgid "Trading rate displayed on the page will be different from the actual rate. If your actual rate is 5% higher than the current page, the transaction will be rejected."
-msgstr "Trading rate displayed on the page will be different from the actual rate. If your actual rate is 5% higher than the current page, the transaction will be rejected."
+msgid "Trading price displayed on the page will be different from the actual price. If your actual price is 5% higher than the current page, the transaction will be rejected."
+msgstr "Trading price displayed on the page will be different from the actual price. If your actual price is 5% higher than the current page, the transaction will be rejected."
 
 #: src/pages/Shared/TransactionModal/index.tsx
 msgid "Transaction declined"
@@ -486,8 +486,8 @@ msgid "View"
 msgstr "View"
 
 #: src/pages/Shared/TransactionModal/index.tsx
-msgid "View on polygonscan"
-msgstr "View on polygonscan"
+msgid "View on etherscan"
+msgstr "View on etherscan"
 
 #: src/pages/Shared/TransactionModal/index.tsx
 msgid "Wait for confirm"

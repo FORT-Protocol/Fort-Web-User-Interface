@@ -4,7 +4,7 @@
 .fort-button {
     height: 44px;
     border-radius: 22px;
-    background-color: $main-button-color;
+    background: $main-button-color;
     color: $main-button-text-color;
     font-family: $boldFont;
     font-weight: bold;
@@ -14,7 +14,7 @@
     padding-right: 35px;
 
     &.disable {
-        background-color: $button-disable-color;
+        background: $button-disable-color;
         &:hover {
             cursor: not-allowed;
         }

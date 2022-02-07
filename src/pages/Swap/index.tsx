@@ -85,7 +85,6 @@ const Swap: FC = () => {
       account
     )?.balanceOf(account);
     setSwapTokenBalance({ src: srcTokenBalance, dest: destTokenBalance });
-    
   }, [account, chainId, library, swapToken]);
   useEffect(() => {
     getBalance();
@@ -141,10 +140,7 @@ const Swap: FC = () => {
     if (!chainId || !library || !account) {
       return;
     }
-    const swapWithK = async (
-      srcName: string,
-      amountIn: BigNumber
-    ) => {
+    const swapWithK = async (srcName: string, amountIn: BigNumber) => {
       const priceList = await priceContract?.lastPriceListAndTriggeredPriceInfo(
         NESTUSDTPriceChannelId[chainId],
         2
@@ -156,7 +152,7 @@ const Swap: FC = () => {
         priceList[0][1],
         priceList[0][0]
       );
-      
+
       const k: BigNumber = kValue;
       const tokenAmount: BigNumber = priceList[0][1];
       if (srcName === "USDT") {
@@ -165,7 +161,7 @@ const Swap: FC = () => {
           .sub(fee)
           .mul(tokenAmount)
           .mul(BASE_AMOUNT)
-          .div(BASE_AMOUNT.mul(BigNumber.from('2000')))
+          .div(BASE_AMOUNT.mul(BigNumber.from("2000")))
           .div(
             BASE_AMOUNT.add(k).add(
               amountIn.mul(200).div(BigNumber.from("500000000"))
@@ -173,7 +169,9 @@ const Swap: FC = () => {
           );
         return amountOut;
       } else {
-        const amountETHOut = amountIn.mul(BASE_AMOUNT.mul(BigNumber.from('2000'))).div(tokenAmount);
+        const amountETHOut = amountIn
+          .mul(BASE_AMOUNT.mul(BigNumber.from("2000")))
+          .div(tokenAmount);
         const amountETHOut2 = amountETHOut
           .mul(BASE_AMOUNT)
           .div(
@@ -326,7 +324,7 @@ const Swap: FC = () => {
             t`Balance` +
             `:${
               swapTokenBalance
-                ? bigNumberToNormal(swapTokenBalance.src, 18, 2)
+                ? bigNumberToNormal(swapTokenBalance.src, 18, 6)
                 : "---"
             } ${swapToken.src}`
           }
@@ -345,6 +343,7 @@ const Swap: FC = () => {
             placeholder={t`Input`}
             className={"input-middle"}
             value={inputValue}
+            maxLength={32}
             onChange={(e) => setInputValue(formatInputNum(e.target.value))}
             onBlur={(e: any) => {}}
           />
@@ -375,7 +374,7 @@ const Swap: FC = () => {
             t`Balance` +
             `:${
               swapTokenBalance
-                ? bigNumberToNormal(swapTokenBalance.dest, 18, 2)
+                ? bigNumberToNormal(swapTokenBalance.dest, 18, 6)
                 : "---"
             } ${swapToken.dest}`
           }
@@ -396,7 +395,7 @@ const Swap: FC = () => {
           <Tooltip
             placement="leftBottom"
             color={"#ffffff"}
-            title={t`Trading rate displayed on the page will be different from the actual rate. If your actual rate is 5% higher than the current page, the transaction will be rejected.`}
+            title={t`Trading price displayed on the page will be different from the actual price. If your actual price is 5% higher than the current page, the transaction will be rejected.`}
           >
             <span>
               <Trans>Trading Price</Trans>

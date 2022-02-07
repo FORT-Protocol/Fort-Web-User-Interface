@@ -160,7 +160,7 @@ const MintOptions: FC = () => {
       [0],
       1
     );
-    const priceValue = BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(price[1])
+    const priceValue = BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(price[1]);
     setPriceNow(priceValue);
   };
   useEffect(() => {
@@ -280,7 +280,9 @@ const MintOptions: FC = () => {
     isLong,
     BigNumber.from(exercise.blockNum),
     normalToBigNumber(fortNum),
-    strikePrice ? normalToBigNumber(strikePrice, tokenList["USDT"].decimals) : undefined
+    strikePrice
+      ? normalToBigNumber(strikePrice, tokenList["USDT"].decimals)
+      : undefined
   );
   return (
     <div>
@@ -304,7 +306,9 @@ const MintOptions: FC = () => {
               <DoubleTokenShow tokenNameOne={"ETH"} tokenNameTwo={"USDT"} />
             </div>
             <p>{`${checkWidth() ? "1 ETH = " : ""}${
-              priceNow ? bigNumberToNormal(priceNow, tokenList['USDT'].decimals, 2) : "---"
+              priceNow
+                ? bigNumberToNormal(priceNow, tokenList["USDT"].decimals, 2)
+                : "---"
             } USDT`}</p>
           </InfoShow>
           <ChooseType
@@ -324,7 +328,7 @@ const MintOptions: FC = () => {
               onChange={onOk}
               bordered={false}
               suffixIcon={<PutDownIcon />}
-              placeholder={t`Exercise time`}
+              placeholder={'Select'}
               allowClear={false}
             />
           </InfoShow>
@@ -332,7 +336,9 @@ const MintOptions: FC = () => {
           <InfoShow
             topLeftText={t`Strike price`}
             bottomRightText={`1 ETH = ${
-              priceNow ? bigNumberToNormal(priceNow, tokenList['USDT'].decimals, 2) : "---"
+              priceNow
+                ? bigNumberToNormal(priceNow, tokenList["USDT"].decimals, 2)
+                : "---"
             } USDT`}
           >
             <input
@@ -340,6 +346,7 @@ const MintOptions: FC = () => {
               placeholder={t`Input`}
               className={"input-left"}
               value={strikePrice}
+              maxLength={32}
               onChange={(e) => setStrikePrice(formatInputNum(e.target.value))}
             />
             <span>USDT</span>
@@ -361,6 +368,7 @@ const MintOptions: FC = () => {
               placeholder={t`Input`}
               className={"input-middle"}
               value={fortNum}
+              maxLength={32}
               onChange={(e) => setFortNum(formatInputNum(e.target.value))}
             />
             <button
