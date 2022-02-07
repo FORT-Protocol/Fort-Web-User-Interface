@@ -252,7 +252,7 @@ const Perpetuals: FC = () => {
             <Trans>Margin</Trans>
           </th>
           <th>
-            <Trans>Open Price</Trans>
+            <Trans>Open price</Trans>
           </th>
           <th className={"th-marginAssets"}>
             <Tooltip
@@ -263,7 +263,7 @@ const Perpetuals: FC = () => {
               }
             >
               <span>
-                <Trans>Margin Assets</Trans>
+                <Trans>Margin assets</Trans>
               </span>
             </Tooltip>
           </th>
@@ -310,7 +310,7 @@ const Perpetuals: FC = () => {
             color={"#ffffff"}
             title={t`The opening price is based on NEST oracle and corrected according to risk compensation.`}
           >
-            <span>{t`Open Price:` + kPrice() + " USDT"}</span>
+            <span>{t`Open price:` + kPrice() + " USDT"}</span>
           </Tooltip>
         </p>
         <ChooseType
@@ -331,6 +331,7 @@ const Perpetuals: FC = () => {
             placeholder={t`Input`}
             className={"input-middle"}
             value={dcuInput}
+            maxLength={32}
             onChange={(e) => setDcuInput(formatInputNum(e.target.value))}
             onBlur={(e: any) => {}}
           />

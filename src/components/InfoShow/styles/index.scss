@@ -90,6 +90,10 @@
         .max-button {
             margin-left: 5px;
             display: block;
+
+            &:hover {
+                cursor: pointer;
+            }
         }
 
         span {
@@ -145,6 +149,7 @@
 
             &:hover {
                 background-color: $gray-line-color;
+                cursor: pointer;
             }
 
             svg {

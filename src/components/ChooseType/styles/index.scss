@@ -21,6 +21,10 @@
                 color: $up-color;
             }
         }
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 
     &-right {
@@ -36,6 +40,10 @@
             p {
                 color: $down-color;
             }
+        }
+
+        &:hover {
+            cursor: pointer;
         }
     }
 
