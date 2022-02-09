@@ -212,40 +212,6 @@
 				"internalType": "uint256",
 				"name": "height",
 				"type": "uint256"
-			},
-			{
-				"internalType": "address",
-				"name": "payback",
-				"type": "address"
-			}
-		],
-		"name": "findPrice",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "blockNumber",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "price",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "channelId",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "height",
-				"type": "uint256"
 			}
 		],
 		"name": "findPrice",
@@ -531,55 +497,6 @@
 				"internalType": "uint256",
 				"name": "count",
 				"type": "uint256"
-			},
-			{
-				"internalType": "address",
-				"name": "payback",
-				"type": "address"
-			}
-		],
-		"name": "lastPriceListAndTriggeredPriceInfo",
-		"outputs": [
-			{
-				"internalType": "uint256[]",
-				"name": "prices",
-				"type": "uint256[]"
-			},
-			{
-				"internalType": "uint256",
-				"name": "triggeredPriceBlockNumber",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "triggeredPriceValue",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "triggeredAvgPrice",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "triggeredSigmaSQ",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "channelId",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "count",
-				"type": "uint256"
 			}
 		],
 		"name": "lastPriceListAndTriggeredPriceInfo",
@@ -635,35 +552,6 @@
 			}
 		],
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "channelId",
-				"type": "uint256"
-			},
-			{
-				"internalType": "address",
-				"name": "payback",
-				"type": "address"
-			}
-		],
-		"name": "latestPrice",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "blockNumber",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "price",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "payable",
 		"type": "function"
 	},
 	{

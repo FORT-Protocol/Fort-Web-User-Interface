@@ -1,0 +1,531 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.main-white {
+    background-image: url(../white/whiteBK.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+
+    .header-nav {
+        background-color: rgba(255, 255, 255, 0.5);
+    }
+
+    table {
+        tr {
+            background-color: $main-background-color;
+
+            td:first-child {
+                border-bottom-left-radius: 12px;
+            }
+
+            td:last-child {
+                border-bottom-right-radius: 12px;
+            }
+
+            td:first-child {
+                border-top-left-radius: 12px;
+            }
+
+            td:last-child {
+                border-top-right-radius: 12px;
+            }
+
+            th:first-child {
+                border-bottom-left-radius: 12px;
+            }
+
+            th:last-child {
+                border-bottom-right-radius: 12px;
+            }
+
+            th:first-child {
+                border-top-left-radius: 12px;
+            }
+
+            th:last-child {
+                border-top-right-radius: 12px;
+            }
+        }
+    }
+}
+
+.main-dark {
+    background-image: url(../dark/darkBK.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+
+    .header-mobile {
+        svg path {
+            fill: $main-background-color;
+        }
+    }
+
+    .OptionsList-mobile {
+        .mobileListInfo-title {
+            span {
+                color: #C5C5C5;
+            }
+        }
+
+        .OptionsList-mobile-card-mid .mobileListInfo,
+        .OptionsList-mobile-card-bottom .mobileListInfo,
+        .OptionsList-mobile-card-block .mobileListInfo {
+            p {
+                color: $main-background-color;
+            }
+        }
+
+        .OptionsList-mobile-card-top,
+        .OptionsList-mobile-card-mid,
+        .OptionsList-mobile-card-bottom {
+            border-bottom: 0.5px solid rgba(255, 255, 255, 0.15);
+        }
+    }
+    
+    .perListMobile-li {
+        .mobileListInfo-title {
+            span {
+                color: #C5C5C5;
+            }
+        }
+
+        .perListMobile-mid .mobileListInfo,
+        .perListMobile-bottom .mobileListInfo {
+            p {
+                color: $main-background-color;
+            }
+        }
+
+        .perListMobile-top,
+        .perListMobile-mid {
+            border-bottom: 0.5px solid rgba(255, 255, 255, 0.15);
+        }
+    }
+
+    .footer-right {
+        svg {
+            &:hover {
+                &>path:first-child {
+                    fill: url(#paint0_linear_2217_205);
+                }
+            }
+        }
+    }
+    
+    .options-mintOptions-rightCard-smallCard-title {
+        p {
+            color: #C5C5C5;
+        }
+    }
+
+    .options-mintOptions-rightCard-smallCard-value {
+        color: $main-background-color;
+    }
+
+    .options-mintOptions-rightCard-smallCard-name {
+        color: #C5C5C5;
+    }
+
+    .options-mintOptions-rightCard-smallCard {
+        .mainCard {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(0px);
+        }
+    }
+
+    .options-mintOptions-rightCard-tokenTitle {
+        span {
+            color: #C5C5C5;
+        }
+    }
+
+    .options-mintOptions-rightCard-tokenValue {
+        color: $main-background-color;
+    }
+
+    .options-mintOptions-rightCard-timeValue {
+        color: #C5C5C5;
+    }
+
+    .swap-card-trading {
+        span {
+            color: #C5C5C5;
+        }
+
+        p {
+            color: $main-background-color;
+        }
+    }
+
+    .swap-card-exchange {
+        background: linear-gradient(90deg, #8BB7FF 0%, #0061FF 100%);
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border: 0px;
+
+        svg path {
+            fill: $main-background-color;
+        }
+    }
+
+    .th-marginAssets,
+    .options-mintOptions-rightCard-tokenTitle,
+    .swap-card-trading {
+        span {
+            border-color: $main-background-color;
+        }
+    }
+
+    .chooseType-left,
+    .chooseType-right {
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .chooseType div.selected {
+        background: linear-gradient(90deg, #8BB7FF 0%, #0061FF 100%);
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .perpetuals-card .kPrice span {
+        color: #C5C5C5;
+        border-bottom: 1px dashed $main-background-color;
+    }
+
+    .leverChoose {
+        &-title {
+            color: #C5C5C5;
+        }
+
+        &-choose {
+            li {
+                color: $main-background-color;
+                background: rgba(255, 255, 255, 0.15);
+                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+                &:hover {
+                    border: 0px;
+                }
+
+                &.selected {
+                    background: linear-gradient(90deg, #8BB7FF 0%, #0061FF 100%);
+                    color: $main-background-color;
+                    border: 0px;
+
+                    &:hover {
+                        border: 0px;
+                    }
+                }
+            }
+
+        }
+    }
+
+    .infoView {
+        &-topLeft {
+            color: #C5C5C5;
+        }
+
+        &-bottomRight {
+            color: #C5C5C5;
+        }
+    }
+
+    .infoView-mainView {
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border: 0px;
+
+        &:hover {
+            border: 1px solid #8BB7FF;
+        }
+
+        p,
+        span {
+            color: #BDD6FF;
+        }
+
+        input {
+            color: $main-background-color;
+        }
+
+        .TokenShow {
+
+            p {
+                color: $main-background-color;
+            }
+
+        }
+
+        .max-button {
+            color: #BDD6FF;
+        }
+
+        .ant-picker-suffix,
+        .swap-card-selected p {
+            svg path {
+                fill: #BDD6FF;
+            }
+
+            svg circle {
+                stroke: #BDD6FF;
+            }
+        }
+    }
+
+    .mainCard {
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border: 0px;
+        backdrop-filter: blur(10px);
+    }
+
+    .baseModal .mainCard {
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border: 0px;
+    }
+
+    .fort-button {
+        background: linear-gradient(90deg, #8BB7FF 0%, #0061FF 100%);
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+
+
+    .header-nav {
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+        backdrop-filter: blur(2px);
+        border-bottom: 0px;
+        z-index: 10;
+
+        a svg.header-logo path {
+            fill: $main-background-color;
+        }
+
+        nav li a {
+            color: #C5C5C5;
+        }
+
+        li.selected {
+            border-bottom: 2px solid $main-background-color;
+
+            a {
+                color: $main-background-color;
+            }
+        }
+
+        .selectNetwork-chainName {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border: 0px;
+
+            p {
+                color: $main-background-color;
+            }
+
+        }
+
+        .selectNetwork-ul {
+            background: rgba(44, 46, 50);
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border: 0px;
+            z-index: 99;
+
+            ul li a p {
+                color: $main-background-color;
+            }
+
+            ul li {
+                &:hover {
+                    background: rgba(255, 255, 255, 0.15);
+                    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+                }
+            }
+        }
+    }
+
+    .holdLine {
+        .holdLine-line {
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            ;
+        }
+
+        .holdLine-mainBG {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(8px);
+            color: $main-background-color;
+        }
+    }
+
+    table {
+
+        .perpetuals-table-title,
+        .options-mintOptions-table-title {
+            color: #C5C5C5;
+        }
+
+        .perpetuals-table-normal,
+        .options-mintOptions-table-normal {
+            color: $main-background-color;
+        }
+
+        tr {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(8px);
+
+            td:first-child {
+                border-bottom-left-radius: 12px;
+            }
+
+            td:last-child {
+                border-bottom-right-radius: 12px;
+            }
+
+            td:first-child {
+                border-top-left-radius: 12px;
+            }
+
+            td:last-child {
+                border-top-right-radius: 12px;
+            }
+
+            th:first-child {
+                border-bottom-left-radius: 12px;
+            }
+
+            th:last-child {
+                border-bottom-right-radius: 12px;
+            }
+
+            th:first-child {
+                border-top-left-radius: 12px;
+            }
+
+            th:last-child {
+                border-top-right-radius: 12px;
+            }
+        }
+    }
+
+    footer {
+        border-top: 0px;
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+
+        .footer-left-receive {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border: 0;
+            color: $main-background-color;
+        }
+    }
+}
+
+.modal-status-dark {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border: 0px;
+    backdrop-filter: blur(24px);
+
+    .baseModal-top-title {
+        color: $main-background-color;
+    }
+
+    .baseModal-top-rightButton svg path {
+        fill: #C5C5C5;
+    }
+
+    .modal-status-notice {
+        color: #C5C5C5;
+    }
+
+    .modal-status-walletSelect {
+        .mainCard {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border: 0px;
+
+            p {
+                color: $main-background-color;
+            }
+        }
+    }
+
+}
+
+.modal-wallet-dark {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border: 0px;
+    backdrop-filter: blur(24px);
+
+    .baseModal-top-title {
+        color: $main-background-color;
+    }
+
+    .baseModal-top-rightButton svg path {
+        fill: #C5C5C5;
+    }
+
+    .modal-wallet-metamask {
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border: 0px;
+
+        .modal-wallet-metamask-address {
+            p {
+                color: #BDD6FF;
+            }
+        }
+
+    }
+
+    .modal-wallet-ulTitle {
+        color: #C5C5C5;
+    }
+
+    ul {
+        li {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border: 0px;
+
+            .transactionInfo {
+                p {
+                    color: #C5C5C5;
+                }
+            }
+
+            a svg path {
+                fill: #BDD6FF;
+            }
+        }
+    }
+}
+
+.modal-transaction-dark {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border: 0px;
+    backdrop-filter: blur(24px);
+
+    .modal-transaction-text {
+        color: $main-background-color;
+    }
+
+    .baseModal-top-rightButton svg path {
+        fill: #C5C5C5;
+    }
+
+    a {
+        color: #BDD6FF;
+    }
+}

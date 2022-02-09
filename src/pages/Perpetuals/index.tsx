@@ -13,7 +13,11 @@ import PerpetualsList, {
 } from "../../components/PerpetualsList";
 import { DoubleTokenShow, SingleTokenShow } from "../../components/TokenShow";
 import { useFortLeverBuy } from "../../contracts/hooks/useFortLeverTransation";
-import { ETHUSDTPriceChannelId, FortLeverContract, tokenList } from "../../libs/constants/addresses";
+import {
+  ETHUSDTPriceChannelId,
+  FortLeverContract,
+  tokenList,
+} from "../../libs/constants/addresses";
 import {
   ERC20Contract,
   FortLever,
@@ -87,7 +91,6 @@ const Perpetuals: FC = () => {
         className={classPrefix}
         item={item}
         key={item.index.toString() + account}
-        showNotice={showNoticeModal}
         kValue={kValue}
       />
     ) : (
@@ -95,7 +98,6 @@ const Perpetuals: FC = () => {
         className={classPrefix}
         item={item}
         key={item.index.toString() + account}
-        showNotice={showNoticeModal}
         kValue={kValue}
       />
     );
@@ -110,7 +112,7 @@ const Perpetuals: FC = () => {
       2
     );
 
-    const priceValue = BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(priceList[1])
+    const priceValue = BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(priceList[1]);
     const k = await leverContract.calcRevisedK(
       BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(priceList[3]),
       priceList[2],
@@ -124,17 +126,9 @@ const Perpetuals: FC = () => {
     if (!priceContract || !chainId || !leverContract) {
       return;
     }
-    getPrice(
-      priceContract,
-      leverContract,
-      chainId
-    );
+    getPrice(priceContract, leverContract, chainId);
     const id = setInterval(() => {
-      getPrice(
-        priceContract,
-        leverContract,
-        chainId
-      );
+      getPrice(priceContract, leverContract, chainId);
     }, 60 * 1000);
     intervalRef.current = id;
     return () => {
@@ -218,13 +212,26 @@ const Perpetuals: FC = () => {
       return "---";
     }
     var price: BigNumber;
+    const inputNum = normalToBigNumber(dcuInput);
     if (isLong) {
-      price = kValue.nowPrice.mul(BASE_AMOUNT.add(kValue.k)).div(BASE_AMOUNT);
+      price = kValue.nowPrice
+        .mul(
+          BASE_AMOUNT.add(kValue.k).add(
+            inputNum.div(BigNumber.from("10000000"))
+          )
+        )
+        .div(BASE_AMOUNT);
     } else {
-      price = kValue.nowPrice.mul(BASE_AMOUNT).div(BASE_AMOUNT.add(kValue.k));
+      price = kValue.nowPrice
+        .mul(BASE_AMOUNT)
+        .div(
+          BASE_AMOUNT.add(kValue.k).add(
+            inputNum.div(BigNumber.from("10000000"))
+          )
+        );
     }
     return bigNumberToNormal(price, 18, 2);
-  }, [isLong, kValue]);
+  }, [dcuInput, isLong, kValue]);
 
   const pcTable = (
     <table>
@@ -243,16 +250,18 @@ const Perpetuals: FC = () => {
             <Trans>Margin</Trans>
           </th>
           <th>
-            <Trans>Open Price</Trans>
+            <Trans>Open price</Trans>
           </th>
           <th className={"th-marginAssets"}>
             <Tooltip
               placement="top"
               color={"#ffffff"}
-              title={"Dynamic changes in net assets, less than a certain amount of liquidation will be liquidated, the amount of liquidation is Max'{'margin*leverage*0.02, 10'}'"}
+              title={
+                "Dynamic changes in net assets, less than a certain amount of liquidation will be liquidated, the amount of liquidation is Max'{'margin*leverage*0.02, 10'}'"
+              }
             >
               <span>
-                <Trans>Margin Assets</Trans>
+                <Trans>Margin assets</Trans>
               </span>
             </Tooltip>
           </th>
@@ -277,6 +286,7 @@ const Perpetuals: FC = () => {
         >
           <PerpetualsNoticeModal
             onClose={() => modal.current.close()}
+            action={active}
           ></PerpetualsNoticeModal>
         </Popup>
       ) : null}
@@ -299,7 +309,7 @@ const Perpetuals: FC = () => {
             color={"#ffffff"}
             title={t`The opening price is based on NEST oracle and corrected according to risk compensation.`}
           >
-            <span>{t`Open Price:` + kPrice() + " USDT"}</span>
+            <span>{t`Open price:` + kPrice() + " USDT"}</span>
           </Tooltip>
         </p>
         <ChooseType
@@ -320,6 +330,7 @@ const Perpetuals: FC = () => {
             placeholder={t`Input`}
             className={"input-middle"}
             value={dcuInput}
+            maxLength={32}
             onChange={(e) => setDcuInput(formatInputNum(e.target.value))}
             onBlur={(e: any) => {}}
           />
@@ -340,8 +351,8 @@ const Perpetuals: FC = () => {
             if (!checkMainButton() || showNoticeModal()) {
               return;
             }
-            if (normalToBigNumber(dcuInput).lt(normalToBigNumber("100"))) {
-              message.error(t`Minimum input 100`);
+            if (normalToBigNumber(dcuInput).lt(normalToBigNumber("50"))) {
+              message.error(t`Minimum input 50`);
               return;
             }
             active();

@@ -16,6 +16,8 @@ import { message } from "antd";
 import "./styles";
 import { useEtherscanBaseUrl } from "../../../../../libs/hooks/useEtherscanBaseUrl";
 import { transactionTitle } from "../../../TransactionToast";
+import useThemes, { ThemeType } from "../../../../../libs/hooks/useThemes";
+import classNames from "classnames";
 
 type Props = {
   onClose?: MouseEventHandler<HTMLButtonElement>;
@@ -26,6 +28,7 @@ const WalletModal: FC<Props> = ({ ...props }) => {
   const [transactionList, setTransactionList] = useState<Array<any>>();
   const classPrefix = "modal-wallet";
   const etherscanBase = useEtherscanBaseUrl();
+  const { theme } = useThemes();
 
   useEffect(() => {
     if (chainId) {
@@ -83,7 +86,10 @@ const WalletModal: FC<Props> = ({ ...props }) => {
   return (
     <BaseModal
       onClose={props.onClose}
-      classNames={classPrefix}
+      classNames={classNames({
+        [`${classPrefix}`]: true,
+        [`${classPrefix}-dark`]: theme === ThemeType.dark,
+      })}
       titleName={t`Wallet`}
     >
       <div className={`${classPrefix}-metamask`}>

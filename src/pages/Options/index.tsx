@@ -19,6 +19,8 @@ import {
 } from "../../libs/hooks/useContract";
 import useWeb3 from "../../libs/hooks/useWeb3";
 import {
+  BASE_2000ETH_AMOUNT,
+  BASE_AMOUNT,
   bigNumberToNormal,
   checkWidth,
   formatInputNum,
@@ -86,7 +88,6 @@ const MintOptions: FC = () => {
         key={item.index.toString() + account}
         item={item}
         blockNum={latestBlock.blockNum.toString()}
-        showNotice={showNoticeModal}
         nowPrice={priceNow}
       />
     );
@@ -153,10 +154,8 @@ const MintOptions: FC = () => {
     setFortBalance(BigNumber.from(0));
   }, [account, fortContract]);
   const getPrice = async (contract: Contract, chainId: number) => {
-    const price = await contract.latestPrice(
-      ETHUSDTPriceChannelId[chainId]
-    );
-    const priceValue = normalToBigNumber('2000').mul(normalToBigNumber('1')).div(price[1])
+    const price = await contract.latestPrice(ETHUSDTPriceChannelId[chainId]);
+    const priceValue = BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(price[1]);
     setPriceNow(priceValue);
   };
   useEffect(() => {
@@ -176,7 +175,7 @@ const MintOptions: FC = () => {
   }, [chainId, nestPriceContract]);
 
   useEffect(() => {
-    if (moment().valueOf() - latestBlock.time > 15000 && library) {
+    if (moment().valueOf() - latestBlock.time > 6000 && library) {
       (async () => {
         const latest = await library?.getBlockNumber();
         setLatestBlock({ time: moment().valueOf(), blockNum: latest || 0 });
@@ -199,7 +198,7 @@ const MintOptions: FC = () => {
       if (selectTime > nowTime) {
         const timeString = moment(value).format("YYYY[-]MM[-]DD");
         const blockNum = parseFloat(
-          ((selectTime - nowTime) / 14000).toString()
+          ((selectTime - nowTime) / 3000).toString()
         ).toFixed(0);
         setExercise({
           time: timeString,
@@ -290,6 +289,7 @@ const MintOptions: FC = () => {
         >
           <OptionsNoticeModal
             onClose={() => modal.current.close()}
+            action={active}
           ></OptionsNoticeModal>
         </Popup>
       ) : null}
@@ -320,7 +320,7 @@ const MintOptions: FC = () => {
               onChange={onOk}
               bordered={false}
               suffixIcon={<PutDownIcon />}
-              placeholder={t`Exercise time`}
+              placeholder={"Select"}
               allowClear={false}
             />
           </InfoShow>
@@ -336,6 +336,7 @@ const MintOptions: FC = () => {
               placeholder={t`Input`}
               className={"input-left"}
               value={strikePrice}
+              maxLength={32}
               onChange={(e) => setStrikePrice(formatInputNum(e.target.value))}
             />
             <span>USDT</span>
@@ -357,6 +358,7 @@ const MintOptions: FC = () => {
               placeholder={t`Input`}
               className={"input-middle"}
               value={fortNum}
+              maxLength={32}
               onChange={(e) => setFortNum(formatInputNum(e.target.value))}
             />
             <button

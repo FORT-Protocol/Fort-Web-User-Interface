@@ -1,0 +1,88 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.selectNetwork {
+    &-chainName {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 14px;
+        height: 44px;
+        border-radius: 22px;
+        border: 1px solid $gray-background-color;
+        margin-right: 20px;
+
+        p {
+            text-align: center;
+            font-size: $T3;
+            color: black;
+            line-height: 42px;
+        }
+
+        svg {
+            margin: auto 0;
+            margin-right: 10px;
+        }
+    }
+
+    &:hover {
+        .selectNetwork-ul {
+            display: block;
+        }
+    }
+
+    &-hover {
+        position: absolute;
+    }
+
+    &-ul {
+        display: none;
+        width: 180px;
+        margin-top: 20px;
+        padding: 14px 0px;
+        border-radius: 10px;
+
+        p {
+            margin: 0 14px;
+            height: 16px;
+            line-height: 16px;
+            font-size: $T4;
+            color: $gray-info-text-color;
+        }
+
+        
+
+        ul {
+            display:contents;
+
+            li {
+                display: flex;
+                height: 28px;
+                padding: 0 14px;
+
+                a {
+                    display: contents;
+                    svg {
+                        margin: auto 0;
+                        margin-right: 10px;
+                    }
+    
+                    p {
+                        margin: 0;
+                        line-height: 28px;
+                        color: black;
+                    }
+    
+                    p + svg {
+                        text-align: right;
+                        margin-right: 0;
+                    }
+                }
+                
+            }
+
+            li:hover {
+                background-color: $gray-line-color;
+            }
+        }
+    }
+}

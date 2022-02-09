@@ -7,6 +7,7 @@ import {
   useFortEuropeanOptionSell,
 } from "../../contracts/hooks/useFortEuropeanOptionTransation";
 import {
+  ETHUSDTPriceChannelId,
   FortEuropeanOptionContract,
   tokenList,
 } from "../../libs/constants/addresses";
@@ -19,6 +20,7 @@ import useTransactionListCon, {
 } from "../../libs/hooks/useTransactionInfo";
 import useWeb3 from "../../libs/hooks/useWeb3";
 import {
+  BASE_2000ETH_AMOUNT,
   BASE_AMOUNT,
   bigNumberToNormal,
   checkWidth,
@@ -36,7 +38,6 @@ type Props = {
   key: string;
   className: string;
   blockNum: string;
-  showNotice: () => boolean;
   nowPrice?: BigNumber;
 };
 
@@ -94,7 +95,7 @@ const OptionsList: FC<Props> = ({ ...props }) => {
     }
     if (props.item.exerciseBlock.toNumber() >= Number(props.blockNum)) {
       const subTime =
-        (props.item.exerciseBlock.toNumber() - Number(props.blockNum)) * 14000;
+        (props.item.exerciseBlock.toNumber() - Number(props.blockNum)) * 3000;
       setTimeString(
         moment(moment().valueOf() + subTime).format("YYYY[-]MM[-]DD HH:mm")
       );
@@ -111,22 +112,23 @@ const OptionsList: FC<Props> = ({ ...props }) => {
       })();
       (async () => {
         const blockPrice: Array<BigNumber> = await priceContract.findPrice(
-          tokenList["USDT"].addresses[chainId],
+          ETHUSDTPriceChannelId[chainId],
           props.item.exerciseBlock
         );
+        const blockPrice_toUSDT = BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(blockPrice[1])
         if (props.item.orientation) {
           const amount =
-            blockPrice[1] > props.item.strikePrice
+          blockPrice_toUSDT.gt(props.item.strikePrice)
               ? props.item.balance
-                  .mul(blockPrice[1].sub(props.item.strikePrice))
+                  .mul(blockPrice_toUSDT.sub(props.item.strikePrice))
                   .div(BASE_AMOUNT)
               : BigNumber.from("0");
           setStrikeAmount(amount);
         } else {
           const amount =
-            props.item.strikePrice > blockPrice[1]
+            props.item.strikePrice.gt(blockPrice_toUSDT)
               ? props.item.balance
-                  .mul(props.item.strikePrice.sub(blockPrice[1]))
+                  .mul(props.item.strikePrice.sub(blockPrice_toUSDT))
                   .div(BASE_AMOUNT)
               : BigNumber.from("0");
           setStrikeAmount(amount);
@@ -162,7 +164,7 @@ const OptionsList: FC<Props> = ({ ...props }) => {
         const letNum = BigNumber.from("18446744073709551616000000000000000000");
         const sellNUm = calcV
           .mul(props.item.balance)
-          .mul(BigNumber.from("975"))
+          .mul(BigNumber.from("950"))
           .div(BigNumber.from("1000").mul(letNum));
           console.log(props.item.strikePrice.toString())
         setSaleAmount(sellNUm);
@@ -248,9 +250,6 @@ const OptionsList: FC<Props> = ({ ...props }) => {
         <div className={`${classPrefix}-mobile-card-buttonGroup`}>
           <MainButton
             onClick={() => {
-              if (props.showNotice()) {
-                return;
-              }
               return checkSellButton() ? null : sellActive();
             }}
             loading={loadingSellButton()}
@@ -260,9 +259,6 @@ const OptionsList: FC<Props> = ({ ...props }) => {
           </MainButton>
           <MainButton
             onClick={() => {
-              if (props.showNotice()) {
-                return;
-              }
               return checkButton() ? null : active();
             }}
             loading={loadingButton()}
@@ -301,9 +297,6 @@ const OptionsList: FC<Props> = ({ ...props }) => {
         <div>
           <MainButton
             onClick={() => {
-              if (props.showNotice()) {
-                return;
-              }
               return checkSellButton() ? null : sellActive();
             }}
             loading={loadingSellButton()}
@@ -313,9 +306,6 @@ const OptionsList: FC<Props> = ({ ...props }) => {
           </MainButton>
           <MainButton
             onClick={() => {
-              if (props.showNotice()) {
-                return;
-              }
               return checkButton() ? null : active();
             }}
             loading={loadingButton()}

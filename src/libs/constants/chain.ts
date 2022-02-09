@@ -20,6 +20,18 @@ export const BSCTest = {
   infoURL: "https://testnet.bscscan.com/",
 };
 
+export const BSC = {
+  name: "BSC",
+  chainId:56,
+  tokenName: "BSC",
+  tokenSymbol: "BNB",
+  tokenDecimals: 18,
+  rpc: [
+    `https://bsc-dataseed1.defibit.io/`
+  ],
+  infoURL: "https://bscscan.com/",
+};
+
 
 // export const SupportedChains: Array<Chain> = [Mainnet, Ropsten, Rinkeby, Goerli, Kovan]
 export const SupportedChains: Array<Chain> = [BSCTest];

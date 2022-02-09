@@ -28,7 +28,6 @@ type Props = {
   item: LeverListType;
   key: string;
   className: string;
-  showNotice: () => boolean;
   kValue?: PerpetualsListKValue;
 };
 
@@ -122,7 +121,7 @@ const PerpetualsListMobile: FC<Props> = ({ ...props }) => {
           </MobileListInfo>
         </div>
         <div className={`${classPrefix}-bottom`}>
-          <MobileListInfo title={t`Open Price`}>
+          <MobileListInfo title={t`Open price`}>
             <p>
               {bigNumberToNormal(
                 props.item.basePrice,
@@ -132,15 +131,16 @@ const PerpetualsListMobile: FC<Props> = ({ ...props }) => {
               USDT
             </p>
           </MobileListInfo>
-          <MobileListInfo title={t`Margin Assets`} under={true} underText={t`Dynamic changes in net assets, less than a certain amount of liquidation will be liquidated, the amount of liquidation is Max'{'margin*leverage*0.02, 10'}'`}>
+          <MobileListInfo
+            title={t`Margin assets`}
+            under={true}
+            underText={t`Dynamic changes in net assets, less than a certain amount of liquidation will be liquidated, the amount of liquidation is Max'{'margin*leverage*0.02, 10'}'`}
+          >
             <p>{`${marginAssetsStr} DCU`}</p>
           </MobileListInfo>
         </div>
         <MainButton
           onClick={() => {
-            if (props.showNotice()) {
-              return;
-            }
             return loadingButton() ? null : active();
           }}
           loading={loadingButton()}

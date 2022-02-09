@@ -4,7 +4,7 @@ import { t, Trans } from "@lingui/macro";
 import { Tooltip } from "antd";
 import moment from "moment";
 import { FC, useCallback, useEffect, useState } from "react";
-import { ExchangeIcon, PutDownIcon } from "../../components/Icon";
+import { ExchangeIcon } from "../../components/Icon";
 import InfoShow from "../../components/InfoShow";
 import MainButton from "../../components/MainButton";
 import MainCard from "../../components/MainCard";
@@ -13,12 +13,10 @@ import { useSwapExactTokensForTokens } from "../../contracts/hooks/useCofixSwap"
 import { useERC20Approve } from "../../contracts/hooks/useERC20Approve";
 import {
   CofixSwapAddress,
-  NESTUSDTPriceChannelId,
   SwapAddress,
   tokenList,
 } from "../../libs/constants/addresses";
 import {
-  CofixNestUsdtPool,
   CofixSwapContract,
   getERC20Contract,
   NestPriceContract,
@@ -30,7 +28,6 @@ import useWeb3 from "../../libs/hooks/useWeb3";
 import {
   BASE_AMOUNT,
   bigNumberToNormal,
-  COFIX_THETA,
   formatInputNum,
   normalToBigNumber,
 } from "../../libs/utils";
@@ -52,7 +49,7 @@ const Swap: FC = () => {
   const [inputValue, setInputValue] = useState<string>();
   const [priceValue, setPriceValue] = useState<BigNumber>();
   const [swapToken, setSwapToken] = useState<SwapTokenType>({
-    src: "NEST",
+    src: "USDT",
     dest: "DCU",
   });
   const [srcAllowance, setSrcAllowance] = useState<BigNumber>(
@@ -62,7 +59,6 @@ const Swap: FC = () => {
     useState<SwapTokenBalanceType>();
   const [destValue, setDestValue] = useState<BigNumber>();
   const cofixSwapContract = CofixSwapContract();
-  const cofixOpenPool = CofixNestUsdtPool();
   const exchangeSwapTokens = () => {
     setSwapToken({ src: swapToken.dest, dest: swapToken.src });
     setInputValue("");
@@ -85,7 +81,6 @@ const Swap: FC = () => {
       account
     )?.balanceOf(account);
     setSwapTokenBalance({ src: srcTokenBalance, dest: destTokenBalance });
-    
   }, [account, chainId, library, swapToken]);
   useEffect(() => {
     getBalance();
@@ -129,10 +124,10 @@ const Swap: FC = () => {
 
   const path = useCallback(() => {
     if (swapToken.src === "USDT") {
-      return ["USDT", "NEST", "DCU"];
+      return ["USDT", "DCU"];
     }
     if (swapToken.dest === "USDT") {
-      return ["DCU", "NEST", "USDT"];
+      return ["DCU", "USDT"];
     }
     return [swapToken.src, swapToken.dest];
   }, [swapToken]);
@@ -141,59 +136,15 @@ const Swap: FC = () => {
     if (!chainId || !library || !account) {
       return;
     }
-    const swapWithK = async (
-      srcName: string,
-      amountIn: BigNumber
-    ) => {
-      const priceList = await priceContract?.lastPriceListAndTriggeredPriceInfo(
-        NESTUSDTPriceChannelId[chainId],
-        2
-      );
-      const kValue = await cofixOpenPool?.calcRevisedK(
-        '102739726027',
-        priceList[0][3],
-        priceList[0][2],
-        priceList[0][1],
-        priceList[0][0]
-      );
-      const k: BigNumber = kValue;
-      const tokenAmount: BigNumber = priceList[0][1];
-      if (srcName === "USDT") {
-        const fee = amountIn.mul(COFIX_THETA).div(BigNumber.from("10000"));
-        const amountOut = amountIn
-          .sub(fee)
-          .mul(tokenAmount)
-          .mul(BASE_AMOUNT)
-          .div(BASE_AMOUNT.mul(BigNumber.from('2000')))
-          .div(
-            BASE_AMOUNT.add(k).add(
-              amountIn.mul(200).div(BigNumber.from("100000"))
-            )
-          );
-          console.log(amountOut.toString())
-        return amountOut;
-      } else {
-        const amountETHOut = amountIn.mul(BASE_AMOUNT.mul(BigNumber.from('2000'))).div(tokenAmount);
-        const amountETHOut2 = amountETHOut
-          .mul(BASE_AMOUNT)
-          .div(
-            BASE_AMOUNT.add(k).add(
-              amountETHOut.mul(200).div(BigNumber.from("100000"))
-            )
-          );
-        const fee = amountETHOut2.mul(COFIX_THETA).div(BigNumber.from("10000"));
-        const amountETHOut3 = amountETHOut2.sub(fee);
-        return amountETHOut3;
-      }
-    };
+  
     const swapXY = async (
       srcName: string,
       destName: string,
       amountIn: BigNumber
     ) => {
-      const k = BigNumber.from("15000000")
+      const k = BigNumber.from("800000")
         .mul(BASE_AMOUNT)
-        .mul(BigNumber.from("15000000").mul(BASE_AMOUNT));
+        .mul(BigNumber.from("2600000").mul(BASE_AMOUNT));
       const srcTokenBalance: BigNumber = await getERC20Contract(
         tokenList[srcName].addresses[chainId],
         library,
@@ -217,11 +168,7 @@ const Swap: FC = () => {
         ? normalToBigNumber(inputValue!)
         : BASE_AMOUNT;
       for (let index = 0; index < usePath.length - 1; index++) {
-        if (usePath[index] === "USDT" || usePath[index + 1] === "USDT") {
-          amount = await swapWithK(usePath[index], amount);
-        } else {
-          amount = await swapXY(usePath[index], usePath[index + 1], amount);
-        }
+        amount = await swapXY(usePath[index], usePath[index + 1], amount);
       }
       setDestValue(checkInputValue ? amount : undefined);
       setPriceValue(
@@ -235,7 +182,6 @@ const Swap: FC = () => {
   }, [
     account,
     chainId,
-    cofixOpenPool,
     library,
     swapToken,
     inputValue,
@@ -243,7 +189,7 @@ const Swap: FC = () => {
     priceContract,
   ]);
 
-  const tokenData = [tokenList["NEST"], tokenList["USDT"]];
+  
   const getSelectedToken = (tokenName: string) => {
     if (swapToken.src === "DCU") {
       setSwapToken({ src: swapToken.src, dest: tokenName });
@@ -326,25 +272,25 @@ const Swap: FC = () => {
             t`Balance` +
             `:${
               swapTokenBalance
-                ? bigNumberToNormal(swapTokenBalance.src, 18, 2)
+                ? bigNumberToNormal(swapTokenBalance.src, 18, 6)
                 : "---"
             } ${swapToken.src}`
           }
-          tokenSelect={swapToken.src === "DCU" ? false : true}
-          tokenList={swapToken.src === "DCU" ? undefined : tokenData}
+          tokenSelect={false}
           getSelectedToken={getSelectedToken}
           balanceRed={!checkBalance()}
         >
           <div className={`${classPrefix}-card-selected`}>
             <SingleTokenShow tokenNameOne={swapToken.src} isBold />
 
-            <p>{swapToken.src === "DCU" ? <></> : <PutDownIcon />}</p>
+            {/* <p>{swapToken.src === "DCU" ? <></> : <PutDownIcon />}</p> */}
           </div>
 
           <input
             placeholder={t`Input`}
             className={"input-middle"}
             value={inputValue}
+            maxLength={32}
             onChange={(e) => setInputValue(formatInputNum(e.target.value))}
             onBlur={(e: any) => {}}
           />
@@ -375,18 +321,17 @@ const Swap: FC = () => {
             t`Balance` +
             `:${
               swapTokenBalance
-                ? bigNumberToNormal(swapTokenBalance.dest, 18, 2)
+                ? bigNumberToNormal(swapTokenBalance.dest, 18, 6)
                 : "---"
             } ${swapToken.dest}`
           }
-          tokenSelect={swapToken.dest === "DCU" ? false : true}
-          tokenList={swapToken.dest === "DCU" ? undefined : tokenData}
+          tokenSelect={false}
           getSelectedToken={getSelectedToken}
         >
           <div className={`${classPrefix}-card-selected`}>
             <SingleTokenShow tokenNameOne={swapToken.dest} isBold />
 
-            <p>{swapToken.dest === "DCU" ? <></> : <PutDownIcon />}</p>
+            {/* <p>{swapToken.dest === "DCU" ? <></> : <PutDownIcon />}</p> */}
           </div>
           <p className={"showValue"}>
             {destValue ? bigNumberToNormal(destValue, 18, 18) : undefined}
@@ -396,7 +341,7 @@ const Swap: FC = () => {
           <Tooltip
             placement="leftBottom"
             color={"#ffffff"}
-            title={t`Trading rate displayed on the page will be different from the actual rate. If your actual rate is 5% higher than the current page, the transaction will be rejected.`}
+            title={t`Trading price displayed on the page will be different from the actual price. If your actual price is 5% higher than the current page, the transaction will be rejected.`}
           >
             <span>
               <Trans>Trading Price</Trans>

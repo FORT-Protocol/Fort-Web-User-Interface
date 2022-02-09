@@ -66,6 +66,10 @@
             border: 1px solid $main-button-color;
             color: $main-button-color;
             font-size: $T2;
+
+            &:hover {
+                cursor: pointer;
+            }
         }
     }
 }

@@ -49,10 +49,15 @@
         justify-content: space-between;
         flex-direction: column;
 
+        svg {
+            margin: 0 auto;
+        }
+
         &-tokenTitle {
             @include normal-text;
 
             span {
+                padding-bottom: 5px;
                 border-bottom: 1px dashed $gray-info-text-color;
             }
         }

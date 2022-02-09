@@ -19,6 +19,7 @@
         }
 
         span {
+            padding-bottom: 5px;
             color: $gray-info-text-color;
             border-bottom: 1px dashed $gray-info-text-color;
         }
@@ -33,6 +34,10 @@
         border-radius: 44px;
         box-shadow: $shadow;
         border: 1px solid $gray-background-color;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 
     &-exchange+.infoView {
@@ -59,6 +64,10 @@
                 width: 22px;
                 height: 22px;
                 margin-top: 11px;
+
+                &:hover {
+                    cursor: pointer;
+                }
             }
         }
     }

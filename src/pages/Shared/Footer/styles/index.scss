@@ -8,25 +8,33 @@ footer {
     $footerWidth: 100%;
     width: $footerWidth;
     height: $footerHeight;
-    background-color: $main-background-color;
     display: flex;
     justify-content: space-between;
     border-top: 1px solid $gray-background-color;
 
     .footer-left {
+        display: flex;
         height: $footerHeight;
         width: 50%;
 
-        &-english {
-            width: $iconSize;
-            height: $iconSize;
-            margin: $iconMargin 0 (-$iconMargin) 40px;
+        &-theme {
+            margin: auto 0;
+            margin-left: 44px;
+            &:hover {
+                cursor: pointer;
+            }
         }
 
-        &-chinese {
-            width: $iconSize;
-            height: $iconSize;
-            margin: $iconMargin 0 (-$iconMargin) 12px;
+        &-receive {
+            margin: auto 0;
+            margin-left: 40px;
+            padding: 0 14px;
+            height: 44px;
+            border-radius: 22px;
+            border: 1px solid $gray-line-color;
+            &:hover {
+                border: 1px solid black;
+            }
         }
     }
 
