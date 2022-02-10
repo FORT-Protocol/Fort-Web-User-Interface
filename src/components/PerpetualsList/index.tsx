@@ -17,7 +17,6 @@ type Props = {
   item: LeverListType;
   key: string;
   className: string;
-  showNotice: () => boolean;
   kValue?: PerpetualsListKValue;
 };
 
@@ -113,7 +112,6 @@ const PerpetualsList: FC<Props> = ({ ...props }) => {
       <td>
         <MainButton
           onClick={() => {
-            if (props.showNotice()) {return}
             return loadingButton() ? null : active();
           }}
           loading={loadingButton()}

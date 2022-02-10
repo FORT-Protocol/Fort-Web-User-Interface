@@ -91,7 +91,6 @@ const Perpetuals: FC = () => {
         className={classPrefix}
         item={item}
         key={item.index.toString() + account}
-        showNotice={showNoticeModal}
         kValue={kValue}
       />
     ) : (
@@ -99,7 +98,6 @@ const Perpetuals: FC = () => {
         className={classPrefix}
         item={item}
         key={item.index.toString() + account}
-        showNotice={showNoticeModal}
         kValue={kValue}
       />
     );
@@ -288,6 +286,7 @@ const Perpetuals: FC = () => {
         >
           <PerpetualsNoticeModal
             onClose={() => modal.current.close()}
+            action={active}
           ></PerpetualsNoticeModal>
         </Popup>
       ) : null}

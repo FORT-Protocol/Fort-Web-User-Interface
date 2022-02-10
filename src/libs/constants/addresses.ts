@@ -1,7 +1,6 @@
 import {
   TokenETH,
   TokenFORT,
-  TokenNest,
   TokenUSDT,
 } from "../../components/Icon";
 import { ZERO_ADDRESS } from "../utils";
@@ -45,15 +44,6 @@ export const tokenList: { [key: string]: TokenType } = {
       97: "0x5Df87aE415206707fd52aDa20a5Eac2Ec70e8dbb"
     },
   },
-  NEST: {
-    symbol: "NEST",
-    Icon: TokenNest,
-    decimals: 18,
-    addresses: {
-      56: "0x98f8669F6481EbB341B522fCD3663f79A3d1A6A7",
-      97: "0x821edD79cc386E56FeC9DA5793b87a3A52373cdE"
-    },
-  }
 };
 
 export const FortEuropeanOptionContract: AddressesType = {
@@ -72,18 +62,13 @@ export const NestPrice: AddressesType = {
 };
 
 export const SwapAddress: AddressesType = {
-  56: '0x2Cd1Bf9345E969b5DFc6D88000475aD6d487363A',
-  97: '0xD83C860d3A27cC5EddaB68EaBFCF9cc8ad38F15D'
+  56: '0x9484f12044b9d5707AfeaC5BD02b5E0214381801',
+  97: '0xc61409835E6A23e31f2fb06F76ae13A1b4c5fD26'
 };
 
 export const CofixSwapAddress: AddressesType = {
   56: '0xb29A8d980E1408E487B9968f5E4f7fD7a9B0CaC5',
   97: '0x4A448cBb12e449D7031f36C8122eCE6dDdf9cc84'
-};
-
-export const CofixNestUsdtPoolAddress: AddressesType = {
-  56: '0x278f5d08bEa1989BEfcC09A20ad60fB39702D556',
-  97: '0xF9e8D1C6Ed54295a4a630085E6D982a37d9d2f85'
 };
 
 export const ETHUSDTPriceChannelId: {[key: number] : string} = {

@@ -34,7 +34,7 @@ export function useSendTransaction(
       return;
     }
     const estimateGas = await library.estimateGas(tx).catch((error) => {
-      failModal(error.message)
+      failModal(error.data.message)
       return;
     });
     if (!estimateGas) {

@@ -49,6 +49,10 @@
         justify-content: space-between;
         flex-direction: column;
 
+        svg {
+            margin: 0 auto;
+        }
+
         &-tokenTitle {
             @include normal-text;
 

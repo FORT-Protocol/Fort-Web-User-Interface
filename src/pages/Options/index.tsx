@@ -88,7 +88,6 @@ const MintOptions: FC = () => {
         key={item.index.toString() + account}
         item={item}
         blockNum={latestBlock.blockNum.toString()}
-        showNotice={showNoticeModal}
         nowPrice={priceNow}
       />
     );
@@ -290,6 +289,7 @@ const MintOptions: FC = () => {
         >
           <OptionsNoticeModal
             onClose={() => modal.current.close()}
+            action={active}
           ></OptionsNoticeModal>
         </Popup>
       ) : null}
