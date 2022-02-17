@@ -41,7 +41,13 @@
     }
 }
 @media screen and (max-width: 1000px) {
-    .modal-status {
-        width: 100%;
+    .baseModal {
+        padding-left: 10px;
+        padding-right: 10px;
+
+        .modal-status {
+            width: 100%;
+            padding: 20px 20px;
+        }
     }
 }

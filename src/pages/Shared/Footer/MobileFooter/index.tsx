@@ -2,6 +2,7 @@ import { FC } from "react";
 import {
   GithubIcon,
   MiIcon,
+  SafeIcon,
   TelIcon,
   TwitterIcon,
   WhitePaper,
@@ -13,6 +14,12 @@ const MobileFooter: FC = () => {
   return (
     <footer>
       <div className={`${footer}`}>
+      <a
+          href="https://app.fortprotocol.com/REP-FORT-2022-01-25.pdf"
+          target="view_window"
+        >
+          <SafeIcon className={`${footer}-right-safe`} />
+        </a>
         <a
           href="https://docs.fortprotocol.com/"
           target="view_window"

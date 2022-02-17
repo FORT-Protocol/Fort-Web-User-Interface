@@ -81,5 +81,11 @@ footer {
             height: $iconSize;
             margin: $iconMargin 12px (-$iconMargin) 0;
         }
+
+        &-safe {
+            width: $iconSize;
+            height: $iconSize;
+            margin: $iconMargin 12px (-$iconMargin) 0;
+        }
     }
 }

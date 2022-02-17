@@ -13,8 +13,19 @@
     }
 }
 .selectNetworkMobile {
+    width: 240px;
 
-    
+    .baseModal-top {
+        justify-content: space-between;
+        &-leftButton {
+            width: 0px;
+        }
+        &-title {
+            width: 100%;
+            text-align: left;
+            margin-left: 14px;
+        }
+    }
     
     ul {
         display: contents;
