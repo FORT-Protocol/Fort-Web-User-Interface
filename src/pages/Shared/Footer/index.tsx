@@ -3,6 +3,7 @@ import {
   DarkIcon,
   GithubIcon,
   MiIcon,
+  SafeIcon,
   TelIcon,
   TwitterIcon,
   WhiteIcon,
@@ -39,6 +40,12 @@ const Footer: FC = () => {
         </button>
       </div>
       <div className={`${footer}-right`}>
+        <a
+          href="https://app.fortprotocol.com/REP-FORT-2022-01-25.pdf"
+          target="view_window"
+        >
+          <SafeIcon className={`${footer}-right-safe`} />
+        </a>
         <a href="https://docs.fortprotocol.com/" target="view_window">
           <WhitePaper className={`${footer}-right-paper`} />
         </a>

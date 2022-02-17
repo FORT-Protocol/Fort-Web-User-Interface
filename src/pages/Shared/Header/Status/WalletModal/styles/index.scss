@@ -95,8 +95,21 @@
         }
     }
 }
+
 @media screen and (max-width: 1000px) {
-    .modal-wallet {
-        width: 100%;
+    .baseModal {
+        margin-left: 0px;
+        margin-right: 0px;
+        .modal-wallet {
+            width: 100%;
+            padding: 20px 10px;
+
+            &-metamask {
+                &-address p {
+                    font-size: 14px;
+                }
+            }
+        }
     }
+
 }
