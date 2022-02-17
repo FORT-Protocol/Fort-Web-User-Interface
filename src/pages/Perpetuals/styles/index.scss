@@ -8,7 +8,7 @@
     padding: 40px 44px;
     margin-top: 22px;
     margin-bottom: 44px;
-    
+
 
     &-tokenPair {
         display: flex;
@@ -37,7 +37,7 @@
         margin-top: 20px;
     }
 
-    &-tokenPair + p {
+    &-tokenPair+p {
         line-height: 44px;
         font-size: $T2;
         color: $main-button-color;
@@ -47,13 +47,13 @@
         margin-top: 20px;
     }
 
-    .leverChoose + .infoView {
+    .leverChoose+.infoView {
         margin-top: 30px;
     }
 
     &-button {
         width: 100%;
-        margin-top:30px;
+        margin-top: 30px;
     }
 }
 
@@ -61,7 +61,7 @@
     margin-top: 40px;
 }
 
-.holdLine + ul {
+.holdLine+ul {
     margin-bottom: 20px;
 }
 
@@ -79,6 +79,7 @@ table {
         border-radius: 12px;
         box-shadow: $shadow;
     }
+
     .perpetuals-table-normal {
         color: $gray-info-text-color;
         font-size: $T2;
@@ -103,9 +104,10 @@ table {
         .tokenPair {
             svg {
                 z-index: 1;
-                
+
             }
-            svg + svg {
+
+            svg+svg {
                 margin-left: -8px;
                 z-index: 0;
             }
@@ -125,6 +127,7 @@ table {
             line-height: 44px;
             color: $up-color;
         }
+
         p.green {
             margin-left: 5px;
             line-height: 44px;
@@ -137,7 +140,7 @@ table {
             font-size: 16px;
         }
 
-        p + p {
+        p+p {
             font-size: 12px;
         }
     }
@@ -156,5 +159,21 @@ table {
     .perpetuals-card {
         margin: 0 10px;
         padding: 20px 20px;
+    }
+
+    .leverChoose {
+        margin-left: 0px;
+        margin-right: 0px;
+
+        &-title {
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+        &-choose li {
+            width: 52px;
+            height: 32px;
+            line-height: 32px;
+        }
     }
 }

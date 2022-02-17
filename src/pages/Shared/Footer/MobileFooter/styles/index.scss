@@ -1,6 +1,10 @@
 @use "sass:math";
 @import 'src/styles/shared.scss';
 
+footer {
+    margin-top: 20px;
+}
+
 .footer-mobile {
     display: flex;
     justify-content: space-between;
