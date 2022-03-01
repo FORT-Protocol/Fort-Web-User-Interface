@@ -11,7 +11,11 @@ import MainCard from "../../components/MainCard";
 import PerpetualsList from "../../components/PerpetualsList";
 import { DoubleTokenShow, SingleTokenShow } from "../../components/TokenShow";
 import { useFortLeverBuy } from "../../contracts/hooks/useFortLeverTransation";
-import { FortLeverContract, tokenList, TokenType } from "../../libs/constants/addresses";
+import {
+  FortLeverContract,
+  tokenList,
+  TokenType,
+} from "../../libs/constants/addresses";
 import {
   ERC20Contract,
   FortLever,
@@ -52,9 +56,9 @@ const Perpetuals: FC = () => {
   const modal = useRef<any>();
   const [isLong, setIsLong] = useState(true);
   const [dcuBalance, setDcuBalance] = useState<BigNumber>();
-  const [kValue, setKValue] = useState<{[key: string]: TokenType;}>();
+  const [kValue, setKValue] = useState<{ [key: string]: TokenType }>();
   const [leverNum, setLeverNum] = useState<number>(1);
-  const [tokenPair, setTokenPair] = useState<TokenType>(tokenList['ETH']);
+  const [tokenPair, setTokenPair] = useState<TokenType>(tokenList["ETH"]);
   const [dcuInput, setDcuInput] = useState<string>("");
   const [isRefresh, setIsRefresh] = useState<boolean>(false);
   const [leverListState, setLeverListState] = useState<Array<LeverListType>>(
@@ -97,7 +101,12 @@ const Perpetuals: FC = () => {
       />
     );
   });
-  const getPriceAndK = async (contract: Contract,leverContract: Contract, token: TokenType, chainId: number) => {
+  const getPriceAndK = async (
+    contract: Contract,
+    leverContract: Contract,
+    token: TokenType,
+    chainId: number
+  ) => {
     const priceList = await contract.lastPriceList(
       0,
       token.pairIndex[chainId],
@@ -110,24 +119,33 @@ const Perpetuals: FC = () => {
       priceValue,
       priceList[0]
     );
-    const tokenNew = token
-    tokenNew.nowPrice = priceValue
-    tokenNew.k = k
-    return tokenNew
-  }
-
-  const getPrice = async (
-    contract: Contract,
-    leverContract: Contract,
-    chainId: number
-  ) => {
-    const ETH = await getPriceAndK(contract, leverContract, tokenList['ETH'], chainId)
-    const BTC = await getPriceAndK(contract, leverContract, tokenList['BTC'], chainId)
-    const tokenListNew = tokenList
-    tokenListNew['ETH'] = ETH
-    tokenListNew['BTC'] = BTC
-    setKValue(tokenListNew);
+    const tokenNew = token;
+    tokenNew.nowPrice = priceValue;
+    tokenNew.k = k;
+    return tokenNew;
   };
+
+  const getPrice = useCallback(
+    async (contract: Contract, leverContract: Contract, chainId: number) => {
+      const ETH = await getPriceAndK(
+        contract,
+        leverContract,
+        tokenList["ETH"],
+        chainId
+      );
+      const BTC = await getPriceAndK(
+        contract,
+        leverContract,
+        tokenList["BTC"],
+        chainId
+      );
+      const tokenListNew = tokenList;
+      tokenListNew["ETH"] = ETH;
+      tokenListNew["BTC"] = BTC;
+      setKValue(tokenListNew);
+    },
+    []
+  );
   // price
   useEffect(() => {
     if (!priceContract || !chainId || !leverContract) {
@@ -143,7 +161,7 @@ const Perpetuals: FC = () => {
         clearInterval(intervalRef.current);
       }
     };
-  }, [chainId, priceContract, leverContract]);
+  }, [chainId, priceContract, leverContract, getPrice]);
   // balance
   useEffect(() => {
     if (!dcuToken) {
@@ -220,7 +238,7 @@ const Perpetuals: FC = () => {
     }
     var price: BigNumber;
     const inputNum = normalToBigNumber(dcuInput);
-    const tokenKValue = kValue[tokenPair.symbol]
+    const tokenKValue = kValue[tokenPair.symbol];
     if (!tokenKValue || !tokenKValue.nowPrice || !tokenKValue.k) {
       return "---";
     }
@@ -310,11 +328,18 @@ const Perpetuals: FC = () => {
           getSelectedToken={setTokenPair}
         >
           <div className={`${classPrefix}-card-tokenPair`}>
-            <DoubleTokenShow tokenNameOne={tokenPair.symbol} tokenNameTwo={"USDT"} />
+            <DoubleTokenShow
+              tokenNameOne={tokenPair.symbol}
+              tokenNameTwo={"USDT"}
+            />
           </div>
           <p>
-            {`${checkWidth() ? "1 " + tokenPair.symbol + " = " : ""}${bigNumberToNormal(
-              kValue ? (kValue[tokenPair.symbol].nowPrice || BigNumber.from("0")) : BigNumber.from("0"),
+            {`${
+              checkWidth() ? "1 " + tokenPair.symbol + " = " : ""
+            }${bigNumberToNormal(
+              kValue
+                ? kValue[tokenPair.symbol].nowPrice || BigNumber.from("0")
+                : BigNumber.from("0"),
               tokenList["USDT"].decimals,
               2
             )} USDT`}
