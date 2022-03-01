@@ -15,6 +15,7 @@ import {
   CofixSwapAddress,
   SwapAddress,
   tokenList,
+  TokenType,
 } from "../../libs/constants/addresses";
 import {
   CofixSwapContract,
@@ -142,9 +143,8 @@ const Swap: FC = () => {
       destName: string,
       amountIn: BigNumber
     ) => {
-      const k = BigNumber.from("800000")
-        .mul(BASE_AMOUNT)
-        .mul(BigNumber.from("2600000").mul(BASE_AMOUNT));
+      const k = BigNumber.from("775269925761307568974296")
+        .mul(BigNumber.from("2357000923200406848351572"));
       const srcTokenBalance: BigNumber = await getERC20Contract(
         tokenList[srcName].addresses[chainId],
         library,
@@ -190,11 +190,11 @@ const Swap: FC = () => {
   ]);
 
   
-  const getSelectedToken = (tokenName: string) => {
+  const getSelectedToken = (token: TokenType) => {
     if (swapToken.src === "DCU") {
-      setSwapToken({ src: swapToken.src, dest: tokenName });
+      setSwapToken({ src: swapToken.src, dest: token.symbol });
     } else {
-      setSwapToken({ src: tokenName, dest: swapToken.dest });
+      setSwapToken({ src: token.symbol, dest: swapToken.dest });
     }
   };
   const checkBalance = () => {

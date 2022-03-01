@@ -471,6 +471,11 @@
 			},
 			{
 				"internalType": "uint256",
+				"name": "pairIndex",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
 				"name": "count",
 				"type": "uint256"
 			}

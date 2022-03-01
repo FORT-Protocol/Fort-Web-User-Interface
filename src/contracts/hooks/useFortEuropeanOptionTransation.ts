@@ -1,4 +1,4 @@
-import { tokenList } from './../../libs/constants/addresses';
+import { TokenType } from './../../libs/constants/addresses';
 import { BigNumber } from "ethers";
 import { FortEuropeanOptionContract } from "../../libs/constants/addresses";
 import { FortEuropeanOption } from "../../libs/hooks/useContract";
@@ -8,7 +8,7 @@ import { PRICE_FEE } from "../../libs/utils";
 import { TransactionType } from '../../libs/hooks/useTransactionInfo';
 
 export function useFortEuropeanOptionOpen(
-    tokenName: string,  
+    token: TokenType,  
     orientation: boolean, 
     endblock: BigNumber, 
     fortAmount: BigNumber,
@@ -21,7 +21,7 @@ export function useFortEuropeanOptionOpen(
         contract = null
     } else {
         callData = contract?.interface.encodeFunctionData('open', [
-            tokenList[tokenName].addresses[chainId], 
+            token.addresses[chainId], 
             price, 
             orientation, 
             endblock, 

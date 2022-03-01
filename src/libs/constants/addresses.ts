@@ -1,4 +1,6 @@
+import { BigNumber } from "ethers";
 import {
+  TokenBTC,
   TokenETH,
   TokenFORT,
   TokenUSDT,
@@ -9,11 +11,18 @@ export type AddressesType = {
   [key: number]: string;
 };
 
+export type PairIndexType = {
+  [key: number]: string;
+}
+
 export type TokenType = {
   symbol: string;
   Icon: typeof TokenETH;
   decimals: number;
   addresses: AddressesType;
+  pairIndex: PairIndexType;
+  nowPrice?: BigNumber;
+  k?: BigNumber;
 };
 
 export const tokenList: { [key: string]: TokenType } = {
@@ -25,6 +34,10 @@ export const tokenList: { [key: string]: TokenType } = {
       56: ZERO_ADDRESS,
       97: ZERO_ADDRESS
     },
+    pairIndex: {
+      56: '0',
+      97: '0'
+    }
   },
   USDT: {
     symbol: "USDT",
@@ -34,6 +47,10 @@ export const tokenList: { [key: string]: TokenType } = {
       56: "0x55d398326f99059ff775485246999027b3197955",
       97: "0xDd4A68D8236247BDC159F7C5fF92717AA634cBCc"
     },
+    pairIndex: {
+      56: '',
+      97: ''
+    }
   },
   DCU: {
     symbol: "DCU",
@@ -43,12 +60,29 @@ export const tokenList: { [key: string]: TokenType } = {
       56: "0xf56c6eCE0C0d6Fbb9A53282C0DF71dBFaFA933eF",
       97: "0x5Df87aE415206707fd52aDa20a5Eac2Ec70e8dbb"
     },
+    pairIndex: {
+      56: '',
+      97: ''
+    }
+  },
+  BTC: {
+    symbol: "BTC",
+    Icon: TokenBTC,
+    decimals: 18,
+    addresses: {
+      56: "0xf56c6eCE0C0d6Fbb9A53282C0DF71dBFaFA933eF",
+      97: "0xaE73d363Cb4aC97734E07e48B01D0a1FF5D1190B"
+    },
+    pairIndex: {
+      56: '2',
+      97: '2'
+    }
   },
 };
 
 export const FortEuropeanOptionContract: AddressesType = {
   56: "0x284935F8C571d054Df98eDA8503ea13cde5fd8Cc",
-  97: "0x19465d54ba7c492174127244cc26dE49F0cC1F1f"
+  97: "0x741AD178C22b901dFEDAB44491534BD2C90Dc7Ed"
 };
 
 export const FortLeverContract: AddressesType = {
@@ -62,7 +96,7 @@ export const NestPrice: AddressesType = {
 };
 
 export const SwapAddress: AddressesType = {
-  56: '0x2Cd1Bf9345E969b5DFc6D88000475aD6d487363A',
+  56: '0x9484f12044b9d5707AfeaC5BD02b5E0214381801',
   97: '0xc61409835E6A23e31f2fb06F76ae13A1b4c5fD26'
 };
 
@@ -70,13 +104,3 @@ export const CofixSwapAddress: AddressesType = {
   56: '0xb29A8d980E1408E487B9968f5E4f7fD7a9B0CaC5',
   97: '0x4A448cBb12e449D7031f36C8122eCE6dDdf9cc84'
 };
-
-export const ETHUSDTPriceChannelId: {[key: number] : string} = {
-  56: '0',
-  97: '0',
-}
-
-export const NESTUSDTPriceChannelId: {[key: number] : string} = {
-  56: '1',
-  97: '1',
-}

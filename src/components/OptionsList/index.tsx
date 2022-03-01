@@ -1,15 +1,15 @@
 import { BigNumber } from "@ethersproject/bignumber";
 import { t, Trans } from "@lingui/macro";
 import moment from "moment";
-import { FC, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import {
   useFortEuropeanOptionExercise,
   useFortEuropeanOptionSell,
 } from "../../contracts/hooks/useFortEuropeanOptionTransation";
 import {
-  ETHUSDTPriceChannelId,
   FortEuropeanOptionContract,
   tokenList,
+  TokenType,
 } from "../../libs/constants/addresses";
 import {
   FortEuropeanOption,
@@ -38,7 +38,7 @@ type Props = {
   key: string;
   className: string;
   blockNum: string;
-  nowPrice?: BigNumber;
+  nowPrice?: {[key: string]: TokenType};
 };
 
 const OptionsList: FC<Props> = ({ ...props }) => {
@@ -66,12 +66,12 @@ const OptionsList: FC<Props> = ({ ...props }) => {
     return closeTx.length > 0 ? true : false;
   };
 
-  const tokenName = () => {
+  const tokenName = useCallback(() => {
     if (props.item.tokenAddress === ZERO_ADDRESS) {
       return "ETH";
     }
-    return "ETH";
-  };
+    return "BTC";
+  }, [props.item.tokenAddress]);
   const TokenOneSvg = tokenList[tokenName()].Icon;
   const TokenTwoSvg = tokenList["USDT"].Icon;
   const active = useFortEuropeanOptionExercise(
@@ -112,7 +112,7 @@ const OptionsList: FC<Props> = ({ ...props }) => {
       })();
       (async () => {
         const blockPrice: Array<BigNumber> = await priceContract.findPrice(
-          ETHUSDTPriceChannelId[chainId],
+          tokenList[tokenName()].pairIndex[chainId],
           props.item.exerciseBlock
         );
         const blockPrice_toUSDT = BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(blockPrice[1])
@@ -135,28 +135,18 @@ const OptionsList: FC<Props> = ({ ...props }) => {
         }
       })();
     }
-  }, [
-    chainId,
-    library,
-    optionsContract,
-    priceContract,
-    props.blockNum,
-    props.item.balance,
-    props.item.exerciseBlock,
-    props.item.index,
-    props.item.orientation,
-    props.item.strikePrice,
-  ]);
+  }, [chainId, library, optionsContract, priceContract, props.blockNum, props.item.balance, props.item.exerciseBlock, props.item.index, props.item.orientation, props.item.strikePrice, tokenName]);
 
   useEffect(() => {
-    if (!optionsContract || !chainId || !props.nowPrice) {
+    if (!optionsContract || !chainId || !props.nowPrice || !props.nowPrice[tokenName()].nowPrice) {
       return;
     }
+    const nowPrice = props.nowPrice[tokenName()].nowPrice
     if (props.item.exerciseBlock.toNumber() >= Number(props.blockNum)) {
       (async () => {
         const calcV: BigNumber = await optionsContract.calcV(
-          tokenList["ETH"].addresses[chainId],
-          props.nowPrice,
+          tokenList[tokenName()].addresses[chainId],
+          nowPrice,
           props.item.strikePrice,
           props.item.orientation,
           props.item.exerciseBlock
@@ -166,20 +156,10 @@ const OptionsList: FC<Props> = ({ ...props }) => {
           .mul(props.item.balance)
           .mul(BigNumber.from("950"))
           .div(BigNumber.from("1000").mul(letNum));
-          console.log(props.item.strikePrice.toString())
         setSaleAmount(sellNUm);
       })();
     }
-  }, [
-    chainId,
-    optionsContract,
-    props.blockNum,
-    props.item.balance,
-    props.item.exerciseBlock,
-    props.item.orientation,
-    props.item.strikePrice,
-    props.nowPrice,
-  ]);
+  }, [chainId, optionsContract, props.blockNum, props.item.balance, props.item.exerciseBlock, props.item.orientation, props.item.strikePrice, props.nowPrice, tokenName]);
 
   const checkButton = () => {
     if (
