@@ -23,6 +23,7 @@ export type TokenType = {
   pairIndex: PairIndexType;
   nowPrice?: BigNumber;
   k?: BigNumber;
+  sigmaSQ?: BigNumber;
 };
 
 export const tokenList: { [key: string]: TokenType } = {
@@ -37,7 +38,8 @@ export const tokenList: { [key: string]: TokenType } = {
     pairIndex: {
       56: '0',
       97: '0'
-    }
+    },
+    sigmaSQ: BigNumber.from('45659142400')
   },
   USDT: {
     symbol: "USDT",
@@ -76,13 +78,14 @@ export const tokenList: { [key: string]: TokenType } = {
     pairIndex: {
       56: '2',
       97: '2'
-    }
+    },
+    sigmaSQ: BigNumber.from('31708924900')
   },
 };
 
 export const FortEuropeanOptionContract: AddressesType = {
   56: "0x284935F8C571d054Df98eDA8503ea13cde5fd8Cc",
-  97: "0x741AD178C22b901dFEDAB44491534BD2C90Dc7Ed"
+  97: "0x19465d54ba7c492174127244cc26dE49F0cC1F1f"
 };
 
 export const FortLeverContract: AddressesType = {

@@ -114,6 +114,7 @@ const Perpetuals: FC = () => {
     );
     const priceValue = BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(priceList[1]);
     const k = await leverContract.calcRevisedK(
+      token.sigmaSQ,
       BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(priceList[3]),
       priceList[2],
       priceValue,
