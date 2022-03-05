@@ -57,10 +57,7 @@ const PerpetualsListMobile: FC<Props> = ({ ...props }) => {
   useEffect(() => {
     if (
       !leverContract ||
-      !account ||
-      !props.kValue ||
-      !props.kValue.nowPrice ||
-      !props.kValue.k
+      !account
     ) {
       return;
     }
@@ -72,6 +69,7 @@ const PerpetualsListMobile: FC<Props> = ({ ...props }) => {
       if (!tokenKValue.nowPrice || !tokenKValue.k) {
         return;
       }
+
       var price: BigNumber;
       if (!props.item.orientation) {
         price = tokenKValue.nowPrice
