@@ -17,6 +17,18 @@
         button {
             margin-left: 10px;
         }
+
+        div + svg {
+            margin: auto auto;
+            margin-left: 10px;
+            circle {
+                stroke: #BDD6FF;
+            }
+
+            path {
+                fill: #BDD6FF;
+            }
+        }
     }
 
     .kPrice {

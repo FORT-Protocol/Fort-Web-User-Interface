@@ -28,6 +28,23 @@
             margin-top: 20px;
         }
 
+        &-tokenPair {
+            display: flex;
+            justify-content: space-between;
+    
+            div + svg {
+                margin: auto auto;
+                margin-left: 10px;
+                circle {
+                    stroke: #BDD6FF;
+                }
+    
+                path {
+                    fill: #BDD6FF;
+                }
+            }
+        }
+
         &-tokenPair+p {
             line-height: 44px;
             font-size: $T2;

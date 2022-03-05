@@ -39,6 +39,7 @@ import { Contract } from "@ethersproject/contracts";
 import { Popup } from "reactjs-popup";
 import PerpetualsNoticeModal from "./PerpetualsNoticeModal";
 import PerpetualsListMobile from "../../components/PerpetualsList/PerpetualsListMobile";
+import { PutDownIcon } from "../../components/Icon";
 
 export type LeverListType = {
   index: BigNumber; //  编号
@@ -333,6 +334,7 @@ const Perpetuals: FC = () => {
               tokenNameOne={tokenPair.symbol}
               tokenNameTwo={"USDT"}
             />
+            <PutDownIcon />
           </div>
           <p>
             {`${
