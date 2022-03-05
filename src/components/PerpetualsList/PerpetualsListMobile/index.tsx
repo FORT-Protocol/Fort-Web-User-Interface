@@ -1,11 +1,11 @@
 import { t, Trans } from "@lingui/macro";
 import { BigNumber } from "ethers";
-import { FC, useEffect, useState } from "react";
-import { PerpetualsListKValue } from "..";
+import { FC, useCallback, useEffect, useState } from "react";
 import { useFortLeverSell } from "../../../contracts/hooks/useFortLeverTransation";
 import {
   FortLeverContract,
   tokenList,
+  TokenType,
 } from "../../../libs/constants/addresses";
 import { FortLever } from "../../../libs/hooks/useContract";
 import useTransactionListCon, {
@@ -28,7 +28,7 @@ type Props = {
   item: LeverListType;
   key: string;
   className: string;
-  kValue?: PerpetualsListKValue;
+  kValue?: { [key: string]: TokenType };
 };
 
 const PerpetualsListMobile: FC<Props> = ({ ...props }) => {
@@ -45,12 +45,12 @@ const PerpetualsListMobile: FC<Props> = ({ ...props }) => {
     );
     return closeTx.length > 0 ? true : false;
   };
-  const tokenName = () => {
+  const tokenName = useCallback(() => {
     if (props.item.tokenAddress === ZERO_ADDRESS) {
       return "ETH";
     }
-    return "ETH";
-  };
+    return "BTC";
+  }, [props.item.tokenAddress]);
   const TokenOneSvg = tokenList[tokenName()].Icon;
   const TokenTwoSvg = tokenList["USDT"].Icon;
   const active = useFortLeverSell(props.item.index, props.item.balance);
@@ -65,18 +65,22 @@ const PerpetualsListMobile: FC<Props> = ({ ...props }) => {
       return;
     }
     (async () => {
-      if (!props.kValue || !props.kValue.nowPrice || !props.kValue.k) {
+      if (!props.kValue) {
+        return;
+      }
+      const tokenKValue = props.kValue[tokenName()];
+      if (!tokenKValue.nowPrice || !tokenKValue.k) {
         return;
       }
       var price: BigNumber;
       if (!props.item.orientation) {
-        price = props.kValue.nowPrice
-          .mul(BASE_AMOUNT.add(props.kValue.k))
+        price = tokenKValue.nowPrice
+          .mul(BASE_AMOUNT.add(tokenKValue.k))
           .div(BASE_AMOUNT);
       } else {
-        price = props.kValue.nowPrice
+        price = tokenKValue.nowPrice
           .mul(BASE_AMOUNT)
-          .div(BASE_AMOUNT.add(props.kValue.k));
+          .div(BASE_AMOUNT.add(tokenKValue.k));
       }
       const num: BigNumber = await leverContract.balanceOf(
         props.item.index,
@@ -91,6 +95,7 @@ const PerpetualsListMobile: FC<Props> = ({ ...props }) => {
     props.item.index,
     props.item.orientation,
     props.kValue,
+    tokenName,
   ]);
   const marginAssetsStr = marginAssets
     ? bigNumberToNormal(marginAssets, 18, 2)

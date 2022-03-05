@@ -1,5 +1,6 @@
+import { TokenType } from './../../libs/constants/addresses';
 import { BigNumber } from "ethers";
-import { FortLeverContract, tokenList } from "../../libs/constants/addresses";
+import { FortLeverContract } from "../../libs/constants/addresses";
 import { FortLever } from "../../libs/hooks/useContract";
 import { useSendTransaction } from "../../libs/hooks/useSendTransaction";
 import useWeb3 from "../../libs/hooks/useWeb3";
@@ -7,7 +8,7 @@ import { PRICE_FEE } from "../../libs/utils";
 import { TransactionType } from '../../libs/hooks/useTransactionInfo';
 
 export function useFortLeverBuy(
-    tokenName: string,
+    token: TokenType,
     leverNum: number,
     isLong: boolean,
     fortAmount: BigNumber
@@ -19,7 +20,7 @@ export function useFortLeverBuy(
         contract = null
     } else {
         callData = contract?.interface.encodeFunctionData('buy', [
-            tokenList[tokenName].addresses[chainId],
+            token.addresses[chainId],
             leverNum,
             isLong,
             fortAmount]

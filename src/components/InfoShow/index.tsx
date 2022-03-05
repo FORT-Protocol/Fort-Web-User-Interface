@@ -11,7 +11,8 @@ type Props = {
     tokenList?: Array<TokenType>,
     dataSelect?: boolean,
     dataList?: Array<DataType>,
-    getSelectedToken?: (token: string) => void
+    getSelectedData?: (token: string) => void
+    getSelectedToken?: (token: TokenType) => void
 }
 
 export type DataType = {
@@ -30,17 +31,17 @@ const InfoShow: FC<Props> = ({children, ...props}) => {
             return (
                 <li key={item.symbol} onClick={() => {
                     if (props.getSelectedToken) {
-                        props.getSelectedToken(item.symbol)
+                        props.getSelectedToken(item)
                     }
-                }}><TokenIcon/><p>{item.symbol}</p></li>
+                }}><TokenIcon/><p>{item.symbol}/USDT</p></li>
             )
         })
     } else if (props.dataSelect) {
         dataLi = props.dataList?.map((item: DataType, index) => {
             return (
                 <li key={item.title + index.toString()} onClick={() => {
-                    if (props.getSelectedToken) {
-                        props.getSelectedToken(item.title)
+                    if (props.getSelectedData) {
+                        props.getSelectedData(item.title)
                     }
                 }}><p className={'dataSelect'}>{item.title}</p></li>
             )

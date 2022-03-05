@@ -328,6 +328,11 @@
 						"internalType": "uint256",
 						"name": "balance",
 						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
 					}
 				],
 				"internalType": "struct IHedgeOptions.OptionView[]",

@@ -45,6 +45,8 @@ export { ReactComponent as PolygonIcon } from './svg/polygonIcon.svg'
 export { ReactComponent as DarkIcon } from './svg/darkIcon.svg'
 export { ReactComponent as WhiteIcon } from './svg/whiteIcon.svg'
 export { ReactComponent as SafeIcon } from './svg/safeIcon.svg'
+export { ReactComponent as TokenBTC } from './svg/TokenBTC.svg'
+
 
 
 

@@ -15,6 +15,7 @@ import {
   CofixSwapAddress,
   SwapAddress,
   tokenList,
+  TokenType,
 } from "../../libs/constants/addresses";
 import {
   CofixSwapContract,
@@ -189,11 +190,11 @@ const Swap: FC = () => {
   ]);
 
   
-  const getSelectedToken = (tokenName: string) => {
+  const getSelectedToken = (token: TokenType) => {
     if (swapToken.src === "DCU") {
-      setSwapToken({ src: swapToken.src, dest: tokenName });
+      setSwapToken({ src: swapToken.src, dest: token.symbol });
     } else {
-      setSwapToken({ src: tokenName, dest: swapToken.dest });
+      setSwapToken({ src: token.symbol, dest: swapToken.dest });
     }
   };
   const checkBalance = () => {

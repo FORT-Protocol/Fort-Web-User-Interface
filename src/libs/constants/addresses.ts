@@ -1,4 +1,6 @@
+import { BigNumber } from "ethers";
 import {
+  TokenBTC,
   TokenETH,
   TokenFORT,
   TokenUSDT,
@@ -9,11 +11,19 @@ export type AddressesType = {
   [key: number]: string;
 };
 
+export type PairIndexType = {
+  [key: number]: string;
+}
+
 export type TokenType = {
   symbol: string;
   Icon: typeof TokenETH;
   decimals: number;
   addresses: AddressesType;
+  pairIndex: PairIndexType;
+  nowPrice?: BigNumber;
+  k?: BigNumber;
+  sigmaSQ?: BigNumber;
 };
 
 export const tokenList: { [key: string]: TokenType } = {
@@ -25,6 +35,11 @@ export const tokenList: { [key: string]: TokenType } = {
       56: ZERO_ADDRESS,
       97: ZERO_ADDRESS
     },
+    pairIndex: {
+      56: '0',
+      97: '0'
+    },
+    sigmaSQ: BigNumber.from('45659142400')
   },
   USDT: {
     symbol: "USDT",
@@ -34,6 +49,10 @@ export const tokenList: { [key: string]: TokenType } = {
       56: "0x55d398326f99059ff775485246999027b3197955",
       97: "0xDd4A68D8236247BDC159F7C5fF92717AA634cBCc"
     },
+    pairIndex: {
+      56: '',
+      97: ''
+    }
   },
   DCU: {
     symbol: "DCU",
@@ -43,6 +62,24 @@ export const tokenList: { [key: string]: TokenType } = {
       56: "0xf56c6eCE0C0d6Fbb9A53282C0DF71dBFaFA933eF",
       97: "0x5Df87aE415206707fd52aDa20a5Eac2Ec70e8dbb"
     },
+    pairIndex: {
+      56: '',
+      97: ''
+    }
+  },
+  BTC: {
+    symbol: "BTC",
+    Icon: TokenBTC,
+    decimals: 18,
+    addresses: {
+      56: "0x46893c30fBDF3A5818507309c0BDca62eB3e1E6b",
+      97: "0xaE73d363Cb4aC97734E07e48B01D0a1FF5D1190B"
+    },
+    pairIndex: {
+      56: '2',
+      97: '2'
+    },
+    sigmaSQ: BigNumber.from('31708924900')
   },
 };
 
@@ -70,13 +107,3 @@ export const CofixSwapAddress: AddressesType = {
   56: '0xb29A8d980E1408E487B9968f5E4f7fD7a9B0CaC5',
   97: '0x4A448cBb12e449D7031f36C8122eCE6dDdf9cc84'
 };
-
-export const ETHUSDTPriceChannelId: {[key: number] : string} = {
-  56: '0',
-  97: '0',
-}
-
-export const NESTUSDTPriceChannelId: {[key: number] : string} = {
-  56: '1',
-  97: '1',
-}
