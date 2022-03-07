@@ -107,7 +107,6 @@ const MintOptions: FC = () => {
     const resultList = optionsList.filter((item: OptionsListType) =>
       item.balance.gt(BigNumber.from("0"))
     );
-    console.log(optionsList);
     setOptionsListState(resultList);
     setIsRefresh(true);
   }, [account, fortEuropeanOption]);

@@ -112,6 +112,7 @@ const OptionsList: FC<Props> = ({ ...props }) => {
       })();
       (async () => {
         const blockPrice: Array<BigNumber> = await priceContract.findPrice(
+          0,
           tokenList[tokenName()].pairIndex[chainId],
           props.item.exerciseBlock
         );
