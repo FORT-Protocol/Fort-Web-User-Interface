@@ -28,7 +28,7 @@ const WalletModal: FC<Props> = ({ ...props }) => {
   const [transactionList, setTransactionList] = useState<Array<any>>();
   const classPrefix = "modal-wallet";
   const etherscanBase = useEtherscanBaseUrl();
-  const {theme} = useThemes();
+  const { theme } = useThemes();
 
   useEffect(() => {
     if (chainId) {
@@ -88,7 +88,7 @@ const WalletModal: FC<Props> = ({ ...props }) => {
       onClose={props.onClose}
       classNames={classNames({
         [`${classPrefix}`]: true,
-        [`${classPrefix}-dark`]: theme === ThemeType.dark
+        [`${classPrefix}-dark`]: theme === ThemeType.dark,
       })}
       titleName={t`Wallet`}
     >

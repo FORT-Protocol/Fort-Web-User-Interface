@@ -7,7 +7,7 @@ import {
   DarkIcon,
   FortLogo,
   HeaderListMobile,
-  LittleETH,
+  LittleKCC,
   WhiteIcon,
   WhiteLoading,
   XIcon,
@@ -37,7 +37,7 @@ const MobileHeader: FC = () => {
   const routes = [
     { path: "/futures", content: t`Futures` },
     { path: "/options", content: t`Options` },
-    // { path: "/swap", content: t`Swap` },
+    { path: "/swap", content: t`Swap` },
   ].map((item) => (
     <li
       key={item.path}
@@ -73,8 +73,8 @@ const MobileHeader: FC = () => {
           ref={modal}
           trigger={
             <div className={`${classPrefix}-headerList-top-mid`}>
-              <LittleETH />
-              <p>Ethereum</p>
+              <LittleKCC />
+              <p>KCC</p>
             </div>
           }
         >

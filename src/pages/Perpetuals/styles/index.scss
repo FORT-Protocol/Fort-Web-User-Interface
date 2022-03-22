@@ -17,6 +17,18 @@
         button {
             margin-left: 10px;
         }
+
+        div + svg {
+            margin: auto auto;
+            margin-left: 10px;
+            circle {
+                stroke: #BDD6FF;
+            }
+
+            path {
+                fill: #BDD6FF;
+            }
+        }
     }
 
     .kPrice {
@@ -157,7 +169,6 @@ table {
         margin: 0 10px;
         padding: 20px 20px;
     }
-
     .leverChoose {
         margin-left: 0px;
         margin-right: 0px;
@@ -173,4 +184,5 @@ table {
             line-height: 32px;
         }
     }
+    
 }

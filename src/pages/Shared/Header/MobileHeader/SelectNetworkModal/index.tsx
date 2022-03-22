@@ -3,6 +3,7 @@ import BaseModal from "../../../../../components/BaseModal";
 import {
   LittleBSC,
   LittleETH,
+  LittleKCC,
   NetworkNow,
   PolygonIcon,
 } from "../../../../../components/Icon";
@@ -25,7 +26,6 @@ const SelectNetworkModal: FC<Props> = ({ ...props }) => {
           <a href={"https://app.fortprotocol.com"}>
             <LittleETH />
             <p>Ethereum</p>
-            <NetworkNow />
           </a>
         </li>
         <li>
@@ -44,6 +44,13 @@ const SelectNetworkModal: FC<Props> = ({ ...props }) => {
           <a href={"https://polygon.fortprotocol.com"}>
             <PolygonIcon />
             <p>Polygon</p>
+          </a>
+        </li>
+        <li>
+          <a href={"https://kcc.fortprotocol.com"}>
+            <LittleKCC />
+            <p>KCC</p>
+            <NetworkNow />
           </a>
         </li>
       </ul>

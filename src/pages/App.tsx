@@ -15,7 +15,7 @@ import "../themes/styles";
 const Perpetuals = loadable(() => import("./Perpetuals"));
 const Option = loadable(() => import("./Options"));
 // const Mining = loadable(() => import("./Farm"));
-// const Swap = loadable(() => import("./Swap"));
+const Swap = loadable(() => import("./Swap"));
 
 const App: FC = () => {
   const { theme } = useThemes();
@@ -37,9 +37,9 @@ const App: FC = () => {
             {/* <Route path="/farm">
               <Mining />
             </Route> */}
-            {/* <Route path="/swap">
+            <Route path="/swap">
               <Swap />
-            </Route> */}
+            </Route>
             <Redirect to="/futures" />
           </Switch>
         </HashRouter>

@@ -8,12 +8,14 @@ import InfoShow from "../../components/InfoShow";
 import { LeverChoose } from "../../components/LeverChoose";
 import MainButton from "../../components/MainButton";
 import MainCard from "../../components/MainCard";
-import PerpetualsList, {
-  PerpetualsListKValue,
-} from "../../components/PerpetualsList";
+import PerpetualsList from "../../components/PerpetualsList";
 import { DoubleTokenShow, SingleTokenShow } from "../../components/TokenShow";
 import { useFortLeverBuy } from "../../contracts/hooks/useFortLeverTransation";
-import { FortLeverContract, tokenList } from "../../libs/constants/addresses";
+import {
+  FortLeverContract,
+  tokenList,
+  TokenType,
+} from "../../libs/constants/addresses";
 import {
   ERC20Contract,
   FortLever,
@@ -24,6 +26,7 @@ import useTransactionListCon, {
 } from "../../libs/hooks/useTransactionInfo";
 import useWeb3 from "../../libs/hooks/useWeb3";
 import {
+  BASE_2000ETH_AMOUNT,
   BASE_AMOUNT,
   bigNumberToNormal,
   checkWidth,
@@ -36,6 +39,7 @@ import { Contract } from "@ethersproject/contracts";
 import { Popup } from "reactjs-popup";
 import PerpetualsNoticeModal from "./PerpetualsNoticeModal";
 import PerpetualsListMobile from "../../components/PerpetualsList/PerpetualsListMobile";
+import { PutDownIcon } from "../../components/Icon";
 
 export type LeverListType = {
   index: BigNumber; //  编号
@@ -53,8 +57,9 @@ const Perpetuals: FC = () => {
   const modal = useRef<any>();
   const [isLong, setIsLong] = useState(true);
   const [dcuBalance, setDcuBalance] = useState<BigNumber>();
-  const [kValue, setKValue] = useState<PerpetualsListKValue>();
+  const [kValue, setKValue] = useState<{ [key: string]: TokenType }>();
   const [leverNum, setLeverNum] = useState<number>(1);
+  const [tokenPair, setTokenPair] = useState<TokenType>(tokenList["ETH"]);
   const [dcuInput, setDcuInput] = useState<string>("");
   const [isRefresh, setIsRefresh] = useState<boolean>(false);
   const [leverListState, setLeverListState] = useState<Array<LeverListType>>(
@@ -86,7 +91,6 @@ const Perpetuals: FC = () => {
         className={classPrefix}
         item={item}
         key={item.index.toString() + account}
-        showNotice={showNoticeModal}
         kValue={kValue}
       />
     ) : (
@@ -94,47 +98,64 @@ const Perpetuals: FC = () => {
         className={classPrefix}
         item={item}
         key={item.index.toString() + account}
-        showNotice={showNoticeModal}
         kValue={kValue}
       />
     );
   });
-  const getPrice = async (
+  const getPriceAndK = async (
     contract: Contract,
     leverContract: Contract,
-    tokenAddress: string,
+    token: TokenType,
     chainId: number
   ) => {
-    const priceList = await contract.lastPriceListAndTriggeredPriceInfo(
-      tokenAddress,
+    const priceList = await contract.lastPriceList(
+      0,
+      token.pairIndex[chainId],
       2
     );
+    const priceValue = BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(priceList[1]);
     const k = await leverContract.calcRevisedK(
-      priceList[0][3],
-      priceList[0][2],
-      priceList[0][1],
-      priceList[0][0]
+      token.sigmaSQ,
+      BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(priceList[3]),
+      priceList[2],
+      priceValue,
+      priceList[0]
     );
-    setKValue({ nowPrice: priceList[0][1], k: k });
+    const tokenNew = token;
+    tokenNew.nowPrice = priceValue;
+    tokenNew.k = k;
+    return tokenNew;
   };
+
+  const getPrice = useCallback(
+    async (contract: Contract, leverContract: Contract, chainId: number) => {
+      const ETH = await getPriceAndK(
+        contract,
+        leverContract,
+        tokenList["ETH"],
+        chainId
+      );
+      const BTC = await getPriceAndK(
+        contract,
+        leverContract,
+        tokenList["BTC"],
+        chainId
+      );
+      const tokenListNew = tokenList;
+      tokenListNew["ETH"] = ETH;
+      tokenListNew["BTC"] = BTC;
+      setKValue(tokenListNew);
+    },
+    []
+  );
   // price
   useEffect(() => {
     if (!priceContract || !chainId || !leverContract) {
       return;
     }
-    getPrice(
-      priceContract,
-      leverContract,
-      tokenList["USDT"].addresses[chainId],
-      chainId
-    );
+    getPrice(priceContract, leverContract, chainId);
     const id = setInterval(() => {
-      getPrice(
-        priceContract,
-        leverContract,
-        tokenList["USDT"].addresses[chainId],
-        chainId
-      );
+      getPrice(priceContract, leverContract, chainId);
     }, 60 * 1000);
     intervalRef.current = id;
     return () => {
@@ -142,7 +163,7 @@ const Perpetuals: FC = () => {
         clearInterval(intervalRef.current);
       }
     };
-  }, [chainId, priceContract, leverContract]);
+  }, [chainId, priceContract, leverContract, getPrice]);
   // balance
   useEffect(() => {
     if (!dcuToken) {
@@ -158,7 +179,7 @@ const Perpetuals: FC = () => {
     if (!leverContract || !account) {
       return;
     }
-    const leverList = await leverContract.find("0", "10", "10", account);
+    const leverList = await leverContract.find("0", "20", "20", account);
     const resultList = leverList.filter((item: LeverListType) =>
       item.balance.gt(BigNumber.from("0"))
     );
@@ -208,36 +229,40 @@ const Perpetuals: FC = () => {
     return true;
   };
   const active = useFortLeverBuy(
-    "ETH",
+    tokenPair,
     leverNum,
     isLong,
     normalToBigNumber(dcuInput)
   );
   const kPrice = useCallback(() => {
-    if (!kValue || !kValue.nowPrice || !kValue.k) {
+    if (!kValue) {
       return "---";
     }
     var price: BigNumber;
     const inputNum = normalToBigNumber(dcuInput);
+    const tokenKValue = kValue[tokenPair.symbol];
+    if (!tokenKValue || !tokenKValue.nowPrice || !tokenKValue.k) {
+      return "---";
+    }
     if (isLong) {
-      price = kValue.nowPrice
+      price = tokenKValue.nowPrice
         .mul(
-          BASE_AMOUNT.add(kValue.k).add(
+          BASE_AMOUNT.add(tokenKValue.k).add(
             inputNum.div(BigNumber.from("10000000"))
           )
         )
         .div(BASE_AMOUNT);
     } else {
-      price = kValue.nowPrice
+      price = tokenKValue.nowPrice
         .mul(BASE_AMOUNT)
         .div(
-          BASE_AMOUNT.add(kValue.k).add(
+          BASE_AMOUNT.add(tokenKValue.k).add(
             inputNum.div(BigNumber.from("10000000"))
           )
         );
     }
-    return bigNumberToNormal(price, 6, 2);
-  }, [dcuInput, isLong, kValue]);
+    return bigNumberToNormal(price, 18, 2);
+  }, [dcuInput, isLong, kValue, tokenPair.symbol]);
 
   const pcTable = (
     <table>
@@ -262,7 +287,9 @@ const Perpetuals: FC = () => {
             <Tooltip
               placement="top"
               color={"#ffffff"}
-              title={t`Dynamic changes in net assets, less than a certain amount of liquidation will be liquidated, the amount of liquidation is Max'{'margin*leverage*0.02, 10'}'`}
+              title={
+                "Dynamic changes in net assets, less than a certain amount of liquidation will be liquidated, the amount of liquidation is Max'{'margin*leverage*0.02, 10'}'"
+              }
             >
               <span>
                 <Trans>Margin assets</Trans>
@@ -290,17 +317,32 @@ const Perpetuals: FC = () => {
         >
           <PerpetualsNoticeModal
             onClose={() => modal.current.close()}
+            action={active}
           ></PerpetualsNoticeModal>
         </Popup>
       ) : null}
       <MainCard classNames={`${classPrefix}-card`}>
-        <InfoShow topLeftText={t`Token pair`} bottomRightText={""}>
+        <InfoShow
+          topLeftText={t`Token pair`}
+          bottomRightText={""}
+          tokenSelect={true}
+          tokenList={[tokenList["ETH"], tokenList["BTC"]]}
+          getSelectedToken={setTokenPair}
+        >
           <div className={`${classPrefix}-card-tokenPair`}>
-            <DoubleTokenShow tokenNameOne={"ETH"} tokenNameTwo={"USDT"} />
+            <DoubleTokenShow
+              tokenNameOne={tokenPair.symbol}
+              tokenNameTwo={"USDT"}
+            />
+            <PutDownIcon />
           </div>
           <p>
-            {`${checkWidth() ? "1 ETH = " : ""}${bigNumberToNormal(
-              kValue?.nowPrice || BigNumber.from("0"),
+            {`${
+              checkWidth() ? "1 " + tokenPair.symbol + " = " : ""
+            }${bigNumberToNormal(
+              kValue
+                ? kValue[tokenPair.symbol].nowPrice || BigNumber.from("0")
+                : BigNumber.from("0"),
               tokenList["USDT"].decimals,
               2
             )} USDT`}
@@ -354,8 +396,8 @@ const Perpetuals: FC = () => {
             if (!checkMainButton() || showNoticeModal()) {
               return;
             }
-            if (normalToBigNumber(dcuInput).lt(normalToBigNumber("100"))) {
-              message.error(t`Minimum input 100`);
+            if (normalToBigNumber(dcuInput).lt(normalToBigNumber("50"))) {
+              message.error(t`Minimum input 50`);
               return;
             }
             active();

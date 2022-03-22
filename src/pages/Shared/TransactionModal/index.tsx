@@ -43,7 +43,7 @@ const TransactionModal: FC = () => {
         <Trans>Transaction submitted</Trans>
       </p>
       <a href={`${etherscanBase}${showModal.hash}`} target="view_window">
-        <Trans>View on etherscan</Trans>
+        <Trans>View on scan.kcc.io</Trans>
       </a>
     </>
   );
