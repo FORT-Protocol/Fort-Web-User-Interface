@@ -33,6 +33,7 @@ import {
   normalToBigNumber,
 } from "../../libs/utils";
 import "./styles";
+import PriceChart from "./PriceChart";
 
 type SwapTokenType = {
   src: string;
@@ -367,6 +368,9 @@ const Swap: FC = () => {
         >
           {checkAllowance() ? <Trans>Swap</Trans> : <Trans>Approve</Trans>}
         </MainButton>
+      </MainCard>
+      <MainCard classNames={`${classPrefix}-card`}>
+        <PriceChart />
       </MainCard>
     </div>
   );
