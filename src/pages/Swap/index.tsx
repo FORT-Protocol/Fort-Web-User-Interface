@@ -371,7 +371,7 @@ const Swap: FC = () => {
       </MainCard>
       <MainCard classNames={`${classPrefix}-card`}>
         <div className={`${classPrefix}-card-title `}>
-          <text className={`infoView-topLeft`}>Trading Price of DCU</text>
+          <p className={`infoView-topLeft`}>Trading Price of DCU</p>
         </div>
         <PriceChart />
       </MainCard>
