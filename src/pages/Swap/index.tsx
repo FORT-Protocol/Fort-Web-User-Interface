@@ -370,6 +370,9 @@ const Swap: FC = () => {
         </MainButton>
       </MainCard>
       <MainCard classNames={`${classPrefix}-card`}>
+        <div className={`${classPrefix}-card-title `}>
+          <text className={`infoView-topLeft`}>Trading Price of DCU</text>
+        </div>
         <PriceChart />
       </MainCard>
     </div>

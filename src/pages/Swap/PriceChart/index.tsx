@@ -1,4 +1,4 @@
-import { Line } from '@ant-design/plots';
+import { Area } from '@ant-design/plots';
 import {useEffect, useState} from "react";
 import {useDate} from "../../../libs/hooks/useDate";
 
@@ -29,24 +29,56 @@ const PriceChart = () => {
 
   const config = {
     data,
-    color: '#0061FF',
     xField: 'time',
     yField: 'price',
+    color: '#0061FF',
+    line: {
+      size: 2,
+      color: '#0061FF',
+    },
     yAxis: {
-      title: {
-        text: 'Trading Price of DCU',
-      },
-      nice: true,
-      tickCount: 4,
-      min: 0.2
+      // label: null,
+      grid: null,
+      line: null,
+      tickCount: 3,
+      tickLine: null,
+      min: 0.22
     },
     xAxis: {
       nice: true,
       title: null,
-      tickCount: 4,
+      tickCount: 15,
+      line: null,
+      grid: null,
+      tickLine: null,
       label: {
-        formatter: (item: string) => item.slice(0, 10)
-      }
+        formatter: (item: string) => item.slice(8, 10)
+      },
+      annotations: [
+        {
+          type: 'text',
+          position: ['min', 'median'],
+          content: '中位数',
+          offsetY: -4,
+          style: {
+            textBaseline: 'bottom',
+          },
+        },
+        {
+          type: 'line',
+          start: ['min', 'median'],
+          end: ['max', 'median'],
+          style: {
+            stroke: 'red',
+            lineDash: [2, 2],
+          },
+        },
+      ],
+    },
+    areaStyle: () => {
+      return {
+        fill: 'l(270) 0:#8BB7FF 1:#0061FF',
+      };
     },
     meta: {
       price: {
@@ -56,8 +88,8 @@ const PriceChart = () => {
   };
 
   return (
-    <div style={{ height: '200px' }}>
-      <Line {...config} />
+    <div style={{ height: '160px' }}>
+      <Area {...config} />
     </div>
   )
 }
