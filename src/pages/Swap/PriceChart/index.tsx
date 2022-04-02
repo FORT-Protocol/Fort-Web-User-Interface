@@ -54,26 +54,6 @@ const PriceChart = () => {
       label: {
         formatter: (item: string) => item.slice(8, 10)
       },
-      annotations: [
-        {
-          type: 'text',
-          position: ['min', 'median'],
-          content: '中位数',
-          offsetY: -4,
-          style: {
-            textBaseline: 'bottom',
-          },
-        },
-        {
-          type: 'line',
-          start: ['min', 'median'],
-          end: ['max', 'median'],
-          style: {
-            stroke: 'red',
-            lineDash: [2, 2],
-          },
-        },
-      ],
     },
     areaStyle: () => {
       return {
@@ -82,7 +62,7 @@ const PriceChart = () => {
     },
     meta: {
       price: {
-        alias: "1 DCU"
+        alias: "DCU/USDT"
       }
     }
   };
