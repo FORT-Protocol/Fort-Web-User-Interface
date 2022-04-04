@@ -67,6 +67,11 @@ const PriceChart = () => {
         meta: {
             price: {
                 alias: "DCU/USDT"
+            },
+            time: {
+                formatter: (item: string)=>{
+                  return item.replace('T', ' ')
+                }
             }
         }
     };
