@@ -21,15 +21,15 @@ const PriceChart = () => {
             .catch((error) => {
                 console.log('fetch data failed', error);
             });
-    }, [])
+    }, [threeDayAgo, today])
     
     useEffect(() => {
       asyncFetch()
     }, [asyncFetch]);
     
     useEffect(()=>{
-      setInterval(asyncFetch, 60 * 1000)
-    }, [setInterval])
+      setInterval(asyncFetch, 6 * 1000)
+    }, [setInterval, asyncFetch])
     
     const config = {
         data,
