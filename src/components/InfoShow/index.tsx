@@ -13,6 +13,7 @@ type Props = {
     dataList?: Array<DataType>,
     getSelectedData?: (token: string) => void
     getSelectedToken?: (token: TokenType) => void
+    noBottom?: boolean
 }
 
 export type DataType = {
@@ -87,7 +88,9 @@ const InfoShow: FC<Props> = ({children, ...props}) => {
 
     return (
         <div className={classPrefix}>
-            <p className={`${classPrefix}-topLeft`}>{props.topLeftText}</p>
+            { props.topLeftText && (
+              <p className={`${classPrefix}-topLeft`}>{props.topLeftText}</p>
+            ) }
             <div className={classNames({
                 [`${classPrefix}-mainView`]: true,
                 [`noSelect`]: !props.tokenSelect && !props.dataSelect
@@ -95,10 +98,13 @@ const InfoShow: FC<Props> = ({children, ...props}) => {
                 {children}
             </div>
             {(props.tokenSelect || props.dataSelect) ? tokenSelectUl : null}
-            <p className={classNames({
-                [`${classPrefix}-bottomRight`]: true,
-                [`balanceRed`]: props.balanceRed
-            })}>{props.bottomRightText}</p>
+            { !props.noBottom && (
+              <p className={classNames({
+                  [`${classPrefix}-bottomRight`]: true,
+                  [`balanceRed`]: props.balanceRed
+              })}>{props.bottomRightText}</p>
+            ) }
+    
         </div>
     )
 }

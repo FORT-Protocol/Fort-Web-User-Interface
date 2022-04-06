@@ -1,0 +1,285 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+@mixin normal-text {
+  color: $gray-info-text-color;
+  font-size: $T2;
+}
+
+.hedge {
+  margin: 0 auto;
+  margin-bottom: 44px;
+  margin-top: 22px;
+  display: flex;
+  justify-content: center;
+  max-width: 1200px;
+
+  .mainCard {
+    width: $baseWidth;
+    padding: 40px 44px;
+  }
+
+  &-card {
+
+    margin-right: 22px;
+
+    .infoView+.infoView,
+    .chooseType+.infoView {
+      margin-top: 20px;
+    }
+
+    &-lpPair+p {
+      line-height: 44px;
+      font-size: $T2;
+      color: $main-button-color;
+    }
+
+    &.infoView:nth-child(5) {
+      .TokenShow {
+        svg {
+          z-index: auto;
+        }
+      }
+    }
+
+    .fort-button {
+      width: 100%;
+      margin-top: 40px;
+    }
+  }
+
+  &-rightCard {
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+
+    svg {
+      margin: 0 auto;
+    }
+
+    svg {
+      margin: 0 auto;
+    }
+
+    &-tokenTitle {
+      @include normal-text;
+
+      span {
+        padding-bottom: 5px;
+        border-bottom: 1px dashed $gray-info-text-color;
+      }
+    }
+
+    &-tokenValue {
+      font-family: HeptaSlabMedium;
+      font-size: 48px;
+      color: $main-button-color;
+    }
+
+    &-timeTitle {
+      @include normal-text;
+    }
+
+    &-timeValue {
+      margin-top: 1px;
+      @include normal-text;
+    }
+
+    &-smallCard {
+      display: flex;
+      justify-content: space-between;
+
+      .mainCard {
+        margin-right: 44px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 44px 0;
+      }
+
+      .mainCard+.mainCard {
+        margin-right: 0;
+      }
+
+      &-title {
+        p+p {
+          margin-top: 5px;
+        }
+
+        p {
+          color: $gray-info-text-color;
+          font-size: $T3;
+        }
+      }
+
+      &-value {
+        font-family: $boldFont;
+        font-size: $T2;
+        margin: 15px 0;
+      }
+
+      &-name {
+        color: $gray-info-text-color;
+        font-size: $T3;
+      }
+    }
+
+    .fort-button {
+      font-size: $T2;
+    }
+  }
+
+  .ant-picker {
+    padding-left: 0;
+    padding-right: 0;
+    width: 100%;
+  }
+
+  .ant-picker-suffix {
+    justify-self: end;
+    line-height: 0;
+
+    &>svg {
+      margin: auto 0;
+    }
+  }
+
+  .ant-picker-separator {
+    height: auto;
+  }
+}
+
+table {
+  width: 1340px;
+  margin: 0 auto;
+  border-collapse: separate;
+  border-spacing: 0px 20px;
+
+  .options-mintOptions-table-title {
+    color: $gray-info-text-color;
+    font-size: $T2;
+    height: 44px;
+    border-radius: 12px;
+    box-shadow: $shadow;
+  }
+
+  .options-mintOptions-table-normal {
+    color: $gray-info-text-color;
+    font-size: $T2;
+    height: 44px;
+    border-radius: 12px;
+    box-shadow: $shadow;
+    text-align: center;
+    font-size: $T2;
+    font-family: $boldFont;
+    color: $black-text-color;
+
+    svg {
+      margin-top: 3px;
+    }
+
+    .fort-button {
+      height: 28px;
+      width: 90px;
+      padding: 0;
+    }
+
+    .tokenPair {
+      svg {
+        z-index: 1;
+      }
+
+      svg+svg {
+        margin-left: -8px;
+        z-index: 0;
+      }
+    }
+  }
+
+  td.td-type {
+    display: flex;
+    justify-content: center;
+
+    svg {
+      margin: auto 0;
+    }
+
+    p.red {
+      margin-left: 5px;
+      line-height: 44px;
+      color: $up-color;
+    }
+
+    p.green {
+      margin-left: 5px;
+      line-height: 44px;
+      color: $down-color;
+    }
+  }
+
+  td.buttonGroup {
+
+    div {
+      height: 28px;
+      display: flex;
+      justify-content: center;
+
+      .fort-button+.fort-button {
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .options-mintOptions {
+    flex-flow: column;
+    padding: 0 10px;
+    margin-top: 0px;
+
+    .mainCard {
+      width: 100%;
+      padding: 40px 20px;
+    }
+
+    .options-mintOptions-leftCard {
+      margin-right: 0px;
+      margin-bottom: 10px;
+    }
+
+    .options-mintOptions-rightCard {
+      &-tokenValue {
+        margin: 20px auto;
+      }
+
+      &-timeValue {
+        margin: 20px auto;
+      }
+
+      &-smallCard {
+        .mainCard {
+          padding: 20px 20px;
+          margin-right: 20px;
+        }
+
+        .mainCard+.mainCard {
+          margin-right: 0px;
+        }
+      }
+    }
+  }
+
+  .OptionsList-mobile {
+    margin-top: 20px;
+    padding: 0 10px;
+  }
+
+  .options-mintOptions {
+    padding: 0 10px;
+  }
+
+  .options-mintOptions+div>ul {
+    margin-bottom: 20px;
+  }
+}

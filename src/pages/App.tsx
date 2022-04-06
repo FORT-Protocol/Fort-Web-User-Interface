@@ -11,6 +11,7 @@ import MobileFooter from "./Shared/Footer/MobileFooter";
 import MobileHeader from "./Shared/Header/MobileHeader";
 import useThemes from "../libs/hooks/useThemes";
 import "../themes/styles";
+import Hedge from "./Hedge";
 
 const Perpetuals = loadable(() => import("./Perpetuals"));
 const Option = loadable(() => import("./Options"));
@@ -39,6 +40,9 @@ const App: FC = () => {
             </Route> */}
             <Route path="/swap">
               <Swap />
+            </Route>
+            <Route path="/hedge">
+              <Hedge />
             </Route>
             <Redirect to="/futures" />
           </Switch>

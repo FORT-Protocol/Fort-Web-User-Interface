@@ -37,6 +37,7 @@ const MobileHeader: FC = () => {
   const routes = [
     { path: "/futures", content: t`Futures` },
     { path: "/options", content: t`Options` },
+    { path: "/hedge", content: t`Hedge` },
     { path: "/swap", content: t`Swap` },
   ].map((item) => (
     <li
