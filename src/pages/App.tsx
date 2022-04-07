@@ -11,12 +11,12 @@ import MobileFooter from "./Shared/Footer/MobileFooter";
 import MobileHeader from "./Shared/Header/MobileHeader";
 import useThemes from "../libs/hooks/useThemes";
 import "../themes/styles";
-import Hedge from "./Hedge";
 
 const Perpetuals = loadable(() => import("./Perpetuals"));
 const Option = loadable(() => import("./Options"));
 // const Mining = loadable(() => import("./Farm"));
 const Swap = loadable(() => import("./Swap"));
+const Hedge = loadable(()=> import("./Hedge"));
 
 const App: FC = () => {
   const { theme } = useThemes();

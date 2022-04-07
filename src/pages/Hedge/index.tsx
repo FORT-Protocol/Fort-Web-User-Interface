@@ -5,7 +5,7 @@ import {PutDownIcon} from "../../components/Icon";
 import InfoShow from "../../components/InfoShow";
 import MainCard from "../../components/MainCard";
 import {DoubleTokenShow, SingleTokenShow} from "../../components/TokenShow";
-import {tokenList, TokenType, FortLPGuaranteeAddress, CofixSwapAddress} from "../../libs/constants/addresses";
+import {tokenList, TokenType, FortLPGuaranteeAddress} from "../../libs/constants/addresses";
 import {ERC20Contract, getERC20Contract, NestPriceContract, FortLPGuaranteeContract} from "../../libs/hooks/useContract";
 import useWeb3 from "../../libs/hooks/useWeb3";
 import {
@@ -15,18 +15,18 @@ import {
   checkWidth,
   formatInputNum,
   normalToBigNumber,
-  ZERO_ADDRESS,
 } from "../../libs/utils";
 import {DatePicker} from "antd";
 import "../../styles/ant.css";
 import "./styles";
 import {HoldLine} from "../../components/HoldLine";
 import moment from "moment";
-import useTransactionListCon from "../../libs/hooks/useTransactionInfo";
+import useTransactionListCon, {TransactionType} from "../../libs/hooks/useTransactionInfo";
 import MainButton from "../../components/MainButton";
 import HedgeList from "../../components/HedgeList";
 import {useERC20Approve} from "../../contracts/hooks/useERC20Approve";
 import {MaxUint256} from "@ethersproject/constants";
+import useHedgeOpen from "../../contracts/hooks/useHedgeOpen";
 
 export type HedgeListType = {
   index: BigNumber;
@@ -51,19 +51,23 @@ const Hedge: FC = () => {
   const [latestBlock, setLatestBlock] = useState({ time: 0, blockNum: 0 });
   const intervalRef = useRef<NodeJS.Timeout>();
   const [exercise, setExercise] = useState({ time: "", blockNum: 0 });
-  const [fortNum, setFortNum] = useState("");
-  const [strikePrice, setStrikePrice] = useState<string>("");
+  const [dcuPayment, setDcuPayment] = useState<BigNumber>();
   const [tokenPair, setTokenPair] = useState<TokenType>(tokenList["ETH"]);
   const [hedgeListState, setHedgeListState] = useState<
     Array<HedgeListType>
     >([]);
   const [priceNow, setPriceNow] = useState<{ [key: string]: TokenType }>();
-  const [fortBalance, setFortBalance] = useState(BigNumber.from(0));
+  const [dcuBalance, setDcuBalance] = useState(BigNumber.from(0));
   const [dcuAllowance, setDcuAllowance] = useState<BigNumber>(
     BigNumber.from("0")
   );
-  const [dates, setDates] = useState([]);
-  const { RangePicker } = DatePicker;
+  
+  const mainButtonState = () => {
+    const pendingTransaction = pendingList.filter(
+      (item) => item.type === TransactionType.openHedge
+    );
+    return pendingTransaction.length > 0;
+  };
   
   const showNoticeModal = () => {
     const cache = localStorage.getItem("HedgeFirst");
@@ -87,24 +91,30 @@ const Hedge: FC = () => {
   });
   
   useEffect(() => {
-    setStrikePrice("");
-    setFortNum("");
-  }, [account]);
-  
-  const loadingButton = () => {
-    const latestTx = pendingList.filter((item) => item.type === 2);
-    return latestTx.length > 0;
-  };
-  
-  useEffect(() => {
     if (fortContract) {
       fortContract.balanceOf(account).then((value: any) => {
-        setFortBalance(BigNumber.from(value));
+        setDcuBalance(BigNumber.from(value));
       });
       return;
     }
-    setFortBalance(BigNumber.from(0));
+    setDcuBalance(BigNumber.from(0));
   }, [account, fortContract]);
+  
+  const hedge = useHedgeOpen(inputValue, exercise.blockNum)
+  
+  const estimate = useCallback(() => {
+    if (fortLPGuaranteeContract && inputValue && exercise.blockNum){
+      fortLPGuaranteeContract.estimate(0, normalToBigNumber(inputValue), 0, exercise.blockNum).then((value: any)=>{
+        setDcuPayment(BigNumber.from(value))
+      })
+    } else {
+      return 0
+    }
+    }, [fortLPGuaranteeContract, inputValue, exercise])
+  
+  useEffect(()=>{
+    estimate()
+  }, [estimate])
   
   const getPrice = async (contract: Contract, chainId: number) => {
     const price_ETH = await contract.lastPriceList(
@@ -157,7 +167,6 @@ const Hedge: FC = () => {
       if (latestBlock.blockNum === 0) {
         return;
       }
-      
       const nowTime = moment().valueOf();
       const selectTime = moment(value).valueOf();
       if (selectTime > nowTime) {
@@ -202,10 +211,6 @@ const Hedge: FC = () => {
       setDcuAllowance(allowance);
     })();
   }, [account, chainId, library, txList, tokenList]);
-  
-  const hedge = async () => {
-    console.log('hedge')
-  }
   
   const approve = useERC20Approve(
     'DCU',
@@ -254,7 +259,7 @@ const Hedge: FC = () => {
             topLeftText={t``}
             bottomRightText={``}
             balanceRed={
-              normalToBigNumber(fortNum).gt(fortBalance)
+              dcuPayment && dcuPayment.gt(dcuBalance)
             }
           >
             <SingleTokenShow tokenNameOne={"USDT"} isBold />
@@ -268,28 +273,27 @@ const Hedge: FC = () => {
             />
           </InfoShow>
           <InfoShow
-            topLeftText={t`Exercise period`}
+            topLeftText={t`Exercise time`}
             bottomRightText={''}
           >
-            <RangePicker
+            <DatePicker
               format="YYYY-MM-DD"
               disabledDate={disabledDate}
               onChange={onOk}
               bordered={false}
               suffixIcon={<PutDownIcon />}
               allowClear={false}
-              onCalendarChange={(val: any) => setDates(val)}
             />
           </InfoShow>
           <InfoShow
             topLeftText={t`Payment`}
             bottomRightText={`${t`Balance`}: ${bigNumberToNormal(
-              fortBalance,
+              dcuBalance,
               18,
               6
             )} DCU`}
             balanceRed={
-              normalToBigNumber(fortNum).gt(fortBalance)
+              dcuPayment && dcuPayment.gt(dcuBalance)
             }
           >
             <SingleTokenShow tokenNameOne={"DCU"} isBold />
@@ -298,26 +302,25 @@ const Hedge: FC = () => {
               placeholder={t`--`}
               className={"input-middle"}
               disabled={true}
-              value={fortNum}
+              value={dcuPayment ? bigNumberToNormal(dcuPayment, 18, 10) : '--'}
               maxLength={32}
-              onChange={(e) => setFortNum(formatInputNum(e.target.value))}
             />
           </InfoShow>
           <MainButton
-            // disable={!checkButton() || mainButtonState()}
+            disable={!inputValue || !exercise.blockNum}
             onClick={() => {
-              // if (!checkButton() || mainButtonState()) {
-              //   return;
-              // }
+              if (!inputValue || !exercise.blockNum || mainButtonState()) {
+                return;
+              }
               if (checkAllowance()) {
                 hedge();
               } else {
                 approve();
               }
             }}
-            // loading={mainButtonState()}
+            loading={mainButtonState()}
           >
-            {checkAllowance() ? <Trans>Swap</Trans> : <Trans>Approve</Trans>}
+            {checkAllowance() ? <Trans>Hedge</Trans> : <Trans>Approve</Trans>}
           </MainButton>
         </MainCard>
       </div>

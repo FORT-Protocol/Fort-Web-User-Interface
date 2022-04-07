@@ -17,7 +17,8 @@ export enum TransactionType {
   claim = 6,
   unStake = 7,
   sellOption = 8,
-  swap = 9
+  swap = 9,
+  openHedge = 10,
 }
 
 export enum TransactionState {
