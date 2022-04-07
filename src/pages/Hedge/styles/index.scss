@@ -7,9 +7,7 @@
 }
 
 .hedge {
-  margin: 0 auto;
-  margin-bottom: 44px;
-  margin-top: 22px;
+  margin: 22px auto 44px;
   display: flex;
   justify-content: center;
   max-width: 1200px;
@@ -48,88 +46,6 @@
     }
   }
 
-  &-rightCard {
-    text-align: center;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-
-    svg {
-      margin: 0 auto;
-    }
-
-    svg {
-      margin: 0 auto;
-    }
-
-    &-tokenTitle {
-      @include normal-text;
-
-      span {
-        padding-bottom: 5px;
-        border-bottom: 1px dashed $gray-info-text-color;
-      }
-    }
-
-    &-tokenValue {
-      font-family: HeptaSlabMedium;
-      font-size: 48px;
-      color: $main-button-color;
-    }
-
-    &-timeTitle {
-      @include normal-text;
-    }
-
-    &-timeValue {
-      margin-top: 1px;
-      @include normal-text;
-    }
-
-    &-smallCard {
-      display: flex;
-      justify-content: space-between;
-
-      .mainCard {
-        margin-right: 44px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        padding: 44px 0;
-      }
-
-      .mainCard+.mainCard {
-        margin-right: 0;
-      }
-
-      &-title {
-        p+p {
-          margin-top: 5px;
-        }
-
-        p {
-          color: $gray-info-text-color;
-          font-size: $T3;
-        }
-      }
-
-      &-value {
-        font-family: $boldFont;
-        font-size: $T2;
-        margin: 15px 0;
-      }
-
-      &-name {
-        color: $gray-info-text-color;
-        font-size: $T3;
-      }
-    }
-
-    .fort-button {
-      font-size: $T2;
-    }
-  }
-
   .ant-picker {
     padding-left: 0;
     padding-right: 0;
@@ -154,9 +70,9 @@ table {
   width: 1340px;
   margin: 0 auto;
   border-collapse: separate;
-  border-spacing: 0px 20px;
+  border-spacing: 0 20px;
 
-  .options-mintOptions-table-title {
+  .hedge-table-title {
     color: $gray-info-text-color;
     font-size: $T2;
     height: 44px;
@@ -164,16 +80,15 @@ table {
     box-shadow: $shadow;
   }
 
-  .options-mintOptions-table-normal {
+  .hedge-table-normal {
     color: $gray-info-text-color;
     font-size: $T2;
     height: 44px;
     border-radius: 12px;
     box-shadow: $shadow;
     text-align: center;
-    font-size: $T2;
     font-family: $boldFont;
-    color: $black-text-color;
+    //color: $black-text-color;
 
     svg {
       margin-top: 3px;
@@ -233,53 +148,32 @@ table {
 }
 
 @media screen and (max-width: 1000px) {
-  .options-mintOptions {
+  .hedge {
     flex-flow: column;
     padding: 0 10px;
-    margin-top: 0px;
+    margin-top: 0;
 
     .mainCard {
       width: 100%;
       padding: 40px 20px;
     }
 
-    .options-mintOptions-leftCard {
-      margin-right: 0px;
+    &-card {
+      margin-right: 0;
       margin-bottom: 10px;
-    }
-
-    .options-mintOptions-rightCard {
-      &-tokenValue {
-        margin: 20px auto;
-      }
-
-      &-timeValue {
-        margin: 20px auto;
-      }
-
-      &-smallCard {
-        .mainCard {
-          padding: 20px 20px;
-          margin-right: 20px;
-        }
-
-        .mainCard+.mainCard {
-          margin-right: 0px;
-        }
-      }
     }
   }
 
-  .OptionsList-mobile {
+  .hedgeList-mobile {
     margin-top: 20px;
     padding: 0 10px;
   }
 
-  .options-mintOptions {
+  .hedge-mintHedge {
     padding: 0 10px;
   }
 
-  .options-mintOptions+div>ul {
+  .hedge-mintHedge+div>ul {
     margin-bottom: 20px;
   }
 }

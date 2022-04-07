@@ -107,3 +107,7 @@ export const CofixSwapAddress: AddressesType = {
   56: '0xb29A8d980E1408E487B9968f5E4f7fD7a9B0CaC5',
   97: '0x4A448cBb12e449D7031f36C8122eCE6dDdf9cc84'
 };
+
+export const FortLPGuaranteeAddress: AddressesType = {
+  97: '0x1e148a04D29e11dd988Ada81B49108Ad09364444'
+}

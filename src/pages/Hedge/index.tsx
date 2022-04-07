@@ -5,8 +5,8 @@ import {PutDownIcon} from "../../components/Icon";
 import InfoShow from "../../components/InfoShow";
 import MainCard from "../../components/MainCard";
 import {DoubleTokenShow, SingleTokenShow} from "../../components/TokenShow";
-import {CofixSwapAddress, FortEuropeanOptionContract, tokenList, TokenType,} from "../../libs/constants/addresses";
-import {ERC20Contract, FortEuropeanOption, getERC20Contract, NestPriceContract,} from "../../libs/hooks/useContract";
+import {tokenList, TokenType, FortLPGuaranteeAddress, CofixSwapAddress} from "../../libs/constants/addresses";
+import {ERC20Contract, getERC20Contract, NestPriceContract, FortLPGuaranteeContract} from "../../libs/hooks/useContract";
 import useWeb3 from "../../libs/hooks/useWeb3";
 import {
   BASE_2000ETH_AMOUNT,
@@ -22,10 +22,11 @@ import "../../styles/ant.css";
 import "./styles";
 import {HoldLine} from "../../components/HoldLine";
 import moment from "moment";
-import {useFortEuropeanOptionOpen} from "../../contracts/hooks/useFortEuropeanOptionTransation";
-import OptionsList from "../../components/OptionsList";
 import useTransactionListCon from "../../libs/hooks/useTransactionInfo";
 import MainButton from "../../components/MainButton";
+import HedgeList from "../../components/HedgeList";
+import {useERC20Approve} from "../../contracts/hooks/useERC20Approve";
+import {MaxUint256} from "@ethersproject/constants";
 
 export type HedgeListType = {
   index: BigNumber;
@@ -44,28 +45,24 @@ const Hedge: FC = () => {
   const [inputValue, setInputValue] = useState<string>();
   const modal = useRef<any>();
   const nestPriceContract = NestPriceContract();
-  const fortEuropeanOption = FortEuropeanOption(FortEuropeanOptionContract);
+  const fortLPGuaranteeContract = FortLPGuaranteeContract();
   const fortContract = ERC20Contract(tokenList["DCU"].addresses);
   const { pendingList, txList } = useTransactionListCon();
-  const [isRefresh, setIsRefresh] = useState<boolean>(false);
   const [latestBlock, setLatestBlock] = useState({ time: 0, blockNum: 0 });
   const intervalRef = useRef<NodeJS.Timeout>();
-  const [isLong, setIsLong] = useState(true);
   const [exercise, setExercise] = useState({ time: "", blockNum: 0 });
   const [fortNum, setFortNum] = useState("");
   const [strikePrice, setStrikePrice] = useState<string>("");
   const [tokenPair, setTokenPair] = useState<TokenType>(tokenList["ETH"]);
-  const [optionsListState, setOptionsListState] = useState<
+  const [hedgeListState, setHedgeListState] = useState<
     Array<HedgeListType>
     >([]);
-  const [showLoading, setShowLoading] = useState<boolean>(false);
   const [priceNow, setPriceNow] = useState<{ [key: string]: TokenType }>();
   const [fortBalance, setFortBalance] = useState(BigNumber.from(0));
-  const [optionTokenValue, setOptionTokenValue] = useState<BigNumber>();
-  const [srcAllowance, setSrcAllowance] = useState<BigNumber>(
+  const [dcuAllowance, setDcuAllowance] = useState<BigNumber>(
     BigNumber.from("0")
   );
-  
+  const [dates, setDates] = useState([]);
   const { RangePicker } = DatePicker;
   
   const showNoticeModal = () => {
@@ -77,9 +74,9 @@ const Hedge: FC = () => {
     return false;
   };
   
-  const trList = optionsListState.map((item) => {
+  const trList = hedgeListState.map((item) => {
     return (
-      <OptionsList
+      <HedgeList
         className={classPrefix}
         key={item.index.toString() + account}
         item={item}
@@ -98,6 +95,7 @@ const Hedge: FC = () => {
     const latestTx = pendingList.filter((item) => item.type === 2);
     return latestTx.length > 0;
   };
+  
   useEffect(() => {
     if (fortContract) {
       fortContract.balanceOf(account).then((value: any) => {
@@ -154,10 +152,6 @@ const Hedge: FC = () => {
     }
   }, [latestBlock.time, library]);
   
-  const handleType = (isLong: boolean) => {
-    setIsLong(isLong);
-  };
-  
   const onOk = useCallback(
     async (value: any) => {
       if (latestBlock.blockNum === 0) {
@@ -183,57 +177,40 @@ const Hedge: FC = () => {
     [latestBlock]
   );
   
-  useEffect(() => {
-    if (
-      fortEuropeanOption &&
-      strikePrice !== "" &&
-      fortNum !== "" &&
-      priceNow &&
-      exercise.blockNum !== 0
-    ) {
-      (async () => {
-        setShowLoading(true);
-        try {
-          const value = await fortEuropeanOption.estimate(
-            ZERO_ADDRESS,
-            priceNow[tokenPair.symbol].nowPrice,
-            normalToBigNumber(
-              strikePrice,
-              tokenList["USDT"].decimals
-            ).toString(),
-            isLong,
-            exercise.blockNum.toString(),
-            normalToBigNumber(fortNum).toString()
-          );
-          setOptionTokenValue(BigNumber.from(value));
-        } catch {
-          setOptionTokenValue(undefined);
-        }
-        setShowLoading(false);
-      })();
-    } else {
-      setOptionTokenValue(undefined);
-    }
-  }, [
-    exercise.blockNum,
-    fortEuropeanOption,
-    fortNum,
-    isLong,
-    priceNow,
-    strikePrice,
-    tokenPair.symbol,
-  ]);
-  
   function disabledDate(current: any) {
     return current && current < moment().add(30, "days").startOf("day");
   }
   
-  const active = useFortEuropeanOptionOpen(
-    tokenPair,
-    isLong,
-    BigNumber.from(exercise.blockNum),
-    normalToBigNumber(fortNum),
-    strikePrice ? normalToBigNumber(strikePrice, 18) : undefined
+  useEffect(() => {
+    if (!chainId || !account || !library) {
+      return;
+    }
+    const dcuToken = getERC20Contract(
+      tokenList['DCU'].addresses[chainId],
+      library,
+      account
+    );
+    if (!dcuToken) {
+      setDcuAllowance(BigNumber.from("0"));
+      return;
+    }
+    (async () => {
+      const allowance = await dcuToken.allowance(
+        account,
+        FortLPGuaranteeAddress[chainId]
+      );
+      setDcuAllowance(allowance);
+    })();
+  }, [account, chainId, library, txList, tokenList]);
+  
+  const hedge = async () => {
+    console.log('hedge')
+  }
+  
+  const approve = useERC20Approve(
+    'DCU',
+    MaxUint256,
+    fortLPGuaranteeContract?.address
   );
   
   const priceString = () => {
@@ -248,10 +225,7 @@ const Hedge: FC = () => {
     if (!inputValue) {
       return true;
     }
-    if (srcAllowance.lt(normalToBigNumber(inputValue))) {
-      return false;
-    }
-    return true;
+    return !dcuAllowance.lt(normalToBigNumber(inputValue));
   };
   
   return (
@@ -303,8 +277,8 @@ const Hedge: FC = () => {
               onChange={onOk}
               bordered={false}
               suffixIcon={<PutDownIcon />}
-              // placeholder={"Select"}
               allowClear={false}
+              onCalendarChange={(val: any) => setDates(val)}
             />
           </InfoShow>
           <InfoShow
@@ -331,23 +305,23 @@ const Hedge: FC = () => {
           </InfoShow>
           <MainButton
             // disable={!checkButton() || mainButtonState()}
-            // onClick={() => {
-            //   if (!checkButton() || mainButtonState()) {
-            //     return;
-            //   }
-            //   if (checkAllowance()) {
-            //     swap();
-            //   } else {
-            //     approve();
-            //   }
-            // }}
+            onClick={() => {
+              // if (!checkButton() || mainButtonState()) {
+              //   return;
+              // }
+              if (checkAllowance()) {
+                hedge();
+              } else {
+                approve();
+              }
+            }}
             // loading={mainButtonState()}
           >
             {checkAllowance() ? <Trans>Swap</Trans> : <Trans>Approve</Trans>}
           </MainButton>
         </MainCard>
       </div>
-      {optionsListState.length > 0 ? (
+      {hedgeListState.length > 0 ? (
         <div>
           <HoldLine>
             <Trans>Position</Trans>
@@ -357,22 +331,10 @@ const Hedge: FC = () => {
               <thead>
               <tr className={`${classPrefix}-table-title`}>
                 <th>
-                  <Trans>Token pair</Trans>
+                  <Trans>LP pair</Trans>
                 </th>
                 <th>
-                  <Trans>Type</Trans>
-                </th>
-                <th>
-                  <Trans>Strike price</Trans>
-                </th>
-                <th className={`exerciseTime`}>
-                  <Trans>Exercise time</Trans>
-                </th>
-                <th>
-                  <Trans>Option shares</Trans>
-                </th>
-                <th>
-                  <Trans>Sale earn</Trans>
+                  <Trans>Liquidity</Trans>
                 </th>
                 <th>
                   <Trans>Strike earn</Trans>
