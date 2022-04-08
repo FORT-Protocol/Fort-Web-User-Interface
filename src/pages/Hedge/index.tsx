@@ -37,12 +37,12 @@ import HedgeNoticeModal from "./HedgeNoticeModal";
 
 export type HedgeListType = {
   index: BigNumber;
-  tokenAddress: string;
-  strikePrice: BigNumber;
-  orientation: boolean;
-  exerciseBlock: BigNumber;
+  x0: BigNumber;
+  y0: BigNumber;
   balance: BigNumber;
   owner: string;
+  exerciseBlock: number;
+  tokenIndex: number;
 };
 
 const Hedge: FC = () => {
@@ -66,6 +66,7 @@ const Hedge: FC = () => {
   const [dcuAllowance, setDcuAllowance] = useState<BigNumber>(
     BigNumber.from("0")
   );
+  const [y0, setY0] = useState('1')
   
   const mainButtonState = () => {
     const pendingTransaction = pendingList.filter(
@@ -105,7 +106,35 @@ const Hedge: FC = () => {
     setDcuBalance(BigNumber.from(0));
   }, [account, fortContract]);
   
-  const open = useHedgeOpen(inputValue, exercise.blockNum)
+  const getHedgeList = useCallback(async () => {
+    if (!fortLPGuaranteeContract) {
+      return;
+    }
+    const count = await fortLPGuaranteeContract.getGuaranteeCount();
+    const hedgeList = await fortLPGuaranteeContract.find(
+      0,
+      1000,
+      count,
+      account
+    );
+    const resultList = hedgeList.filter((item: HedgeListType) =>
+      item.x0.gt(BigNumber.from("0"))
+    );
+    setHedgeListState(resultList);
+  }, [account, fortLPGuaranteeContract]);
+  
+  useEffect(()=>{
+    getHedgeList()
+  }, [getHedgeList])
+  
+  useEffect(()=>{
+    if (inputValue && priceNow && priceNow[tokenPair.symbol].nowPrice) {
+      const y = (Number(inputValue)/Number(bigNumberToNormal(priceNow[tokenPair.symbol].nowPrice ?? BigNumber.from(1)))).toString()
+      setY0(y)
+    }
+  }, [inputValue, priceNow, tokenPair.symbol])
+  
+  const open = useHedgeOpen(0, inputValue, y0, exercise.blockNum)
   
   const estimate = useCallback(() => {
     if (fortLPGuaranteeContract && inputValue && exercise.blockNum) {

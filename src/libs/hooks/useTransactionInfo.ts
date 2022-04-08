@@ -19,6 +19,7 @@ export enum TransactionType {
   sellOption = 8,
   swap = 9,
   openHedge = 10,
+  exerciseHedge = 11,
 }
 
 export enum TransactionState {

@@ -2,15 +2,11 @@ import { BigNumber } from "@ethersproject/bignumber";
 import { t, Trans } from "@lingui/macro";
 import { FC, useCallback, useEffect, useState } from "react";
 import {
-  useFortEuropeanOptionExercise,
-} from "../../contracts/hooks/useFortEuropeanOptionTransation";
-import {
   FortEuropeanOptionContract,
   tokenList,
   TokenType,
 } from "../../libs/constants/addresses";
 import {
-  FortEuropeanOption,
   NestPriceContract,
 } from "../../libs/hooks/useContract";
 import useTransactionListCon, {
@@ -22,14 +18,15 @@ import {
   checkWidth,
   ZERO_ADDRESS,
 } from "../../libs/utils";
-import { OptionsListType } from "../../pages/Options";
 import MainButton from "../MainButton";
 import MainCard from "../MainCard";
 import MobileListInfo from "../MobileListInfo";
 import './styles'
+import {HedgeListType} from "../../pages/Hedge";
+import useHedgeExercise from "../../contracts/hooks/useHedgeExercise";
 
 type Props = {
-  item: OptionsListType;
+  item: HedgeListType;
   key: string;
   className: string;
   blockNum: string;
@@ -38,35 +35,23 @@ type Props = {
 
 const HedgeList: FC<Props> = ({ ...props }) => {
   const { pendingList } = useTransactionListCon();
-  const { chainId, library } = useWeb3();
   const [strikeAmount, setStrikeAmount] = useState<BigNumber>();
-  const priceContract = NestPriceContract();
-  const optionsContract = FortEuropeanOption(FortEuropeanOptionContract);
   const loadingButton = () => {
-    const closeTx = pendingList.filter(
+    const exerciseTx = pendingList.filter(
       (item) =>
         item.info === props.item.index.toString() &&
-        item.type === TransactionType.closeOption
+        item.type === TransactionType.exerciseHedge
     );
-    return closeTx.length > 0;
+    return exerciseTx.length > 0;
   };
-
-  const tokenName = useCallback(() => {
-    if (props.item.tokenAddress === ZERO_ADDRESS) {
-      return "ETH";
-    }
-    return "BTC";
-  }, [props.item.tokenAddress]);
-  const TokenOneSvg = tokenList[tokenName()].Icon;
+  
+  const TokenOneSvg = tokenList["ETH"].Icon;
   const TokenTwoSvg = tokenList["USDT"].Icon;
-  const active = useFortEuropeanOptionExercise(
-    props.item.index,
-    props.item.balance
-  );
+  const active = useHedgeExercise(props.item.index.toNumber());
   
   const checkButton = () => {
     return loadingButton() ||
-      Number(props.blockNum) <= props.item.exerciseBlock.toNumber();
+      Number(props.blockNum) <= props.item.exerciseBlock;
   };
 
   const classPrefix = "HedgeList";
@@ -81,7 +66,7 @@ const HedgeList: FC<Props> = ({ ...props }) => {
         </div>
         <div className={`${classPrefix}-mobile-card-mid`}>
           <MobileListInfo title={t`Liquidity`}>
-            <p>{bigNumberToNormal(props.item.strikePrice, 18, 2)} USDT / 1 ETH</p>
+            <p>{bigNumberToNormal(props.item.x0, 18, 2)} USDT / {bigNumberToNormal(props.item.y0, 18, 2)} ETH</p>
           </MobileListInfo>
         </div>
         <div className={`${classPrefix}-mobile-card-bottom`}>
@@ -113,7 +98,7 @@ const HedgeList: FC<Props> = ({ ...props }) => {
         <TokenOneSvg />
         <TokenTwoSvg />
       </td>
-      <td>{bigNumberToNormal(props.item.strikePrice, 18, 2)} USDT/ 1 ETH</td>
+      <td>{bigNumberToNormal(props.item.x0, 18, 2)} USDT/ {bigNumberToNormal(props.item.y0, 18, 2)} ETH</td>
       <td>{strikeAmount ? bigNumberToNormal(strikeAmount, 18, 2) : "---"}</td>
       <td className={"buttonGroup"}>
         <div>

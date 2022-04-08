@@ -1,21 +1,19 @@
-import {normalToBigNumber, PRICE_FEE} from "../../libs/utils";
+import {PRICE_FEE} from "../../libs/utils";
 import {FortLPGuaranteeContract} from "../../libs/hooks/useContract";
 import useWeb3 from "../../libs/hooks/useWeb3";
 import {useSendTransaction} from "../../libs/hooks/useSendTransaction";
 import {TransactionType} from "../../libs/hooks/useTransactionInfo";
 
-const useHedgeOpen = (index: number, x0: string | undefined, y0: string, blockNum: number) => {
+const useHedgeOpen = (index: number) => {
   let contract = FortLPGuaranteeContract()
   const {account, chainId} = useWeb3()
+  
   let callData: string | undefined;
-  if (!chainId || !x0 || !blockNum || !y0 || !index) {
+  if (!chainId || !index) {
     contract = null
   } else {
-    callData = contract?.interface.encodeFunctionData('open', [
+    callData = contract?.interface.encodeFunctionData('exercise', [
         index,
-        normalToBigNumber(x0),
-      normalToBigNumber(y0),
-        blockNum
       ]
     )
   }
@@ -25,7 +23,7 @@ const useHedgeOpen = (index: number, x0: string | undefined, y0: string, blockNu
     data: callData,
     value: PRICE_FEE
   }
-  return useSendTransaction(contract, tx, {title: `Hedge`, info: 'Open', type: TransactionType.openHedge})
+  return useSendTransaction(contract, tx, {title: `Hedge`, info: 'Exercise', type: TransactionType.exerciseHedge})
 }
 
 export default useHedgeOpen
