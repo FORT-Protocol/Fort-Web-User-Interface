@@ -35,16 +35,25 @@ type Props = {
 const HedgeList: FC<Props> = ({ ...props }) => {
   const { pendingList } = useTransactionListCon();
   const [strikeAmount, setStrikeAmount] = useState<BigNumber>();
+  const [tokenX, setTokenX] = useState("ETH")
   const loadingButton = () => {
     const exerciseTx = pendingList.filter(
       (item) =>
         item.info === props.item.index.toString() &&
-        item.type === TransactionType.exerciseHedge
+        item.type === TransactionType.strikeHedge
     );
     return exerciseTx.length > 0;
   };
   
-  const TokenOneSvg = tokenList["ETH"].Icon;
+  useEffect(()=>{
+    if (props.item.tokenIndex === 0) {
+      setTokenX("ETH")
+    } else if (props.item.tokenIndex === 1) {
+      setTokenX("BTC")
+    }
+  }, [props.item.tokenIndex])
+  
+  const TokenOneSvg = tokenList[tokenX].Icon;
   const TokenTwoSvg = tokenList["USDT"].Icon;
   const active = useHedgeExercise(props.item.index.toNumber());
   

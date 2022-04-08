@@ -55,15 +55,16 @@ const OptionsList: FC<Props> = ({ ...props }) => {
         item.info === props.item.index.toString() &&
         item.type === TransactionType.closeOption
     );
-    return closeTx.length > 0 ? true : false;
+    return closeTx.length > 0;
   };
+  
   const loadingSellButton = () => {
     const closeTx = pendingList.filter(
       (item) =>
         item.info === props.item.index.toString() &&
         item.type === TransactionType.sellOption
     );
-    return closeTx.length > 0 ? true : false;
+    return closeTx.length > 0;
   };
 
   const tokenName = useCallback(() => {

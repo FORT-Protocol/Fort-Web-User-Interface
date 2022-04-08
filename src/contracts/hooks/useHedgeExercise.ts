@@ -23,7 +23,7 @@ const useHedgeOpen = (index: number) => {
     data: callData,
     value: PRICE_FEE
   }
-  return useSendTransaction(contract, tx, {title: `Hedge`, info: 'Exercise', type: TransactionType.exerciseHedge})
+  return useSendTransaction(contract, tx, {title: `Strike hedge`, info: index.toString(), type: TransactionType.strikeHedge})
 }
 
 export default useHedgeOpen
