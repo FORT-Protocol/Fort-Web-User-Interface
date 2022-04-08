@@ -1,9 +1,13 @@
 @use "sass:math";
 @import 'src/styles/shared.scss';
 
+.HedgeList-mobile {
+    padding: 10px;
+}
+
 .HedgeList-mobile-card {
     width: 100%;
-    padding: 20px;
+    padding: 24px 20px;
 
     .mobileListInfo+.mobileListInfo {
         text-align: right;
@@ -24,8 +28,6 @@
     &-top {
         display: flex;
         justify-content: space-between;
-        border-bottom: 0.5px solid $gray-background-color;
-        padding-bottom: 10px;
 
         &-type{
             display: flex;
@@ -54,16 +56,14 @@
         margin-top: 10px;
         display: flex;
         justify-content: space-between;
-        border-bottom: 0.5px solid $gray-background-color;
-        padding-bottom: 10px;
+        color: white;
     }
 
     &-bottom {
         margin-top: 10px;
         display: flex;
+        color: white;
         justify-content: space-between;
-        border-bottom: 0.5px solid $gray-background-color;
-        padding-bottom: 10px;
     }
 
     &-block {
@@ -74,12 +74,37 @@
     }
 
     .fort-button {
-        width: 45%;
+        width: 100%;
         margin-top: 10px;
     }
 
     &-buttonGroup {
         display: flex;
         justify-content: space-between;
+    }
+}
+
+.mobileListInfo {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-content: center;
+
+    &-title {
+        font-size: $T2;
+        color: $gray-info-text-color;
+        margin-bottom: 15px;
+
+
+        span {
+            &.underLine {
+                border-bottom: 1px dashed $gray-info-text-color;
+            }
+        }
+    }
+
+    p {
+        font-family: $boldFont;
+        font-size: $T2;
     }
 }

@@ -19,6 +19,7 @@
     "@web3-react/injected-connector": "^6.0.7",
     "@web3-react/walletconnect-connector": "^6.2.4",
     "antd": "^4.16.13",
+    "bignumber.js": "^9.0.2",
     "classnames": "^2.3.1",
     "ethers": "^5.4.3",
     "lodash": "^4.17.21",
