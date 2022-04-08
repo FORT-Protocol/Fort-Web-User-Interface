@@ -403,29 +403,31 @@ const Hedge: FC = () => {
           <HoldLine>
             <Trans>Position</Trans>
           </HoldLine>
-          {checkWidth() ? (
-            <table>
-              <thead>
-              <tr className={`${classPrefix}-table-title`}>
-                <th>
-                  <Trans>LP pair</Trans>
-                </th>
-                <th>
-                  <Trans>Liquidity</Trans>
-                </th>
-                <th>
-                  <Trans>Strike earn</Trans>
-                </th>
-                <th>
-                  <Trans>Operate</Trans>
-                </th>
-              </tr>
-              </thead>
-              <tbody>{trList}</tbody>
-            </table>
-          ) : (
-            <ul>{trList}</ul>
-          )}
+          <div className={`${classPrefix}-list`}>
+            {checkWidth() ? (
+              <table>
+                <thead>
+                <tr className={`${classPrefix}-table-title`}>
+                  <th>
+                    <Trans>LP pair</Trans>
+                  </th>
+                  <th>
+                    <Trans>Liquidity</Trans>
+                  </th>
+                  <th>
+                    <Trans>Strike earn</Trans>
+                  </th>
+                  <th>
+                    <Trans>Operate</Trans>
+                  </th>
+                </tr>
+                </thead>
+                <tbody>{trList}</tbody>
+              </table>
+            ) : (
+              <ul>{trList}</ul>
+            )}
+          </div>
         </div>
       ) : null}
     </div>
