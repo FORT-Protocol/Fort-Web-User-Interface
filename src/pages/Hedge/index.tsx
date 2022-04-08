@@ -278,6 +278,7 @@ const Hedge: FC = () => {
           >
             <DatePicker
               format="YYYY-MM-DD"
+              defaultPickerValue={moment().add(30, "days")}
               disabledDate={disabledDate}
               onChange={onOk}
               bordered={false}
