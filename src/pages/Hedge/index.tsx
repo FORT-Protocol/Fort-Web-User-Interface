@@ -6,7 +6,12 @@ import InfoShow from "../../components/InfoShow";
 import MainCard from "../../components/MainCard";
 import {DoubleTokenShow, SingleTokenShow} from "../../components/TokenShow";
 import {tokenList, TokenType, FortLPGuaranteeAddress} from "../../libs/constants/addresses";
-import {ERC20Contract, getERC20Contract, NestPriceContract, FortLPGuaranteeContract} from "../../libs/hooks/useContract";
+import {
+  ERC20Contract,
+  getERC20Contract,
+  NestPriceContract,
+  FortLPGuaranteeContract
+} from "../../libs/hooks/useContract";
 import useWeb3 from "../../libs/hooks/useWeb3";
 import {
   BASE_2000ETH_AMOUNT,
@@ -27,6 +32,8 @@ import HedgeList from "../../components/HedgeList";
 import {useERC20Approve} from "../../contracts/hooks/useERC20Approve";
 import {MaxUint256} from "@ethersproject/constants";
 import useHedgeOpen from "../../contracts/hooks/useHedgeOpen";
+import {Popup} from "reactjs-popup";
+import HedgeNoticeModal from "./HedgeNoticeModal";
 
 export type HedgeListType = {
   index: BigNumber;
@@ -40,22 +47,20 @@ export type HedgeListType = {
 
 const Hedge: FC = () => {
   const classPrefix = "hedge";
-  const { account, chainId, library } = useWeb3();
+  const {account, chainId, library} = useWeb3();
   const [showNotice, setShowNotice] = useState(false);
   const [inputValue, setInputValue] = useState<string>();
   const modal = useRef<any>();
   const nestPriceContract = NestPriceContract();
   const fortLPGuaranteeContract = FortLPGuaranteeContract();
   const fortContract = ERC20Contract(tokenList["DCU"].addresses);
-  const { pendingList, txList } = useTransactionListCon();
-  const [latestBlock, setLatestBlock] = useState({ time: 0, blockNum: 0 });
+  const {pendingList, txList} = useTransactionListCon();
+  const [latestBlock, setLatestBlock] = useState({time: 0, blockNum: 0});
   const intervalRef = useRef<NodeJS.Timeout>();
-  const [exercise, setExercise] = useState({ time: "", blockNum: 0 });
+  const [exercise, setExercise] = useState({time: "", blockNum: 0});
   const [dcuPayment, setDcuPayment] = useState<BigNumber>();
   const [tokenPair, setTokenPair] = useState<TokenType>(tokenList["ETH"]);
-  const [hedgeListState, setHedgeListState] = useState<
-    Array<HedgeListType>
-    >([]);
+  const [hedgeListState, setHedgeListState] = useState<Array<HedgeListType>>([]);
   const [priceNow, setPriceNow] = useState<{ [key: string]: TokenType }>();
   const [dcuBalance, setDcuBalance] = useState(BigNumber.from(0));
   const [dcuAllowance, setDcuAllowance] = useState<BigNumber>(
@@ -100,19 +105,19 @@ const Hedge: FC = () => {
     setDcuBalance(BigNumber.from(0));
   }, [account, fortContract]);
   
-  const hedge = useHedgeOpen(inputValue, exercise.blockNum)
+  const open = useHedgeOpen(inputValue, exercise.blockNum)
   
   const estimate = useCallback(() => {
-    if (fortLPGuaranteeContract && inputValue && exercise.blockNum){
-      fortLPGuaranteeContract.estimate(0, normalToBigNumber(inputValue), 0, exercise.blockNum).then((value: any)=>{
+    if (fortLPGuaranteeContract && inputValue && exercise.blockNum) {
+      fortLPGuaranteeContract.estimate(0, normalToBigNumber(inputValue), 0, exercise.blockNum).then((value: any) => {
         setDcuPayment(BigNumber.from(value))
       })
     } else {
       return 0
     }
-    }, [fortLPGuaranteeContract, inputValue, exercise])
+  }, [fortLPGuaranteeContract, inputValue, exercise])
   
-  useEffect(()=>{
+  useEffect(() => {
     estimate()
   }, [estimate])
   
@@ -157,7 +162,7 @@ const Hedge: FC = () => {
     if (moment().valueOf() - latestBlock.time > 6000 && library) {
       (async () => {
         const latest = await library?.getBlockNumber();
-        setLatestBlock({ time: moment().valueOf(), blockNum: latest || 0 });
+        setLatestBlock({time: moment().valueOf(), blockNum: latest || 0});
       })();
     }
   }, [latestBlock.time, library]);
@@ -180,7 +185,7 @@ const Hedge: FC = () => {
         });
       } else {
         const timeString = moment().format("YYYY[-]MM[-]DD");
-        setExercise({ time: timeString, blockNum: latestBlock.blockNum || 0 });
+        setExercise({time: timeString, blockNum: latestBlock.blockNum || 0});
       }
     },
     [latestBlock]
@@ -235,6 +240,20 @@ const Hedge: FC = () => {
   
   return (
     <div>
+      {showNotice ? (
+        <Popup
+          ref={modal}
+          open
+          onClose={() => {
+            setShowNotice(false);
+          }}
+        >
+          <HedgeNoticeModal
+            onClose={() => modal.current.close()}
+            action={open}
+          />
+        </Popup>
+      ) : null}
       <div className={classPrefix}>
         <MainCard classNames={`${classPrefix}-card`}>
           <InfoShow
@@ -262,7 +281,7 @@ const Hedge: FC = () => {
               dcuPayment && dcuPayment.gt(dcuBalance)
             }
           >
-            <SingleTokenShow tokenNameOne={"USDT"} isBold />
+            <SingleTokenShow tokenNameOne={"USDT"} isBold/>
             <input
               type="text"
               placeholder={t`Input liquidity`}
@@ -282,7 +301,7 @@ const Hedge: FC = () => {
               disabledDate={disabledDate}
               onChange={onOk}
               bordered={false}
-              suffixIcon={<PutDownIcon />}
+              suffixIcon={<PutDownIcon/>}
               allowClear={false}
             />
           </InfoShow>
@@ -297,7 +316,7 @@ const Hedge: FC = () => {
               dcuPayment && dcuPayment.gt(dcuBalance)
             }
           >
-            <SingleTokenShow tokenNameOne={"DCU"} isBold />
+            <SingleTokenShow tokenNameOne={"DCU"} isBold/>
             <input
               type="text"
               placeholder={t`--`}
@@ -310,11 +329,14 @@ const Hedge: FC = () => {
           <MainButton
             disable={!inputValue || !exercise.blockNum}
             onClick={() => {
+              if (showNoticeModal()) {
+                return;
+              }
               if (!inputValue || !exercise.blockNum || mainButtonState()) {
                 return;
               }
               if (checkAllowance()) {
-                hedge();
+                open();
               } else {
                 approve();
               }

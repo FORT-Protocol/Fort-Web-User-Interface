@@ -1,0 +1,75 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.notice-card {
+    width: 400px;
+    
+    &-title {
+        font-family: $boldFont;
+        font-size: $T2;
+        margin: 20px auto;
+        text-align: center;
+    }
+
+    ul {
+        margin: 0 20px;
+        height: 350px;
+        overflow:auto;
+        font-size: $T3;
+        color: $gray-info-text-color;
+
+        input {
+            display: none;
+        }
+
+        li + li {
+            margin-top: 10px;
+        }
+
+        .selectButton {
+            width: 14px;
+            height: 14px;
+            border: 1px solid black;
+
+            svg {
+                width: 13px;
+                height: 12px;
+                display: none;
+            }
+
+            &.selected {
+                svg {
+                    display: block;
+                }
+            }
+        }
+    }
+
+    &-buttonGroup {
+        margin: 20px 46px;
+
+        .fort-button {
+            width: 100%;
+        }
+
+        a {
+            display: block;
+            margin-top: 20px;
+        }
+
+        &-more {
+            width: 100%;
+            text-align: center;
+            font-family: $boldFont;
+            border-radius: 22px;
+            height: 44px;
+            border: 1px solid $main-button-color;
+            color: $main-button-color;
+            font-size: $T2;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}
