@@ -8,13 +8,13 @@ const useHedgeOpen = (index: number, x0: string | undefined, y0: string, blockNu
   let contract = FortLPGuaranteeContract()
   const {account, chainId} = useWeb3()
   let callData: string | undefined;
-  if (!chainId || !x0 || !blockNum || !y0 || !index) {
+  if (!chainId || !x0 || !blockNum || !y0) {
     contract = null
   } else {
     callData = contract?.interface.encodeFunctionData('open', [
         index,
         normalToBigNumber(x0),
-      normalToBigNumber(y0),
+        normalToBigNumber(y0),
         blockNum
       ]
     )
