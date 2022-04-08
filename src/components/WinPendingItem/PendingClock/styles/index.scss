@@ -1,0 +1,17 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.pendingClock {
+    width: 34px;
+    height: 34px;
+    background: $button-disable-color;
+    border-radius: 17px;
+    overflow: hidden;
+
+    &-top {
+        width: 34px;
+        height: 34px;
+        border-radius: 34px 0 0;
+        background: #80C269;
+    }
+}

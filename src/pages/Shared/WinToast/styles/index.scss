@@ -1,0 +1,38 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.winToast {
+
+    &-title {
+        font-size: $T2;
+        font-family: $boldFont;
+        margin-left: 10px;
+        color: $gray-background-text-color;
+    }
+
+    &-info {
+        font-size: $T3;
+        font-family: $boldFont;
+        margin-left: 10px;
+        color: $gray-background-text-color;
+    }
+
+    &-win {
+        width: 275px;
+        &-time {
+            font-size: $T3;
+            font-family: $boldFont;
+            margin-left: 10px;
+            color: $gray-background-text-color;
+        }
+
+        .fort-button {
+            display: block;
+            width: 80px;
+            height: 28px;
+            padding: 0;
+            margin: 0 auto;
+            margin-top: 15px;
+        }
+    }
+}

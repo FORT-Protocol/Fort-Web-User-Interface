@@ -39,15 +39,16 @@ import { Contract } from "@ethersproject/contracts";
 import { Popup } from "reactjs-popup";
 import PerpetualsNoticeModal from "./PerpetualsNoticeModal";
 import PerpetualsListMobile from "../../components/PerpetualsList/PerpetualsListMobile";
+import { PutDownIcon } from "../../components/Icon";
 
 export type LeverListType = {
-  index: BigNumber; //  编号
-  tokenAddress: string; //  token地址
-  lever: BigNumber; //  X倍数
-  orientation: boolean; //  涨跌
-  balance: BigNumber; //  保证金
-  basePrice: BigNumber; //  基础价格
-  baseBlock: BigNumber; //  基础区块号
+  index: BigNumber; 
+  tokenAddress: string; 
+  lever: BigNumber; 
+  orientation: boolean; 
+  balance: BigNumber; 
+  basePrice: BigNumber; 
+  baseBlock: BigNumber; 
 };
 
 const Perpetuals: FC = () => {
@@ -333,6 +334,7 @@ const Perpetuals: FC = () => {
               tokenNameOne={tokenPair.symbol}
               tokenNameTwo={"USDT"}
             />
+            <PutDownIcon />
           </div>
           <p>
             {`${

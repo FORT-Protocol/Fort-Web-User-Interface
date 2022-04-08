@@ -24,8 +24,7 @@ import {
   bigNumberToNormal,
   checkWidth,
   formatInputNum,
-  normalToBigNumber,
-  ZERO_ADDRESS,
+  normalToBigNumber
 } from "../../libs/utils";
 import { DatePicker, message, Tooltip } from "antd";
 import "../../styles/ant.css";
@@ -108,7 +107,6 @@ const MintOptions: FC = () => {
     const resultList = optionsList.filter((item: OptionsListType) =>
       item.balance.gt(BigNumber.from("0"))
     );
-    console.log(optionsList);
     setOptionsListState(resultList);
     setIsRefresh(true);
   }, [account, fortEuropeanOption]);
@@ -238,13 +236,13 @@ const MintOptions: FC = () => {
       strikePrice !== "" &&
       fortNum !== "" &&
       priceNow &&
-      exercise.blockNum !== 0
+      exercise.blockNum !== 0 && chainId
     ) {
       (async () => {
         setShowLoading(true);
         try {
           const value = await fortEuropeanOption.estimate(
-            ZERO_ADDRESS,
+            tokenPair.addresses[chainId],
             priceNow[tokenPair.symbol].nowPrice,
             normalToBigNumber(
               strikePrice,
@@ -263,15 +261,7 @@ const MintOptions: FC = () => {
     } else {
       setOptionTokenValue(undefined);
     }
-  }, [
-    exercise.blockNum,
-    fortEuropeanOption,
-    fortNum,
-    isLong,
-    priceNow,
-    strikePrice,
-    tokenPair.symbol,
-  ]);
+  }, [chainId, exercise.blockNum, fortEuropeanOption, fortNum, isLong, priceNow, strikePrice, tokenPair.addresses, tokenPair.symbol]);
 
   const checkButton = () => {
     if (
@@ -336,6 +326,7 @@ const MintOptions: FC = () => {
                 tokenNameOne={tokenPair.symbol}
                 tokenNameTwo={"USDT"}
               />
+              <PutDownIcon />
             </div>
             <p>{`${
               checkWidth() ? "1 " + tokenPair.symbol + " = " : ""

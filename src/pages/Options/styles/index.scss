@@ -28,6 +28,24 @@
             margin-top: 20px;
         }
 
+        &-tokenPair {
+            display: flex;
+            justify-content: space-between;
+
+            div+svg {
+                margin: auto auto;
+                margin-left: 10px;
+
+                circle {
+                    stroke: $gray-background-text-color;
+                }
+
+                path {
+                    fill: $gray-background-text-color;
+                }
+            }
+        }
+
         &-tokenPair+p {
             line-height: 44px;
             font-size: $T2;

@@ -3,6 +3,7 @@ import {
   TokenBTC,
   TokenETH,
   TokenFORT,
+  TokenPRC,
   TokenUSDT,
 } from "../../components/Icon";
 import { ZERO_ADDRESS } from "../utils";
@@ -72,7 +73,7 @@ export const tokenList: { [key: string]: TokenType } = {
     Icon: TokenBTC,
     decimals: 18,
     addresses: {
-      56: "0xf56c6eCE0C0d6Fbb9A53282C0DF71dBFaFA933eF",
+      56: "0x46893c30fBDF3A5818507309c0BDca62eB3e1E6b",
       97: "0xaE73d363Cb4aC97734E07e48B01D0a1FF5D1190B"
     },
     pairIndex: {
@@ -80,6 +81,20 @@ export const tokenList: { [key: string]: TokenType } = {
       97: '2'
     },
     sigmaSQ: BigNumber.from('31708924900')
+  },
+  PRC: {
+    symbol: "PRC",
+    Icon: TokenPRC,
+    decimals: 18,
+    addresses: {
+      56: "0x4738044bb1E1dCc1dCD2910F16a2F7b841956613",
+      97: "0x4738044bb1E1dCc1dCD2910F16a2F7b841956613"
+    },
+    pairIndex: {
+      56: '',
+      97: ''
+    },
+    sigmaSQ: BigNumber.from('0')
   },
 };
 
@@ -107,3 +122,13 @@ export const CofixSwapAddress: AddressesType = {
   56: '0xb29A8d980E1408E487B9968f5E4f7fD7a9B0CaC5',
   97: '0x4A448cBb12e449D7031f36C8122eCE6dDdf9cc84'
 };
+
+export const FortPRC : AddressesType = {
+  56: '0x4738044bb1E1dCc1dCD2910F16a2F7b841956613',
+  97: '0x4738044bb1E1dCc1dCD2910F16a2F7b841956613'
+}
+
+export const FortPRCSwap:  AddressesType = {
+  56: '0x3f495B1f2AD403EFb3090E5eda92725A34B00E23',
+  97: '0x3f495B1f2AD403EFb3090E5eda92725A34B00E23'
+}
