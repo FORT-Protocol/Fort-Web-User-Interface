@@ -50,6 +50,7 @@ const Hedge: FC = () => {
   const {account, chainId, library} = useWeb3();
   const [showNotice, setShowNotice] = useState(false);
   const [inputValue, setInputValue] = useState<string>();
+  const [isRefresh, setIsRefresh] = useState<boolean>(false);
   const modal = useRef<any>();
   const nestPriceContract = NestPriceContract();
   const fortLPGuaranteeContract = FortLPGuaranteeContract();
@@ -118,14 +119,35 @@ const Hedge: FC = () => {
       account
     );
     const resultList = hedgeList.filter((item: HedgeListType) =>
-      item.x0.gt(BigNumber.from("0"))
+      item.balance.gt(BigNumber.from("0"))
     );
     setHedgeListState(resultList);
+    setIsRefresh(true);
   }, [account, fortLPGuaranteeContract]);
   
-  useEffect(()=>{
-    getHedgeList()
-  }, [getHedgeList])
+  useEffect(() => {
+    if (!isRefresh) {
+      getHedgeList();
+    }
+    if (!txList || txList.length === 0) {
+      return;
+    }
+    const latestTx = txList[txList.length - 1];
+    if (
+      latestTx.txState === 1 &&
+      (latestTx.type === 10 || latestTx.type === 11)
+    ) {
+      setTimeout(getHedgeList, 4000);
+      setTimeout(() => {
+        if (!fortContract) {
+          return;
+        }
+        fortContract.balanceOf(account).then((value: any) => {
+          setDcuBalance(BigNumber.from(value));
+        });
+      }, 4000);
+    }
+  }, [account, fortContract, getHedgeList, isRefresh, txList]);
   
   useEffect(()=>{
     if (inputValue && priceNow && priceNow[tokenPair.symbol].nowPrice) {

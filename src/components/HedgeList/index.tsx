@@ -2,7 +2,6 @@ import { BigNumber } from "@ethersproject/bignumber";
 import { t, Trans } from "@lingui/macro";
 import { FC, useCallback, useEffect, useState } from "react";
 import {
-  FortEuropeanOptionContract,
   tokenList,
   TokenType,
 } from "../../libs/constants/addresses";
@@ -50,8 +49,7 @@ const HedgeList: FC<Props> = ({ ...props }) => {
   const active = useHedgeExercise(props.item.index.toNumber());
   
   const checkButton = () => {
-    return loadingButton() ||
-      Number(props.blockNum) <= props.item.exerciseBlock;
+    return loadingButton();
   };
 
   const classPrefix = "HedgeList";
