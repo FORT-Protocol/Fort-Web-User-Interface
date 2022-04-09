@@ -4,14 +4,15 @@
 .winChoice {
     width: 110px;
     height: 110px;
-    background-color: $gray-background-color;
+    background: white;
     border: 1px solid $gray-background-color;
     border-radius: 50%;
     box-shadow: $shadow;
     overflow:hidden;
 
     &-topNum {
-        margin-top: 46px;
+        margin-top: 40px;
+        margin-bottom: 6px;
         height: 30px;
         text-align: center;
         line-height: 30px;

@@ -47,7 +47,7 @@ export { ReactComponent as WhiteIcon } from './svg/whiteIcon.svg'
 export { ReactComponent as SafeIcon } from './svg/safeIcon.svg'
 export { ReactComponent as TokenBTC } from './svg/TokenBTC.svg'
 export { ReactComponent as TokenPRC } from './svg/TokenPRC.svg'
-
+export { ReactComponent as ClockPosition } from './svg/clockPosition.svg'
 
 
 export { ReactComponent as TokenLeverUp } from './svg/TokenLeverUp.svg'

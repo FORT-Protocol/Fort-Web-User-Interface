@@ -60,7 +60,10 @@ const useCheckWinResult = () => {
     if (nowTime - txList[txList.length - 1].addTime > 40) {
       return
     }
-    getList();
+    setTimeout(() => {
+      getList();
+    }, 5000);
+    
   }, [getList, txList]);
 };
 

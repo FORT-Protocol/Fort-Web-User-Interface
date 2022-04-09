@@ -7,4 +7,16 @@
     background: $button-disable-color;
     border-radius: 17px;
     overflow: hidden;
+
+    &-position {
+        float: left;
+        position: absolute;
+        width: 34px;
+        height: 34px;
+
+        svg {
+            margin-top: 14px;
+            margin-left: 14px;
+        } 
+    }
 }

@@ -1,3 +1,4 @@
+import { Tooltip } from "antd";
 import { BigNumber } from "ethers";
 import { FC, useState } from "react";
 import { PRCListType } from "..";
@@ -14,15 +15,17 @@ type WinOrderListProps = {
 
 const WinOrderList: FC<WinOrderListProps> = ({ ...props }) => {
   const classPrefix = "winOrderList";
-  
+
   const [isHistory, setIsHistory] = useState<Boolean>(false);
 
   const historyLi = props.historyList.map((item) => {
     return (
       <li key={item.owner + item.index.toString()}>
-        <HistoryTime blockNum={BigNumber.from(item.openBlock.toString()).toNumber()}/>
+        <HistoryTime
+          blockNum={BigNumber.from(item.openBlock.toString()).toNumber()}
+        />
         <p className={`${classPrefix}-historyList-right`}>
-          {BigNumber.from('0').eq(item.n) ? item.m : 0} DCU
+          {BigNumber.from("0").eq(item.n) ? item.m : 0} DCU
         </p>
       </li>
     );
@@ -30,21 +33,35 @@ const WinOrderList: FC<WinOrderListProps> = ({ ...props }) => {
   const pendingLi = props.pendingList.map((item) => {
     return (
       <li key={item.owner + item.index.toString() + "p"}>
-        <WinPendingItem
-          nowBlock={props.nowBlock}
-          gained={item.gained}
-          openBlock={item.openBlock}
-          index = {item.index}
-        />
+        <Tooltip
+          placement="bottom"
+          color={"#ffffff"}
+          title={"Estimated remaining claimable time"}
+        >
+          <span>
+            <WinPendingItem
+              nowBlock={props.nowBlock}
+              gained={item.gained}
+              openBlock={item.openBlock}
+              index={item.index}
+            />
+          </span>
+        </Tooltip>
       </li>
     );
   });
 
-  const listView = isHistory ? (props.historyList.length > 0 ? (
-    <ul className={`${classPrefix}-historyList`}>{historyLi}</ul>
-  ) : (<></>)) : (props.pendingList.length > 0 ? (
+  const listView = isHistory ? (
+    props.historyList.length > 0 ? (
+      <ul className={`${classPrefix}-historyList`}>{historyLi}</ul>
+    ) : (
+      <></>
+    )
+  ) : props.pendingList.length > 0 ? (
     <ul className={`${classPrefix}-pendingList`}>{pendingLi}</ul>
-  ) : (<></>));
+  ) : (
+    <></>
+  );
   return (
     <div className={classPrefix}>
       <MainCard classNames={`${classPrefix}-card`}>
