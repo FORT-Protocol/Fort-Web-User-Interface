@@ -17,6 +17,7 @@ export const WinPendingItem: FC<WinPendingItemType> = ({ ...props }) => {
   const classPrefix = "winPendingItem";
   const [timeString, setTimeString] = useState<String>('');
   const [countNum, setCountNum] = useState<number>(0);
+  const [leftTimeClock, setLeftTimeClock] = useState<number>(0);
 
   const claim = useFortPRCClaim(
     props.index
@@ -26,11 +27,12 @@ export const WinPendingItem: FC<WinPendingItemType> = ({ ...props }) => {
   
   useEffect(() => {
     const thisLeftTime = leftTime - countNum
-    console.log(thisLeftTime)
     if (thisLeftTime <= 0) {
       setTimeString('0:00')
+      setLeftTimeClock(0)
       return
     }
+    setLeftTimeClock(thisLeftTime)
     const minTime = parseInt((parseInt(thisLeftTime.toString()) / 60).toString())
     var secondString = (thisLeftTime - minTime * 60).toString()
     if (secondString.length === 1) {
@@ -43,7 +45,6 @@ export const WinPendingItem: FC<WinPendingItemType> = ({ ...props }) => {
   useEffect(() => {
     setTimeout(() => {
       setCountNum(countNum + 1)
-      console.log(countNum)
     }, 1000);
   }, [countNum])
 
@@ -55,7 +56,7 @@ export const WinPendingItem: FC<WinPendingItemType> = ({ ...props }) => {
   return (
     <div className={classPrefix}>
       <div className={`${classPrefix}-left`}>
-        <div className={`${classPrefix}-left-clock`}><PendingClock/></div>
+        <div className={`${classPrefix}-left-clock`}><PendingClock leftTime={leftTimeClock} allTime={allTime}/></div>
         <div className={`${classPrefix}-left-text`}>{timeString}</div>
       </div>
       <div className={`${classPrefix}-right`}>

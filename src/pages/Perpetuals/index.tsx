@@ -42,13 +42,13 @@ import PerpetualsListMobile from "../../components/PerpetualsList/PerpetualsList
 import { PutDownIcon } from "../../components/Icon";
 
 export type LeverListType = {
-  index: BigNumber; 
-  tokenAddress: string; 
-  lever: BigNumber; 
-  orientation: boolean; 
-  balance: BigNumber; 
-  basePrice: BigNumber; 
-  baseBlock: BigNumber; 
+  index: BigNumber;
+  tokenAddress: string;
+  lever: BigNumber;
+  orientation: boolean;
+  balance: BigNumber;
+  basePrice: BigNumber;
+  baseBlock: BigNumber;
 };
 
 const Perpetuals: FC = () => {
@@ -327,6 +327,7 @@ const Perpetuals: FC = () => {
           bottomRightText={""}
           tokenSelect={true}
           tokenList={[tokenList["ETH"], tokenList["BTC"]]}
+          showUSDT={true}
           getSelectedToken={setTokenPair}
         >
           <div className={`${classPrefix}-card-tokenPair`}>

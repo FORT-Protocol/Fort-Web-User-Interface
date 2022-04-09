@@ -319,6 +319,7 @@ const MintOptions: FC = () => {
             bottomRightText={""}
             tokenSelect={true}
             tokenList={[tokenList["ETH"], tokenList["BTC"]]}
+            showUSDT={true}
             getSelectedToken={setTokenPair}
           >
             <div className={`${classPrefix}-leftCard-tokenPair`}>

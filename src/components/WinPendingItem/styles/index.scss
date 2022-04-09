@@ -11,8 +11,8 @@
         height: 78px;
 
         &-clock {
-            // padding-top: 10px;
-            display: none;
+            padding-top: 10px;
+            // display: none;
             .pendingClock {
                 margin: 0 auto;
             }
@@ -20,8 +20,8 @@
         
         &-text {
             width: 100%;
-            height: 78px;
-            line-height: 78px;
+            height: 33px;
+            line-height: 33px;
             font-size: 25px;
             font-family: $boldFont;
         }

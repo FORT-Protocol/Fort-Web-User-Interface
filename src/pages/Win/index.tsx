@@ -32,7 +32,7 @@ export type PRCListType = {
 const Win: FC = () => {
   const classPrefix = "win";
   const { chainId, account, library } = useWeb3();
-  const [selected, setSelected] = useState<BigNumber>();
+  const [selected, setSelected] = useState<BigNumber>(BigNumber.from('100000000000000000000'));
   const [winPendingList, setWinPendingList] = useState<Array<PRCListType>>([]);
   const [historyList, setHistoryList] = useState<Array<PRCListType>>([]);
   const [nowBlock, setNowBlock] = useState<number>(0);
@@ -144,7 +144,7 @@ const Win: FC = () => {
           disable={selected == null || mainButtonPending() || !PRCBalance.gte(BigNumber.from('1000000000000000000'))}
           loading={mainButtonPending()}
         >
-          {<Trans>Confirm</Trans>}
+          {<Trans>Roll</Trans>}
         </MainButton>
         <p className={`${classPrefix}-card-balance`}>
           <span>Balance: {bigNumberToNormal(PRCBalance, 18, 6)} PRC</span>
