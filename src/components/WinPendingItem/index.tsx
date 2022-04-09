@@ -56,7 +56,7 @@ export const WinPendingItem: FC<WinPendingItemType> = ({ ...props }) => {
   return (
     <div className={classPrefix}>
       <div className={`${classPrefix}-left`}>
-        <div className={`${classPrefix}-left-clock`}><PendingClock leftTime={leftTimeClock} allTime={allTime}/></div>
+        <div className={`${classPrefix}-left-clock`}><PendingClock leftTime={leftTimeClock} allTime={allTime} index={props.index.toNumber()}/></div>
         <div className={`${classPrefix}-left-text`}>{timeString}</div>
       </div>
       <div className={`${classPrefix}-right`}>

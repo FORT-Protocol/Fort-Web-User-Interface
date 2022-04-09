@@ -6,7 +6,7 @@
     margin: 0 auto;
     padding: 40px 44px;
     margin-top: 22px;
-    margin-bottom: 44px;
+    margin-bottom: 22px;
 
     &-title {
         margin-left: 0;
@@ -50,4 +50,11 @@
         }
     }
 
+}
+
+@media screen and (max-width: 1000px) {
+    .win-card {
+        margin: 0 10px;
+        padding: 20px 20px;
+    }
 }

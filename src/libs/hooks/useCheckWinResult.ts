@@ -32,12 +32,13 @@ const useCheckWinResult = () => {
           .add(BigNumber.from(256))
           .gt(latest)
     );
-    if (pending.length === 0) {return}
+    if (pending.length === 0) {
+      return;
+    }
     const latestItem = pending[pending.length - 1];
     const allTime = 256 * 3;
     const leftTime =
-      allTime -
-      BigNumber.from(latest).sub(latestItem.openBlock).toNumber() * 3;
+      allTime - BigNumber.from(latest).sub(latestItem.openBlock).toNumber() * 3;
     const minTime = parseInt((parseInt(leftTime.toString()) / 60).toString());
     const timeString =
       minTime.toString() + ":" + (leftTime - minTime * 60).toString();
@@ -52,18 +53,18 @@ const useCheckWinResult = () => {
     if (
       !txList ||
       txList.length === 0 ||
-      txList[txList.length - 1].type !== TransactionType.roll
+      txList[txList.length - 1].type !== TransactionType.roll ||
+      txList[txList.length - 1].txState !== 1
     ) {
       return;
     }
-    const nowTime = new Date().getTime() / 1000
+    const nowTime = new Date().getTime() / 1000;
     if (nowTime - txList[txList.length - 1].addTime > 40) {
-      return
+      return;
     }
     setTimeout(() => {
       getList();
     }, 5000);
-    
   }, [getList, txList]);
 };
 

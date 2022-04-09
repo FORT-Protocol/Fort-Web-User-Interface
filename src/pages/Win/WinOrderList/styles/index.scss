@@ -5,8 +5,7 @@
     max-width: $baseWidth;
     margin: 0 auto;
     padding: 40px 44px;
-    margin-top: 22px;
-    margin-bottom: 44px;
+    margin-bottom: 22px;
 
     &-title {
         font-size: $T2;
@@ -20,6 +19,14 @@
         margin: 0 auto;
         margin-top: 20px;
         width: 100%;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .winOrderList-card {
+        margin: 0 10px;
+        margin-top: 22px;
+        padding: 20px 20px;
     }
 }
 

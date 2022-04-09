@@ -5,6 +5,7 @@ import "./styles";
 type PendingClockType = {
   leftTime: number;
   allTime: number;
+  index: number;
 }
 
 const PendingClock:FC<PendingClockType> = ({...props}) => {
@@ -12,7 +13,7 @@ const PendingClock:FC<PendingClockType> = ({...props}) => {
 
   useEffect(() => {
     const du = 360 - props.leftTime / props.allTime * 360 + (-90)
-    var canvas = document.getElementById("topClock") as any;
+    var canvas = document.getElementById(`topClock-${props.index}`) as any;
     var cv = canvas?.getContext("2d");
     cv.clearRect(0,0,34,34);
     cv.beginPath();
@@ -21,14 +22,14 @@ const PendingClock:FC<PendingClockType> = ({...props}) => {
     cv.fillStyle = "#80C269";
     cv.fill();
 
-    var canvas2 = document.getElementById("position");
+    var canvas2 = document.getElementById(`position-${props.index}`);
     canvas2!.style.transform = `rotate(${du}deg)`;
     
-  }, [props.allTime, props.leftTime])
+  }, [props.allTime, props.index, props.leftTime])
   return (
     <div className={classPrefix}>
-      <div id={'position'} className={`${classPrefix}-position`}><ClockPosition/></div>
-      <canvas id='topClock' width={`34px`} height={`34px`}>
+      <div id={`position-${props.index}`} className={`${classPrefix}-position`}><ClockPosition/></div>
+      <canvas id={`topClock-${props.index}`} width={`34px`} height={`34px`}>
         {/* Your browser does not support the canvas element. */}
       </canvas>
     </div>
