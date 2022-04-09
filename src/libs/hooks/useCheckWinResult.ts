@@ -56,6 +56,10 @@ const useCheckWinResult = () => {
     ) {
       return;
     }
+    const nowTime = new Date().getTime() / 1000
+    if (nowTime - txList[txList.length - 1].endTime > 30) {
+      return
+    }
     getList();
   }, [getList, txList]);
 };

@@ -36,7 +36,7 @@ export const WinPendingItem: FC<WinPendingItemType> = ({ ...props }) => {
     const minTime = parseInt((parseInt(thisLeftTime.toString()) / 60).toString())
     var secondString = (thisLeftTime - minTime * 60).toString()
     if (secondString.length === 1) {
-      secondString = secondString + "0"
+      secondString = "0" + secondString
     }
     const time = minTime.toString() + ":" + secondString
     setTimeString(time)

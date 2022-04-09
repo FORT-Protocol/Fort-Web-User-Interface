@@ -1,8 +1,10 @@
+import { BigNumber } from "ethers";
 import { FC, useState } from "react";
 import { PRCListType } from "..";
 import MainCard from "../../../components/MainCard";
 import { WinPendingItem } from "../../../components/WinPendingItem";
 import { bigNumberToNormal } from "../../../libs/utils";
+import { HistoryTime } from "./HistoryTime";
 import "./styles";
 
 type WinOrderListProps = {
@@ -13,14 +15,13 @@ type WinOrderListProps = {
 
 const WinOrderList: FC<WinOrderListProps> = ({ ...props }) => {
   const classPrefix = "winOrderList";
+  
   const [isHistory, setIsHistory] = useState<Boolean>(false);
 
   const historyLi = props.historyList.map((item) => {
     return (
       <li key={item.owner + item.index.toString()}>
-        <p className={`${classPrefix}-historyList-left`}>
-          {item.openBlock.toString()}
-        </p>
+        <HistoryTime blockNum={BigNumber.from(item.openBlock.toString()).toNumber()}/>
         <p className={`${classPrefix}-historyList-right`}>
           {bigNumberToNormal(item.gained, 18, 6)} DCU
         </p>

@@ -1,4 +1,5 @@
 import { Trans } from "@lingui/macro";
+import { Tooltip } from "antd";
 import { BigNumber } from "ethers";
 import { FC, useCallback, useEffect, useRef, useState } from "react";
 import MainButton from "../../components/MainButton";
@@ -73,11 +74,9 @@ const Win: FC = () => {
     const result = listResult.filter(
       (item: PRCListType) => item.owner !== ZERO_ADDRESS
     );
-    const history = result.filter((item: PRCListType) =>
-      BigNumber.from(item.n.toString()).eq(BigNumber.from("0")) || BigNumber.from(item.openBlock.toString()).add(BigNumber.from(256)).lte(latest)
-    );
+    const history = result
     const pending = result.filter((item: PRCListType) =>
-      BigNumber.from(item.n.toString()).gt(BigNumber.from("0")) && BigNumber.from(item.openBlock.toString()).add(BigNumber.from(256)).gt(latest)
+      (BigNumber.from(item.n.toString()).gt(BigNumber.from("0")) && BigNumber.from(item.openBlock.toString()).add(BigNumber.from(256)).gt(latest) && BigNumber.from(item.gained.toString()).gt(BigNumber.from("0"))) || (BigNumber.from(item.gained.toString()).eq(BigNumber.from("0")) && BigNumber.from(latest).sub(item.openBlock).lte(BigNumber.from(10)))
     );
     setHistoryList(history)
     setWinPendingList(pending)
@@ -96,6 +95,23 @@ const Win: FC = () => {
       }
     };
   }, [getList]);
+  const { ethereum } = window;
+  const addToken = async () => {
+    if (!chainId) {return}
+    
+    await ethereum.request({
+      method: 'wallet_watchAsset',
+      params: {
+        type: 'ERC20', // Initially only supports ERC20, but eventually more!
+        options: {
+          address: tokenList['PRC'].addresses[chainId], // The address that the token is at.
+          symbol: 'PRC', // A ticker symbol or shorthand, up to 5 chars.
+          decimals: 18, // The number of decimals in the token
+          image: '', // A string url of the token logo
+        },
+      },
+    });
+  } 
 
   const confirm = useFortPRCRoll(
     BigNumber.from("1"),
@@ -147,7 +163,13 @@ const Win: FC = () => {
           {<Trans>Roll</Trans>}
         </MainButton>
         <p className={`${classPrefix}-card-balance`}>
+        <Tooltip
+          placement="right"
+          color={"#ffffff"}
+          title={<button onClick={() => addToken()}>+ Add PRC to your wallet</button>}
+        >
           <span>Balance: {bigNumberToNormal(PRCBalance, 18, 6)} PRC</span>
+          </Tooltip>
         </p>
       </MainCard>
       <WinOrderList historyList={historyList} pendingList={winPendingList} nowBlock={nowBlock}/>
