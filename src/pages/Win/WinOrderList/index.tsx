@@ -3,7 +3,6 @@ import { FC, useState } from "react";
 import { PRCListType } from "..";
 import MainCard from "../../../components/MainCard";
 import { WinPendingItem } from "../../../components/WinPendingItem";
-import { bigNumberToNormal } from "../../../libs/utils";
 import { HistoryTime } from "./HistoryTime";
 import "./styles";
 
@@ -23,7 +22,7 @@ const WinOrderList: FC<WinOrderListProps> = ({ ...props }) => {
       <li key={item.owner + item.index.toString()}>
         <HistoryTime blockNum={BigNumber.from(item.openBlock.toString()).toNumber()}/>
         <p className={`${classPrefix}-historyList-right`}>
-          {bigNumberToNormal(item.gained, 18, 6)} DCU
+          {BigNumber.from('0').eq(item.n) ? item.m : 0} DCU
         </p>
       </li>
     );
