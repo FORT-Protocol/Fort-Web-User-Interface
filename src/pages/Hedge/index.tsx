@@ -266,7 +266,7 @@ const Hedge: FC = () => {
       );
       setDcuAllowance(allowance);
     })();
-  }, [account, chainId, library, txList, tokenList]);
+  }, [account, chainId, library, txList]);
   
   const approve = useERC20Approve(
     'DCU',

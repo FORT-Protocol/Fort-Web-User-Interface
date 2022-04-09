@@ -16,7 +16,6 @@ import {
   BASE_2000ETH_AMOUNT, BASE_AMOUNT,
   bigNumberToNormal,
   checkWidth,
-  ZERO_ADDRESS,
 } from "../../libs/utils";
 import MainButton from "../MainButton";
 import MainCard from "../MainCard";
@@ -37,6 +36,7 @@ type Props = {
 const HedgeList: FC<Props> = ({ ...props }) => {
   const { pendingList } = useTransactionListCon();
   const priceContract = NestPriceContract();
+  const {library} = useWeb3();
   const [strikeAmount, setStrikeAmount] = useState<BigNumber>();
   const [tokenX, setTokenX] = useState("ETH")
   const loadingButton = () => {
@@ -61,24 +61,26 @@ const HedgeList: FC<Props> = ({ ...props }) => {
   const active = useHedgeExercise(props.item.index.toNumber());
   
   const getPrice = useCallback(async () => {
-    if (priceContract) {
-      const price = await priceContract.lastPriceList(
+    if (priceContract && library) {
+      const latest = await library?.getBlockNumber();
+      let exerciseBlock = props.item.exerciseBlock
+      if (latest < props.item.exerciseBlock) {
+        exerciseBlock = latest
+      }
+      const blockPrice: Array<BigNumber> = await priceContract.findPrice(
         0,
         props.item.tokenIndex,
-        1
+        exerciseBlock
       );
-      const price_USDT = BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(
-        price[1]
-      );
-      const exercisePrice = parseToBigNumber(price_USDT).multipliedBy(parseToBigNumber(props.item.y0))
-        .shiftedBy(-18).plus(parseToBigNumber(props.item.x0)).multipliedBy(2).minus(
-          (parseToBigNumber(props.item.x0).multipliedBy(parseToBigNumber(props.item.y0))
-            .shiftedBy(-18)).sqrt()
-        )
-    
+      const price_USDT = parseToBigNumber(BASE_2000ETH_AMOUNT).multipliedBy(parseToBigNumber(BASE_AMOUNT)).div(parseToBigNumber(blockPrice[1]))
+      const x0 = parseToBigNumber(props.item.x0)
+      const y0 = parseToBigNumber(props.item.y0)
+      const oraclePrice = parseToBigNumber(price_USDT)
+      const exercisePrice = oraclePrice.multipliedBy(y0).shiftedBy(-18).plus(x0)
+        .minus((x0.multipliedBy(y0).multipliedBy(oraclePrice).shiftedBy(-18)).sqrt().multipliedBy(2))
       setStrikeAmount(exercisePrice)
     }
-  }, [priceContract, props.item])
+  }, [priceContract, props.item, library])
   
   useEffect(()=>{
     getPrice()
