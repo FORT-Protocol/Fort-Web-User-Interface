@@ -98,7 +98,8 @@ const Win: FC = () => {
     if (
       !txList ||
       txList.length === 0 ||
-      txList[txList.length - 1].type !== TransactionType.roll ||
+      (txList[txList.length - 1].type !== TransactionType.roll &&
+        txList[txList.length - 1].type !== TransactionType.prcclaim) ||
       txList[txList.length - 1].txState !== 1
     ) {
       return;

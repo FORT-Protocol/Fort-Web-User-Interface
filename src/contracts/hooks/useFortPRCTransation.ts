@@ -49,6 +49,6 @@ export function useFortPRCClaim(
         to: contract?.address,
         data: callData
     }
-    const txPromise = useSendTransaction(contract, tx, {title:`Claim`, info:'', type: TransactionType.prcclaim})
+    const txPromise = useSendTransaction(contract, tx, {title:`Claim`, info:index.toString(), type: TransactionType.prcclaim})
     return txPromise
 }

@@ -21,21 +21,12 @@ const useCheckWinResult = () => {
     if (!latest) {
       return;
     }
-    const listResult = await fortPRCContract.find("0", "300", "300", account);
+    const listResult = await fortPRCContract.find("0", "3000", "3000", account);
     const result = listResult.filter(
       (item: PRCListType) => item.owner !== ZERO_ADDRESS
     );
-    const pending: Array<PRCListType> = result.filter(
-      (item: PRCListType) =>
-        BigNumber.from(item.n.toString()).gt(BigNumber.from("0")) &&
-        BigNumber.from(item.openBlock.toString())
-          .add(BigNumber.from(256))
-          .gt(latest)
-    );
-    if (pending.length === 0) {
-      return;
-    }
-    const latestItem = pending[pending.length - 1];
+
+    const latestItem = result[0];
     const allTime = 256 * 3;
     const leftTime =
       allTime - BigNumber.from(latest).sub(latestItem.openBlock).toNumber() * 3;
@@ -64,7 +55,7 @@ const useCheckWinResult = () => {
     }
     setTimeout(() => {
       getList();
-    }, 5000);
+    }, 10000);
   }, [getList, txList]);
 };
 
