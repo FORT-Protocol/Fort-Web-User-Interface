@@ -87,8 +87,8 @@ export const tokenList: { [key: string]: TokenType } = {
     Icon: TokenPRC,
     decimals: 18,
     addresses: {
-      56: "0x4738044bb1E1dCc1dCD2910F16a2F7b841956613",
-      97: "0x4738044bb1E1dCc1dCD2910F16a2F7b841956613"
+      56: "0x6c0cC0e354c12B7c0aceCC45424e9Ee1334bda24",
+      97: "0x6c0cC0e354c12B7c0aceCC45424e9Ee1334bda24"
     },
     pairIndex: {
       56: '',
@@ -124,11 +124,11 @@ export const CofixSwapAddress: AddressesType = {
 };
 
 export const FortPRC : AddressesType = {
-  56: '0x4738044bb1E1dCc1dCD2910F16a2F7b841956613',
-  97: '0x4738044bb1E1dCc1dCD2910F16a2F7b841956613'
+  56: '0x6c0cC0e354c12B7c0aceCC45424e9Ee1334bda24',
+  97: '0x6c0cC0e354c12B7c0aceCC45424e9Ee1334bda24'
 }
 
 export const FortPRCSwap:  AddressesType = {
-  56: '0x3f495B1f2AD403EFb3090E5eda92725A34B00E23',
-  97: '0x3f495B1f2AD403EFb3090E5eda92725A34B00E23'
+  56: '0xb035E907cF84472af91b69eBa1fB7E4eeCF6D3F6',
+  97: '0xb035E907cF84472af91b69eBa1fB7E4eeCF6D3F6'
 }

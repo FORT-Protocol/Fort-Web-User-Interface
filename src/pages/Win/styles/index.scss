@@ -50,6 +50,17 @@
         }
     }
 
+    &-balance-add {
+        display: flex;
+        color: $main-button-color;
+        justify-content: space-between;
+        cursor: pointer;
+
+        p {
+            line-height: 22px;
+            margin-left: 5px;
+        }
+    }
 }
 
 @media screen and (max-width: 1000px) {

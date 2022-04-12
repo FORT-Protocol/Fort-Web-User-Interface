@@ -2,6 +2,7 @@ import { Trans } from "@lingui/macro";
 import { Tooltip } from "antd";
 import { BigNumber } from "ethers";
 import { FC, useCallback, useEffect, useRef, useState } from "react";
+import { AddTokenIcon } from "../../components/Icon";
 import MainButton from "../../components/MainButton";
 import MainCard from "../../components/MainCard";
 import WinChoice from "../../components/WinChoice";
@@ -137,7 +138,11 @@ const Win: FC = () => {
 
   const confirm = useFortPRCRoll(
     BigNumber.from("1"),
-    selected ? BigNumber.from(bigNumberToNormal(selected, 18, 6)) : null
+    selected
+      ? BigNumber.from(
+          bigNumberToNormal(selected.mul(BigNumber.from("10000")), 18, 6)
+        )
+      : null
   );
 
   const mainButtonPending = () => {
@@ -178,7 +183,16 @@ const Win: FC = () => {
         </div>
         <MainButton
           className={`${classPrefix}-card-button`}
-          onClick={() => confirm()}
+          onClick={() => {
+            if (
+              selected == null ||
+              mainButtonPending() ||
+              !PRCBalance.gte(BigNumber.from("1000000000000000000"))
+            ) {
+              return;
+            }
+            confirm();
+          }}
           disable={
             selected == null ||
             mainButtonPending() ||
@@ -193,8 +207,8 @@ const Win: FC = () => {
             placement="right"
             color={"#ffffff"}
             title={
-              <button onClick={() => addToken()}>
-                + Add PRC to your wallet
+              <button className={`${classPrefix}-card-balance-add`} onClick={() => addToken()}>
+                <AddTokenIcon/><p>Add PRC to your wallet</p>
               </button>
             }
           >

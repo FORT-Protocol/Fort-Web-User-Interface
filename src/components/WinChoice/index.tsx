@@ -36,18 +36,17 @@ const WinChoice: FC<WinChoiceProps> = ({ ...props }) => {
           {DCUAmountNormal}
         </Tooltip>
       </p>
-      <div className={`${classPrefix}-bottomBg`}>
-        <p className={`${classPrefix}-bottomBg-num`}>
-        <Tooltip
-          placement="top"
-          color={"#ffffff"}
-          title={`Probability of winning ${DCUAmountNormal} DCU`}
-        >
-          {`${
-          100 / parseFloat(DCUAmountNormal)
-        } %`}</Tooltip></p>
-        
-      </div>
+      <Tooltip
+        placement="top"
+        color={"#ffffff"}
+        title={`Probability of winning ${DCUAmountNormal} DCU`}
+      >
+        <div className={`${classPrefix}-bottomBg`}>
+          <p className={`${classPrefix}-bottomBg-num`}>
+            {`${100 / parseFloat(DCUAmountNormal)} %`}
+          </p>
+        </div>
+      </Tooltip>
     </div>
   );
 };

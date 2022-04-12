@@ -19,13 +19,14 @@ const WinOrderList: FC<WinOrderListProps> = ({ ...props }) => {
   const [isHistory, setIsHistory] = useState<Boolean>(false);
 
   const historyLi = props.historyList.map((item) => {
+    const itemAmount = BigNumber.from(item.m.toString()).div(BigNumber.from('10000'))
     return (
       <li key={item.owner + item.index.toString()}>
         <HistoryTime
           blockNum={BigNumber.from(item.openBlock.toString()).toNumber()}
         />
         <p className={`${classPrefix}-historyList-right`}>
-          {BigNumber.from("0").eq(item.n) ? item.m : 0} DCU
+          {BigNumber.from("0").eq(item.n) ? itemAmount.toString() : 0} DCU
         </p>
       </li>
     );
@@ -65,18 +66,20 @@ const WinOrderList: FC<WinOrderListProps> = ({ ...props }) => {
   return (
     <div className={classPrefix}>
       <MainCard classNames={`${classPrefix}-card`}>
-        <p className={`${classPrefix}-card-title`}>
-          {isHistory ? "History" : "Waiting list"}
-        </p>
+        <div className={`${classPrefix}-card-topShow`}>
+          <p className={`${classPrefix}-card-topShow-title`}>
+            {isHistory ? "History" : "Waiting list"}
+          </p>
+          <button
+            className={`${classPrefix}-card-topShow-bottom`}
+            onClick={() => {
+              setIsHistory(!isHistory);
+            }}
+          >
+            {isHistory ? "< Waiting list" : "History >"}
+          </button>
+        </div>
         {listView}
-        <button
-          className={`${classPrefix}-card-bottom`}
-          onClick={() => {
-            setIsHistory(!isHistory);
-          }}
-        >
-          {isHistory ? "< Waiting list" : "History >"}
-        </button>
       </MainCard>
     </div>
   );

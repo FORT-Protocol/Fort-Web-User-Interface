@@ -7,18 +7,23 @@
     padding: 40px 44px;
     margin-bottom: 22px;
 
-    &-title {
-        font-size: $T2;
-        color: $gray-background-text-color;
-    }
-
-    &-bottom {
-        display: block;
-        font-size: $T2;
-        color: $gray-background-text-color;
-        margin: 0 auto;
-        margin-top: 20px;
-        width: 100%;
+    &-topShow {
+        display: flex;
+        justify-content: space-between;
+        &-title {
+            font-size: $T2;
+            color: $gray-background-text-color;
+            width: 40%;
+        }
+    
+        &-bottom {
+            display: block;
+            width: 40%;
+            text-align: right;
+            font-size: $T2;
+            color: $gray-background-text-color;
+    
+        }
     }
 }
 
