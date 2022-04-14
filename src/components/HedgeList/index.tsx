@@ -78,7 +78,11 @@ const HedgeList: FC<Props> = ({ ...props }) => {
       const oraclePrice = parseToBigNumber(price_USDT)
       const exercisePrice = oraclePrice.multipliedBy(y0).shiftedBy(-18).plus(x0)
         .minus((x0.multipliedBy(y0).multipliedBy(oraclePrice).shiftedBy(-18)).sqrt().multipliedBy(2))
-      setStrikeAmount(exercisePrice)
+      if (exercisePrice.gt(0)){
+        setStrikeAmount(exercisePrice)
+      } else {
+        setStrikeAmount(parseToBigNumber(0))
+      }
     }
   }, [priceContract, props.item, library])
   
