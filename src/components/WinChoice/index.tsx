@@ -27,15 +27,18 @@ const WinChoice: FC<WinChoiceProps> = ({ ...props }) => {
         props.callBack(props.DCUAmount);
       }}
     >
-      <p className={`${classPrefix}-topNum`}>
-        <Tooltip
-          placement="top"
-          color={"#ffffff"}
-          title={"Amount of DCU that 1 PRC can win"}
-        >
-          {DCUAmountNormal}
-        </Tooltip>
-      </p>
+      <div className={`${classPrefix}-topBg`}>
+        <p className={`${classPrefix}-topBg-topNum`}>
+          <Tooltip
+            placement="top"
+            color={"#ffffff"}
+            title={"Amount of DCU that 1 PRC can win"}
+          >
+            {DCUAmountNormal}
+          </Tooltip>
+        </p>
+      </div>
+
       <Tooltip
         placement="top"
         color={"#ffffff"}

@@ -6,27 +6,33 @@
     height: 110px;
     background: white;
     border: 1px solid $gray-background-color;
-    border-radius: 50%;
+    border-radius: 55px;
     box-shadow: $shadow;
-    overflow:hidden;
+    overflow: hidden;
 
-    &-topNum {
-        margin-top: 40px;
-        margin-bottom: 6px;
-        height: 30px;
-        text-align: center;
-        line-height: 30px;
-        font-family: MontserratBold;
-        font-size: $T2;
+    &-topBg {
+        height: 76px;
+        padding-top: 40px;
+
+        &-topNum {
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            font-family: MontserratBold;
+            font-size: $T2;
+        }
     }
+    
 
     &-bottomBg {
-        height: 30%;
+        height: 34px;
         text-align: center;
         line-height: 34px;
-        background-color: #DDEDF2;
+        background: #DDEDF2;
 
         &-num {
+            height: 34px;
+            width: 110px;
             text-align: center;
             line-height: 34px;
             font-size: $T4;
@@ -35,9 +41,11 @@
 }
 
 .winChoice-selected {
-    background-color: $main-button-color;
+    .winChoice-topBg {
+        background: $main-button-color;
 
-    .winChoice-topNum {
-        color: $main-background-color;
+        &-topNum {
+            color: $main-background-color;
+        }
     }
 }

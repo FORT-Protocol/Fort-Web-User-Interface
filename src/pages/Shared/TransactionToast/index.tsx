@@ -56,7 +56,6 @@ export const notifyTransaction = (txInfo: TransactionInfoType) => {
   toast(<TransactionToast info={toastInfo} />, {
     position: toast.POSITION.TOP_RIGHT,
     closeOnClick: false,
-    // hideProgressBar: true,
   });
 };
 
