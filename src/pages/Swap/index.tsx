@@ -4,7 +4,7 @@ import { t, Trans } from "@lingui/macro";
 import { Tooltip } from "antd";
 import moment from "moment";
 import { FC, useCallback, useEffect, useState } from "react";
-import { ExchangeIcon, PutDownIcon } from "../../components/Icon";
+import { ExchangeIcon } from "../../components/Icon";
 import InfoShow from "../../components/InfoShow";
 import MainButton from "../../components/MainButton";
 import MainCard from "../../components/MainCard";
@@ -314,14 +314,14 @@ const Swap: FC = () => {
                 : "---"
             } ${swapToken.src}`
           }
-          tokenSelect={true}
+          tokenSelect={false}
           tokenList={tokenListShow(true)}
           getSelectedToken={getSelectedSrcToken}
           balanceRed={!checkBalance()}
         >
           <div className={`${classPrefix}-card-selected`}>
             <SingleTokenShow tokenNameOne={swapToken.src} isBold />
-            <p><PutDownIcon /></p>
+            {/* <p><PutDownIcon /></p> */}
           </div>
 
           <input
@@ -363,13 +363,13 @@ const Swap: FC = () => {
                 : "---"
             } ${swapToken.dest}`
           }
-          tokenSelect={true}
+          tokenSelect={false}
           tokenList={tokenListShow(false)}
           getSelectedToken={getSelectedDestToken}
         >
           <div className={`${classPrefix}-card-selected`}>
             <SingleTokenShow tokenNameOne={swapToken.dest} isBold />
-            <p><PutDownIcon /></p>
+            {/* <p><PutDownIcon /></p> */}
           </div>
           <p className={"showValue"}>
             {destValue ? bigNumberToNormal(destValue, 18, 6) : undefined}
