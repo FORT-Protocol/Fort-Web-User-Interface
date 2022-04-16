@@ -29,7 +29,7 @@ export const KCC = {
   rpc: [
     `https://rpc-mainnet.kcc.network`
   ],
-  infoURL: "https://explorer.kcc.io/cn/",
+  infoURL: "https://scan.kcc.io/cn/",
 };
 
-export const SupportedChains: Array<Chain> = [KCCTest];
+export const SupportedChains: Array<Chain> = [KCC];

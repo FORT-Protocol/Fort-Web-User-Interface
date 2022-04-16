@@ -72,7 +72,7 @@ export const tokenList: { [key: string]: TokenType } = {
     Icon: TokenBTC,
     decimals: 18,
     addresses: {
-      321: "0x46893c30fBDF3A5818507309c0BDca62eB3e1E6b",
+      321: "0x32D4a9a94537a88118e878c56b93009Af234A6ce",
       322: "0x5cbb73B367FD69807381d06BC2041BEc86d8487d"
     },
     pairIndex: {
@@ -84,17 +84,17 @@ export const tokenList: { [key: string]: TokenType } = {
 };
 
 export const FortEuropeanOptionContract: AddressesType = {
-  321: "0x284935F8C571d054Df98eDA8503ea13cde5fd8Cc",
+  321: "0x01ffb51Da9bf237fC6dDB7940dd7Edc859dBFE82",
   322: "0x5F1ae37aF4716d12E336d706E2D9bDdA710425c5"
 };
 
 export const FortLeverContract: AddressesType = {
-  321: "0x8c5052f7747D8Ebc2F069286416b6aE8Ad3Cc149",
+  321: "0x284935F8C571d054Df98eDA8503ea13cde5fd8Cc",
   322: "0xBa2064BbD49454517A9dBba39005bf46d31971f8"
 };
 
 export const NestPrice: AddressesType = {
-  321: "0x09CE0e021195BA2c1CDE62A8B187abf810951540",
+  321: "0x7DBe94A4D6530F411A1E7337c7eb84185c4396e6",
   322: "0xF331D5C0E36Cc8a575D185b1D513715be55087E4"
 };
 
