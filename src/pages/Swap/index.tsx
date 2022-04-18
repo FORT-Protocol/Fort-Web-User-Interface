@@ -32,6 +32,7 @@ import {
   formatInputNum,
   normalToBigNumber,
 } from "../../libs/utils";
+import PriceChart from "./PriceChart";
 import "./styles";
 
 type SwapTokenType = {
@@ -405,6 +406,12 @@ const Swap: FC = () => {
         >
           {checkAllowance() ? <Trans>Swap</Trans> : <Trans>Approve</Trans>}
         </MainButton>
+      </MainCard>
+      <MainCard classNames={`${classPrefix}-card`}>
+        <div className={`${classPrefix}-card-title `}>
+          <p className={`infoView-topLeft`}>Trading Price of DCU</p>
+        </div>
+        <PriceChart />
       </MainCard>
     </div>
   );

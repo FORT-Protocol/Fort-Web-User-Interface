@@ -6,7 +6,7 @@
     margin: 0 auto;
     padding: 40px 44px;
     margin-top: 22px;
-    margin-bottom: 44px;
+    margin-bottom: 22px;
 
     &-trading {
         display: flex;
@@ -70,6 +70,10 @@
                 }
             }
         }
+    }
+
+    &-title {
+        margin-bottom: 20px;
     }
 }
 
