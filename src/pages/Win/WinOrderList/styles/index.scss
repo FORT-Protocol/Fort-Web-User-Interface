@@ -1,0 +1,70 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.winOrderList-card {
+    max-width: $baseWidth;
+    margin: 0 auto;
+    padding: 40px 44px;
+    margin-bottom: 22px;
+
+    &-topShow {
+        display: flex;
+        justify-content: space-between;
+        &-title {
+            font-size: $T2;
+            color: $gray-background-text-color;
+            width: 40%;
+        }
+    
+        &-bottom {
+            display: block;
+            width: 40%;
+            text-align: right;
+            font-size: $T2;
+            color: $gray-background-text-color;
+    
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .winOrderList-card {
+        margin: 0 10px;
+        margin-top: 22px;
+        padding: 20px 20px;
+    }
+}
+
+.winOrderList-historyList {
+    margin-top: 20px;
+    height: 400px;
+    overflow: auto;
+    overflow-x: none;
+    li {
+        display: flex;
+        justify-content: space-between;
+        border-top: 1px solid $gray-background-color;
+        padding: 20px 0px;
+
+        p {
+            font-size: $T2;
+        }
+    }
+}
+
+.winOrderList-pendingList {
+    margin-top: 20px;
+    border-top: 1px solid $gray-background-color;
+    border-bottom: 1px solid $gray-background-color;
+    clear: both;
+    padding: 10px;
+    overflow:auto;
+
+    li {
+        white-space:nowrap;
+        display:block;
+        float: left;
+        text-align: center;
+        width: 33%;
+    }
+}

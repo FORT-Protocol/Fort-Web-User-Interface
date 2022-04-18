@@ -7,7 +7,7 @@ import {
   NetworkNow,
   PolygonIcon,
 } from "../../../../../components/Icon";
-import './styles'
+import "./styles";
 
 type Props = {
   onClose?: MouseEventHandler<HTMLButtonElement>;

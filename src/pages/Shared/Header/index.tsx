@@ -12,6 +12,7 @@ const Header: FC = () => {
   const routes = [
     { path: "/futures", content: t`Futures` },
     { path: "/options", content: t`Options` },
+    { path: "/win", content: t`Win` },
     { path: "/swap", content: t`Swap` },
     // { path: "/farm", content: t`Farm` },
   ].map((item) => (

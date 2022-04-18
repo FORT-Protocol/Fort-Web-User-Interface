@@ -9,6 +9,7 @@ type Props = {
     balanceRed?: boolean,
     tokenSelect?: boolean,
     tokenList?: Array<TokenType>,
+    showUSDT?: boolean,
     dataSelect?: boolean,
     dataList?: Array<DataType>,
     getSelectedData?: (token: string) => void
@@ -33,7 +34,7 @@ const InfoShow: FC<Props> = ({children, ...props}) => {
                     if (props.getSelectedToken) {
                         props.getSelectedToken(item)
                     }
-                }}><TokenIcon/><p>{item.symbol}/USDT</p></li>
+                }}><TokenIcon/><p>{item.symbol}{`${props.showUSDT ? '/USDT' : ''}`}</p></li>
             )
         })
     } else if (props.dataSelect) {

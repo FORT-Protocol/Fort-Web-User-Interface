@@ -56,7 +56,6 @@ export const notifyTransaction = (txInfo: TransactionInfoType) => {
   toast(<TransactionToast info={toastInfo} />, {
     position: toast.POSITION.TOP_RIGHT,
     closeOnClick: false,
-    // hideProgressBar: true,
   });
 };
 
@@ -82,6 +81,10 @@ export const transactionTitle = (type: TransactionType) => {
       return t`Sell options`;
     case 9:
     return t`Swap`;
+    case 10:
+    return 'Roll';
+    case 11:
+    return 'Claim';
     default:
       break;
   }

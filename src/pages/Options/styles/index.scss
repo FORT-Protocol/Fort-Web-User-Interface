@@ -31,16 +31,17 @@
         &-tokenPair {
             display: flex;
             justify-content: space-between;
-    
-            div + svg {
+
+            div+svg {
                 margin: auto auto;
                 margin-left: 10px;
+
                 circle {
-                    stroke: #BDD6FF;
+                    stroke: $gray-background-text-color;
                 }
-    
+
                 path {
-                    fill: #BDD6FF;
+                    fill: $gray-background-text-color;
                 }
             }
         }

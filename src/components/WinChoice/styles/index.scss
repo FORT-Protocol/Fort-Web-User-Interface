@@ -1,0 +1,51 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.winChoice {
+    width: 110px;
+    height: 110px;
+    background: white;
+    border: 1px solid $gray-background-color;
+    border-radius: 55px;
+    box-shadow: $shadow;
+    overflow: hidden;
+
+    &-topBg {
+        height: 76px;
+        padding-top: 40px;
+
+        &-topNum {
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            font-family: MontserratBold;
+            font-size: $T2;
+        }
+    }
+    
+
+    &-bottomBg {
+        height: 34px;
+        text-align: center;
+        line-height: 34px;
+        background: #DDEDF2;
+
+        &-num {
+            height: 34px;
+            width: 110px;
+            text-align: center;
+            line-height: 34px;
+            font-size: $T4;
+        }
+    }
+}
+
+.winChoice-selected {
+    .winChoice-topBg {
+        background: $main-button-color;
+
+        &-topNum {
+            color: $main-background-color;
+        }
+    }
+}

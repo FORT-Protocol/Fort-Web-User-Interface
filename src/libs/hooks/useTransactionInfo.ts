@@ -17,7 +17,9 @@ export enum TransactionType {
   claim = 6,
   unStake = 7,
   sellOption = 8,
-  swap = 9
+  swap = 9,
+  roll = 10,
+  prcclaim = 11
 }
 
 export enum TransactionState {

@@ -1,0 +1,71 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.win-card {
+    max-width: $baseWidth;
+    margin: 0 auto;
+    padding: 40px 44px;
+    margin-top: 22px;
+    margin-bottom: 22px;
+
+    &-title {
+        margin-left: 0;
+        font-size: $T2;
+        line-height: 20px;
+        color: $gray-info-text-color;
+    }
+
+    &-choice {
+        width: 242px;
+        height: 242px;
+        margin: 0 auto;
+        margin-top: 26px;
+
+        &-second,
+        &-first {
+            width: 242px;
+            height: 110px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        &-second {
+            margin-top: 22px;
+        }
+    }
+
+    .fort-button {
+        width: 100%;
+        margin-top: 40px;
+        margin-bottom: 20px;
+    }
+
+    &-balance {
+        text-align: right;
+
+        span {
+            padding-bottom: 5px;
+            color: $gray-info-text-color;
+            border-bottom: 1px dashed $gray-info-text-color;
+        }
+    }
+
+    &-balance-add {
+        display: flex;
+        color: $main-button-color;
+        justify-content: space-between;
+        cursor: pointer;
+
+        p {
+            line-height: 22px;
+            margin-left: 5px;
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .win-card {
+        margin: 0 10px;
+        padding: 20px 20px;
+    }
+}
