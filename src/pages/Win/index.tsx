@@ -130,7 +130,7 @@ const Win: FC = () => {
           address: tokenList["PRC"].addresses[chainId], // The address that the token is at.
           symbol: "PRC", // A ticker symbol or shorthand, up to 5 chars.
           decimals: 18, // The number of decimals in the token
-          image: "", // A string url of the token logo
+          image: "https://raw.githubusercontent.com/FORT-Protocol/Fort-Web-User-Interface/2e289cd29722576329fae529c2bfaa0a905f0148/src/components/Icon/svg/TokenPRC.svg", // A string url of the token logo
         },
       },
     });
