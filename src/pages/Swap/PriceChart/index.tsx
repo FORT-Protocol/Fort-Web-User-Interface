@@ -29,7 +29,7 @@ const PriceChart = () => {
     
     useEffect(()=>{
       setInterval(asyncFetch, 60 * 1000)
-    }, [setInterval, asyncFetch])
+    }, [asyncFetch])
     
     const config = {
         data,
