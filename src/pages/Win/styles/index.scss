@@ -37,7 +37,7 @@
     .fort-button {
         width: 100%;
         margin-top: 40px;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
     }
 
     &-balance {
@@ -45,6 +45,8 @@
 
         span {
             padding-bottom: 5px;
+            margin-right: 22px;
+            font-size: $T4;
             color: $gray-info-text-color;
             border-bottom: 1px dashed $gray-info-text-color;
         }
