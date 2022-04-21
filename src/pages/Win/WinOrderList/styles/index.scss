@@ -68,3 +68,11 @@
         width: 33%;
     }
 }
+
+@media screen and (max-width: 1000px) {
+    .winOrderList-pendingList {
+        li {
+            width: 50%;
+        }
+    }
+}
