@@ -95,7 +95,12 @@ export const WinPendingItem: FC<WinPendingItemType> = ({ ...props }) => {
           {bigNumberToNormal(props.gained, 18, 6)} DCU
         </div>
         <MainButton
-          onClick={claim}
+          onClick={() => {
+            if (buttonState()) {
+              return;
+            }
+            claim();
+          }}
           disable={buttonState()}
           loading={loadingButton()}
         >
