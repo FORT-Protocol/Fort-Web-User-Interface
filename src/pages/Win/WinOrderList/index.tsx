@@ -20,6 +20,7 @@ const WinOrderList: FC<WinOrderListProps> = ({ ...props }) => {
 
   const historyLi = props.historyList.map((item) => {
     // const itemAmount = BigNumber.from(item.m.toString()).div(BigNumber.from('10000'))
+    const showNum = 100 / (parseFloat(item.m.toString()) / 10000)
     return (
       <li key={item.owner + item.index.toString()}>
         <HistoryTime
@@ -27,7 +28,7 @@ const WinOrderList: FC<WinOrderListProps> = ({ ...props }) => {
         />
         <p className={`${classPrefix}-historyList-right`}>
           {/* {BigNumber.from("0").eq(item.n) ? itemAmount.toString() : 0} DCU */}
-          0 DCU
+          {`${showNum} %`}
         </p>
       </li>
     );
