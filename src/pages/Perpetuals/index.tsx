@@ -394,12 +394,15 @@ const Perpetuals: FC = () => {
         <MainButton
           className={`${classPrefix}-card-button`}
           onClick={() => {
-            if (!checkMainButton() || showNoticeModal()) {
+            if (!checkMainButton()) {
               return;
             }
             if (normalToBigNumber(dcuInput).lt(normalToBigNumber("50"))) {
               message.error(t`Minimum input 50`);
               return;
+            }
+            if (showNoticeModal()) {
+              
             }
             active();
           }}
