@@ -423,14 +423,14 @@ const MintOptions: FC = () => {
             disable={checkButton()}
             loading={loadingButton()}
             onClick={() => {
-              if (showNoticeModal()) {
-                return;
-              }
               if (normalToBigNumber(fortNum).gt(fortBalance)) {
                 message.error(t`Insufficient balance`);
                 return;
               }
               if (checkButton()) {
+                return;
+              }
+              if (showNoticeModal()) {
                 return;
               }
               active();
