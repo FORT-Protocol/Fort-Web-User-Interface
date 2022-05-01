@@ -4,7 +4,7 @@ import { t, Trans } from "@lingui/macro";
 import { Tooltip } from "antd";
 import moment from "moment";
 import { FC, useCallback, useEffect, useState } from "react";
-import { ExchangeIcon } from "../../components/Icon";
+import { ExchangeIcon, PutDownIcon } from "../../components/Icon";
 import InfoShow from "../../components/InfoShow";
 import MainButton from "../../components/MainButton";
 import MainCard from "../../components/MainCard";
@@ -62,6 +62,9 @@ const Swap: FC = () => {
   const [destValue, setDestValue] = useState<BigNumber>();
   const cofixSwapContract = CofixSwapContract();
   const exchangeSwapTokens = () => {
+    if (swapToken.dest === "PRC") {
+      return;
+    }
     setSwapToken({ src: swapToken.dest, dest: swapToken.src });
     setInputValue("");
   };
@@ -152,25 +155,22 @@ const Swap: FC = () => {
       return;
     }
 
-    const swapPRCToDCU = async (
-      amountIn: BigNumber
-    ) => {
+    const swapPRCToDCU = async (amountIn: BigNumber) => {
       return amountIn;
-    }
+    };
 
-    const swapDCUToPRC = async (
-      amountIn: BigNumber
-    ) => {
-      return amountIn.div(2)
-    }
-  
+    const swapDCUToPRC = async (amountIn: BigNumber) => {
+      return amountIn.div(2);
+    };
+
     const swapXY = async (
       srcName: string,
       destName: string,
       amountIn: BigNumber
     ) => {
-      const k = BigNumber.from("200000000000000000000000")
-        .mul(BigNumber.from("868616188258191063223411"));
+      const k = BigNumber.from("200000000000000000000000").mul(
+        BigNumber.from("868616188258191063223411")
+      );
       const srcTokenBalance: BigNumber = await getERC20Contract(
         tokenList[srcName].addresses[chainId],
         library,
@@ -194,12 +194,15 @@ const Swap: FC = () => {
         ? normalToBigNumber(inputValue!)
         : BASE_AMOUNT;
       for (let index = 0; index < usePath.length - 1; index++) {
-        if ((usePath[index] === 'USDT' && usePath[index + 1] === 'DCU') || (usePath[index] === 'DCU' && usePath[index + 1] === 'USDT')) {
+        if (
+          (usePath[index] === "USDT" && usePath[index + 1] === "DCU") ||
+          (usePath[index] === "DCU" && usePath[index + 1] === "USDT")
+        ) {
           amount = await swapXY(usePath[index], usePath[index + 1], amount);
-        } else if (usePath[index] === 'PRC' && usePath[index + 1] === 'DCU') {
-          amount = await swapPRCToDCU(amount)
-        } else if (usePath[index] === 'DCU' && usePath[index + 1] === 'PRC') {
-          amount = await swapDCUToPRC(amount)
+        } else if (usePath[index] === "PRC" && usePath[index + 1] === "DCU") {
+          amount = await swapPRCToDCU(amount);
+        } else if (usePath[index] === "DCU" && usePath[index + 1] === "PRC") {
+          amount = await swapDCUToPRC(amount);
         }
       }
       setDestValue(checkInputValue ? amount : undefined);
@@ -211,16 +214,8 @@ const Swap: FC = () => {
           : amount
       );
     })();
-  }, [
-    account,
-    chainId,
-    library,
-    swapToken,
-    inputValue,
-    path,
-    priceContract,
-  ]);
-  
+  }, [account, chainId, library, swapToken, inputValue, path, priceContract]);
+
   const getSelectedSrcToken = (token: TokenType) => {
     setSwapToken({ src: token.symbol, dest: swapToken.dest });
   };
@@ -229,12 +224,26 @@ const Swap: FC = () => {
   };
 
   const tokenListShow = (top: boolean) => {
-    const allToken = ['USDT','DCU','PRC']
-    const showToken = [swapToken.src, swapToken.dest]
-    const leftToken = allToken.filter((item:string) => showToken.indexOf(item) === -1)
-    const tokenName = top ? [swapToken.src].concat(leftToken) : [swapToken.dest].concat(leftToken)
-    return tokenName.map((item) => { return tokenList[item]})
-  }
+    const allToken = ["USDT", "DCU", "PRC"];
+    const showToken = [swapToken.src, swapToken.dest];
+    if (top) {
+      const leftToken = allToken.filter(
+        (item: string) => showToken.indexOf(item) === -1 && item !== "PRC"
+      );
+      const tokenName = [swapToken.src].concat(leftToken);
+      return tokenName.map((item) => {
+        return tokenList[item];
+      });
+    } else {
+      const leftToken = allToken.filter(
+        (item: string) => showToken.indexOf(item) === -1
+      );
+      const tokenName = [swapToken.dest].concat(leftToken);
+      return tokenName.map((item) => {
+        return tokenList[item];
+      });
+    }
+  };
 
   const checkBalance = () => {
     if (!swapTokenBalance) {
@@ -302,6 +311,16 @@ const Swap: FC = () => {
     );
     return pendingTransaction.length > 0 ? true : false;
   };
+
+  const specialTop = () => {
+    if (
+      (swapToken.src === "USDT" && swapToken.dest === "DCU") ||
+      (swapToken.src === "DCU" && swapToken.dest === "USDT")
+    ) {
+      return false;
+    }
+    return true;
+  };
   return (
     <div className={`${classPrefix}`}>
       <MainCard classNames={`${classPrefix}-card`}>
@@ -315,14 +334,16 @@ const Swap: FC = () => {
                 : "---"
             } ${swapToken.src}`
           }
-          tokenSelect={false}
+          tokenSelect={specialTop()}
           tokenList={tokenListShow(true)}
           getSelectedToken={getSelectedSrcToken}
           balanceRed={!checkBalance()}
         >
           <div className={`${classPrefix}-card-selected`}>
             <SingleTokenShow tokenNameOne={swapToken.src} isBold />
-            {/* <p><PutDownIcon /></p> */}
+            <p>
+              {specialTop() ? (<PutDownIcon />) : (<></>)}
+            </p>
           </div>
 
           <input
@@ -364,13 +385,15 @@ const Swap: FC = () => {
                 : "---"
             } ${swapToken.dest}`
           }
-          tokenSelect={false}
+          tokenSelect={true}
           tokenList={tokenListShow(false)}
           getSelectedToken={getSelectedDestToken}
         >
           <div className={`${classPrefix}-card-selected`}>
             <SingleTokenShow tokenNameOne={swapToken.dest} isBold />
-            {/* <p><PutDownIcon /></p> */}
+            <p>
+              <PutDownIcon />
+            </p>
           </div>
           <p className={"showValue"}>
             {destValue ? bigNumberToNormal(destValue, 18, 6) : undefined}
