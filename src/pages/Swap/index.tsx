@@ -2,6 +2,7 @@ import { BigNumber } from "@ethersproject/bignumber";
 import { MaxUint256 } from "@ethersproject/constants";
 import { t, Trans } from "@lingui/macro";
 import { Tooltip } from "antd";
+import classNames from "classnames";
 import moment from "moment";
 import { FC, useCallback, useEffect, useState } from "react";
 import { ExchangeIcon, PutDownIcon } from "../../components/Icon";
@@ -370,7 +371,10 @@ const Swap: FC = () => {
           </button>
         </InfoShow>
         <button
-          className={`${classPrefix}-card-exchange`}
+          className={classNames({
+            [`${classPrefix}-card-exchange`]: true,
+            [`disable`]: specialTop()
+          })}
           onClick={exchangeSwapTokens}
         >
           <ExchangeIcon />

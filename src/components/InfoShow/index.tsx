@@ -116,28 +116,39 @@ const InfoShow: FC<Props> = ({ children, ...props }) => {
 
   const bottomRight = () => {
     const { ethereum } = window;
-    const addToken = async () => {
+    const addToken = async (tokenName:string) => {
       if (!chainId) {
         return;
       }
-  
+      var imageURL = ''
+      if (tokenName === 'DCU') {
+        imageURL = "https://raw.githubusercontent.com/FORT-Protocol/Fort-Web-User-Interface/2e289cd29722576329fae529c2bfaa0a905f0148/src/components/Icon/svg/TokenFORT.svg"
+      } else if (tokenName === 'PRC') {
+        imageURL = "https://raw.githubusercontent.com/FORT-Protocol/Fort-Web-User-Interface/2e289cd29722576329fae529c2bfaa0a905f0148/src/components/Icon/svg/TokenPRC.svg"
+      }
       await ethereum.request({
         method: "wallet_watchAsset",
         params: {
           type: "ERC20", // Initially only supports ERC20, but eventually more!
           options: {
-            address: tokenList["DCU"].addresses[chainId], // The address that the token is at.
-            symbol: "DCU", // A ticker symbol or shorthand, up to 5 chars.
+            address: tokenList[tokenName].addresses[chainId], // The address that the token is at.
+            symbol: tokenName, // A ticker symbol or shorthand, up to 5 chars.
             decimals: 18, // The number of decimals in the token
-            image: "https://raw.githubusercontent.com/FORT-Protocol/Fort-Web-User-Interface/2e289cd29722576329fae529c2bfaa0a905f0148/src/components/Icon/svg/TokenFORT.svg", // A string url of the token logo
+            image: imageURL, // A string url of the token logo
           },
         },
       });
     };
     if (
       props.bottomRightText.toLowerCase().indexOf("balance") >= 0 &&
-      props.bottomRightText.toLowerCase().indexOf("dcu") >= 0
+      (props.bottomRightText.toLowerCase().indexOf("dcu") >= 0 || props.bottomRightText.toLowerCase().indexOf("prc") >= 0)
     ) {
+      var tokenName:string = ''
+      if (props.bottomRightText.toLowerCase().indexOf("dcu") >= 0) {
+        tokenName = 'DCU'
+      } else {
+        tokenName = 'PRC'
+      }
       return (
         <Tooltip
           placement="right"
@@ -145,10 +156,10 @@ const InfoShow: FC<Props> = ({ children, ...props }) => {
           title={
             <button
               className={`${classPrefix}-balance-add`}
-              onClick={() => addToken()}
+              onClick={() => addToken(tokenName)}
             >
               <AddTokenIcon />
-              <p>Add DCU to your wallet</p>
+              <p>{`Add ${tokenName} to your wallet`}</p>
             </button>
           }
         >
