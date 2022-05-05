@@ -21,7 +21,6 @@ import WalletModal from "../Status/WalletModal";
 import "../Status/styles";
 import "./styles";
 import SelectNetworkModal from "./SelectNetworkModal";
-import { useWithdrawToken } from "../../../../contracts/hooks/useReceiveDcuTransation";
 import useThemes, { ThemeType } from "../../../../libs/hooks/useThemes";
 
 const MobileHeader: FC = () => {
@@ -38,7 +37,7 @@ const MobileHeader: FC = () => {
   const routes = [
     { path: "/futures", content: t`Futures` },
     { path: "/options", content: t`Options` },
-    { path: "/swap", content: t`Swap` },
+    // { path: "/swap", content: t`Swap` },
   ].map((item) => (
     <li
       key={item.path}
@@ -75,7 +74,7 @@ const MobileHeader: FC = () => {
           trigger={
             <div className={`${classPrefix}-headerList-top-mid`}>
               <LittleETH />
-              <p>Rinkeby</p>
+              <p>Ethereum</p>
             </div>
           }
         >
@@ -133,9 +132,6 @@ const MobileHeader: FC = () => {
             <WalletModal onClose={() => modal.current.close()} />
           </Popup>
         )}
-      </div>
-      <div className={"receiveDcu"}>
-        <button onClick={useWithdrawToken()}>Receive DCU</button>
       </div>
     </div>
   );

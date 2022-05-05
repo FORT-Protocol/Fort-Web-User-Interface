@@ -1,9 +1,9 @@
 import { BigNumber } from "ethers";
 
-export const PRICE_FEE = BigNumber.from(normalToBigNumber("0.01"));
+export const PRICE_FEE = BigNumber.from(normalToBigNumber("0.001"));
 export const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
 export const BASE_AMOUNT = BigNumber.from('1000000000000000000');
-export const USDT_BASE_AMOUNT = BigNumber.from('1000000');
+export const BASE_2000ETH_AMOUNT = BigNumber.from('2000000000000000000000');
 export const COFIX_THETA = BigNumber.from('30');
 
 /**
@@ -11,7 +11,6 @@ export const COFIX_THETA = BigNumber.from('30');
  * @param num BigNumber
  * @param decimals token精度（USDT为6位，大部分为18位）
  * @param fix 保留小数点后位数
- * @param exZero 是否清除0
  * @returns 浮点字符串
  */
 export function bigNumberToNormal(

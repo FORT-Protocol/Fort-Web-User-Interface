@@ -8,6 +8,7 @@ import "./styles";
 
 type Props = {
   onClose?: MouseEventHandler<HTMLButtonElement>;
+  action: () => Promise<void>
 };
 
 const PerpetualsNoticeModal: FC<Props> = ({ ...props }) => {
@@ -101,6 +102,7 @@ const PerpetualsNoticeModal: FC<Props> = ({ ...props }) => {
           onClick={(e) => {
             if (props.onClose && selected) {
               localStorage.setItem("PerpetualsFirst", "1");
+              props.action();
               props.onClose(e);
             }
           }}

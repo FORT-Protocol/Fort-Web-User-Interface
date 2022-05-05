@@ -8,6 +8,14 @@
     background-position: center;
     background-attachment: fixed;
 
+    .swap-card-exchange {
+        &.disable {
+            svg path{
+                fill: white;
+            }
+        }
+    }
+
     .header-nav {
         background-color: rgba(255, 255, 255, 0.5);
     }
@@ -64,6 +72,75 @@
         }
     }
 
+    .win-card {
+        &-title {
+            color: #C5C5C5;
+        }
+
+        &-balance span {
+            color: #C5C5C5;
+            border-bottom: 1px dashed #C5C5C5;
+        }
+    }
+
+    .winOrderList-card {
+        &-title {
+            color: #C5C5C5;
+        }
+
+        &-bottom {
+            color: #C5C5C5;
+        }
+    }
+
+    .winOrderList-historyList {
+        li {
+            border-top: 1px solid rgba(197, 197, 197, 0.15);
+            color: white;
+        }
+    }
+
+    .winOrderList-pendingList {
+        border-top: 1px solid rgba(197, 197, 197, 0.15);
+        border-bottom: 1px solid rgba(197, 197, 197, 0.15);
+        color: white;
+    }
+
+    .winChoice {
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border: 0px;
+
+        &-topBg {
+            &-topNum {
+                color: white;
+            }
+        }
+
+        &-bottomBg {
+            background: rgba(255, 255, 255, 0.3);
+
+            &-num {
+                color: white;
+            }
+        }
+    }
+
+    .winChoice-selected {
+        .winChoice-topBg {
+            background: linear-gradient(90deg, #8BB7FF 0%, #0061FF 100%);
+        }
+
+        .winChoice-bottomBg {
+            background: linear-gradient(90deg, #8BB7FF 0%, #0061FF 100%);
+            &-num {
+                background: rgba(255, 255, 255, 0.3);
+            }
+        }
+        
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
     .OptionsList-mobile {
         .mobileListInfo-title {
             span {
@@ -85,7 +162,7 @@
             border-bottom: 0.5px solid rgba(255, 255, 255, 0.15);
         }
     }
-    
+
     .perListMobile-li {
         .mobileListInfo-title {
             span {
@@ -115,7 +192,7 @@
             }
         }
     }
-    
+
     .options-mintOptions-rightCard-smallCard-title {
         p {
             color: #C5C5C5;
@@ -232,6 +309,11 @@
 
         &-bottomRight {
             color: #C5C5C5;
+            &.underLine {
+                span {
+                    border-bottom: 1px dashed #C5C5C5;
+                }
+            }
         }
     }
 
@@ -259,6 +341,10 @@
                 color: $main-background-color;
             }
 
+            .icon_prc {
+                fill: white;
+            }
+
         }
 
         .max-button {
@@ -272,6 +358,16 @@
             }
 
             svg circle {
+                stroke: #BDD6FF;
+            }
+        }
+
+        div+svg {
+            path {
+                fill: #BDD6FF;
+            }
+
+            circle {
                 stroke: #BDD6FF;
             }
         }
@@ -293,6 +389,10 @@
     .fort-button {
         background: linear-gradient(90deg, #8BB7FF 0%, #0061FF 100%);
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .fort-button.disable {
+        background: #BFBFBF;
     }
 
 

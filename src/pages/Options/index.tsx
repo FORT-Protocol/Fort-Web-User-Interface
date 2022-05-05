@@ -10,6 +10,7 @@ import { DoubleTokenShow, SingleTokenShow } from "../../components/TokenShow";
 import {
   FortEuropeanOptionContract,
   tokenList,
+  TokenType,
 } from "../../libs/constants/addresses";
 import {
   ERC20Contract,
@@ -18,11 +19,12 @@ import {
 } from "../../libs/hooks/useContract";
 import useWeb3 from "../../libs/hooks/useWeb3";
 import {
+  BASE_2000ETH_AMOUNT,
+  BASE_AMOUNT,
   bigNumberToNormal,
   checkWidth,
   formatInputNum,
-  normalToBigNumber,
-  ZERO_ADDRESS,
+  normalToBigNumber
 } from "../../libs/utils";
 import { DatePicker, message, Tooltip } from "antd";
 import "../../styles/ant.css";
@@ -34,15 +36,15 @@ import OptionsList from "../../components/OptionsList";
 import useTransactionListCon from "../../libs/hooks/useTransactionInfo";
 import { Popup } from "reactjs-popup";
 import OptionsNoticeModal from "./OptionsNoticeModal";
-// import _ from 'lodash';
 
 export type OptionsListType = {
-  balance: BigNumber;
-  exerciseBlock: BigNumber;
   index: BigNumber;
-  orientation: boolean;
-  strikePrice: BigNumber;
   tokenAddress: string;
+  strikePrice: BigNumber;
+  orientation: boolean;
+  exerciseBlock: BigNumber;
+  balance: BigNumber;
+  owner: string;
 };
 
 const MintOptions: FC = () => {
@@ -61,11 +63,12 @@ const MintOptions: FC = () => {
   const [exercise, setExercise] = useState({ time: "", blockNum: 0 });
   const [fortNum, setFortNum] = useState("");
   const [strikePrice, setStrikePrice] = useState<string>("");
+  const [tokenPair, setTokenPair] = useState<TokenType>(tokenList["ETH"]);
   const [optionsListState, setOptionsListState] = useState<
     Array<OptionsListType>
   >([]);
   const [showLoading, setShowLoading] = useState<boolean>(false);
-  const [priceNow, setPriceNow] = useState<BigNumber>();
+  const [priceNow, setPriceNow] = useState<{ [key: string]: TokenType }>();
   const [fortBalance, setFortBalance] = useState(BigNumber.from(0));
   const [optionTokenValue, setOptionTokenValue] = useState<BigNumber>();
 
@@ -85,7 +88,6 @@ const MintOptions: FC = () => {
         key={item.index.toString() + account}
         item={item}
         blockNum={latestBlock.blockNum.toString()}
-        showNotice={showNoticeModal}
         nowPrice={priceNow}
       />
     );
@@ -151,11 +153,28 @@ const MintOptions: FC = () => {
     }
     setFortBalance(BigNumber.from(0));
   }, [account, fortContract]);
+
   const getPrice = async (contract: Contract, chainId: number) => {
-    const price = await contract.latestPrice(
-      tokenList["USDT"].addresses[chainId]
+    const price_ETH = await contract.lastPriceList(
+      0,
+      tokenList["ETH"].pairIndex[chainId],
+      1
     );
-    setPriceNow(price[1]);
+    const priceValue_ETH = BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(
+      price_ETH[1]
+    );
+    const price_BTC = await contract.lastPriceList(
+      0,
+      tokenList["BTC"].pairIndex[chainId],
+      1
+    );
+    const priceValue_BTC = BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(
+      price_BTC[1]
+    );
+    const tokenListNew = tokenList;
+    tokenListNew["ETH"].nowPrice = priceValue_ETH;
+    tokenListNew["BTC"].nowPrice = priceValue_BTC;
+    setPriceNow(tokenListNew);
   };
   useEffect(() => {
     if (!nestPriceContract || !chainId) {
@@ -174,7 +193,7 @@ const MintOptions: FC = () => {
   }, [chainId, nestPriceContract]);
 
   useEffect(() => {
-    if (moment().valueOf() - latestBlock.time > 15000 && library) {
+    if (moment().valueOf() - latestBlock.time > 6000 && library) {
       (async () => {
         const latest = await library?.getBlockNumber();
         setLatestBlock({ time: moment().valueOf(), blockNum: latest || 0 });
@@ -197,7 +216,7 @@ const MintOptions: FC = () => {
       if (selectTime > nowTime) {
         const timeString = moment(value).format("YYYY[-]MM[-]DD");
         const blockNum = parseFloat(
-          ((selectTime - nowTime) / 14000).toString()
+          ((selectTime - nowTime) / 3000).toString()
         ).toFixed(0);
         setExercise({
           time: timeString,
@@ -217,14 +236,14 @@ const MintOptions: FC = () => {
       strikePrice !== "" &&
       fortNum !== "" &&
       priceNow &&
-      exercise.blockNum !== 0
+      exercise.blockNum !== 0 && chainId
     ) {
       (async () => {
         setShowLoading(true);
         try {
           const value = await fortEuropeanOption.estimate(
-            ZERO_ADDRESS,
-            priceNow,
+            tokenPair.addresses[chainId],
+            priceNow[tokenPair.symbol].nowPrice,
             normalToBigNumber(
               strikePrice,
               tokenList["USDT"].decimals
@@ -242,14 +261,7 @@ const MintOptions: FC = () => {
     } else {
       setOptionTokenValue(undefined);
     }
-  }, [
-    exercise.blockNum,
-    fortEuropeanOption,
-    fortNum,
-    isLong,
-    priceNow,
-    strikePrice,
-  ]);
+  }, [chainId, exercise.blockNum, fortEuropeanOption, fortNum, isLong, priceNow, strikePrice, tokenPair.addresses, tokenPair.symbol]);
 
   const checkButton = () => {
     if (
@@ -270,12 +282,20 @@ const MintOptions: FC = () => {
     return current && current < moment().add(30, "days").startOf("day");
   }
   const active = useFortEuropeanOptionOpen(
-    "ETH",
+    tokenPair,
     isLong,
     BigNumber.from(exercise.blockNum),
     normalToBigNumber(fortNum),
-    strikePrice ? normalToBigNumber(strikePrice, 6) : undefined
+    strikePrice ? normalToBigNumber(strikePrice, 18) : undefined
   );
+
+  const priceString = () => {
+    return priceNow
+      ? priceNow[tokenPair.symbol].nowPrice
+        ? bigNumberToNormal(priceNow[tokenPair.symbol].nowPrice!, 18, 2)
+        : "---"
+      : "---";
+  };
   return (
     <div>
       {showNotice ? (
@@ -288,18 +308,30 @@ const MintOptions: FC = () => {
         >
           <OptionsNoticeModal
             onClose={() => modal.current.close()}
+            action={active}
           ></OptionsNoticeModal>
         </Popup>
       ) : null}
       <div className={classPrefix}>
         <MainCard classNames={`${classPrefix}-leftCard`}>
-          <InfoShow topLeftText={t`Token pair`} bottomRightText={""}>
+          <InfoShow
+            topLeftText={t`Token pair`}
+            bottomRightText={""}
+            tokenSelect={true}
+            tokenList={[tokenList["ETH"], tokenList["BTC"]]}
+            showUSDT={true}
+            getSelectedToken={setTokenPair}
+          >
             <div className={`${classPrefix}-leftCard-tokenPair`}>
-              <DoubleTokenShow tokenNameOne={"ETH"} tokenNameTwo={"USDT"} />
+              <DoubleTokenShow
+                tokenNameOne={tokenPair.symbol}
+                tokenNameTwo={"USDT"}
+              />
+              <PutDownIcon />
             </div>
-            <p>{`${checkWidth() ? "1 ETH = " : ""}${
-              priceNow ? bigNumberToNormal(priceNow, 6, 2) : "---"
-            } USDT`}</p>
+            <p>{`${
+              checkWidth() ? "1 " + tokenPair.symbol + " = " : ""
+            }${priceString()} USDT`}</p>
           </InfoShow>
           <ChooseType
             callBack={handleType}
@@ -318,16 +350,14 @@ const MintOptions: FC = () => {
               onChange={onOk}
               bordered={false}
               suffixIcon={<PutDownIcon />}
-              placeholder={'Select'}
+              placeholder={"Select"}
               allowClear={false}
             />
           </InfoShow>
 
           <InfoShow
             topLeftText={t`Strike price`}
-            bottomRightText={`1 ETH = ${
-              priceNow ? bigNumberToNormal(priceNow, 6, 2) : "---"
-            } USDT`}
+            bottomRightText={`1 ETH = ${priceString()} USDT`}
           >
             <input
               type="text"

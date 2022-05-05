@@ -15,7 +15,7 @@ import "../themes/styles";
 const Perpetuals = loadable(() => import("./Perpetuals"));
 const Option = loadable(() => import("./Options"));
 // const Mining = loadable(() => import("./Farm"));
-const Swap = loadable(() => import("./Swap"));
+// const Swap = loadable(() => import("./Swap"));
 
 const App: FC = () => {
   const { theme } = useThemes();
@@ -26,7 +26,7 @@ const App: FC = () => {
         {/* <ToastContainer autoClose={8000}/> */}
         <ToastContainer />
         <HashRouter>
-          {checkWidth() ? <Header /> : <MobileHeader />}
+          {checkWidth() ? (<Header />) : (<MobileHeader/>)}
           <Switch>
             <Route path="/futures">
               <Perpetuals />
@@ -37,14 +37,14 @@ const App: FC = () => {
             {/* <Route path="/farm">
               <Mining />
             </Route> */}
-            <Route path="/swap">
+            {/* <Route path="/swap">
               <Swap />
-            </Route>
+            </Route> */}
             <Redirect to="/futures" />
           </Switch>
         </HashRouter>
       </div>
-      {checkWidth() ? <Footer /> : <MobileFooter />}
+      {checkWidth() ? (<Footer/>) : (<MobileFooter/>)}
     </main>
   );
 };

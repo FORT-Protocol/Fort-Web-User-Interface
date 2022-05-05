@@ -67,9 +67,9 @@ export const transactionTitle = (type: TransactionType) => {
     case 1:
       return t`Close Future positions`;
     case 2:
-      return t`Buy Option`;
+      return t`Buy options`;
     case 3:
-      return t`Strike Option`;
+      return t`Strike options`;
     case 4:
       return t`Approve`;
     case 5:
@@ -79,11 +79,9 @@ export const transactionTitle = (type: TransactionType) => {
     case 7:
       return t`Withdraw`;
     case 8:
-      return t`Sell Option`;
+      return t`Sell options`;
     case 9:
-      return t`Swap`;
-    case 99:
-      return "Receive DCU";
+    return t`Swap`;
     default:
       break;
   }

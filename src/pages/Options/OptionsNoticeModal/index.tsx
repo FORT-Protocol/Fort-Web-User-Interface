@@ -8,6 +8,7 @@ import "./styles";
 
 type Props = {
   onClose?: MouseEventHandler<HTMLButtonElement>;
+  action: () => Promise<void>;
 };
 
 const OptionsNoticeModal: FC<Props> = ({ ...props }) => {
@@ -90,6 +91,7 @@ const OptionsNoticeModal: FC<Props> = ({ ...props }) => {
           onClick={(e) => {
             if (props.onClose && selected) {
               localStorage.setItem("OptionsFirst", "1");
+              props.action();
               props.onClose(e);
             }
           }}

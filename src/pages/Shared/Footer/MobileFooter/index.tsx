@@ -7,23 +7,20 @@ import {
   TwitterIcon,
   WhitePaper,
 } from "../../../../components/Icon";
-import './styles'
+import "./styles";
 
 const MobileFooter: FC = () => {
   const footer = "footer-mobile";
   return (
     <footer>
       <div className={`${footer}`}>
-      <a
+        <a
           href="https://app.fortprotocol.com/REP-FORT-2022-01-25.pdf"
           target="view_window"
         >
           <SafeIcon className={`${footer}-right-safe`} />
         </a>
-        <a
-          href="https://docs.fortprotocol.com/"
-          target="view_window"
-        >
+        <a href="https://docs.fortprotocol.com/" target="view_window">
           <WhitePaper className={`${footer}-right-paper`} />
         </a>
         <a href="https://t.me/fort_DeFi" target="view_window">

@@ -1,4 +1,4 @@
-import { tokenList } from './../../libs/constants/addresses';
+import { TokenType } from './../../libs/constants/addresses';
 import { BigNumber } from "ethers";
 import { FortEuropeanOptionContract } from "../../libs/constants/addresses";
 import { FortEuropeanOption } from "../../libs/hooks/useContract";
@@ -8,7 +8,7 @@ import { PRICE_FEE } from "../../libs/utils";
 import { TransactionType } from '../../libs/hooks/useTransactionInfo';
 
 export function useFortEuropeanOptionOpen(
-    tokenName: string,  
+    token: TokenType,  
     orientation: boolean, 
     endblock: BigNumber, 
     fortAmount: BigNumber,
@@ -21,7 +21,7 @@ export function useFortEuropeanOptionOpen(
         contract = null
     } else {
         callData = contract?.interface.encodeFunctionData('open', [
-            tokenList[tokenName].addresses[chainId], 
+            token.addresses[chainId], 
             price, 
             orientation, 
             endblock, 
@@ -35,7 +35,7 @@ export function useFortEuropeanOptionOpen(
         data: callData,
         value: PRICE_FEE
     }
-    const txPromise = useSendTransaction(contract, tx, {title:`Buy Option`, info:'', type: TransactionType.buyOption})
+    const txPromise = useSendTransaction(contract, tx, {title:`Buy options`, info:'', type: TransactionType.buyOption})
     return txPromise
 }
 
@@ -61,7 +61,7 @@ export function useFortEuropeanOptionExercise(
         data: callData,
         value: PRICE_FEE
     }
-    const txPromise = useSendTransaction(contract, tx, {title:`Strike Option`, info:index.toString(), type: TransactionType.closeOption})
+    const txPromise = useSendTransaction(contract, tx, {title:`Strike options`, info:index.toString(), type: TransactionType.closeOption})
     return txPromise
 }
 
@@ -87,6 +87,6 @@ export function useFortEuropeanOptionSell(
         data: callData,
         value: PRICE_FEE
     }
-    const txPromise = useSendTransaction(contract, tx, {title:`Sell Option`, info:index.toString(), type: TransactionType.sellOption})
+    const txPromise = useSendTransaction(contract, tx, {title:`Sell options`, info:index.toString(), type: TransactionType.sellOption})
     return txPromise
 }

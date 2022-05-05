@@ -46,8 +46,8 @@ footer {
 
         svg {
             &:hover {
-                &>path:first-child {
-                    fill: $main-button-color;
+                & > path:first-child {
+                fill: $main-button-color;
                 }
             }
         }

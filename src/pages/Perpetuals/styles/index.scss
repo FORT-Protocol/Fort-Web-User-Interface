@@ -17,6 +17,19 @@
         button {
             margin-left: 10px;
         }
+
+        div+svg {
+            margin: auto auto;
+            margin-left: 10px;
+
+            circle {
+                stroke: $gray-background-text-color;
+            }
+
+            path {
+                fill: $gray-background-text-color;
+            }
+        }
     }
 
     .kPrice {
@@ -147,9 +160,9 @@ table {
 
     th.th-marginAssets {
         span {
+
             line-height: 28px;
             padding: 3px 0;
-            padding-bottom: 5px;
             border-bottom: 1px dashed $gray-info-text-color;
         }
     }

@@ -9,13 +9,12 @@ import {
   WhiteIcon,
   WhitePaper,
 } from "../../../components/Icon";
-import { useWithdrawToken } from "../../../contracts/hooks/useReceiveDcuTransation";
 import useThemes, { ThemeType } from "../../../libs/hooks/useThemes";
+// import { dynamicActivate } from "../../../libs/i18nConfig";
 import "./styles/index";
 
 const Footer: FC = () => {
   const footer = "footer";
-  const receiveDcu = useWithdrawToken();
   const { theme, setTheme } = useThemes();
   const themeIcon = () => {
     if (theme === ThemeType.dark) {
@@ -24,7 +23,6 @@ const Footer: FC = () => {
       return <DarkIcon />;
     }
   };
-
   return (
     <footer>
       <div className={`${footer}-left`}>
@@ -39,9 +37,6 @@ const Footer: FC = () => {
           }}
         >
           {themeIcon()}
-        </button>
-        <button className={`${footer}-left-receive`} onClick={receiveDcu}>
-          Receive DCU
         </button>
       </div>
       <div className={`${footer}-right`}>
