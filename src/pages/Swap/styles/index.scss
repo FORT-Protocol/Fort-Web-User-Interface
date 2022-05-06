@@ -35,6 +35,13 @@
         box-shadow: $shadow;
         border: 1px solid $gray-background-color;
 
+        &.disable {
+            background: $button-disable-color;
+            &:hover {
+                cursor: not-allowed;
+            }
+        }
+
         &:hover {
             cursor: pointer;
         }

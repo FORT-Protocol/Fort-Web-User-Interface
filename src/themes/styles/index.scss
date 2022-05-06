@@ -8,6 +8,14 @@
     background-position: center;
     background-attachment: fixed;
 
+    .swap-card-exchange {
+        &.disable {
+            svg path{
+                fill: white;
+            }
+        }
+    }
+
     .header-nav {
         background-color: rgba(255, 255, 255, 0.5);
     }
@@ -331,6 +339,10 @@
 
             p {
                 color: $main-background-color;
+            }
+
+            .icon_prc {
+                fill: white;
             }
 
         }

@@ -402,7 +402,7 @@ const Perpetuals: FC = () => {
               return;
             }
             if (showNoticeModal()) {
-              
+              return;
             }
             active();
           }}
