@@ -1,12 +1,8 @@
+import { BigNumber } from "ethers";
 import {
-  TokenCoFiX,
+  TokenBTC,
   TokenETH,
   TokenFORT,
-  TokenFortube,
-  TokenNest,
-  TokenNHBTC,
-  TokenPETH,
-  TokenPUSD,
   TokenUSDT,
 } from "../../components/Icon";
 import { ZERO_ADDRESS } from "../utils";
@@ -15,11 +11,19 @@ export type AddressesType = {
   [key: number]: string;
 };
 
+export type PairIndexType = {
+  [key: number]: string;
+}
+
 export type TokenType = {
   symbol: string;
   Icon: typeof TokenETH;
   decimals: number;
   addresses: AddressesType;
+  pairIndex: PairIndexType;
+  nowPrice?: BigNumber;
+  k?: BigNumber;
+  sigmaSQ?: BigNumber;
 };
 
 export const tokenList: { [key: string]: TokenType } = {
@@ -32,15 +36,26 @@ export const tokenList: { [key: string]: TokenType } = {
       3: ZERO_ADDRESS,
       4: ZERO_ADDRESS,
     },
+    pairIndex: {
+      1: '1',
+      3: '1',
+      4: '1'
+    },
+    sigmaSQ: BigNumber.from('45659142400')
   },
   USDT: {
     symbol: "USDT",
     Icon: TokenUSDT,
-    decimals: 6,
+    decimals: 18,
     addresses: {
       1: "0xdac17f958d2ee523a2206206994597c13d831ec7",
       3: "0xc6611844fD9FAE67ABFAdB5a67E33A4fbbB00893",
       4: "0x2d750210c0b5343a0b79beff8F054C9add7d2411",
+    },
+    pairIndex: {
+      1: '',
+      3: '',
+      4: ''
     },
   },
   DCU: {
@@ -52,67 +67,29 @@ export const tokenList: { [key: string]: TokenType } = {
       3: "0xFe864063e10e5f7D99803765f28d2676A582A816",
       4: "0xc408edF487e98bB932eD4A8983038FF19352eDbd",
     },
-  },
-  NHBTC: {
-    symbol: "NHBTC",
-    Icon: TokenNHBTC,
-    decimals: 18,
-    addresses: {
-      1: "0x1F832091fAf289Ed4f50FE7418cFbD2611225d46",
-      3: "0x4c23ad0326C8ad411643cEde15E928E39afA728F",
-      4: "0x801b69dA3210BAB7482E21085cd2A14d77b23475",
+    pairIndex: {
+      1: '',
+      3: '',
+      4: ''
     },
   },
-  NEST: {
-    symbol: "NEST",
-    Icon: TokenNest,
+  BTC: {
+    symbol: "BTC",
+    Icon: TokenBTC,
     decimals: 18,
     addresses: {
-      1: "0x04abEdA201850aC0124161F037Efd70c74ddC74C",
-      3: "0xEa9E43FAf5e7F38525238ED4aDf650f06DF4e87F",
-      4: "0xE313F3f49B647fBEDDC5F2389Edb5c93CBf4EE25",
+      1: "0x0316EB71485b0Ab14103307bf65a021042c6d380",
+      3: "",
+      4: "0xaE73d363Cb4aC97734E07e48B01D0a1FF5D1190B"
     },
+    pairIndex: {
+      1: "0",
+      3: "0",
+      4: "0"
+    },
+    sigmaSQ: BigNumber.from('31708924900')
   },
-  CoFi: {
-    symbol: "CoFi",
-    Icon: TokenCoFiX,
-    decimals: 18,
-    addresses: {
-      1: "0x1a23a6BfBAdB59fa563008c0fB7cf96dfCF34Ea1",
-      3: "0x0D73aBdb1415f77698362b8d99FD2a2eD41b0558",
-      4: "0x61EA050b28Ccca539F0faf79Fd26F6Df31b9f15B",
-    },
-  },
-  FOR: {
-    symbol: "FOR",
-    Icon: TokenFortube,
-    decimals: 18,
-    addresses: {
-      1: "0x1FCdcE58959f536621d76f5b7FfB955baa5A672F",
-      3: "0x9bc2b3da2d2583ca489c053Df76DB2762f3aB394",
-      4: "0x37591670bCc04af593287fbc16C58F12f0B57881",
-    },
-  },
-  PUSD: {
-    symbol: "PUSD",
-    Icon: TokenPUSD,
-    decimals: 18,
-    addresses: {
-      1: "0xCCEcC702Ec67309Bc3DDAF6a42E9e5a6b8Da58f0",
-      3: "0x49FDeD8d731204998ca9e2BDe277949E57bf63b1",
-      4: "0x5407cab67ad304FB8A4aC46D83b3Dd63A9dbA575",
-    },
-  },
-  PETH: {
-    symbol: "PETH",
-    Icon: TokenPETH,
-    decimals: 18,
-    addresses: {
-      1: "0x53f878Fb7Ec7B86e4F9a0CB1E9a6c89C0555FbbD",
-      3: "0x49FDeD8d731204998ca9e2BDe277949E57bf63b1",
-      4: "0x5407cab67ad304FB8A4aC46D83b3Dd63A9dbA575",
-    },
-  }
+  
 };
 
 export const FortEuropeanOptionContract: AddressesType = {
@@ -134,9 +111,9 @@ export const FortVaultForStakingContract: AddressesType = {
 };
 
 export const NestPrice: AddressesType = {
-  1: "0xB5D2890c061c321A5B6A4a4254bb1522425BAF0A",
+  1: "0xE544cF993C7d477C7ef8E91D28aCA250D135aa03",
   3: "0x85723E83A7E7d88b0F3Ceb4C5bE7C853e3Ed8a82",
-  4: "0x40C3EB032f27fDa7AdcF1B753c75B84e27f26838",
+  4: "0xc08E6A853241B9a08225EECf93F3b279FA7A1bE7",
 };
 
 export const SwapAddress: AddressesType = {

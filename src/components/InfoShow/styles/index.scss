@@ -109,8 +109,21 @@
         text-align: right;
         height: 20px;
 
+        span {
+            padding-bottom: 5px;
+        }
+
+        &.underLine {
+            span {
+                border-bottom: 1px dashed #7D7D7D;
+            }
+        }
+
         &.balanceRed {
             color: $wrongAndNotice-color;
+            span {
+                border-bottom: 1px dashed $wrongAndNotice-color;
+            }
         }
     }
 
@@ -123,8 +136,8 @@
         position: relative;
         display: none;
         background-color: $gray-info-background-color;
-        height: 150px;
-        margin-bottom: -155px;
+        height: 80px;
+        margin-bottom: -85px;
         overflow: scroll;
         border: 1px solid $gray-line-color;
         box-shadow: $shadow-inside;
@@ -165,6 +178,18 @@
 
         &.hover {
             display: block;
+        }
+    }
+
+    &-balance-add {
+        display: flex;
+        color: $main-button-color;
+        justify-content: space-between;
+        cursor: pointer;
+
+        p {
+            line-height: 22px;
+            margin-left: 5px;
         }
     }
 }
