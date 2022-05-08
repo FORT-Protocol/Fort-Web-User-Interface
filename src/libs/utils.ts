@@ -1,6 +1,6 @@
 import { BigNumber } from "ethers";
 
-export const PRICE_FEE = BigNumber.from(normalToBigNumber("0.002"));
+export const PRICE_FEE = BigNumber.from(normalToBigNumber("0"));
 export const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
 export const BASE_AMOUNT = BigNumber.from('1000000000000000000');
 export const BASE_2000ETH_AMOUNT = BigNumber.from('2000000000000000000000');
