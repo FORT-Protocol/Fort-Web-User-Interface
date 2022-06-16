@@ -75,7 +75,7 @@ const Win: FC = () => {
     if (!fortPRCContract) {
       return;
     }
-
+    
     const latest = await library?.getBlockNumber();
     if (!latest) {
       return;
@@ -136,11 +136,10 @@ const Win: FC = () => {
 
   useEffect(() => {
     if (
-      !txList ||
-      txList.length === 0 ||
+      txList.length !== 0 && (!txList ||
       (txList[txList.length - 1].type !== TransactionType.roll &&
         txList[txList.length - 1].type !== TransactionType.prcclaim) ||
-      txList[txList.length - 1].txState !== 1
+      txList[txList.length - 1].txState !== 1)
     ) {
       return;
     }
