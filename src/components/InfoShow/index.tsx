@@ -8,6 +8,7 @@ import "./styles";
 
 type Props = {
   topLeftText: string;
+  topRightText?: string;
   bottomRightText: string;
   balanceRed?: boolean;
   tokenSelect?: boolean;
@@ -208,7 +209,11 @@ const InfoShow: FC<Props> = ({ children, ...props }) => {
 
   return (
     <div className={classPrefix}>
-      <p className={`${classPrefix}-topLeft`}>{props.topLeftText}</p>
+      <div className={`${classPrefix}-top`}>
+        <p className={`${classPrefix}-topLeft`}>{props.topLeftText}</p>
+        <p className={`${classPrefix}-topRight`}>{props.topRightText}</p>
+      </div>
+
       <div
         className={classNames({
           [`${classPrefix}-mainView`]: true,

@@ -60,6 +60,7 @@
     }
 
     &-title + .infoView + .infoView {
+        margin-top: 10px;
         .sub-button {
             margin: auto 0;
             margin-left: 10px;
@@ -72,13 +73,17 @@
         }
     }
 
+    .infoView-topRight {
+        color: #FF0000;
+    }
+
     .infoView-topLeft {
         font-weight: 600;
     }
 
     .fort-button {
         width: 100%;
-        margin-top: 25px;
+        margin-top: 15px;
         margin-bottom: 15px;
     }
 

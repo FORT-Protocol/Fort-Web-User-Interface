@@ -1,4 +1,3 @@
-import { BigNumber } from "ethers";
 import { FC } from "react";
 import { PRCListType } from "..";
 import MainCard from "../../../components/MainCard";
@@ -16,15 +15,12 @@ const WinOrderList: FC<WinOrderListProps> = ({ ...props }) => {
   const classPrefix = "winOrderList";
 
   const historyLi = props.historyList.map((item) => {
-    const itemAmount = BigNumber.from(item.n.toString()).div(
-      BigNumber.from("10000")
-    );
     return (
       <li key={item.owner + item.index.toString()}>
-        <p>{item.openBlock.toString()}</p>
+        <p>{item.open_block.toString()}</p>
 
         <p className={`${classPrefix}-historyList-amount`}>
-          {`${itemAmount} DCU`}
+          {`${item.gained} DCU`}
         </p>
         <span></span>
       </li>
@@ -33,7 +29,7 @@ const WinOrderList: FC<WinOrderListProps> = ({ ...props }) => {
   const pendingLi = props.pendingList.map((item) => {
     const itemAmount = bigNumberToNormal(item.gained, 18, 2)
     return (
-      <li key={item.owner + item.index.toString() + "p"}>
+      <li key={item.owner + item.index.toString()}>
         <p>{item.openBlock.toString()}</p>
 
         <p className={`${classPrefix}-historyList-amount`}>

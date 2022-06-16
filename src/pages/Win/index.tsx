@@ -53,7 +53,7 @@ const Win: FC = () => {
   const { pendingList, txList } = useTransactionListCon();
   const intervalRef = useRef<NodeJS.Timeout>();
 
-  const addressBaseUrl = useEtherscanAddressBaseUrl()
+  const addressBaseUrl = useEtherscanAddressBaseUrl();
 
   const getBalance = useCallback(async () => {
     if (!chainId || !account || !library) {
@@ -80,28 +80,34 @@ const Win: FC = () => {
     if (!latest) {
       return;
     }
-    const allBets_get = await fetch("https://api.hedge.red/api/prc/list/0/2");
+    const allBets_get = await fetch("https://api.hedge.red/api/prcTest/list/0/2");
     const allBets_data = await allBets_get.json();
     const allBets_data_modol = allBets_data.value.filter(
       (item: PRCListType) => item.owner !== ZERO_ADDRESS
     );
 
-    const weekly_get = await fetch('https://api.hedge.red/api/prc/weekList/10');
+    const weekly_get = await fetch("https://api.hedge.red/api/prcTest/weekList/10");
     const weekly_data = await weekly_get.json();
     const weekly_data_modol = weekly_data.value.filter(
+      (item: PRCListType) => item.owner !== ZERO_ADDRESS
+    );
+    const myBetsUrl = `https://api.hedge.red/api/prcTest/userList/${account}/200`
+    const myBets_get = await fetch(myBetsUrl)
+    const myBets_data = await myBets_get.json();
+    const myBets_data_modol = myBets_data.value.filter(
       (item: PRCListType) => item.owner !== ZERO_ADDRESS
     );
 
     const listResult = await fortPRCContract.find44(
       "0",
-      "2000",
-      "2000",
+      "200",
+      "200",
       account
     );
     const result = listResult.filter(
       (item: PRCListType) => item.owner !== ZERO_ADDRESS
     );
-    const history = result;
+    var history = myBets_data_modol;
     const pending = result.filter(
       (item: PRCListType) =>
         (BigNumber.from(item.n.toString()).gt(BigNumber.from("0")) &&
@@ -112,6 +118,15 @@ const Win: FC = () => {
         (BigNumber.from(item.gained.toString()).eq(BigNumber.from("0")) &&
           BigNumber.from(latest).sub(item.openBlock).lte(BigNumber.from(10)))
     );
+
+    for (var i = 0; i < pending.length; i++) {
+      for (var j = 0;j < myBets_data_modol.length; j++) {
+        if ((pending[i].owner.toLowerCase() === myBets_data_modol[j].owner.toLowerCase()) && (pending[i].index.toString() === myBets_data_modol[j].index.toString())) {
+          history.splice(j,1); 
+        }
+      }
+    }
+
     setHistoryList(history);
     setWinPendingList(pending);
     setNowBlock(latest);
@@ -162,29 +177,38 @@ const Win: FC = () => {
   };
 
   const weekly_li = weeklyData.map((item) => {
-    const url = addressBaseUrl + item.owner
+    const url = addressBaseUrl + item.owner;
     return (
-      <li><p key={item.owner + "weekly"}><a href={url} target="view_window">{showEllipsisAddress(item.owner)}</a></p><p>{item.gained} DCU</p></li>
-    )
-  })
+      <li key={item.owner + "weekly"}>
+        <p>
+          <a href={url} target="view_window">
+            {showEllipsisAddress(item.owner)}
+          </a>
+        </p>
+        <p>{item.gained} DCU</p>
+      </li>
+    );
+  });
 
   const weeklyRanks = () => {
     return (
       <div className={`${classPrefix}-otherList-weekly`}>
         <p className={`${classPrefix}-otherList-weekly-title`}>Weekly ranks</p>
-        <ul>
-          {weekly_li}
-        </ul>
+        <ul>{weekly_li}</ul>
       </div>
     );
   };
 
   const allBets_li = allBetsData.map((item) => {
-    const url = addressBaseUrl + item.owner
+    const url = addressBaseUrl + item.owner;
     return (
       <li key={item.owner + item.index.toString() + "all"}>
         <p>{item.open_block}</p>
-        <p><a href={url} target="view_window">{showEllipsisAddress(item.owner)}</a></p>
+        <p>
+          <a href={url} target="view_window">
+            {showEllipsisAddress(item.owner)}
+          </a>
+        </p>
         <p>{item.gained} DCU</p>
       </li>
     );
@@ -225,6 +249,24 @@ const Win: FC = () => {
       setPRCNum(resultString);
     }
   };
+  const checkChance = () => {
+    const result = parseFloat(chance.valueOf());
+    const resultString = formatPRCInputNum(result.toFixed(2));
+    if (parseFloat(resultString) > 100 || parseFloat(resultString) < 1.1) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+  const checkPRCNum = () => {
+    const result = parseFloat(prcNum.valueOf());
+    const resultString = formatPRCInputNum(result.toFixed(2));
+    if (parseFloat(resultString) > 1000 || parseFloat(resultString) < 1) {
+      return false;
+    } else {
+      return true;
+    }
+  };
   return (
     <div className={`${classPrefix}`}>
       <div className={`${classPrefix}-left`}>
@@ -232,10 +274,11 @@ const Win: FC = () => {
           <p className={`${classPrefix}-card-title`}>Win DCU by PRC</p>
           <InfoShow
             topLeftText={"Multiplier"}
+            topRightText={checkChance() ? "" : "Limitation: 1.10-100.00"}
             bottomRightText={`Win chance:${
               winChance === "NaN" ? "---" : winChance
             } %`}
-            popText={'Win chance = 1 / Multiplier'}
+            popText={"Win chance = 1 / Multiplier"}
           >
             <input
               type="text"
@@ -245,27 +288,15 @@ const Win: FC = () => {
               maxLength={6}
               onChange={(e) => {
                 const resultString = formatPRCInputNum(e.target.value);
-                if (parseFloat(resultString) > 100) {
-                  setChance("100.00");
-                } else if (parseFloat(resultString) < 1.1) {
-                  setChance("1.10");
-                } else {
-                  setChance(resultString);
-                }
+                setChance(resultString);
               }}
             />
             <p className={`${classPrefix}-card-x`}>X</p>
             <button
               onClick={() => {
-                const result = Math.floor(Math.random() * 100 + 1.1);
-                const resultString = formatPRCInputNum(result.toString());
-                if (parseFloat(resultString) > 100) {
-                  setChance("100.00");
-                } else if (parseFloat(resultString) < 1.1) {
-                  setChance("1.10");
-                } else {
-                  setChance(resultString);
-                }
+                const result = Math.floor(Math.random() * 9890 + 110);
+                const resultString = formatPRCInputNum((parseFloat(result.toString())/100).toFixed(2).toString());
+                setChance(resultString);
               }}
             >
               <Chance />
@@ -276,7 +307,8 @@ const Win: FC = () => {
             bottomRightText={`${"Payout"}: ${
               payout === "NaN" ? "---" : payout
             } DCU`}
-            popText={'Payout = Multiplier * Bet amount'}
+            topRightText={checkPRCNum() ? "" : "Limitation: 1.10-1000.00"}
+            popText={"Payout = Multiplier * Bet amount"}
           >
             <SingleTokenShow tokenNameOne={"PRC"} isBold />
             <input
@@ -287,13 +319,7 @@ const Win: FC = () => {
               maxLength={7}
               onChange={(e) => {
                 const resultString = formatPRCInputNum(e.target.value);
-                if (parseFloat(resultString) > 1000) {
-                  setPRCNum("1000.00");
-                } else if (parseFloat(resultString) < 1) {
-                  setPRCNum("1.00");
-                } else {
-                  setPRCNum(resultString);
-                }
+                setPRCNum(resultString);
               }}
             />
             <button className={"sub-button"} onClick={() => changePayout(0.5)}>
@@ -307,6 +333,8 @@ const Win: FC = () => {
             className={`${classPrefix}-card-button`}
             onClick={() => {
               if (
+                !checkChance() ||
+                !checkPRCNum() ||
                 mainButtonPending() ||
                 !PRCBalance.gte(BigNumber.from("1000000000000000000"))
               ) {
@@ -315,6 +343,8 @@ const Win: FC = () => {
               confirm();
             }}
             disable={
+              !checkChance() ||
+              !checkPRCNum() ||
               mainButtonPending() ||
               !PRCBalance.gte(BigNumber.from("1000000000000000000"))
             }
