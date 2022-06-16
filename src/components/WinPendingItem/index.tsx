@@ -1,10 +1,10 @@
+import { Tooltip } from "antd";
 import { BigNumber } from "ethers";
 import { FC, useEffect, useState } from "react";
 import { useFortPRCClaim } from "../../contracts/hooks/useFortPRCTransation";
 import useTransactionListCon, {
   TransactionType,
 } from "../../libs/hooks/useTransactionInfo";
-import { bigNumberToNormal } from "../../libs/utils";
 import MainButton from "../MainButton";
 import PendingClock from "./PendingClock";
 import "./styles";
@@ -37,14 +37,6 @@ export const WinPendingItem: FC<WinPendingItemType> = ({ ...props }) => {
     );
     return claimTx.length > 0 ? true : false;
   };
-  // useEffect(() => {
-  //   const claimTx = pendingList.filter(
-  //     (item) =>
-  //       item.info === props.index.toString() &&
-  //       item.type === TransactionType.prcclaim
-  //   );
-  //   setIsPending(claimTx.length > 0 ? true : false)
-  // }, [pendingList, props.index])
 
   useEffect(() => {
     const thisLeftTime = leftTime - countNum;
@@ -81,19 +73,6 @@ export const WinPendingItem: FC<WinPendingItemType> = ({ ...props }) => {
   return (
     <div className={classPrefix}>
       <div className={`${classPrefix}-left`}>
-        <div className={`${classPrefix}-left-clock`}>
-          <PendingClock
-            leftTime={leftTimeClock}
-            allTime={allTime}
-            index={props.index.toNumber()}
-          />
-        </div>
-        <div className={`${classPrefix}-left-text`}>{timeString}</div>
-      </div>
-      <div className={`${classPrefix}-right`}>
-        <div className={`${classPrefix}-right-text`}>
-          {bigNumberToNormal(props.gained, 18, 6)} DCU
-        </div>
         <MainButton
           onClick={() => {
             if (buttonState()) {
@@ -106,6 +85,21 @@ export const WinPendingItem: FC<WinPendingItemType> = ({ ...props }) => {
         >
           Claim
         </MainButton>
+      </div>
+      <div className={`${classPrefix}-right`}>
+        <Tooltip
+          placement="right"
+          color={"#ffffff"}
+          title={`Remaining claim time:${timeString}`}
+        >
+          <span>
+            <PendingClock
+              leftTime={leftTimeClock}
+              allTime={allTime}
+              index={props.index.toNumber()}
+            />
+          </span>
+        </Tooltip>
       </div>
     </div>
   );

@@ -74,10 +74,10 @@
 
     .win-card {
         &-title {
-            color: #C5C5C5;
+            color: #FFFFFF;
         }
 
-        &-balance span {
+        &-balance span , &-fairness span{
             color: #C5C5C5;
             border-bottom: 1px dashed #C5C5C5;
         }
@@ -96,49 +96,66 @@
     .winOrderList-historyList {
         li {
             border-top: 1px solid rgba(197, 197, 197, 0.15);
-            color: white;
+            p {
+                color: #8BB7FF;
+                font-size: 15px;
+                font-weight: 500;
+                width: 171px; 
+            }
+    
+            :first-child+p {
+                color: white;
+            }
+
+            p + p {
+                color: #C5C5C5;
+            }
         }
     }
 
-    .winOrderList-pendingList {
+    .win-otherList-line {
         border-top: 1px solid rgba(197, 197, 197, 0.15);
-        border-bottom: 1px solid rgba(197, 197, 197, 0.15);
-        color: white;
     }
 
-    .winChoice {
-        background: rgba(255, 255, 255, 0.15);
-        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        border: 0px;
-
-        &-topBg {
-            &-topNum {
-                color: white;
-            }
+    .win-otherList-weekly {
+        &-title {
+            color: #C5C5C5;
         }
 
-        &-bottomBg {
-            background: rgba(255, 255, 255, 0.3);
+        ul {
+            li {
+                border-top: 1px solid rgba(197, 197, 197, 0.15);
 
-            &-num {
-                color: white;
+                :first-child + p {
+                    color: #C5C5C5;
+                }
+
+                :first-child {
+                    color: #8BB7FF;
+                }
             }
         }
     }
 
-    .winChoice-selected {
-        .winChoice-topBg {
-            background: linear-gradient(90deg, #8BB7FF 0%, #0061FF 100%);
+    .win-otherList-allBets {
+        &-title {
+            color: #C5C5C5;
         }
 
-        .winChoice-bottomBg {
-            background: linear-gradient(90deg, #8BB7FF 0%, #0061FF 100%);
-            &-num {
-                background: rgba(255, 255, 255, 0.3);
+        ul {
+            li {
+                border-top: 1px solid rgba(197, 197, 197, 0.15);
+                p {
+                    color: #C5C5C5;
+                }
+                :first-child+p > a {
+                    color: #8BB7FF;
+                }
+                :first-child+p+p {
+                    color: #C5C5C5;
+                }
             }
         }
-        
-        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     }
 
     .OptionsList-mobile {
@@ -329,6 +346,21 @@
         p,
         span {
             color: #BDD6FF;
+        }
+        p.win-card-x {
+            color: #FFFFFF;
+        }
+
+        .win-card-x + button {
+            svg > g > path{
+                fill: #8BB7FF;
+            }
+        }
+
+        .sub-button, .add-button {
+            svg > rect {
+                fill: #8BB7FF;
+            }
         }
 
         input {

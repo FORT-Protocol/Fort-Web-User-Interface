@@ -21,7 +21,7 @@ const useCheckWinResult = () => {
     if (!latest) {
       return;
     }
-    const listResult = await fortPRCContract.find("0", "3000", "3000", account);
+    const listResult = await fortPRCContract.find44("0", "3000", "3000", account);
     const result = listResult.filter(
       (item: PRCListType) => item.owner !== ZERO_ADDRESS
     );

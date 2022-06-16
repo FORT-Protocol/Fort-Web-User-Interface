@@ -15,7 +15,7 @@ export const BSCTest = {
   tokenSymbol: "BNB",
   tokenDecimals: 18,
   rpc: [
-    `https://data-seed-prebsc-1-s1.binance.org:8545/`
+    `https://data-seed-prebsc-2-s1.binance.org:8545/`
   ],
   infoURL: "https://testnet.bscscan.com/",
 };

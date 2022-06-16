@@ -2,7 +2,6 @@ import { BigNumber } from "ethers";
 import { CofixSwapContract } from "../../libs/hooks/useContract";
 import { useSendTransaction } from "../../libs/hooks/useSendTransaction";
 import useWeb3 from "../../libs/hooks/useWeb3";
-import { PRICE_FEE } from "../../libs/utils";
 import { TransactionType } from '../../libs/hooks/useTransactionInfo';
 
 export function useSwapExactTokensForTokens(
@@ -29,11 +28,7 @@ export function useSwapExactTokensForTokens(
         )
     }
     const value = () => {
-        if (path.length === 2) {
-            return 0
-        } else {
-            return PRICE_FEE
-        }
+        return 0;
     }
     const tx = {
         from: account,

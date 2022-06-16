@@ -4,44 +4,33 @@
 .winPendingItem {
     display: flex;
     justify-content: space-between;
-    height: 78px;
+    height: 51px;
+    width: 143px;
 
     &-left {
-        width: 40%;
-        height: 78px;
-
-        &-clock {
-            padding-top: 10px;
-            // display: none;
-            .pendingClock {
-                margin: 0 auto;
-            }
-        }
-        
-        &-text {
-            width: 100%;
-            height: 28px;
-            line-height:28px;
-            font-size: $T2;
-        }
-    }
-
-    &-right {
-        width: 60%;
-        height: 78px;
-
-        &-text {
-            width: 100%;
-            height: 36.5px;
-            font-size: $T2;
-            font-family: $boldFont;
-            line-height: 36.5px;
-        }
+        width: 80px;
+        height: 51px;
+        display: flex;
 
         .fort-button {
             width: 80px;
             height: 28px;
             padding: 0;
+            margin: auto 0;
+        }
+    }
+
+    &-right {
+        width: 34px;
+        height: 51px;
+        display: flex;
+
+        span {
+            display: flex;
+
+            .pendingClock {
+                margin: auto 0;
+            }
         }
     }
 }

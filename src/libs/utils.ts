@@ -1,6 +1,6 @@
 import { BigNumber } from "ethers";
 
-export const PRICE_FEE = BigNumber.from(normalToBigNumber("0.0002"));
+export const PRICE_FEE = BigNumber.from(normalToBigNumber("0"));
 export const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
 export const BASE_AMOUNT = BigNumber.from('1000000000000000000');
 export const BASE_2000ETH_AMOUNT = BigNumber.from('2000000000000000000000');
@@ -126,6 +126,21 @@ export function formatInputNum(value: string): string {
     .replace(
       // eslint-disable-next-line no-useless-escape
       /^(\-)*(\d+)\.(\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d).*$/,
+      "$1$2.$3"
+    )
+    .replace(/^\./g, "");
+}
+
+export function formatPRCInputNum(value: string): string {
+  return value
+    .replace(/[^\d.]/g, "")
+    .replace(/\.{2,}/g, ".")
+    .replace(".", "$#$")
+    .replace(/\./g, "")
+    .replace("$#$", ".")
+    .replace(
+      // eslint-disable-next-line no-useless-escape
+      /^(\-)*(\d+)\.(\d\d).*$/,
       "$1$2.$3"
     )
     .replace(/^\./g, "");
