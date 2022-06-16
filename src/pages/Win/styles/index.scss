@@ -107,6 +107,13 @@
             color: $gray-info-text-color;
             border-bottom: 1px dashed $gray-info-text-color;
         }
+
+        &-red {
+            span {
+                color: #FF0000;
+                border-bottom: 1px dashed #FF0000;
+            }
+        }
     }
 
     &-balance-add {

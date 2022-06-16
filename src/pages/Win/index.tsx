@@ -1,5 +1,6 @@
 import { Trans } from "@lingui/macro";
 import { Tooltip } from "antd";
+import classNames from "classnames";
 import { BigNumber } from "ethers";
 import { FC, useCallback, useEffect, useRef, useState } from "react";
 import { AddIcon, AddTokenIcon, Chance, SubIcon } from "../../components/Icon";
@@ -75,35 +76,34 @@ const Win: FC = () => {
     if (!fortPRCContract) {
       return;
     }
-    
+
     const latest = await library?.getBlockNumber();
     if (!latest) {
       return;
     }
-    const allBets_get = await fetch("https://api.hedge.red/api/prcTest/list/0/2");
+    const allBets_get = await fetch(
+      "https://api.hedge.red/api/prcTest/list/0/2"
+    );
     const allBets_data = await allBets_get.json();
     const allBets_data_modol = allBets_data.value.filter(
       (item: PRCListType) => item.owner !== ZERO_ADDRESS
     );
 
-    const weekly_get = await fetch("https://api.hedge.red/api/prcTest/weekList/10");
+    const weekly_get = await fetch(
+      "https://api.hedge.red/api/prcTest/weekList/10"
+    );
     const weekly_data = await weekly_get.json();
     const weekly_data_modol = weekly_data.value.filter(
       (item: PRCListType) => item.owner !== ZERO_ADDRESS
     );
-    const myBetsUrl = `https://api.hedge.red/api/prcTest/userList/${account}/200`
-    const myBets_get = await fetch(myBetsUrl)
+    const myBetsUrl = `https://api.hedge.red/api/prcTest/userList/${account}/200`;
+    const myBets_get = await fetch(myBetsUrl);
     const myBets_data = await myBets_get.json();
     const myBets_data_modol = myBets_data.value.filter(
       (item: PRCListType) => item.owner !== ZERO_ADDRESS
     );
 
-    const listResult = await fortPRCContract.find44(
-      "0",
-      "200",
-      "200",
-      account
-    );
+    const listResult = await fortPRCContract.find44("0", "200", "200", account);
     const result = listResult.filter(
       (item: PRCListType) => item.owner !== ZERO_ADDRESS
     );
@@ -120,9 +120,13 @@ const Win: FC = () => {
     );
 
     for (var i = 0; i < pending.length; i++) {
-      for (var j = 0;j < myBets_data_modol.length; j++) {
-        if ((pending[i].owner.toLowerCase() === myBets_data_modol[j].owner.toLowerCase()) && (pending[i].index.toString() === myBets_data_modol[j].index.toString())) {
-          history.splice(j,1); 
+      for (var j = 0; j < myBets_data_modol.length; j++) {
+        if (
+          pending[i].owner.toLowerCase() ===
+            myBets_data_modol[j].owner.toLowerCase() &&
+          pending[i].index.toString() === myBets_data_modol[j].index.toString()
+        ) {
+          history.splice(j, 1);
         }
       }
     }
@@ -136,10 +140,11 @@ const Win: FC = () => {
 
   useEffect(() => {
     if (
-      txList.length !== 0 && (!txList ||
-      (txList[txList.length - 1].type !== TransactionType.roll &&
-        txList[txList.length - 1].type !== TransactionType.prcclaim) ||
-      txList[txList.length - 1].txState !== 1)
+      txList.length !== 0 &&
+      (!txList ||
+        (txList[txList.length - 1].type !== TransactionType.roll &&
+          txList[txList.length - 1].type !== TransactionType.prcclaim) ||
+        txList[txList.length - 1].txState !== 1)
     ) {
       return;
     }
@@ -266,6 +271,13 @@ const Win: FC = () => {
       return true;
     }
   };
+  const checkBalance = () => {
+    if (PRCBalance.gte(normalToBigNumber(prcNum.valueOf(), 18))) {
+      return true;
+    } else {
+      return false;
+    }
+  };
   return (
     <div className={`${classPrefix}`}>
       <div className={`${classPrefix}-left`}>
@@ -294,7 +306,9 @@ const Win: FC = () => {
             <button
               onClick={() => {
                 const result = Math.floor(Math.random() * 9890 + 110);
-                const resultString = formatPRCInputNum((parseFloat(result.toString())/100).toFixed(2).toString());
+                const resultString = formatPRCInputNum(
+                  (parseFloat(result.toString()) / 100).toFixed(2).toString()
+                );
                 setChance(resultString);
               }}
             >
@@ -335,7 +349,7 @@ const Win: FC = () => {
                 !checkChance() ||
                 !checkPRCNum() ||
                 mainButtonPending() ||
-                !PRCBalance.gte(BigNumber.from("1000000000000000000"))
+                !checkBalance()
               ) {
                 return;
               }
@@ -345,7 +359,7 @@ const Win: FC = () => {
               !checkChance() ||
               !checkPRCNum() ||
               mainButtonPending() ||
-              !PRCBalance.gte(BigNumber.from("1000000000000000000"))
+              !checkBalance()
             }
             loading={mainButtonPending()}
           >
@@ -363,7 +377,10 @@ const Win: FC = () => {
                 <span>Fairness</span>
               </Tooltip>
             </p>
-            <p className={`${classPrefix}-card-balance`}>
+            <p className={classNames({
+              [`${classPrefix}-card-balance`]:true,
+              [`${classPrefix}-card-balance-red`]:!checkBalance()
+            })}>
               <Tooltip
                 placement="right"
                 color={"#ffffff"}
