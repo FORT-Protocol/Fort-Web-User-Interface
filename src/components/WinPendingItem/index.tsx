@@ -1,6 +1,7 @@
 import { Tooltip } from "antd";
 import { BigNumber } from "ethers";
 import { FC, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { useFortPRCClaim } from "../../contracts/hooks/useFortPRCTransation";
 import useTransactionListCon, {
   TransactionType,
@@ -84,7 +85,9 @@ export const WinPendingItem: FC<WinPendingItemType> = ({ ...props }) => {
             if (buttonState()) {
               return;
             }
+
             claim();
+            toast.dismiss(props.index.toNumber());
           }}
           disable={buttonState()}
           loading={loadingButton()}

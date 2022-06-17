@@ -21,7 +21,10 @@ export const WinToast: FC<WinToastProps> = ({ ...props }) => {
   const winTimeAndACT = BigNumber.from('0').eq(props.gained) ? (<></>) : (
     <div className={`${classPrefix}-win`}>
       <p className={`${classPrefix}-win-time`}>{`remaining claim time ${props.leftTime}`}</p>
-      <MainButton onClick={claim}>Claim</MainButton>
+      <MainButton onClick={() => {
+        claim()
+        toast.dismiss(props.index.toNumber())
+      }}>Claim</MainButton>
     </div>
   )
   return (
@@ -46,7 +49,8 @@ export const notifyWinToast = (resultInfo: WinToastProps) => {
       position: toast.POSITION.TOP_RIGHT,
       closeOnClick: true,
       hideProgressBar: true,
-      autoClose: 30000
+      autoClose: 30000,
+      toastId: resultInfo.index.toNumber()
     }
   );
 };

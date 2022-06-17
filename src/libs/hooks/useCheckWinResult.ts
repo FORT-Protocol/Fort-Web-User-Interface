@@ -14,6 +14,7 @@ const useCheckWinResult = () => {
   const { account, library } = useWeb3();
 
   const getList = useCallback(async () => {
+    
     if (!fortPRCContract) {
       return;
     }
