@@ -81,6 +81,15 @@
             color: #C5C5C5;
             border-bottom: 1px dashed #C5C5C5;
         }
+
+        &-balance {
+            &-red {
+                span {
+                    color: #FF0000;
+                    border-bottom: 1px dashed #FF0000;
+                }
+            }
+        }
     }
 
     .winOrderList-card {

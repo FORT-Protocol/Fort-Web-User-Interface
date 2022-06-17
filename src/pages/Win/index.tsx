@@ -320,7 +320,7 @@ const Win: FC = () => {
             bottomRightText={`${"Payout"}: ${
               payout === "NaN" ? "---" : payout
             } DCU`}
-            topRightText={checkPRCNum() ? "" : "Limitation: 1.10-1000.00"}
+            topRightText={checkPRCNum() ? "" : "Limitation: 1.00-1000.00"}
             popText={"Payout = Multiplier * Bet amount"}
           >
             <SingleTokenShow tokenNameOne={"PRC"} isBold />
