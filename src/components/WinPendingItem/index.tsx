@@ -21,14 +21,11 @@ export const WinPendingItem: FC<WinPendingItemType> = ({ ...props }) => {
   const { pendingList } = useTransactionListCon();
   const [timeString, setTimeString] = useState<String>("");
   const [countNum, setCountNum] = useState<number>(0);
+  const [nowBlock, setNowBlock] = useState<number>(0);
   const [leftTimeClock, setLeftTimeClock] = useState<number>(0);
 
   const claim = useFortPRCClaim(props.index);
   const allTime = 256 * 3;
-  var leftTime =
-    allTime -
-    BigNumber.from(props.nowBlock).sub(props.openBlock).toNumber() * 3;
-
   const loadingButton = () => {
     const claimTx = pendingList.filter(
       (item) =>
@@ -38,13 +35,27 @@ export const WinPendingItem: FC<WinPendingItemType> = ({ ...props }) => {
     return claimTx.length > 0 ? true : false;
   };
 
+  setTimeout(() => {
+    if (props.nowBlock !== nowBlock) {
+      setCountNum(0);
+      setNowBlock(props.nowBlock);
+    } else {
+      setCountNum(countNum + 1);
+    }
+  }, 1000);
+
   useEffect(() => {
+    var leftTime =
+      allTime -
+      BigNumber.from(props.nowBlock).sub(props.openBlock).toNumber() * 3;
+    
     const thisLeftTime = leftTime - countNum;
     if (thisLeftTime <= 0) {
       setTimeString("0:00");
       setLeftTimeClock(0);
       return;
     }
+    console.log(countNum)
     setLeftTimeClock(thisLeftTime);
     const minTime = parseInt(
       (parseInt(thisLeftTime.toString()) / 60).toString()
@@ -55,13 +66,8 @@ export const WinPendingItem: FC<WinPendingItemType> = ({ ...props }) => {
     }
     const time = minTime.toString() + ":" + secondString;
     setTimeString(time);
-  }, [countNum, leftTime]);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setCountNum(countNum + 1);
-    }, 1000);
-  }, [countNum]);
+    
+  }, [allTime, countNum, nowBlock, props.nowBlock, props.openBlock]);
 
   const buttonState = () => {
     if (BigNumber.from("0").eq(props.gained) || loadingButton()) {

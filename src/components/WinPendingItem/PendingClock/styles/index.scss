@@ -11,13 +11,20 @@
 
     &-position {
         float: left;
-        position: absolute;
+        position: relative;
         width: 34px;
         height: 34px;
-
+        z-index: 99;
         svg {
+            
             margin-top: 14px;
             margin-left: 14px;
         } 
+    }
+
+    canvas {
+        float: left;
+        position: relative;
+        margin-top: -34px;
     }
 }

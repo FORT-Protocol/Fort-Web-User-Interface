@@ -16,7 +16,7 @@ const WinOrderList: FC<WinOrderListProps> = ({ ...props }) => {
 
   const historyLi = props.historyList.map((item) => {
     return (
-      <li key={item.owner + item.index.toString()}>
+      <li key={item.owner + item.index.toString() + item.open_block.toString() + 'h'}>
         <p>{item.open_block.toString()}</p>
 
         <p className={`${classPrefix}-historyList-amount`}>
@@ -28,8 +28,9 @@ const WinOrderList: FC<WinOrderListProps> = ({ ...props }) => {
   });
   const pendingLi = props.pendingList.map((item) => {
     const itemAmount = bigNumberToNormal(item.gained, 18, 2)
+    
     return (
-      <li key={item.owner + item.index.toString()}>
+      <li key={item.owner + item.index.toString() + 'p'}>
         <p>{item.openBlock.toString()}</p>
 
         <p className={`${classPrefix}-historyList-amount`}>

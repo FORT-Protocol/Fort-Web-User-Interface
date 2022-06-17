@@ -12,6 +12,7 @@ const useCheckWinResult = () => {
   const fortPRCContract = FortPRCContract(FortPRC);
   const { txList } = useTransactionListCon();
   const { account, library } = useWeb3();
+
   const getList = useCallback(async () => {
     if (!fortPRCContract) {
       return;
@@ -55,7 +56,7 @@ const useCheckWinResult = () => {
     }
     setTimeout(() => {
       getList();
-    }, 10000);
+    }, 13000);
   }, [getList, txList]);
 };
 

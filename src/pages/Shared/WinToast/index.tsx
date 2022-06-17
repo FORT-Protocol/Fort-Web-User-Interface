@@ -46,7 +46,7 @@ export const notifyWinToast = (resultInfo: WinToastProps) => {
       position: toast.POSITION.TOP_RIGHT,
       closeOnClick: true,
       hideProgressBar: true,
-      autoClose: (BigNumber.from('0').eq(resultInfo.gained) ? 30000 : false)
+      autoClose: 30000
     }
   );
 };

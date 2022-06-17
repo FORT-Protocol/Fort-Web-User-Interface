@@ -114,9 +114,7 @@ const Win: FC = () => {
           BigNumber.from(item.openBlock.toString())
             .add(BigNumber.from(256))
             .gt(latest) &&
-          BigNumber.from(item.gained.toString()).gt(BigNumber.from("0"))) ||
-        (BigNumber.from(item.gained.toString()).eq(BigNumber.from("0")) &&
-          BigNumber.from(latest).sub(item.openBlock).lte(BigNumber.from(10)))
+          BigNumber.from(item.gained.toString()).gt(BigNumber.from("0")))
     );
 
     for (var i = 0; i < pending.length; i++) {
@@ -132,7 +130,7 @@ const Win: FC = () => {
     }
 
     setHistoryList(history);
-    setWinPendingList(pending);
+    setWinPendingList(pending.reverse());
     setNowBlock(latest);
     setAllBetsData(allBets_data_modol);
     setWeeklyData(weekly_data_modol);
@@ -243,7 +241,7 @@ const Win: FC = () => {
     parseFloat(chance.toString()) * parseFloat(prcNum.toString())
   ).toFixed(2);
   const changePayout = (num: number) => {
-    const result = parseFloat(prcNum.valueOf()) * num;
+    const result = parseFloat(prcNum.valueOf() === '' ? '1' : prcNum.valueOf()) * num;
     const resultString = formatPRCInputNum(result.toFixed(2));
     if (parseFloat(resultString) > 1000) {
       setPRCNum("1000.00");
@@ -286,7 +284,7 @@ const Win: FC = () => {
           <InfoShow
             topLeftText={"Multiplier"}
             topRightText={checkChance() ? "" : "Limitation: 1.10-100.00"}
-            bottomRightText={`Win chance:${
+            bottomRightText={`Win chance: ${
               winChance === "NaN" ? "---" : winChance
             } %`}
             popText={"Win chance = 1 / Multiplier"}
