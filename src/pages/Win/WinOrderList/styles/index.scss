@@ -37,18 +37,18 @@
         justify-content: space-between;
 
         p {
-            color: $main-button-color;
+            color: $gray-background-text-color;
             font-size: 15px;
             font-weight: 500;
-            width: 145px; 
+            width: 30%;
         }
 
         :first-child+p {
             color: black;
         }
 
-        span {
-            width: 143px;
+        p+span {
+            width: 40%;
         }
 
         p {

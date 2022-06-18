@@ -106,17 +106,13 @@
         li {
             border-top: 1px solid rgba(197, 197, 197, 0.15);
             p {
-                color: #8BB7FF;
+                color: #C5C5C5;
                 font-size: 15px;
                 font-weight: 500;
             }
     
             :first-child+p {
                 color: white;
-            }
-
-            p + p {
-                color: #C5C5C5;
             }
         }
     }

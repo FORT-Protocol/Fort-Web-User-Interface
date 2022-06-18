@@ -109,6 +109,9 @@ export function addGasLimit(value: BigNumber): BigNumber {
 export function showEllipsisAddress(address: string): string {
   return address.substr(0, 8) + "...." + address.substr(address.length - 6, 6);
 }
+export function showEllipsisAddress2(address: string): string {
+  return address.substr(0, 6) + "...." + address.substr(address.length - 4, 4);
+}
 
 export function checkWidth():boolean {
   const width = window.innerWidth;

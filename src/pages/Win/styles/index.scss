@@ -211,21 +211,21 @@
                     font-size: 15px;
                     color: $gray-background-text-color;
                     font-weight: 500;
-                    width: 120px;
+                    width: 25%;
                 }
 
                 :first-child+p>a {
                     color: $main-button-color;
                     font-size: 15px;
                     font-weight: 500;
-                    width: 200px
+                    width: 40%;
                 }
 
                 :first-child+p+p {
                     font-size: 15px;
                     color: $gray-background-text-color;
                     font-weight: 500;
-                    width: 165px;
+                    width: 35%;
                     text-align: right;
                 }
 

@@ -3,14 +3,14 @@
 
 .winPendingItem {
     display: flex;
-    justify-content: space-between;
+    justify-content:flex-end;
     height: 51px;
-    width: 143px;
 
     &-left {
         width: 80px;
         height: 51px;
         display: flex;
+        margin-right: 20px;
 
         .fort-button {
             width: 80px;

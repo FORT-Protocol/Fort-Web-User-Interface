@@ -23,7 +23,7 @@ import {
   bigNumberToNormal,
   formatPRCInputNum,
   normalToBigNumber,
-  showEllipsisAddress,
+  showEllipsisAddress2,
   ZERO_ADDRESS,
 } from "../../libs/utils";
 import "./styles";
@@ -134,7 +134,7 @@ const Win: FC = () => {
     setHistoryList(history);
     setWinPendingList(pending.reverse());
     setNowBlock(latest);
-    setAllBetsData(allBets_data_modol);
+    setAllBetsData(allBets_data_modol.reverse());
     setWeeklyData(weekly_data_modol);
   }, [account, fortPRCContract, library]);
 
@@ -168,7 +168,7 @@ const Win: FC = () => {
     getList();
     const id = setInterval(() => {
       getList();
-    }, 30 * 1000);
+    }, 10 * 1000);
     intervalRef.current = id;
     return () => {
       if (intervalRef.current) {
@@ -203,7 +203,7 @@ const Win: FC = () => {
       <li key={item.owner + "weekly"}>
         <p>
           <a href={url} target="view_window">
-            {showEllipsisAddress(item.owner)}
+            {showEllipsisAddress2(item.owner)}
           </a>
         </p>
         <p>{item.gained} DCU</p>
@@ -227,7 +227,7 @@ const Win: FC = () => {
         <p>{item.open_block}</p>
         <p>
           <a href={url} target="view_window">
-            {showEllipsisAddress(item.owner)}
+            {showEllipsisAddress2(item.owner)}
           </a>
         </p>
         <p>{item.gained} DCU</p>
@@ -238,7 +238,7 @@ const Win: FC = () => {
   const allBets = () => {
     return (
       <div className={`${classPrefix}-otherList-allBets`}>
-        <p className={`${classPrefix}-otherList-allBets-title`}>All bets</p>
+        <p className={`${classPrefix}-otherList-allBets-title`}>Live claim</p>
         <ul>{allBets_li}</ul>
       </div>
     );
@@ -338,7 +338,7 @@ const Win: FC = () => {
               payout === "NaN" ? "---" : payout
             } DCU`}
             topRightText={checkPRCNum() ? "" : "Limitation: 1.00-1000.00"}
-            popText={"Payout = Multiplier * Bet amount"}
+            popText={"Reward = Multiplier * Bet amount"}
           >
             <SingleTokenShow tokenNameOne={"PRC"} isBold />
             <input
@@ -388,7 +388,7 @@ const Win: FC = () => {
                 placement="bottom"
                 color={"#ffffff"}
                 title={
-                  "After each roll is submitted, the contract hashes the combination of the hash of next block and the index number of the roll. Convert the result to a 32-byte integer, and if it can be divisible by the multiplier you submitted, you win."
+                  `1) Combining the HASH of the first block after the 'roll' with the index number assigned to the 'roll', the protocol computes the corresponding HASH and transforms it to an integer with a length of 32 bytes. \n 2) Divide this integer by the product of 10000 and the chosen multiplier. The winner should have the remainder smaller than 10000.`
                 }
               >
                 <span>Fairness</span>
