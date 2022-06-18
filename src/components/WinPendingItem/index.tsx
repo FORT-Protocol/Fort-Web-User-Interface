@@ -56,7 +56,6 @@ export const WinPendingItem: FC<WinPendingItemType> = ({ ...props }) => {
       setLeftTimeClock(0);
       return;
     }
-    console.log(countNum)
     setLeftTimeClock(thisLeftTime);
     const minTime = parseInt(
       (parseInt(thisLeftTime.toString()) / 60).toString()

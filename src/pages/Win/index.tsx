@@ -47,6 +47,8 @@ const Win: FC = () => {
   const [winPendingList, setWinPendingList] = useState<Array<PRCListType>>([]);
   const [historyList, setHistoryList] = useState<Array<PRCListType>>([]);
   const [allBetsData, setAllBetsData] = useState<Array<PRCListType>>([]);
+  const [allBetsShow, setAllBetsShow] = useState<Array<PRCListType>>([]);
+  const [allBetsShowCount, setAllBetsShowCount] = useState<number>(0);
   const [weeklyData, setWeeklyData] = useState<Array<PRCListType>>([]);
   const [nowBlock, setNowBlock] = useState<number>(0);
   const [PRCBalance, setPRCBalance] = useState<BigNumber>(BigNumber.from("0"));
@@ -82,7 +84,7 @@ const Win: FC = () => {
       return;
     }
     const allBets_get = await fetch(
-      "https://api.hedge.red/api/prcTest/list/0/2"
+      "https://api.hedge.red/api/prcTest/list/0/10"
     );
     const allBets_data = await allBets_get.json();
     const allBets_data_modol = allBets_data.value.filter(
@@ -135,6 +137,23 @@ const Win: FC = () => {
     setAllBetsData(allBets_data_modol);
     setWeeklyData(weekly_data_modol);
   }, [account, fortPRCContract, library]);
+
+  useEffect(() => {
+    
+    const time = setTimeout(() => {
+      if (allBetsData.length > 0 ) {
+        setAllBetsShow([allBetsData[allBetsShowCount],allBetsData[allBetsShowCount + 1]])
+        setAllBetsShowCount(allBetsShowCount + 1)
+      }
+    }, 2000);
+    console.log(allBetsShowCount)
+    return () => {
+      clearTimeout(time)
+      if (allBetsShowCount === (allBetsData.length - 2)) {
+        setAllBetsShowCount(0)
+      }
+    }
+  }, [allBetsData, allBetsShowCount])
 
   useEffect(() => {
     if (
@@ -201,7 +220,7 @@ const Win: FC = () => {
     );
   };
 
-  const allBets_li = allBetsData.map((item) => {
+  const allBets_li = allBetsShow.map((item) => {
     const url = addressBaseUrl + item.owner;
     return (
       <li key={item.owner + item.index.toString() + "all"}>
@@ -315,7 +334,7 @@ const Win: FC = () => {
           </InfoShow>
           <InfoShow
             topLeftText={"Bet amount"}
-            bottomRightText={`${"Payout"}: ${
+            bottomRightText={`${"Reward"}: ${
               payout === "NaN" ? "---" : payout
             } DCU`}
             topRightText={checkPRCNum() ? "" : "Limitation: 1.00-1000.00"}

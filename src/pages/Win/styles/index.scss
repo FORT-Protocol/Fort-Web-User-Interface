@@ -38,13 +38,15 @@
         justify-content: space-between;
     }
 
-    &-title + .infoView {
+    &-title+.infoView {
         input {
             text-align: right;
             margin-right: 0px;
         }
+
         button {
             padding-top: 2px;
+
             &:hover {
                 cursor: pointer;
             }
@@ -60,15 +62,18 @@
         font-weight: bold;
     }
 
-    &-title + .infoView + .infoView {
+    &-title+.infoView+.infoView {
         margin-top: 10px;
+
         .sub-button {
             margin: auto 0;
             margin-left: 5px;
+            padding-top: 3px;
         }
 
         .add-button {
             margin-right: -5px;
+            padding-top: 3px;
         }
 
         button {
@@ -133,6 +138,7 @@
         }
     }
 }
+
 .win-otherList {
     max-width: $baseWidth;
     padding: 40px 44px;
@@ -149,25 +155,26 @@
 
         ul {
             height: 440px;
+
             li {
                 display: flex;
                 height: 44px;
                 border-top: 1px solid $gray-line-color;
                 justify-content: space-between;
 
-                :first-child{
+                :first-child {
                     color: $main-button-color;
                     font-size: 15px;
                     font-weight: 500;
                 }
 
-                :first-child + p {
+                :first-child+p {
                     font-size: 15px;
                     color: $gray-background-text-color;
                     font-weight: 500;
                     text-align: right;
                 }
-                
+
                 p {
                     margin: auto 0;
                 }
@@ -189,6 +196,11 @@
         }
 
         ul {
+            height: 88px;
+            overflow: auto;
+            overflow-x: none;
+            overflow-y: none;
+
             li {
                 display: flex;
                 height: 44px;
@@ -202,14 +214,14 @@
                     width: 120px;
                 }
 
-                :first-child + p > a {
+                :first-child+p>a {
                     color: $main-button-color;
                     font-size: 15px;
                     font-weight: 500;
-                    width:200px
+                    width: 200px
                 }
 
-                :first-child + p + p {
+                :first-child+p+p {
                     font-size: 15px;
                     color: $gray-background-text-color;
                     font-weight: 500;
@@ -235,7 +247,7 @@
         .win-left {
             width: 100%;
             padding: 0 10px;
-    
+
             .win-card {
                 width: 100%;
                 padding: 20px 20px;
@@ -260,5 +272,5 @@
         }
     }
 
-    
+
 }
