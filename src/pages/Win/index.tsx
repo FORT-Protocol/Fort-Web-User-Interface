@@ -112,11 +112,11 @@ const Win: FC = () => {
     var history = myBets_data_modol;
     const pending = result.filter(
       (item: PRCListType) =>
-        (BigNumber.from(item.n.toString()).gt(BigNumber.from("0")) &&
-          BigNumber.from(item.openBlock.toString())
-            .add(BigNumber.from(256))
-            .gt(latest) &&
-          BigNumber.from(item.gained.toString()).gt(BigNumber.from("0")))
+        BigNumber.from(item.n.toString()).gt(BigNumber.from("0")) &&
+        BigNumber.from(item.openBlock.toString())
+          .add(BigNumber.from(256))
+          .gt(latest) &&
+        BigNumber.from(item.gained.toString()).gt(BigNumber.from("0"))
     );
 
     for (var i = 0; i < pending.length; i++) {
@@ -139,21 +139,22 @@ const Win: FC = () => {
   }, [account, fortPRCContract, library]);
 
   useEffect(() => {
-    
     const time = setTimeout(() => {
-      if (allBetsData.length > 0 ) {
-        setAllBetsShow([allBetsData[allBetsShowCount],allBetsData[allBetsShowCount + 1]])
-        setAllBetsShowCount(allBetsShowCount + 1)
+      if (allBetsData.length > 0) {
+        setAllBetsShow([
+          allBetsData[allBetsShowCount],
+          allBetsData[allBetsShowCount + 1],
+        ]);
+        setAllBetsShowCount(allBetsShowCount + 1);
       }
-    }, 2000);
-    console.log(allBetsShowCount)
+    }, 1500);
     return () => {
-      clearTimeout(time)
-      if (allBetsShowCount === (allBetsData.length - 2)) {
-        setAllBetsShowCount(0)
+      clearTimeout(time);
+      if (allBetsShowCount === allBetsData.length - 2) {
+        setAllBetsShowCount(0);
       }
-    }
-  }, [allBetsData, allBetsShowCount])
+    };
+  }, [allBetsData, allBetsShowCount]);
 
   useEffect(() => {
     if (
@@ -260,7 +261,8 @@ const Win: FC = () => {
     parseFloat(chance.toString()) * parseFloat(prcNum.toString())
   ).toFixed(2);
   const changePayout = (num: number) => {
-    const result = parseFloat(prcNum.valueOf() === '' ? '1' : prcNum.valueOf()) * num;
+    const result =
+      parseFloat(prcNum.valueOf() === "" ? "1" : prcNum.valueOf()) * num;
     const resultString = formatPRCInputNum(result.toFixed(2));
     if (parseFloat(resultString) > 1000) {
       setPRCNum("1000.00");
@@ -302,7 +304,7 @@ const Win: FC = () => {
           <p className={`${classPrefix}-card-title`}>Win DCU by PRC</p>
           <InfoShow
             topLeftText={"Multiplier"}
-            topRightText={checkChance() ? "" : "Limitation: 1.10-100.00"}
+            topRightText={checkChance() ? "" : "Limitation: 1.1-100"}
             bottomRightText={`Win chance: ${
               winChance === "NaN" ? "---" : winChance
             } %`}
@@ -337,7 +339,7 @@ const Win: FC = () => {
             bottomRightText={`${"Reward"}: ${
               payout === "NaN" ? "---" : payout
             } DCU`}
-            topRightText={checkPRCNum() ? "" : "Limitation: 1.00-1000.00"}
+            topRightText={checkPRCNum() ? "" : "Limitation: 1-1000"}
             popText={"Reward = Multiplier * Bet amount"}
           >
             <SingleTokenShow tokenNameOne={"PRC"} isBold />
@@ -388,16 +390,21 @@ const Win: FC = () => {
                 placement="bottom"
                 color={"#ffffff"}
                 title={
-                  `1) Combining the HASH of the first block after the 'roll' with the index number assigned to the 'roll', the protocol computes the corresponding HASH and transforms it to an integer with a length of 32 bytes. \n 2) Divide this integer by the product of 10000 and the chosen multiplier. The winner should have the remainder smaller than 10000.`
+                  <div>
+                    <p>{`1) Combining the HASH of the first block after the 'roll' with the index number assigned to the 'roll', the protocol computes the corresponding HASH and transforms it to an integer with a length of 32 bytes.`}</p>
+                    <p>{`2) Divide this integer by the product of 10000 and the chosen multiplier. The winner should have the remainder smaller than 10000.`}</p>
+                  </div>
                 }
               >
                 <span>Fairness</span>
               </Tooltip>
             </p>
-            <p className={classNames({
-              [`${classPrefix}-card-balance`]:true,
-              [`${classPrefix}-card-balance-red`]:!checkBalance()
-            })}>
+            <p
+              className={classNames({
+                [`${classPrefix}-card-balance`]: true,
+                [`${classPrefix}-card-balance-red`]: !checkBalance(),
+              })}
+            >
               <Tooltip
                 placement="right"
                 color={"#ffffff"}

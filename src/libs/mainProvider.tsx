@@ -9,7 +9,6 @@ import "../../src/styles/ant.css";
 import useEagerConnect from "./hooks/useEagerConnect";
 import useInactiveListener from "./hooks/useInactiveListener";
 import { Provider as ThemesProvider } from "./hooks/useThemes";
-import useCheckWinResult from "./hooks/useCheckWinResult";
 
 function getLibrary(provider: any): TypeWeb3Provider {
   const library = new ethers.providers.Web3Provider(provider);
@@ -22,11 +21,6 @@ const Inner: FC = ({ children }) => {
   return <>{children}</>;
 };
 
-const CheckWinResult: FC = ({ children }) => {
-  useCheckWinResult();
-  return <>{children}</>;
-};
-
 const MainProvider: FC = ({ children }) => {
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
@@ -35,7 +29,7 @@ const MainProvider: FC = ({ children }) => {
           <I18nProvider>
             <TransactionProvider>
               <Inner>
-                <CheckWinResult>{children}</CheckWinResult>
+                {children}
               </Inner>
             </TransactionProvider>
           </I18nProvider>

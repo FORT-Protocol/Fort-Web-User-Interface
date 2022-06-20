@@ -181,17 +181,17 @@ const InfoShow: FC<Props> = ({ children, ...props }) => {
       );
     } else if (props.popText != null) {
       return (
-        <Tooltip placement="right" color={"#ffffff"} title={props.popText}>
-          <p
-            className={classNames({
-              [`${classPrefix}-bottomRight`]: true,
-              [`balanceRed`]: props.balanceRed,
-              [`underLine`]: true,
-            })}
-          >
+        <p
+          className={classNames({
+            [`${classPrefix}-bottomRight`]: true,
+            [`balanceRed`]: props.balanceRed,
+            [`underLine`]: true,
+          })}
+        >
+          <Tooltip placement="right" color={"#ffffff"} title={props.popText}>
             <span>{props.bottomRightText}</span>
-          </p>
-        </Tooltip>
+          </Tooltip>
+        </p>
       );
     } else {
       return (

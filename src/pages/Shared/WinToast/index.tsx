@@ -8,7 +8,6 @@ import './styles'
 
 export type WinToastProps = {
   gained: BigNumber;
-  leftTime: String;
   index: BigNumber
 };
 export const WinToast: FC<WinToastProps> = ({ ...props }) => {
@@ -42,7 +41,6 @@ export const notifyWinToast = (resultInfo: WinToastProps) => {
   toast(
     <WinToast
       gained={resultInfo.gained}
-      leftTime={resultInfo.leftTime}
       index={resultInfo.index}
     />,
     {
