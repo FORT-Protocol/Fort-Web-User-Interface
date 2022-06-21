@@ -9,11 +9,24 @@
         }
     }
 
+    &-top {
+        display: flex;
+        justify-content: space-between;
+    }
+
     &-topLeft {
         margin: 0 20px;
         color: $gray-info-text-color;
         font-size: $T2;
         text-align: left;
+        height: 20px;
+    }
+
+    &-topRight {
+        margin: 0 20px;
+        color: $gray-info-text-color;
+        font-size: 15px;
+        text-align: right;
         height: 20px;
     }
 
@@ -190,6 +203,18 @@
         p {
             line-height: 22px;
             margin-left: 5px;
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .infoView {
+        &-topRight {
+            margin: 0 20px;
+            color: $gray-info-text-color;
+            font-size: 14px;
+            text-align: right;
+            height: 20px;
         }
     }
 }

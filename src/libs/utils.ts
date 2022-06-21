@@ -109,6 +109,9 @@ export function addGasLimit(value: BigNumber): BigNumber {
 export function showEllipsisAddress(address: string): string {
   return address.substr(0, 8) + "...." + address.substr(address.length - 6, 6);
 }
+export function showEllipsisAddress2(address: string): string {
+  return address.substr(0, 6) + "...." + address.substr(address.length - 4, 4);
+}
 
 export function checkWidth():boolean {
   const width = window.innerWidth;
@@ -126,6 +129,21 @@ export function formatInputNum(value: string): string {
     .replace(
       // eslint-disable-next-line no-useless-escape
       /^(\-)*(\d+)\.(\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d).*$/,
+      "$1$2.$3"
+    )
+    .replace(/^\./g, "");
+}
+
+export function formatPRCInputNum(value: string): string {
+  return value
+    .replace(/[^\d.]/g, "")
+    .replace(/\.{2,}/g, ".")
+    .replace(".", "$#$")
+    .replace(/\./g, "")
+    .replace("$#$", ".")
+    .replace(
+      // eslint-disable-next-line no-useless-escape
+      /^(\-)*(\d+)\.(\d\d).*$/,
       "$1$2.$3"
     )
     .replace(/^\./g, "");

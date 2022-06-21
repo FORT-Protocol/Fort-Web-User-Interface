@@ -16,7 +16,7 @@ export function useFortPRCRoll(
     if (!chainId || !m) {
         contract = null
     } else {
-        callData = contract?.interface.encodeFunctionData('roll', [
+        callData = contract?.interface.encodeFunctionData('roll44', [
             n,m]
         )
     }
@@ -39,7 +39,7 @@ export function useFortPRCClaim(
     if (!chainId) {
         contract = null
     } else {
-        callData = contract?.interface.encodeFunctionData('claim', [
+        callData = contract?.interface.encodeFunctionData('claim44', [
             index]
         )
     }

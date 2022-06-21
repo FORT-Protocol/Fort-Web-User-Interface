@@ -50,7 +50,9 @@ export { ReactComponent as LittleKCC } from './svg/littleKCC.svg'
 export { ReactComponent as TokenPRC } from './svg/TokenPRC.svg'
 export { ReactComponent as ClockPosition } from './svg/clockPosition.svg'
 export { ReactComponent as AddTokenIcon } from './svg/addTokenIcon.svg'
-
+export { ReactComponent as Chance } from './svg/chance.svg'
+export { ReactComponent as SubIcon } from './svg/subIcon.svg'
+export { ReactComponent as AddIcon } from './svg/addIcon.svg'
 
 
 export { ReactComponent as TokenLeverUp } from './svg/TokenLeverUp.svg'

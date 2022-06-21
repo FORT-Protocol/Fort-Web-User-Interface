@@ -87,7 +87,10 @@
 @media screen and (max-width: 1000px) {
     .swap-card {
         margin: 0 10px;
-        margin-top: 10px;
         padding: 20px 20px;
+    }
+
+    .swap-card + .swap-card {
+        margin-top: 10px;
     }
 }

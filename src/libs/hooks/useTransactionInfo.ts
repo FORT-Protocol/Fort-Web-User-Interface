@@ -1,3 +1,4 @@
+import { BigNumber } from '@ethersproject/bignumber';
 import { useCallback, useEffect, useState } from "react";
 import { createContainer } from "unstated-next";
 import useWeb3 from "./useWeb3";
@@ -6,6 +7,11 @@ import {
   TransactionModalType,
 } from "../../pages/Shared/TransactionModal";
 import { notifyTransaction } from "../../pages/Shared/TransactionToast";
+import { normalToBigNumber, ZERO_ADDRESS } from "../utils";
+import { notifyWinToast, WinToastProps } from "../../pages/Shared/WinToast";
+import { FortPRCContract } from "./useContract";
+import { FortPRC } from "../constants/addresses";
+import { PRCListType } from "../../pages/Win";
 
 export enum TransactionType {
   buyLever = 0,
@@ -54,7 +60,7 @@ type ShowModalType = {
 };
 
 const useTransactionList = () => {
-  const { chainId, library } = useWeb3();
+  const { chainId, library, account } = useWeb3();
   const [txList, setTxList] = useState<TransactionInfoType[]>([]);
   const [showModal, setShowModal] = useState<ShowModalType>({
     isShow: false,
@@ -63,6 +69,7 @@ const useTransactionList = () => {
   });
   const [pendingList, setPendingList] = useState<TransactionInfoType[]>([]);
   const [checking, setChecking] = useState(false);
+  const fortPRCContract = FortPRCContract(FortPRC);
 
   useEffect(() => {
     if (!chainId) {
@@ -107,6 +114,38 @@ const useTransactionList = () => {
     }
   },[txList]);
 
+  const getList = useCallback(async () => {
+    
+    if (!fortPRCContract) {
+      return;
+    }
+
+    const latest = await library?.getBlockNumber();
+    if (!latest) {
+      return;
+    }
+    
+    // const listResult = await fortPRCContract.find44("0", "100", "100", account);
+    // const result = listResult.filter(
+    //   (item: PRCListType) => item.owner !== ZERO_ADDRESS
+    // );
+
+    const myBetsUrl = `https://api.hedge.red/api/prc/userList/${account}/50`;
+    const myBets_get = await fetch(myBetsUrl);
+    const myBets_data = await myBets_get.json();
+    const result = myBets_data.value.filter(
+      (item: PRCListType) => item.owner !== ZERO_ADDRESS
+    );
+    
+    const latestItem = result[0];
+    console.log(latestItem)
+    const notifyItem: WinToastProps = {
+      gained: normalToBigNumber(latestItem.gained.toString(), 18),
+      index: BigNumber.from(latestItem.index.toString()),
+    };
+    notifyWinToast(notifyItem);
+  }, [account, fortPRCContract, library]);
+
   useEffect(() => {
     if (pendingList.length === 0 || checking) {
       return;
@@ -124,6 +163,12 @@ const useTransactionList = () => {
           updateList(element);
           setChecking(false);
           notifyTransaction(element);
+
+          if (rec.status && element.type === TransactionType.roll) {
+            setTimeout(() => {
+              getList()
+            }, 4000);
+          }
           return;
         }
       }
@@ -132,7 +177,7 @@ const useTransactionList = () => {
       }, 15000);
     })();
     
-  }, [pendingList, checking, library, updateList]);
+  }, [pendingList, checking, library, updateList, getList]);
 
   const pushTx = (hash: string, txInfo: TransactionBaseInfoType) => {
     const nowDate = parseInt((new Date().getTime() / 1000).toString());

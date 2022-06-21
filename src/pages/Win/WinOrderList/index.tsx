@@ -1,10 +1,8 @@
-import { Tooltip } from "antd";
-import { BigNumber } from "ethers";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { PRCListType } from "..";
 import MainCard from "../../../components/MainCard";
 import { WinPendingItem } from "../../../components/WinPendingItem";
-import { HistoryTime } from "./HistoryTime";
+import { bigNumberToNormal } from "../../../libs/utils";
 import "./styles";
 
 type WinOrderListProps = {
@@ -16,31 +14,28 @@ type WinOrderListProps = {
 const WinOrderList: FC<WinOrderListProps> = ({ ...props }) => {
   const classPrefix = "winOrderList";
 
-  const [isHistory, setIsHistory] = useState<Boolean>(false);
-
   const historyLi = props.historyList.map((item) => {
-    // const itemAmount = BigNumber.from(item.m.toString()).div(BigNumber.from('10000'))
-    const showNum = 100 / (parseFloat(item.m.toString()) / 10000)
     return (
-      <li key={item.owner + item.index.toString()}>
-        <HistoryTime
-          blockNum={BigNumber.from(item.openBlock.toString()).toNumber()}
-        />
-        <p className={`${classPrefix}-historyList-right`}>
-          {/* {BigNumber.from("0").eq(item.n) ? itemAmount.toString() : 0} DCU */}
-          {`${showNum} %`}
+      <li key={item.owner + item.index.toString() + item.open_block.toString() + 'h'}>
+        <p>{item.open_block.toString()}</p>
+
+        <p className={`${classPrefix}-historyList-amount`}>
+          {`${item.gained} DCU`}
         </p>
+        <span></span>
       </li>
     );
   });
   const pendingLi = props.pendingList.map((item) => {
+    const itemAmount = bigNumberToNormal(item.gained, 18, 2)
+    
     return (
-      <li key={item.owner + item.index.toString() + "p"}>
-        <Tooltip
-          placement="bottom"
-          color={"#ffffff"}
-          title={"Estimated remaining claimable time"}
-        >
+      <li key={item.owner + item.index.toString() + 'p'}>
+        <p>{item.openBlock.toString()}</p>
+
+        <p className={`${classPrefix}-historyList-amount`}>
+          {`${itemAmount} DCU`}
+        </p>
           <span>
             <WinPendingItem
               nowBlock={props.nowBlock}
@@ -49,39 +44,14 @@ const WinOrderList: FC<WinOrderListProps> = ({ ...props }) => {
               index={item.index}
             />
           </span>
-        </Tooltip>
       </li>
     );
   });
-
-  const listView = isHistory ? (
-    props.historyList.length > 0 ? (
-      <ul className={`${classPrefix}-historyList`}>{historyLi}</ul>
-    ) : (
-      <></>
-    )
-  ) : props.pendingList.length > 0 ? (
-    <ul className={`${classPrefix}-pendingList`}>{pendingLi}</ul>
-  ) : (
-    <></>
-  );
   return (
     <div className={classPrefix}>
       <MainCard classNames={`${classPrefix}-card`}>
-        <div className={`${classPrefix}-card-topShow`}>
-          <p className={`${classPrefix}-card-topShow-title`}>
-            {isHistory ? "History" : "Waiting list"}
-          </p>
-          <button
-            className={`${classPrefix}-card-topShow-bottom`}
-            onClick={() => {
-              setIsHistory(!isHistory);
-            }}
-          >
-            {isHistory ? "< Waiting list" : "History >"}
-          </button>
-        </div>
-        {listView}
+        <p className={`${classPrefix}-card-title`}>My bet</p>
+        <ul className={`${classPrefix}-historyList`}>{pendingLi}{historyLi}</ul>
       </MainCard>
     </div>
   );

@@ -8,6 +8,7 @@ import "./styles";
 
 type Props = {
   topLeftText: string;
+  topRightText?: string;
   bottomRightText: string;
   balanceRed?: boolean;
   tokenSelect?: boolean;
@@ -17,6 +18,7 @@ type Props = {
   dataList?: Array<DataType>;
   getSelectedData?: (token: string) => void;
   getSelectedToken?: (token: TokenType) => void;
+  popText?: string;
 };
 
 export type DataType = {
@@ -116,15 +118,17 @@ const InfoShow: FC<Props> = ({ children, ...props }) => {
 
   const bottomRight = () => {
     const { ethereum } = window;
-    const addToken = async (tokenName:string) => {
+    const addToken = async (tokenName: string) => {
       if (!chainId) {
         return;
       }
-      var imageURL = ''
-      if (tokenName === 'DCU') {
-        imageURL = "https://raw.githubusercontent.com/FORT-Protocol/Fort-Web-User-Interface/2e289cd29722576329fae529c2bfaa0a905f0148/src/components/Icon/svg/TokenFORT.svg"
-      } else if (tokenName === 'PRC') {
-        imageURL = "https://raw.githubusercontent.com/FORT-Protocol/Fort-Web-User-Interface/2e289cd29722576329fae529c2bfaa0a905f0148/src/components/Icon/svg/TokenPRC.svg"
+      var imageURL = "";
+      if (tokenName === "DCU") {
+        imageURL =
+          "https://raw.githubusercontent.com/FORT-Protocol/Fort-Web-User-Interface/2e289cd29722576329fae529c2bfaa0a905f0148/src/components/Icon/svg/TokenFORT.svg";
+      } else if (tokenName === "PRC") {
+        imageURL =
+          "https://raw.githubusercontent.com/FORT-Protocol/Fort-Web-User-Interface/2e289cd29722576329fae529c2bfaa0a905f0148/src/components/Icon/svg/TokenPRC.svg";
       }
       await ethereum.request({
         method: "wallet_watchAsset",
@@ -141,13 +145,14 @@ const InfoShow: FC<Props> = ({ children, ...props }) => {
     };
     if (
       props.bottomRightText.toLowerCase().indexOf("balance") >= 0 &&
-      (props.bottomRightText.toLowerCase().indexOf("dcu") >= 0 || props.bottomRightText.toLowerCase().indexOf("prc") >= 0)
+      (props.bottomRightText.toLowerCase().indexOf("dcu") >= 0 ||
+        props.bottomRightText.toLowerCase().indexOf("prc") >= 0)
     ) {
-      var tokenName:string = ''
+      var tokenName: string = "";
       if (props.bottomRightText.toLowerCase().indexOf("dcu") >= 0) {
-        tokenName = 'DCU'
+        tokenName = "DCU";
       } else {
-        tokenName = 'PRC'
+        tokenName = "PRC";
       }
       return (
         <Tooltip
@@ -164,15 +169,29 @@ const InfoShow: FC<Props> = ({ children, ...props }) => {
           }
         >
           <p
+            className={classNames({
+              [`${classPrefix}-bottomRight`]: true,
+              [`balanceRed`]: props.balanceRed,
+              [`underLine`]: true,
+            })}
+          >
+            <span>{props.bottomRightText}</span>
+          </p>
+        </Tooltip>
+      );
+    } else if (props.popText != null) {
+      return (
+        <p
           className={classNames({
             [`${classPrefix}-bottomRight`]: true,
             [`balanceRed`]: props.balanceRed,
-            [`underLine`]: true
+            [`underLine`]: true,
           })}
         >
-          <span>{props.bottomRightText}</span>
+          <Tooltip placement="right" color={"#ffffff"} title={props.popText}>
+            <span>{props.bottomRightText}</span>
+          </Tooltip>
         </p>
-        </Tooltip>
       );
     } else {
       return (
@@ -182,7 +201,7 @@ const InfoShow: FC<Props> = ({ children, ...props }) => {
             [`balanceRed`]: props.balanceRed,
           })}
         >
-          {props.bottomRightText}
+          <span>{props.bottomRightText}</span>
         </p>
       );
     }
@@ -190,7 +209,11 @@ const InfoShow: FC<Props> = ({ children, ...props }) => {
 
   return (
     <div className={classPrefix}>
-      <p className={`${classPrefix}-topLeft`}>{props.topLeftText}</p>
+      <div className={`${classPrefix}-top`}>
+        <p className={`${classPrefix}-topLeft`}>{props.topLeftText}</p>
+        <p className={`${classPrefix}-topRight`}>{props.topRightText}</p>
+      </div>
+
       <div
         className={classNames({
           [`${classPrefix}-mainView`]: true,

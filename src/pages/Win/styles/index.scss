@@ -1,43 +1,110 @@
 @use "sass:math";
 @import 'src/styles/shared.scss';
 
-.win-card {
-    max-width: $baseWidth;
+.win {
     margin: 0 auto;
-    padding: 40px 44px;
-    margin-top: 22px;
     margin-bottom: 22px;
+    margin-top: 22px;
+    display: flex;
+    justify-content: center;
+    width: 1063px;
 
-    &-title {
-        margin-left: 0;
-        font-size: $T2;
-        line-height: 20px;
-        color: $gray-info-text-color;
+    .win-left {
+        width: 572px;
     }
 
-    &-choice {
-        width: 242px;
-        height: 242px;
-        margin: 0 auto;
-        margin-top: 26px;
+    .win-right {
+        width: 469px;
+    }
+}
 
-        &-second,
-        &-first {
-            width: 242px;
-            height: 110px;
-            display: flex;
-            justify-content: space-between;
+.win-card {
+    max-width: $baseWidth;
+    padding: 40px 44px;
+    margin-bottom: 22px;
+    height: 461px;
+
+    &-title {
+        margin-left: 22px;
+        margin-bottom: 22px;
+        font-size: $T2;
+        font-weight: 600;
+        line-height: 20px;
+        color: black;
+    }
+
+    &-bottom {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &-title+.infoView {
+        input {
+            text-align: right;
+            margin-right: 0px;
         }
 
-        &-second {
-            margin-top: 22px;
+        button {
+            padding-top: 2px;
+
+            &:hover {
+                cursor: pointer;
+            }
         }
+    }
+
+    &-x {
+        margin: auto 0;
+        margin-right: 10px;
+        padding-top: 1px;
+        height: 30px;
+        line-height: 30px;
+        font-weight: bold;
+    }
+
+    &-title+.infoView+.infoView {
+        margin-top: 10px;
+
+        .sub-button {
+            margin: auto 0;
+            margin-left: 5px;
+            padding-top: 3px;
+        }
+
+        .add-button {
+            margin-right: -5px;
+            padding-top: 3px;
+        }
+
+        button {
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+
+    .infoView-topRight {
+        color: #FF0000;
+    }
+
+    .infoView-topLeft {
+        font-weight: 600;
     }
 
     .fort-button {
         width: 100%;
-        margin-top: 40px;
+        margin-top: 15px;
         margin-bottom: 15px;
+    }
+
+    &-fairness {
+        span {
+            padding-bottom: 5px;
+            margin-left: 22px;
+            font-size: $T4;
+            color: $gray-info-text-color;
+            border-bottom: 1px dashed $gray-info-text-color;
+        }
     }
 
     &-balance {
@@ -49,6 +116,13 @@
             font-size: $T4;
             color: $gray-info-text-color;
             border-bottom: 1px dashed $gray-info-text-color;
+        }
+
+        &-red {
+            span {
+                color: #FF0000;
+                border-bottom: 1px dashed #FF0000;
+            }
         }
     }
 
@@ -65,9 +139,138 @@
     }
 }
 
-@media screen and (max-width: 1000px) {
-    .win-card {
-        margin: 0 10px;
-        padding: 20px 20px;
+.win-otherList {
+    max-width: $baseWidth;
+    padding: 40px 44px;
+    margin-left: 22px;
+    height: 742px;
+
+    &-weekly {
+
+        &-title {
+            font-size: $T2;
+            color: $gray-background-text-color;
+            margin-bottom: 17px;
+        }
+
+        ul {
+            height: 440px;
+
+            li {
+                display: flex;
+                height: 44px;
+                border-top: 1px solid $gray-line-color;
+                justify-content: space-between;
+
+                :first-child {
+                    color: $main-button-color;
+                    font-size: 15px;
+                    font-weight: 500;
+                }
+
+                :first-child+p {
+                    font-size: 15px;
+                    color: $gray-background-text-color;
+                    font-weight: 500;
+                    text-align: right;
+                }
+
+                p {
+                    margin: auto 0;
+                }
+            }
+        }
     }
+
+    &-line {
+        margin-top: 35px;
+        margin-bottom: 35px;
+        border-top: 1px solid $gray-line-color;
+    }
+
+    &-allBets {
+        &-title {
+            font-size: $T2;
+            color: $gray-background-text-color;
+            margin-bottom: 17px;
+        }
+
+        ul {
+            height: 88px;
+            overflow: auto;
+            overflow-x: none;
+            overflow-y: none;
+
+            li {
+                display: flex;
+                height: 44px;
+                border-top: 1px solid $gray-line-color;
+                justify-content: space-between;
+
+                :first-child {
+                    font-size: 15px;
+                    color: $gray-background-text-color;
+                    font-weight: 500;
+                    width: 25%;
+                }
+
+                :first-child+p>a {
+                    color: $main-button-color;
+                    font-size: 15px;
+                    font-weight: 500;
+                    width: 40%;
+                }
+
+                :first-child+p+p {
+                    font-size: 15px;
+                    color: $gray-background-text-color;
+                    font-weight: 500;
+                    width: 35%;
+                    text-align: right;
+                }
+
+                p {
+                    margin: auto 0;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .win {
+        flex-flow: column;
+        width: 100%;
+        margin-top: 0px;
+        margin-bottom: 0px;
+
+        .win-left {
+            width: 100%;
+            padding: 0 10px;
+
+            .win-card {
+                width: 100%;
+                padding: 20px 20px;
+                margin-bottom: 10px;
+            }
+
+            .winOrderList-card {
+                margin: 0 0;
+                padding: 20px 40px;
+            }
+        }
+
+        .win-right {
+            width: 100%;
+            margin-top: 10px;
+            padding: 0 10px;
+
+            .win-otherList {
+                margin: 0 0;
+                padding: 20px 40px;
+            }
+        }
+    }
+
+
 }

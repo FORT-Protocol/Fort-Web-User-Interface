@@ -161,7 +161,7 @@ const Swap: FC = () => {
     };
 
     const swapDCUToPRC = async (amountIn: BigNumber) => {
-      return amountIn.div(2);
+      return amountIn.mul(100).div(101);
     };
 
     const swapXY = async (
