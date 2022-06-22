@@ -2,7 +2,7 @@
 @import 'src/styles/shared.scss';
 
 .winToast {
-
+    margin-right: -14px;
     &-title {
         font-size: $T2;
         font-family: $boldFont;

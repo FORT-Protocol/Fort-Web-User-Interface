@@ -130,15 +130,15 @@ const useTransactionList = () => {
     //   (item: PRCListType) => item.owner !== ZERO_ADDRESS
     // );
 
-    const myBetsUrl = `https://api.hedge.red/api/prcTest/userList/${account}/200`;
+    const myBetsUrl = `https://api.hedge.red/api/prcTest/userList/${account}/50`;
     const myBets_get = await fetch(myBetsUrl);
     const myBets_data = await myBets_get.json();
     const result = myBets_data.value.filter(
       (item: PRCListType) => item.owner !== ZERO_ADDRESS
     );
-
+    
     const latestItem = result[0];
-    console.log(latestItem)
+    
     const notifyItem: WinToastProps = {
       gained: normalToBigNumber(latestItem.gained.toString(), 18),
       index: BigNumber.from(latestItem.index.toString()),

@@ -104,7 +104,7 @@ const Win: FC = () => {
     const myBets_data_modol = myBets_data.value.filter(
       (item: PRCListType) => item.owner !== ZERO_ADDRESS
     );
-
+    
     const listResult = await fortPRCContract.find44("0", "200", "200", account);
     const result = listResult.filter(
       (item: PRCListType) => item.owner !== ZERO_ADDRESS
@@ -157,6 +157,7 @@ const Win: FC = () => {
   }, [allBetsData, allBetsShowCount]);
 
   useEffect(() => {
+    getList();
     if (
       txList.length !== 0 &&
       (!txList ||
@@ -166,7 +167,8 @@ const Win: FC = () => {
     ) {
       return;
     }
-    getList();
+
+    console.log(111111)
     const id = setInterval(() => {
       getList();
     }, 10 * 1000);
