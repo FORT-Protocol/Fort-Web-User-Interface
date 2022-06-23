@@ -75,7 +75,7 @@ const MobileHeader: FC = () => {
           trigger={
             <div className={`${classPrefix}-headerList-top-mid`}>
               <LittleBSC />
-              <p>BSC</p>
+              <p>BNB</p>
             </div>
           }
         >

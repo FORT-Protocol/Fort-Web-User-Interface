@@ -5,6 +5,12 @@
     margin: 0;
     padding: 0;
     outline: none;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+    display: none;
 }
 
 @font-face {
@@ -109,7 +115,7 @@ li {
     color: $gray-info-text-color;
 }
 
-.ant-picker-input input{
+.ant-picker-input input {
     font-family: $boldFont;
     font-size: 16px;
 }

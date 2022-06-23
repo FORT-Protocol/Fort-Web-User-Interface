@@ -138,7 +138,7 @@ const useTransactionList = () => {
     );
     
     const latestItem = result[0];
-    console.log(latestItem)
+    
     const notifyItem: WinToastProps = {
       gained: normalToBigNumber(latestItem.gained.toString(), 18),
       index: BigNumber.from(latestItem.index.toString()),
