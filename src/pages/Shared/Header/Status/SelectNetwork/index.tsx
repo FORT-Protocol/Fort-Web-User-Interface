@@ -16,7 +16,7 @@ const SelectNetwork: FC = () => {
                     <ul>
                         <li><a href={'https://app.fortprotocol.com'}><LittleETH/><p>Ethereum</p></a></li>
                         <li><a href={'https://test.fortprotocol.com'}><LittleETH/><p>Rinkeby</p></a></li>
-                        <li><a href={'https://bsc.fortprotocol.com'}><LittleBSC/><p>BSC</p></a></li>
+                        <li><a href={'https://bnb.fortprotocol.com'}><LittleBSC/><p>BNB</p></a></li>
                         <li><a href={'https://polygon.fortprotocol.com'}><PolygonIcon/><p>Polygon</p></a></li>
                         <li><a href={'https://kcc.fortprotocol.com'}><LittleKCC/><p>KCC</p><NetworkNow/></a></li>
                     </ul>
