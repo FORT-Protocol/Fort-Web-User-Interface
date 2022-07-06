@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useRef, useState } from "react";
 import Footer from "./Shared/Footer";
 import Header from "./Shared/Header";
 import { Switch, Route, Redirect, HashRouter } from "react-router-dom";
@@ -11,6 +11,8 @@ import MobileFooter from "./Shared/Footer/MobileFooter";
 import MobileHeader from "./Shared/Header/MobileHeader";
 import useThemes from "../libs/hooks/useThemes";
 import "../themes/styles";
+import Popup from "reactjs-popup";
+import UpdateNoticeModal from "./Shared/UpdateNoticeModal";
 
 const Perpetuals = loadable(() => import("./Perpetuals"));
 const Option = loadable(() => import("./Options"));
@@ -20,8 +22,21 @@ const Win = loadable(() => import("./Win"));
 
 const App: FC = () => {
   const { theme } = useThemes();
+  const modal = useRef<any>();
+  const [showUpdateNotice, setShowUpdateNotice] = useState(true);
   return (
     <main className={`main-${theme.valueOf()}`}>
+      {showUpdateNotice ? (
+        <Popup
+          ref={modal}
+          open
+          onClose={() => {
+            setShowUpdateNotice(false);
+          }}
+        >
+          <UpdateNoticeModal></UpdateNoticeModal>
+        </Popup>
+      ) : null}
       <div className={"main-content"}>
         <TransactionModal />
         {/* <ToastContainer autoClose={8000}/> */}

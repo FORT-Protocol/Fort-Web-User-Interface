@@ -15,7 +15,7 @@ const SelectNetwork: FC = () => {
     <div className={classPrefix}>
       <div className={`${classPrefix}-chainName`}>
         <LittleBSC />
-        <p>BSC</p>
+        <p>BNB</p>
       </div>
       <div className={`${classPrefix}-hover`}>
         <MainCard classNames={`${classPrefix}-ul`}>
@@ -34,9 +34,9 @@ const SelectNetwork: FC = () => {
               </a>
             </li>
             <li>
-              <a href={"https://bsc.fortprotocol.com"}>
+              <a href={"https://bnb.fortprotocol.com"}>
                 <LittleBSC />
-                <p>BSC</p>
+                <p>BNB</p>
                 <NetworkNow />
               </a>
             </li>

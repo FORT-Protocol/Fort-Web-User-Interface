@@ -35,9 +35,9 @@ const SelectNetworkModal: FC<Props> = ({ ...props }) => {
           </a>
         </li>
         <li>
-          <a href={"https://bsc.fortprotocol.com"}>
+          <a href={"https://bnb.fortprotocol.com"}>
             <LittleBSC />
-            <p>BSC</p>
+            <p>BNB</p>
             <NetworkNow />
           </a>
         </li>

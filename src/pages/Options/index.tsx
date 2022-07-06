@@ -24,7 +24,7 @@ import {
   bigNumberToNormal,
   checkWidth,
   formatInputNum,
-  normalToBigNumber
+  normalToBigNumber,
 } from "../../libs/utils";
 import { DatePicker, message, Tooltip } from "antd";
 import "../../styles/ant.css";
@@ -36,6 +36,7 @@ import OptionsList from "../../components/OptionsList";
 import useTransactionListCon from "../../libs/hooks/useTransactionInfo";
 import { Popup } from "reactjs-popup";
 import OptionsNoticeModal from "./OptionsNoticeModal";
+import UpdateNoticeModal from "../Shared/UpdateNoticeModal";
 
 export type OptionsListType = {
   index: BigNumber;
@@ -51,6 +52,7 @@ const MintOptions: FC = () => {
   const classPrefix = "options-mintOptions";
   const { account, chainId, library } = useWeb3();
   const [showNotice, setShowNotice] = useState(false);
+  const [showUpdateNotice, setShowUpdateNotice] = useState(false);
   const modal = useRef<any>();
   const nestPriceContract = NestPriceContract();
   const fortEuropeanOption = FortEuropeanOption(FortEuropeanOptionContract);
@@ -72,13 +74,18 @@ const MintOptions: FC = () => {
   const [fortBalance, setFortBalance] = useState(BigNumber.from(0));
   const [optionTokenValue, setOptionTokenValue] = useState<BigNumber>();
 
-  const showNoticeModal = () => {
-    var cache = localStorage.getItem("OptionsFirst");
-    if (cache !== "1") {
-      setShowNotice(true);
-      return true;
-    }
-    return false;
+  // const showNoticeModal = () => {
+  //   var cache = localStorage.getItem("OptionsFirst");
+  //   if (cache !== "1") {
+  //     setShowNotice(true);
+  //     return true;
+  //   }
+  //   return false;
+  // };
+
+  const showUpdateNoticeModal = () => {
+    setShowUpdateNotice(true);
+    return true;
   };
 
   const trList = optionsListState.map((item) => {
@@ -236,7 +243,8 @@ const MintOptions: FC = () => {
       strikePrice !== "" &&
       fortNum !== "" &&
       priceNow &&
-      exercise.blockNum !== 0 && chainId
+      exercise.blockNum !== 0 &&
+      chainId
     ) {
       (async () => {
         setShowLoading(true);
@@ -261,7 +269,17 @@ const MintOptions: FC = () => {
     } else {
       setOptionTokenValue(undefined);
     }
-  }, [chainId, exercise.blockNum, fortEuropeanOption, fortNum, isLong, priceNow, strikePrice, tokenPair.addresses, tokenPair.symbol]);
+  }, [
+    chainId,
+    exercise.blockNum,
+    fortEuropeanOption,
+    fortNum,
+    isLong,
+    priceNow,
+    strikePrice,
+    tokenPair.addresses,
+    tokenPair.symbol,
+  ]);
 
   const checkButton = () => {
     if (
@@ -310,6 +328,17 @@ const MintOptions: FC = () => {
             onClose={() => modal.current.close()}
             action={active}
           ></OptionsNoticeModal>
+        </Popup>
+      ) : null}
+      {showUpdateNotice ? (
+        <Popup
+          ref={modal}
+          open
+          onClose={() => {
+            setShowUpdateNotice(false);
+          }}
+        >
+          <UpdateNoticeModal></UpdateNoticeModal>
         </Popup>
       ) : null}
       <div className={classPrefix}>
@@ -431,10 +460,13 @@ const MintOptions: FC = () => {
               if (checkButton()) {
                 return;
               }
-              if (showNoticeModal()) {
+              // if (showNoticeModal()) {
+              //   return;
+              // }
+              if (showUpdateNoticeModal()) {
                 return;
               }
-              active();
+              // active();
             }}
           >
             <Trans>Buy Option</Trans>
