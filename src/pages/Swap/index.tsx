@@ -52,8 +52,8 @@ const Swap: FC = () => {
   const [inputValue, setInputValue] = useState<string>();
   const [priceValue, setPriceValue] = useState<BigNumber>();
   const [swapToken, setSwapToken] = useState<SwapTokenType>({
-    src: "USDT",
-    dest: "DCU",
+    src: "DCU",
+    dest: "USDT",
   });
   const [srcAllowance, setSrcAllowance] = useState<BigNumber>(
     BigNumber.from("0")
@@ -62,13 +62,13 @@ const Swap: FC = () => {
     useState<SwapTokenBalanceType>();
   const [destValue, setDestValue] = useState<BigNumber>();
   const cofixSwapContract = CofixSwapContract();
-  const exchangeSwapTokens = () => {
-    if (swapToken.dest === "PRC") {
-      return;
-    }
-    setSwapToken({ src: swapToken.dest, dest: swapToken.src });
-    setInputValue("");
-  };
+  // const exchangeSwapTokens = () => {
+  //   if (swapToken.dest === "PRC") {
+  //     return;
+  //   }
+  //   setSwapToken({ src: swapToken.dest, dest: swapToken.src });
+  //   setInputValue("");
+  // };
   const { pendingList, txList } = useTransactionListCon();
   const priceContract = NestPriceContract();
   // 余额
@@ -373,9 +373,12 @@ const Swap: FC = () => {
         <button
           className={classNames({
             [`${classPrefix}-card-exchange`]: true,
-            [`disable`]: specialTop()
+            [`disable`]: true
           })}
-          onClick={exchangeSwapTokens}
+          onClick={() => {
+            return
+            // exchangeSwapTokens()
+          }}
         >
           <ExchangeIcon />
         </button>
@@ -389,15 +392,15 @@ const Swap: FC = () => {
                 : "---"
             } ${swapToken.dest}`
           }
-          tokenSelect={true}
+          tokenSelect={false}
           tokenList={tokenListShow(false)}
           getSelectedToken={getSelectedDestToken}
         >
           <div className={`${classPrefix}-card-selected`}>
             <SingleTokenShow tokenNameOne={swapToken.dest} isBold />
-            <p>
+            {/* <p>
               <PutDownIcon />
-            </p>
+            </p> */}
           </div>
           <p className={"showValue"}>
             {destValue ? bigNumberToNormal(destValue, 18, 6) : undefined}
