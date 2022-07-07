@@ -40,6 +40,7 @@ import { Popup } from "reactjs-popup";
 import PerpetualsNoticeModal from "./PerpetualsNoticeModal";
 import PerpetualsListMobile from "../../components/PerpetualsList/PerpetualsListMobile";
 import { PutDownIcon } from "../../components/Icon";
+import UpdateNoticeModal from "../Shared/UpdateNoticeModal";
 
 export type LeverListType = {
   index: BigNumber;
@@ -54,6 +55,7 @@ export type LeverListType = {
 const Perpetuals: FC = () => {
   const { account, chainId } = useWeb3();
   const [showNotice, setShowNotice] = useState(false);
+  const [showUpdateNotice, setShowUpdateNotice] = useState(false);
   const modal = useRef<any>();
   const [isLong, setIsLong] = useState(true);
   const [dcuBalance, setDcuBalance] = useState<BigNumber>();
@@ -77,13 +79,17 @@ const Perpetuals: FC = () => {
   const handleLeverNum = (selected: number) => {
     setLeverNum(selected);
   };
-  const showNoticeModal = () => {
-    var cache = localStorage.getItem("PerpetualsFirst");
-    if (cache !== "1") {
-      setShowNotice(true);
-      return true;
-    }
-    return false;
+  // const showNoticeModal = () => {
+  //   var cache = localStorage.getItem("PerpetualsFirst");
+  //   if (cache !== "1") {
+  //     setShowNotice(true);
+  //     return true;
+  //   }
+  //   return false;
+  // };
+  const showUpdateNoticeModal = () => {
+    setShowUpdateNotice(true);
+    return true;
   };
   const trList = leverListState.map((item) => {
     return checkWidth() ? (
@@ -321,6 +327,17 @@ const Perpetuals: FC = () => {
           ></PerpetualsNoticeModal>
         </Popup>
       ) : null}
+      {showUpdateNotice ? (
+        <Popup
+          ref={modal}
+          open
+          onClose={() => {
+            setShowUpdateNotice(false);
+          }}
+        >
+          <UpdateNoticeModal></UpdateNoticeModal>
+        </Popup>
+      ) : null}
       <MainCard classNames={`${classPrefix}-card`}>
         <InfoShow
           topLeftText={t`Token pair`}
@@ -401,10 +418,13 @@ const Perpetuals: FC = () => {
               message.error(t`Minimum input 50`);
               return;
             }
-            if (showNoticeModal()) {
+            // if (showNoticeModal()) {
+            //   return;
+            // }
+            if (showUpdateNoticeModal()) {
               return;
             }
-            active();
+            // active();
           }}
           disable={!checkMainButton()}
           loading={mainButtonState()}
