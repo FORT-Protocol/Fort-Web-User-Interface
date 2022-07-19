@@ -1,0 +1,96 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.swap-card {
+    max-width: $baseWidth;
+    margin: 0 auto;
+    padding: 40px 44px;
+    margin-top: 22px;
+    margin-bottom: 22px;
+
+    &-trading {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+        padding: 0 20px;
+
+        p {
+            font-family: $boldFont;
+        }
+
+        span {
+            padding-bottom: 5px;
+            color: $gray-info-text-color;
+            border-bottom: 1px dashed $gray-info-text-color;
+        }
+    }
+
+    &-exchange {
+        display: block;
+        width: 88px;
+        height: 88px;
+        margin: 0 auto;
+        margin-top: 20px;
+        border-radius: 44px;
+        box-shadow: $shadow;
+        border: 1px solid $gray-background-color;
+
+        &.disable {
+            background: $button-disable-color;
+            &:hover {
+                cursor: not-allowed;
+            }
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    &-exchange+.infoView {
+        margin-top: 20px;
+    }
+
+    .fort-button {
+        width: 100%;
+        margin-top: 40px;
+    }
+
+    .infoView-tokenSelect {
+        height: 80px;
+        margin-bottom: -85px;
+    }
+    &-selected {
+        display: flex;
+        justify-content: space-between;
+
+        p {
+            line-height: 44px;
+            margin-left: 10px;
+            svg {
+                width: 22px;
+                height: 22px;
+                margin-top: 11px;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    &-title {
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .swap-card {
+        margin: 0 10px;
+        padding: 20px 20px;
+    }
+
+    .swap-card + .swap-card {
+        margin-top: 10px;
+    }
+}
