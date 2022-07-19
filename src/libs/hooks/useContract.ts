@@ -12,6 +12,7 @@ import FortLeverABI from '../../contracts/abis/FortLever.json';
 import NestPriceABI from '../../contracts/abis/NestPrice.json';
 import CofixSwapABI from '../../contracts/abis/CofixSwap.json';
 import FortPRCABI from '../../contracts/abis/FortPRC.json';
+import PVMPayBackABI from '../../contracts/abis/PVMPayBack.json';
 import { ZERO_ADDRESS } from '../utils';
 
 function isAddress(value: any): string | false {
@@ -84,4 +85,8 @@ export function CofixSwapContract(): Contract | null {
 
 export function FortPRCContract(addresses: AddressesType): Contract | null {
     return useContract(addresses, FortPRCABI)
+}
+
+export function PVMPayBack(addresses: AddressesType): Contract | null {
+    return useContract(addresses, PVMPayBackABI)
 }

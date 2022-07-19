@@ -130,7 +130,7 @@ const useTransactionList = () => {
     //   (item: PRCListType) => item.owner !== ZERO_ADDRESS
     // );
 
-    const myBetsUrl = `https://api.hedge.red/api/prcTest/userList/${account}/50`;
+    const myBetsUrl = `https://api.hedge.red/api/prc/userList/${account}/50`;
     const myBets_get = await fetch(myBetsUrl);
     const myBets_data = await myBets_get.json();
     const result = myBets_data.value.filter(

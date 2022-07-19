@@ -3,23 +3,21 @@ import { MaxUint256 } from "@ethersproject/constants";
 import { t, Trans } from "@lingui/macro";
 import { Tooltip } from "antd";
 import classNames from "classnames";
-import moment from "moment";
+// import moment from "moment";
 import { FC, useCallback, useEffect, useState } from "react";
-import { ExchangeIcon, PutDownIcon } from "../../components/Icon";
+import { ExchangeIcon } from "../../components/Icon";
 import InfoShow from "../../components/InfoShow";
 import MainButton from "../../components/MainButton";
 import MainCard from "../../components/MainCard";
 import { SingleTokenShow } from "../../components/TokenShow";
-import { useSwapExactTokensForTokens } from "../../contracts/hooks/useCofixSwap";
 import { useERC20Approve } from "../../contracts/hooks/useERC20Approve";
+import { usePVMPayBack } from "../../contracts/hooks/usePVMPayBackTransaction";
 import {
-  CofixSwapAddress,
-  SwapAddress,
+  PVMPayBackContract,
   tokenList,
   TokenType,
 } from "../../libs/constants/addresses";
 import {
-  CofixSwapContract,
   getERC20Contract,
   NestPriceContract,
 } from "../../libs/hooks/useContract";
@@ -33,7 +31,6 @@ import {
   formatInputNum,
   normalToBigNumber,
 } from "../../libs/utils";
-import PriceChart from "./PriceChart";
 import "./styles";
 
 type SwapTokenType = {
@@ -53,7 +50,7 @@ const Swap: FC = () => {
   const [priceValue, setPriceValue] = useState<BigNumber>();
   const [swapToken, setSwapToken] = useState<SwapTokenType>({
     src: "DCU",
-    dest: "USDT",
+    dest: "NEST",
   });
   const [srcAllowance, setSrcAllowance] = useState<BigNumber>(
     BigNumber.from("0")
@@ -61,17 +58,9 @@ const Swap: FC = () => {
   const [swapTokenBalance, setSwapTokenBalance] =
     useState<SwapTokenBalanceType>();
   const [destValue, setDestValue] = useState<BigNumber>();
-  const cofixSwapContract = CofixSwapContract();
-  // const exchangeSwapTokens = () => {
-  //   if (swapToken.dest === "PRC") {
-  //     return;
-  //   }
-  //   setSwapToken({ src: swapToken.dest, dest: swapToken.src });
-  //   setInputValue("");
-  // };
   const { pendingList, txList } = useTransactionListCon();
   const priceContract = NestPriceContract();
-  // 余额
+  // balance
   const getBalance = useCallback(async () => {
     if (!chainId || !account || !library) {
       return;
@@ -105,7 +94,7 @@ const Swap: FC = () => {
       }, 4000);
     }
   }, [getBalance, txList]);
-  // 授权
+  // approve
   useEffect(() => {
     if (!chainId || !account || !library) {
       return;
@@ -122,7 +111,7 @@ const Swap: FC = () => {
     (async () => {
       const allowance = await srcToken.allowance(
         account,
-        CofixSwapAddress[chainId]
+        PVMPayBackContract[chainId]
       );
       setSrcAllowance(allowance);
     })();
@@ -132,20 +121,12 @@ const Swap: FC = () => {
     if (swapToken.src === "USDT") {
       if (swapToken.dest === "DCU") {
         return ["USDT", "DCU"];
-      } else if (swapToken.dest === "PRC") {
-        return ["USDT", "DCU", "PRC"];
       }
     } else if (swapToken.src === "DCU") {
       if (swapToken.dest === "USDT") {
         return ["DCU", "USDT"];
-      } else if (swapToken.dest === "PRC") {
-        return ["DCU", "PRC"];
-      }
-    } else if (swapToken.src === "PRC") {
-      if (swapToken.dest === "USDT") {
-        return ["PRC", "DCU", "USDT"];
-      } else if (swapToken.dest === "DCU") {
-        return ["PRC", "DCU"];
+      } else if (swapToken.dest === "NEST") {
+        return ["DCU", "NEST"];
       }
     }
     return [swapToken.src, swapToken.dest];
@@ -156,12 +137,8 @@ const Swap: FC = () => {
       return;
     }
 
-    const swapPRCToDCU = async (amountIn: BigNumber) => {
-      return amountIn;
-    };
-
-    const swapDCUToPRC = async (amountIn: BigNumber) => {
-      return amountIn.mul(100).div(101);
+    const swapDCUToNEST = async (amountIn: BigNumber) => {
+      return amountIn.mul(33).div(10);
     };
 
     const swapXY = async (
@@ -169,23 +146,23 @@ const Swap: FC = () => {
       destName: string,
       amountIn: BigNumber
     ) => {
-      const k = BigNumber.from("200000000000000000000000").mul(
-        BigNumber.from("868616188258191063223411")
-      );
-      const srcTokenBalance: BigNumber = await getERC20Contract(
-        tokenList[srcName].addresses[chainId],
-        library,
-        account
-      )?.balanceOf(SwapAddress[chainId]);
-      const destTokenBalance: BigNumber = await getERC20Contract(
-        tokenList[destName].addresses[chainId],
-        library,
-        account
-      )?.balanceOf(SwapAddress[chainId]);
-      const amountOut = destTokenBalance.sub(
-        k.div(srcTokenBalance.add(amountIn))
-      );
-      return amountOut;
+      // const k = BigNumber.from("200000000000000000000000").mul(
+      //   BigNumber.from("868616188258191063223411")
+      // );
+      // const srcTokenBalance: BigNumber = await getERC20Contract(
+      //   tokenList[srcName].addresses[chainId],
+      //   library,
+      //   account
+      // )?.balanceOf(SwapAddress[chainId]);
+      // const destTokenBalance: BigNumber = await getERC20Contract(
+      //   tokenList[destName].addresses[chainId],
+      //   library,
+      //   account
+      // )?.balanceOf(SwapAddress[chainId]);
+      // const amountOut = destTokenBalance.sub(
+      //   k.div(srcTokenBalance.add(amountIn))
+      // );
+      return BigNumber.from(0);
     };
     (async () => {
       const usePath = path();
@@ -200,10 +177,8 @@ const Swap: FC = () => {
           (usePath[index] === "DCU" && usePath[index + 1] === "USDT")
         ) {
           amount = await swapXY(usePath[index], usePath[index + 1], amount);
-        } else if (usePath[index] === "PRC" && usePath[index + 1] === "DCU") {
-          amount = await swapPRCToDCU(amount);
-        } else if (usePath[index] === "DCU" && usePath[index + 1] === "PRC") {
-          amount = await swapDCUToPRC(amount);
+        } else if (usePath[index] === "DCU" && usePath[index + 1] === "NEST") {
+          amount = await swapDCUToNEST(amount)
         }
       }
       setDestValue(checkInputValue ? amount : undefined);
@@ -225,11 +200,11 @@ const Swap: FC = () => {
   };
 
   const tokenListShow = (top: boolean) => {
-    const allToken = ["USDT", "DCU", "PRC"];
+    const allToken = ["DCU", "NEST",];
     const showToken = [swapToken.src, swapToken.dest];
     if (top) {
       const leftToken = allToken.filter(
-        (item: string) => showToken.indexOf(item) === -1 && item !== "PRC"
+        (item: string) => showToken.indexOf(item) === -1
       );
       const tokenName = [swapToken.src].concat(leftToken);
       return tokenName.map((item) => {
@@ -286,25 +261,20 @@ const Swap: FC = () => {
   const approve = useERC20Approve(
     swapToken.src,
     MaxUint256,
-    cofixSwapContract?.address
+    chainId ? PVMPayBackContract[chainId] : undefined
   );
-  const amountOutMin = destValue
-    ? destValue.sub(destValue.mul(5).div(100))
-    : MaxUint256;
-  const addressPath = () => {
-    if (!chainId) {
-      return [];
-    }
-    return path().map((item) => tokenList[item].addresses[chainId]);
-  };
+  // const amountOutMin = destValue
+  //   ? destValue.sub(destValue.mul(5).div(100))
+  //   : MaxUint256;
+  // const addressPath = () => {
+  //   if (!chainId) {
+  //     return [];
+  //   }
+  //   return path().map((item) => tokenList[item].addresses[chainId]);
+  // };
 
-  const swap = useSwapExactTokensForTokens(
-    addressPath(),
+  const swap = usePVMPayBack(
     normalToBigNumber(inputValue ? inputValue : ""),
-    amountOutMin,
-    parseInt((moment().valueOf() / 1000 + 600).toString()),
-    account,
-    account
   );
   const mainButtonState = () => {
     const pendingTransaction = pendingList.filter(
@@ -313,15 +283,15 @@ const Swap: FC = () => {
     return pendingTransaction.length > 0 ? true : false;
   };
 
-  const specialTop = () => {
-    if (
-      (swapToken.src === "USDT" && swapToken.dest === "DCU") ||
-      (swapToken.src === "DCU" && swapToken.dest === "USDT")
-    ) {
-      return false;
-    }
-    return true;
-  };
+  // const specialTop = () => {
+  //   if (
+  //     (swapToken.src === "USDT" && swapToken.dest === "DCU") ||
+  //     (swapToken.src === "DCU" && swapToken.dest === "USDT")
+  //   ) {
+  //     return false;
+  //   }
+  //   return true;
+  // };
   return (
     <div className={`${classPrefix}`}>
       <MainCard classNames={`${classPrefix}-card`}>
@@ -335,16 +305,16 @@ const Swap: FC = () => {
                 : "---"
             } ${swapToken.src}`
           }
-          tokenSelect={specialTop()}
-          tokenList={tokenListShow(true)}
+          tokenSelect={false}
+          tokenList={tokenListShow(false)}
           getSelectedToken={getSelectedSrcToken}
           balanceRed={!checkBalance()}
         >
           <div className={`${classPrefix}-card-selected`}>
             <SingleTokenShow tokenNameOne={swapToken.src} isBold />
-            <p>
+            {/* <p>
               {specialTop() ? (<PutDownIcon />) : (<></>)}
-            </p>
+            </p> */}
           </div>
 
           <input
@@ -437,12 +407,12 @@ const Swap: FC = () => {
           {checkAllowance() ? <Trans>Swap</Trans> : <Trans>Approve</Trans>}
         </MainButton>
       </MainCard>
-      <MainCard classNames={`${classPrefix}-card`}>
+      {/* <MainCard classNames={`${classPrefix}-card`}>
         <div className={`${classPrefix}-card-title `}>
           <p className={`infoView-topLeft`}>Trading Price of DCU</p>
         </div>
         <PriceChart />
-      </MainCard>
+      </MainCard> */}
     </div>
   );
 };
