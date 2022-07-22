@@ -19,7 +19,7 @@ const UpdateNoticeModal: FC = () => {
       </ul>
       <div className={`${classPrefix}-card-buttonGroup`}>
         <a
-          href="https://pvm.nestprotocol.org"
+          href="https://finance.nestprotocol.org"
           target="view_window"
         >
           <button className={`${classPrefix}-card-buttonGroup-more`}>
