@@ -3,6 +3,7 @@ import {
   TokenBTC,
   TokenETH,
   TokenFORT,
+  TokenNest,
   TokenUSDT,
 } from "../../components/Icon";
 import { ZERO_ADDRESS } from "../utils";
@@ -89,7 +90,22 @@ export const tokenList: { [key: string]: TokenType } = {
     },
     sigmaSQ: BigNumber.from('31708924900')
   },
-  
+  NEST: {
+    symbol: "NEST",
+    Icon: TokenNest,
+    decimals: 18,
+    addresses: {
+      1: "0x04abEdA201850aC0124161F037Efd70c74ddC74C",
+      3: "",
+      4: "0xE313F3f49B647fBEDDC5F2389Edb5c93CBf4EE25",
+    },
+    pairIndex: {
+      1: "",
+      3: "",
+      4: "",
+    },
+    sigmaSQ: BigNumber.from('0')
+  },
 };
 
 export const FortEuropeanOptionContract: AddressesType = {
@@ -133,3 +149,9 @@ export const CofixControllerAddress: AddressesType = {
   3: ZERO_ADDRESS,
   4: "0x59c2EAF8FC22C10C2EB79Be3c23c2916BD0ec81e",
 };
+
+export const PVMPayBackContract : AddressesType = {
+  1: "0x7b65629A811eBB0d6CC99bDc4d1d606f8F707125",
+  3: "",
+  4: "0x39F0889254Cb5a87075CB0147053cc2301061b9c",
+}

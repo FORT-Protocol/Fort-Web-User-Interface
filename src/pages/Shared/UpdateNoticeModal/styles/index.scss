@@ -3,7 +3,6 @@
 
 .notice-card {
     width: 400px;
-    padding-bottom: 20px;
     
     &-title {
         font-family: $boldFont;
@@ -14,7 +13,7 @@
 
     ul {
         margin: 0 20px;
-        height: 350px;
+        height: 310px;
         overflow:auto;
         font-size: $T3;
         color: $gray-info-text-color;
@@ -25,6 +24,38 @@
 
         li + li {
             margin-top: 10px;
+        }
+    }
+
+    &-buttonGroup {
+        margin: 20px 46px;
+
+        .fort-button {
+            width: 100%;
+        }
+
+        a {
+            display: block;
+            margin-top: 20px;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        &-more {
+            width: 100%;
+            text-align: center;
+            font-family: $boldFont;
+            border-radius: 22px;
+            height: 44px;
+            border: 1px solid $main-button-color;
+            color: $main-button-color;
+            font-size: $T2;
+
+            &:hover {
+                cursor: pointer;
+            }
         }
     }
 }
